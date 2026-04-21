@@ -1,26 +1,50 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'FordF1';
+  src: url('/fonts/FordF1TC-Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FordF1';
+  src: url('/fonts/FordF1TC-Medium.otf') format('opentype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FordF1';
+  src: url('/fonts/FordF1TC-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'FordF1';
+  src: url('/fonts/FordF1TC-Light.otf') format('opentype');
+  font-weight: 300;
+  font-display: swap;
+}
+
+* { box-sizing: border-box; }
+body { font-family: 'FordF1', system-ui, sans-serif; }
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ford-night:  #081534;
+  --ford-navy:   #133A7C;
+  --ford-steel:  #2A6BAC;
+  --ford-sky:    #47A8E5;
+  --ford-silver: #C6C6C6;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
+.bg-ford-night  { background-color: #081534; }
+.bg-ford-navy   { background-color: #133A7C; }
+.bg-ford-steel  { background-color: #2A6BAC; }
+.bg-ford-sky    { background-color: #47A8E5; }
+.text-ford-night { color: #081534; }
+.text-ford-navy  { color: #133A7C; }
+.text-ford-sky   { color: #47A8E5; }
+.border-ford-navy  { border-color: #133A7C; }
+.border-ford-sky   { border-color: #47A8E5; }
+.border-ford-night { border-color: #081534; }

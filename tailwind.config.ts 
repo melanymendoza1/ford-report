@@ -1,0 +1,27 @@
+import type { Config } from 'tailwindcss'
+
+const config: Config = {
+  content: [
+  "./app/**/*.{js,ts,jsx,tsx,mdx}",
+  "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    ],
+  theme: {
+    extend: {
+      colors: {
+        ford: {
+          night:  '#081534',
+          navy:   '#133A7C',
+          steel:  '#2A6BAC',
+          sky:    '#47A8E5',
+          silver: '#C6C6C6',
+        }
+      },
+      fontFamily: {
+        ford: ['FordF1', 'system-ui', 'sans-serif'],
+      }
+    },
+  },
+  plugins: [],
+}
+
+export default config
