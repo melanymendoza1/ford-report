@@ -668,7 +668,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest y Bronco, y en Full Size con Explorer y Expedition']} />
+    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest y Explorer, y en Full Size con Expedition']} />
     {/* Nacional cards with deltas */}
     <Lbl>Nacional</Lbl>
     <div style={gr(5)}>
