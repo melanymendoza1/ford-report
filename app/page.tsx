@@ -668,7 +668,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest y Explorer, y en Full Size con Expedition']} />
+    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest y Bronco, y en Full Size con Explorer y Expedition']} />
     {/* Nacional cards with deltas */}
     <Lbl>Nacional</Lbl>
     <div style={gr(5)}>
@@ -948,8 +948,8 @@ function T5({ d }: { d: any }) {
 
   const r26nac = nacRows.find((r: any) => r.year === '2026') || {} as any
   const r25nac = nacRows.find((r: any) => r.year === '2025') || {} as any
-  const fordVal = r26nac['FORD'] || 0
-  const fordPrev = r25nac['FORD'] || 0
+  const fordVal = r26nac['FORD . NEW TERRITORY'] || r26nac['FORD . TERRITORY'] || 0
+  const fordPrev = 0 // Territory no existía en 2025
 
   function RankBlock({ rows, label }: { rows: any[], label: string }) {
     const r25 = rows.find((r: any) => r.year === '2025') || {} as any
@@ -1912,7 +1912,7 @@ function T12({ d }: { d: any }) {
 
   // Build portfolio items from data
   const portfolio = [
-    { name: 'New Territory', trim: 'Titanium Plus', fuel: 'HEV', price: '$35,990', img: '/images/territory.png', v26: 201, v25: 30, segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
+    { name: 'New Territory', trim: 'Titanium Plus', fuel: 'HEV', price: '$35,990', img: '/images/territory.png', v26: 201, v25: 0, segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'F-150', trim: 'XLT · Lariat · Platinum', fuel: 'Gasolina', price: 'Desde $75,990', img: '/images/f150xlt.png', v26: 93, v25: 65, segment: 'Full Size', highlight: '#1 Full Size' },
     { name: 'Everest', trim: 'Active', fuel: 'Diésel', price: '$69,990', img: '/images/everest.png', v26: 31, v25: 17, segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
     { name: 'Ranger', trim: 'XL · XLT', fuel: 'Diésel 4x4', price: 'Desde $53,990', img: '/images/rangerxl.png', v26: 26, v25: 23, segment: 'Pickup Diesel', highlight: 'Crecimiento sostenido' },
