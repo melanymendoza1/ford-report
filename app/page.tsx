@@ -439,10 +439,10 @@ function T1({ d }: { d: any }) {
 
   const scopeData = getScopeData()
   const scopeLabel = scope === 'NACIONAL' ? 'Nacional' : scope === 'ZONA ORGU' ? 'Zona Orgu' : scope
-  const totInd25 = scopeData.reduce((s, r) => s + r.ind25, 0)
-  const totInd26 = scopeData.reduce((s, r) => s + r.ind26, 0)
-  const totFord25 = scopeData.reduce((s, r) => s + r.ford25, 0)
-  const totFord26 = scopeData.reduce((s, r) => s + r.ford26, 0)
+  const totInd25 = scopeData.reduce((s: number, r: any) => s + r.ind25, 0)
+  const totInd26 = scopeData.reduce((s: number, r: any) => s + r.ind26, 0)
+  const totFord25 = scopeData.reduce((s: number, r: any) => s + r.ford25, 0)
+  const totFord26 = scopeData.reduce((s: number, r: any) => s + r.ford26, 0)
 
   const chartData = scopeData.map(r => {
     const pct = r.ind25 ? ((r.ind26 - r.ind25) / r.ind25 * 100).toFixed(1) : '0'
@@ -1023,14 +1023,14 @@ function T4({ d }: { d: any }) {
       // Recalculate MS
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       // Ford first
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
@@ -1248,7 +1248,7 @@ function T5({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -1256,18 +1256,18 @@ function T5({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
@@ -1464,7 +1464,7 @@ function T6({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -1472,18 +1472,18 @@ function T6({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
@@ -1747,7 +1747,7 @@ function T7({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -1755,18 +1755,18 @@ function T7({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
@@ -2048,7 +2048,7 @@ function T8({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -2056,18 +2056,18 @@ function T8({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
@@ -2426,7 +2426,7 @@ function T10({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -2434,18 +2434,18 @@ function T10({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
@@ -2687,7 +2687,7 @@ function T11({ d }: { d: any }) {
         const row = rows.find((r: any) => r.year === '2026') || {} as any
         const lariTerms = ['LARIAT']
         const platTerms = ['PLATINUM']
-        const sumTerms = (terms: string[]) => Object.entries(row).reduce((s, [k, v]) => {
+        const sumTerms = (terms: string[]) => Object.entries(row).reduce((s: number, [k, v]) => {
           if (k === 'year' || k === 'FORD' || !v) return s
           let mk = k
           if (k.includes(' . ')) {
@@ -2743,7 +2743,7 @@ function T11({ d }: { d: any }) {
       }).filter(b => b.totalVol > 0)
       // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
       bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
           const scale = b.totalVol / matchedTotal
           b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
@@ -2751,18 +2751,18 @@ function T11({ d }: { d: any }) {
       })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
