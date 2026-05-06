@@ -5116,34 +5116,28 @@
     },
     "por_provincia": [
       {
-        "label": "EL ORO",
-        "ytd2024": 14,
-        "ytd2025": 4,
-        "ytd2026": 18
+        "label": "PICHINCHA",
+        "ytd2024": 1081,
+        "ytd2025": 797,
+        "ytd2026": 895
       },
       {
         "label": "GUAYAS",
-        "ytd2024": 573,
-        "ytd2025": 401,
-        "ytd2026": 433
+        "ytd2024": 737,
+        "ytd2025": 537,
+        "ytd2026": 593
       },
       {
         "label": "MANABÍ",
-        "ytd2024": 62,
-        "ytd2025": 45,
-        "ytd2026": 46
+        "ytd2024": 71,
+        "ytd2025": 60,
+        "ytd2026": 62
       },
       {
-        "label": "PICHINCHA",
-        "ytd2024": 902,
-        "ytd2025": 588,
-        "ytd2026": 710
-      },
-      {
-        "label": "Total general",
-        "ytd2024": 1551,
-        "ytd2025": 1038,
-        "ytd2026": 1207
+        "label": "EL ORO",
+        "ytd2024": 16,
+        "ytd2025": 7,
+        "ytd2026": 20
       }
     ]
   },
@@ -6541,34 +6535,28 @@
     },
     "por_provincia": [
       {
-        "label": "EL ORO",
-        "ytd2024": 7,
-        "ytd2025": null,
-        "ytd2026": 15
+        "label": "PICHINCHA",
+        "ytd2024": 803,
+        "ytd2025": 772,
+        "ytd2026": 1882
       },
       {
         "label": "GUAYAS",
-        "ytd2024": 291,
-        "ytd2025": 316,
-        "ytd2026": 691
+        "ytd2024": 324,
+        "ytd2025": 377,
+        "ytd2026": 871
       },
       {
         "label": "MANABÍ",
-        "ytd2024": 25,
-        "ytd2025": 24,
-        "ytd2026": 75
+        "ytd2024": 30,
+        "ytd2025": 26,
+        "ytd2026": 103
       },
       {
-        "label": "PICHINCHA",
-        "ytd2024": 691,
-        "ytd2025": 665,
-        "ytd2026": 1536
-      },
-      {
-        "label": "Total general",
-        "ytd2024": 1014,
-        "ytd2025": 1005,
-        "ytd2026": 2317
+        "label": "EL ORO",
+        "ytd2024": 8,
+        "ytd2025": 1,
+        "ytd2026": 20
       }
     ]
   },
@@ -7113,34 +7101,28 @@
     },
     "por_provincia": [
       {
-        "label": "EL ORO",
-        "ytd2024": 2,
-        "ytd2025": null,
-        "ytd2026": 2
+        "label": "PICHINCHA",
+        "ytd2024": 249,
+        "ytd2025": 136,
+        "ytd2026": 322
       },
       {
         "label": "GUAYAS",
-        "ytd2024": 68,
-        "ytd2025": 38,
-        "ytd2026": 117
+        "ytd2024": 76,
+        "ytd2025": 49,
+        "ytd2026": 145
       },
       {
         "label": "MANABÍ",
-        "ytd2024": 6,
-        "ytd2025": 5,
-        "ytd2026": 12
+        "ytd2024": 10,
+        "ytd2025": 4,
+        "ytd2026": 14
       },
       {
-        "label": "PICHINCHA",
-        "ytd2024": 226,
-        "ytd2025": 108,
-        "ytd2026": 218
-      },
-      {
-        "label": "Total general",
-        "ytd2024": 302,
-        "ytd2025": 151,
-        "ytd2026": 349
+        "label": "EL ORO",
+        "ytd2024": 2,
+        "ytd2025": 0,
+        "ytd2026": 2
       }
     ]
   },
