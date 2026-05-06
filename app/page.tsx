@@ -1039,7 +1039,7 @@ function T4({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
@@ -1277,7 +1277,7 @@ function T5({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1508,7 +1508,7 @@ function T6({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1834,7 +1834,7 @@ function T7({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2144,7 +2144,7 @@ function T8({ d }: { d: any }) {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pkMap: Record<string,string> = { 'expedition': 'SUV  80 plus expedition', 'bronco': '', 'explorer_plat': 'SUV  80 plus explorer' }
       const fmMap: Record<string,string> = { 'expedition': 'Expedition', 'bronco': 'Bronco', 'explorer_plat': 'Explorer Platinum' }
-      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 129990, 'explorer_plat': 98990 }
+      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 129990, 'explorer_plat': 99990 }
       const pk = pkMap[sub] || ''
       if (!pk) return null
       const prices = (d.precios_competidores?.[pk] || []) as any[]
@@ -2179,7 +2179,7 @@ function T8({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2597,7 +2597,7 @@ function T10({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2926,7 +2926,7 @@ function T11({ d }: { d: any }) {
             const tPhrase = ' ' + tWords.join(' ') + ' '
             if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
