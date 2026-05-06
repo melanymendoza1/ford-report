@@ -465,8 +465,8 @@ function T1({ d }: { d: any }) {
 
     {/* Hero KPIs */}
     <div style={gr(4)}>
-      <KPI label={`Industria ${scopeLabel}`} value={N(totInd26)} sub={`vs ${N(totInd25)} un. (2025 YTD)`} />
-      <KPI label={`Ford ${scopeLabel}`} value={N(totFord26)} sub={`vs ${N(totFord25)} un. (2025 YTD)`} accent="navy" />
+      <KPI label={`Industria ${scopeLabel}`} value={N(totInd26)} sub={`${totInd25 ? `${((totInd26-totInd25)/totInd25*100)>=0?'↑ +':'↓ '}${Math.abs((totInd26-totInd25)/totInd25*100).toFixed(1)}%` : ''} vs ${N(totInd25)} un. (2025 YTD)`} />
+      <KPI label={`Ford ${scopeLabel}`} value={N(totFord26)} sub={`${totFord25 ? `${((totFord26-totFord25)/totFord25*100)>=0?'↑ +':'↓ '}${Math.abs((totFord26-totFord25)/totFord25*100).toFixed(1)}%` : ''} vs ${N(totFord25)} un. (2025 YTD)`} accent="navy" />
       <KPI label="Crecimiento Industria" value={totInd25 ? `${((totInd26 - totInd25) / totInd25 * 100).toFixed(1)}%` : '—'} sub="vs 2025 YTD" accent="green" />
       <KPI label="MS Ford" value={totInd26 ? `${(totFord26 / totInd26 * 100).toFixed(2)}%` : '—'} sub={scopeLabel} accent="gold" />
     </div>
