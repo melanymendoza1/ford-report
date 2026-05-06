@@ -353,9 +353,9 @@ export default function Page() {
     {/* HERO — ONLY ON INDUSTRIA */}
     {tab === 'ind' && <div style={{ background: `linear-gradient(135deg,${C.night},#0F2B5E)`, padding: '28px 32px 32px' }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Q1 2026 · YTD Comparable ene-feb-mar</div>
+        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Q1 2026 · YTD Comparable ene-feb-mar-abr</div>
         <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.8x más rápido que el mercado</h1>
-        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar 2026 vs 2025)</p>
+        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar-abr 2026 vs 2025)</p>
         <div style={gr(4, 16)}>
           {[
             { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
@@ -388,7 +388,7 @@ export default function Page() {
     </main>
 
     <footer style={{ borderTop: `1px solid ${C.brd}`, padding: '20px 32px', textAlign: 'center', background: C.w }}>
-      <p style={{ fontSize: 11, color: C.mut, margin: 0 }}>Datos a {data.report_month} · Fuente: AEADE Matriculación · YTD comparable ene-feb-mar · Orgu Ford Ecuador</p>
+      <p style={{ fontSize: 11, color: C.mut, margin: 0 }}>Datos a {data.report_month} · Fuente: AEADE Matriculación · YTD comparable ene-feb-mar-abr · Orgu Ford Ecuador</p>
     </footer>
   </div>
 }
@@ -1428,7 +1428,7 @@ function T6({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
-      const fordModels = [{ name: 'Escape ST-Line', price: 46990, vol: fordEntry?.v26 || 0 }]
+      const fordModels = [{ name: 'Escape ST-Line', price: 44990, vol: fordEntry?.v26 || 0 }]
       const bbcBrands = filteredBrands.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1709,7 +1709,7 @@ function T7({ d }: { d: any }) {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pk = sub === 'everest' ? 'SUV  55 - 80 everest' : 'SUV  55 - 80 explorer'
       const fm = sub === 'everest' ? 'Everest' : 'Explorer Active'
-      const fp = sub === 'everest' ? 69990 : 79990
+      const fp = sub === 'everest' ? 69990 : 89990
       const prices = (d.precios_competidores?.[pk] || []) as any[]
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const bbcBrands = filteredBrands.map(b => {
@@ -2008,7 +2008,7 @@ function T8({ d }: { d: any }) {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pkMap: Record<string,string> = { 'expedition': 'SUV  80 plus expedition', 'bronco': '', 'explorer_plat': 'SUV  80 plus explorer' }
       const fmMap: Record<string,string> = { 'expedition': 'Expedition', 'bronco': 'Bronco', 'explorer_plat': 'Explorer Platinum' }
-      const fpMap: Record<string,number> = { 'expedition': 129990, 'bronco': 119990, 'explorer_plat': 94990 }
+      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 119990, 'explorer_plat': 98990 }
       const pk = pkMap[sub] || ''
       if (!pk) return null
       const prices = (d.precios_competidores?.[pk] || []) as any[]
@@ -2680,7 +2680,7 @@ function T11({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const fm = sub === 'xlt' ? 'F-150 XLT' : 'F-150 Lariat'
-      const fp = sub === 'xlt' ? 75990 : 85990
+      const fp = sub === 'xlt' ? 79990 : 89990
       const prices = (d.precios_competidores?.['Full size Pick up'] || []) as any[]
       // For lariat+plat: two Ford bubbles (Lariat $85,990 and Platinum $95,990)
       const fordModels = (() => {
@@ -2704,8 +2704,8 @@ function T11({ d }: { d: any }) {
         const lariatVol = sumTerms(lariTerms)
         const platVol = sumTerms(platTerms)
         return [
-          { name: 'F-150 Lariat', price: 85990, vol: lariatVol },
-          { name: 'F-150 Platinum', price: 95990, vol: platVol },
+          { name: 'F-150 Lariat', price: 89990, vol: lariatVol },
+          { name: 'F-150 Platinum', price: 99990, vol: platVol },
         ]
       })()
       const bbcBrands = filteredBrands.map(b => {
