@@ -114,7 +114,7 @@ function SubTab({ tabs, active, onChange }: { tabs: { id: string, label: string 
 }
 
 /* BBC — Bubble Brand Chart */
-function BBC({ brands, scopeLabel }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string }) {
+function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string, hotMin?: number }) {
   if (!brands.length) return null
   const allModels = brands.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
   const maxVol = Math.max(...allModels.map(m => m.vol), 1)
@@ -142,7 +142,7 @@ function BBC({ brands, scopeLabel }: { brands: { brand: string, models: { name: 
     priceBuckets[bucket] = (priceBuckets[bucket] || 0) + 1
   })
   const hotBucket = Object.entries(priceBuckets).sort((a, b) => b[1] - a[1])[0]
-  const hotRange = hotBucket ? Number(hotBucket[0]) : -1
+  const hotRange = hotMin !== undefined ? hotMin : (hotBucket ? Number(hotBucket[0]) : -1)
 
   const fmtPrice = (p: number) => `$${p.toLocaleString('es-EC')}`
 
@@ -1381,6 +1381,8 @@ function T6({ d }: { d: any }) {
         if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: brand sells only one model in segment (brand total = model total)
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -1620,6 +1622,8 @@ function T7({ d }: { d: any }) {
         if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: brand sells only one model in segment (brand total = model total)
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -1753,7 +1757,7 @@ function T7({ d }: { d: any }) {
         <img src="/images/exploreractive.png" alt="Explorer" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer Active</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$79,990</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$89,990</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
@@ -1959,6 +1963,8 @@ function T8({ d }: { d: any }) {
         if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: brand sells only one model in segment (brand total = model total)
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -2076,7 +2082,7 @@ function T8({ d }: { d: any }) {
         <img src="/images/expeditionplatinum.png" alt="Expedition" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Expedition</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$129,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$139,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_expedition', '2026'))}</div>
@@ -2087,7 +2093,7 @@ function T8({ d }: { d: any }) {
         <img src="/images/bronco.png" alt="Bronco" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Bronco</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$119,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$129,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_bronco', '2026'))}</div>
@@ -2098,7 +2104,7 @@ function T8({ d }: { d: any }) {
         <img src="/images/explorerplatinum.png" alt="Explorer Platinum" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Explorer Platinum</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$94,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$99,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_explorer_plat', '2026'))}</div>
@@ -2138,7 +2144,7 @@ function T8({ d }: { d: any }) {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pkMap: Record<string,string> = { 'expedition': 'SUV  80 plus expedition', 'bronco': '', 'explorer_plat': 'SUV  80 plus explorer' }
       const fmMap: Record<string,string> = { 'expedition': 'Expedition', 'bronco': 'Bronco', 'explorer_plat': 'Explorer Platinum' }
-      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 119990, 'explorer_plat': 98990 }
+      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 129990, 'explorer_plat': 98990 }
       const pk = pkMap[sub] || ''
       if (!pk) return null
       const prices = (d.precios_competidores?.[pk] || []) as any[]
@@ -2201,7 +2207,7 @@ function T8({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={sub === 'explorer_plat' ? 90000 : undefined} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
@@ -2392,6 +2398,8 @@ function T10({ d }: { d: any }) {
         if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: brand sells only one model in segment (brand total = model total)
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -2690,6 +2698,8 @@ function T11({ d }: { d: any }) {
         if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: brand sells only one model in segment (brand total = model total)
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -2991,7 +3001,7 @@ function T12({ d }: { d: any }) {
       v26: getVal('suv_55_80', '2026', ['EVEREST']), v25: getVal('suv_55_80', '2025', ['EVEREST']), segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
     { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$89,990', img: '/images/exploreractive.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER ACTIVE']), v25: getVal('suv_60_80', '2025', ['EXPLORER ACTIVE']), segment: 'SUV 60-80K', highlight: 'Estable' },
-    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$98,990', img: '/images/explorerplatinum.png',
+    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$99,990', img: '/images/explorerplatinum.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER PLATINUM']), v25: getVal('suv_60_80', '2025', ['EXPLORER PLATINUM']), segment: 'SUV 60-80K', highlight: 'Premium' },
     { name: 'Bronco', trim: 'Wildtrak · Badlands', fuel: 'Gasolina', price: '$119,990', img: '/images/bronco.png',
       v26: getVal('suv_80plus', '2026', ['BRONCO']), v25: getVal('suv_80plus', '2025', ['BRONCO']), segment: 'SUV +80K', highlight: 'Sin unidades YTD' },
