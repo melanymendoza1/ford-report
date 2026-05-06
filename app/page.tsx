@@ -1645,20 +1645,26 @@ function T7({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
+      let brandTotal = 0
+      let foundModel = false
+      // Pass 1: dot keys
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          total += ((v as number) || 0)
-        } else if (!k.includes(' . ') && k !== brand) {
-          // Flat format (v16): no brand prefix — check all model keys under this brand
-          // Only count keys that appear after the brand total in the row
-          // Use brand total as gate: only count if brand has volume
-          const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-          if (!isBrandKey && row[brand] && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-            total += ((v as number) || 0)
-          }
+        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
         }
       })
+      // Pass 2: flat model keys
+      Object.entries(row).forEach(([k, v]) => {
+        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
+        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
+        }
+      })
+      // Fallback: if no model keys matched, use brand total (brand sells only one model in segment)
+      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
+      total += brandTotal
     })
     return total
   }
@@ -1667,12 +1673,12 @@ function T7({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; let foundModel = false
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k.includes(' . ') && k.startsWith('FORD . ')) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
       }
     })
     Object.entries(row).forEach(([k, v]) => {
@@ -1680,9 +1686,10 @@ function T7({ d }: { d: any }) {
       const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
       if (!isBrandKey) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) total += ((v as number) || 0)
+        if (mt.length) { total += ((v as number) || 0); foundModel = true }
       }
     })
+    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
 
@@ -1976,17 +1983,26 @@ function T8({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
+      let brandTotal = 0
+      let foundModel = false
+      // Pass 1: dot keys
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          total += ((v as number) || 0)
-        } else if (!k.includes(' . ') && k !== brand) {
-          const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-          if (!isBrandKey && row[brand] && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-            total += ((v as number) || 0)
-          }
+        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
         }
       })
+      // Pass 2: flat model keys
+      Object.entries(row).forEach(([k, v]) => {
+        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
+        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
+        }
+      })
+      // Fallback: if no model keys matched, use brand total (brand sells only one model in segment)
+      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
+      total += brandTotal
     })
     return total
   }
@@ -1995,12 +2011,12 @@ function T8({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; let foundModel = false
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k.includes(' . ') && k.startsWith('FORD . ')) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
       }
     })
     Object.entries(row).forEach(([k, v]) => {
@@ -2008,9 +2024,10 @@ function T8({ d }: { d: any }) {
       const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
       if (!isBrandKey) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) total += ((v as number) || 0)
+        if (mt.length) { total += ((v as number) || 0); foundModel = true }
       }
     })
+    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2405,17 +2422,22 @@ function T10({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
+      let brandTotal = 0; let foundModel = false
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          total += ((v as number) || 0)
-        } else if (!k.includes(' . ') && k !== brand) {
-          const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-          if (!isBrandKey && row[brand] && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-            total += ((v as number) || 0)
-          }
+        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
         }
       })
+      Object.entries(row).forEach(([k, v]) => {
+        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
+        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
+        }
+      })
+      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
+      total += brandTotal
     })
     return total
   }
@@ -2424,12 +2446,12 @@ function T10({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; let foundModel = false
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k.includes(' . ') && k.startsWith('FORD . ')) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
       }
     })
     Object.entries(row).forEach(([k, v]) => {
@@ -2437,9 +2459,10 @@ function T10({ d }: { d: any }) {
       const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
       if (!isBrandKey) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) total += ((v as number) || 0)
+        if (mt.length) { total += ((v as number) || 0); foundModel = true }
       }
     })
+    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2698,22 +2721,22 @@ function T11({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
-      const coveredByDot = new Set<string>()
+      let brandTotal = 0; let foundModel = false
       Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || !v) return
-        if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-          if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+        if (k === 'year' || k === brand) return
+        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
         }
       })
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand || k.includes(' . ') || !v) return
         const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && row[brand]) {
-          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-          if (mt.length) total += ((v as number) || 0)
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          brandTotal += ((v as number) || 0); foundModel = true
         }
       })
+      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
+      total += brandTotal
     })
     return total
   }
@@ -2722,12 +2745,12 @@ function T11({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = provMarcas[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; let foundModel = false
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k.includes(' . ') && k.startsWith('FORD . ')) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
       }
     })
     Object.entries(row).forEach(([k, v]) => {
@@ -2735,9 +2758,10 @@ function T11({ d }: { d: any }) {
       const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
       if (!isBrandKey) {
         const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) total += ((v as number) || 0)
+        if (mt.length) { total += ((v as number) || 0); foundModel = true }
       }
     })
+    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
