@@ -5116,15 +5116,15 @@
     },
     "por_provincia": [
       {
-        "label": "PICHINCHA",
-        "ytd2024": 1081,
-        "ytd2025": 797,
-        "ytd2026": 895
+        "label": "EL ORO",
+        "ytd2024": 16,
+        "ytd2025": 7,
+        "ytd2026": 20
       },
       {
         "label": "GUAYAS",
-        "ytd2024": 737,
-        "ytd2025": 537,
+        "ytd2024": 738,
+        "ytd2025": 539,
         "ytd2026": 593
       },
       {
@@ -5134,10 +5134,10 @@
         "ytd2026": 62
       },
       {
-        "label": "EL ORO",
-        "ytd2024": 16,
-        "ytd2025": 7,
-        "ytd2026": 20
+        "label": "PICHINCHA",
+        "ytd2024": 1082,
+        "ytd2025": 798,
+        "ytd2026": 895
       }
     ]
   },
@@ -6535,28 +6535,28 @@
     },
     "por_provincia": [
       {
-        "label": "PICHINCHA",
-        "ytd2024": 803,
-        "ytd2025": 772,
-        "ytd2026": 1882
+        "label": "EL ORO",
+        "ytd2024": 9,
+        "ytd2025": 1,
+        "ytd2026": 20
       },
       {
         "label": "GUAYAS",
-        "ytd2024": 324,
-        "ytd2025": 377,
-        "ytd2026": 871
+        "ytd2024": 364,
+        "ytd2025": 425,
+        "ytd2026": 997
       },
       {
         "label": "MANABÍ",
-        "ytd2024": 30,
-        "ytd2025": 26,
-        "ytd2026": 103
+        "ytd2024": 33,
+        "ytd2025": 29,
+        "ytd2026": 109
       },
       {
-        "label": "EL ORO",
-        "ytd2024": 8,
-        "ytd2025": 1,
-        "ytd2026": 20
+        "label": "PICHINCHA",
+        "ytd2024": 880,
+        "ytd2025": 857,
+        "ytd2026": 2146
       }
     ]
   },
@@ -7101,28 +7101,28 @@
     },
     "por_provincia": [
       {
-        "label": "PICHINCHA",
-        "ytd2024": 249,
-        "ytd2025": 136,
-        "ytd2026": 322
+        "label": "EL ORO",
+        "ytd2024": 2,
+        "ytd2025": null,
+        "ytd2026": 2
       },
       {
         "label": "GUAYAS",
         "ytd2024": 76,
-        "ytd2025": 49,
-        "ytd2026": 145
+        "ytd2025": 51,
+        "ytd2026": 159
       },
       {
         "label": "MANABÍ",
         "ytd2024": 10,
-        "ytd2025": 4,
-        "ytd2026": 14
+        "ytd2025": 5,
+        "ytd2026": 16
       },
       {
-        "label": "EL ORO",
-        "ytd2024": 2,
-        "ytd2025": 0,
-        "ytd2026": 2
+        "label": "PICHINCHA",
+        "ytd2024": 249,
+        "ytd2025": 148,
+        "ytd2026": 353
       }
     ]
   },

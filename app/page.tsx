@@ -970,10 +970,10 @@ function T4({ d }: { d: any }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>14</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{fordEntry?.v26 || 0}</div>
           <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
         </div>
-        <Dl a={14} b={45} />
+        <Dl a={fordEntry?.v26 || 0} b={fordEntry?.v25 || 0} />
       </div>
     </Card>
 
