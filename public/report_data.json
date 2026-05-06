@@ -3,448 +3,800 @@
   "months_ytd": 4,
   "mercado_nacional": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 8082,
-      "BUS": 254,
-      "CAMION": 3063,
-      "PICK UPS": 7465,
-      "SUV": 19603,
-      "VAN": 1679
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 21939,
+      "y2025": 21122,
+      "y2026": 5825
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 6102,
-      "BUS": 352,
-      "CAMION": 3506,
-      "PICK UPS": 6410,
-      "SUV": 17175,
-      "VAN": 1468
+      "cat": "BUS",
+      "y2024": 952,
+      "y2025": 1051,
+      "y2026": 189
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 8239,
-      "BUS": 250,
-      "CAMION": 5341,
-      "PICK UPS": 8724,
-      "SUV": 25942,
-      "VAN": 2183
+      "cat": "CAMION",
+      "y2024": 9507,
+      "y2025": 13302,
+      "y2026": 3729
+    },
+    {
+      "cat": "PICK UPS",
+      "y2024": 21032,
+      "y2025": 23214,
+      "y2026": 6228
+    },
+    {
+      "cat": "SUV",
+      "y2024": 50311,
+      "y2025": 60287,
+      "y2026": 18823
+    },
+    {
+      "cat": "VAN",
+      "y2024": 4525,
+      "y2025": 5529,
+      "y2026": 1588
+    },
+    {
+      "cat": "Total general",
+      "y2024": 108266,
+      "y2025": 124505,
+      "y2026": 36382
     }
   ],
   "ford_nacional": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 4,
-      "PICK UPS": 469,
-      "SUV": 257,
-      "VAN": null
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 11,
+      "y2025": 12,
+      "y2026": 8
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 1,
-      "PICK UPS": 209,
-      "SUV": 223,
-      "VAN": null
+      "cat": "CAMION",
+      "y2024": null,
+      "y2025": null,
+      "y2026": 5
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 9,
-      "PICK UPS": 208,
-      "SUV": 471,
-      "VAN": 1
+      "cat": "PICK UPS",
+      "y2024": 1051,
+      "y2025": 753,
+      "y2026": 163
+    },
+    {
+      "cat": "SUV",
+      "y2024": 642,
+      "y2025": 797,
+      "y2026": 354
+    },
+    {
+      "cat": "VAN",
+      "y2024": 1,
+      "y2025": null,
+      "y2026": null
+    },
+    {
+      "cat": "Total general",
+      "y2024": 1705,
+      "y2025": 1562,
+      "y2026": 530
     }
   ],
   "mercado_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 6175,
-      "BUS": 100,
-      "CAMION": 1961,
-      "PICK UPS": 5252,
-      "SUV": 15438,
-      "VAN": 1411
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 6175,
+      "ytd2025": 4804,
+      "ytd2026": 6448
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 4804,
-      "BUS": 198,
-      "CAMION": 2212,
-      "PICK UPS": 4378,
-      "SUV": 13583,
-      "VAN": 1240
+      "cat": "BUS",
+      "ytd2024": 100,
+      "ytd2025": 198,
+      "ytd2026": 106
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 6448,
-      "BUS": 106,
-      "CAMION": 3552,
-      "PICK UPS": 5707,
-      "SUV": 20132,
-      "VAN": 1746
+      "cat": "CAMION",
+      "ytd2024": 1961,
+      "ytd2025": 2212,
+      "ytd2026": 3552
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 5252,
+      "ytd2025": 4378,
+      "ytd2026": 5707
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 15438,
+      "ytd2025": 13583,
+      "ytd2026": 20132
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 1411,
+      "ytd2025": 1240,
+      "ytd2026": 1746
     }
   ],
   "ford_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 2,
-      "PICK UPS": 351,
-      "SUV": 230,
-      "VAN": null
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 2,
+      "ytd2025": null,
+      "ytd2026": 8
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": null,
-      "PICK UPS": 167,
-      "SUV": 194,
-      "VAN": null
+      "cat": "PICK UPS",
+      "ytd2024": 351,
+      "ytd2025": 167,
+      "ytd2026": 150
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 8,
-      "PICK UPS": 150,
-      "SUV": 415,
-      "VAN": 1
+      "cat": "SUV",
+      "ytd2024": 230,
+      "ytd2025": 194,
+      "ytd2026": 415
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 1
     }
   ],
   "provincias_ytd": [
     {
-      "year": "2024",
-      "PICHINCHA": 16735,
-      "MANABÍ": 1502,
-      "GUAYAS": 11701,
-      "EL ORO": 399
+      "prov": "PICHINCHA",
+      "ytd2024": 16735,
+      "ytd2025": 14980,
+      "ytd2026": 20841
     },
     {
-      "year": "2025",
-      "PICHINCHA": 14980,
-      "MANABÍ": 1208,
-      "GUAYAS": 9924,
-      "EL ORO": 304
+      "prov": "MANABÍ",
+      "ytd2024": 1502,
+      "ytd2025": 1208,
+      "ytd2026": 2031
     },
     {
-      "year": "2026",
-      "PICHINCHA": 20841,
-      "MANABÍ": 2031,
-      "GUAYAS": 14035,
-      "EL ORO": 784
+      "prov": "GUAYAS",
+      "ytd2024": 11701,
+      "ytd2025": 9924,
+      "ytd2026": 14035
+    },
+    {
+      "prov": "EL ORO",
+      "ytd2024": 399,
+      "ytd2025": 304,
+      "ytd2026": 784
     }
   ],
   "ford_provincias_ytd": [
     {
-      "year": "2024",
-      "PICHINCHA": 374,
-      "MANABÍ": 24,
-      "GUAYAS": 183,
-      "EL ORO": 2
+      "prov": "PICHINCHA",
+      "ytd2024": 374,
+      "ytd2025": 235,
+      "ytd2026": 336
     },
     {
-      "year": "2025",
-      "PICHINCHA": 235,
-      "MANABÍ": 12,
-      "GUAYAS": 114,
-      "EL ORO": null
+      "prov": "MANABÍ",
+      "ytd2024": 24,
+      "ytd2025": 12,
+      "ytd2026": 51
     },
     {
-      "year": "2026",
-      "PICHINCHA": 336,
-      "MANABÍ": 51,
-      "GUAYAS": 169,
-      "EL ORO": 18
+      "prov": "GUAYAS",
+      "ytd2024": 183,
+      "ytd2025": 114,
+      "ytd2026": 169
+    },
+    {
+      "prov": "EL ORO",
+      "ytd2024": 2,
+      "ytd2025": null,
+      "ytd2026": 18
     }
   ],
   "cat_pichincha_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 3373,
-      "BUS": 65,
-      "CAMION": 1032,
-      "PICK UPS": 3091,
-      "SUV": 8605,
-      "VAN": 569
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 3373,
+      "ytd2025": 2635,
+      "ytd2026": 3780
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 2635,
-      "BUS": 135,
-      "CAMION": 1134,
-      "PICK UPS": 2808,
-      "SUV": 7767,
-      "VAN": 500
+      "cat": "BUS",
+      "ytd2024": 65,
+      "ytd2025": 135,
+      "ytd2026": 61
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 3780,
-      "BUS": 61,
-      "CAMION": 1568,
-      "PICK UPS": 3251,
-      "SUV": 11450,
-      "VAN": 731
+      "cat": "CAMION",
+      "ytd2024": 1032,
+      "ytd2025": 1134,
+      "ytd2026": 1568
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 3091,
+      "ytd2025": 2808,
+      "ytd2026": 3251
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 8605,
+      "ytd2025": 7767,
+      "ytd2026": 11450
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 569,
+      "ytd2025": 500,
+      "ytd2026": 731
     }
   ],
   "cat_guayas_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 2407,
-      "BUS": 20,
-      "CAMION": 769,
-      "PICK UPS": 1823,
-      "SUV": 5965,
-      "VAN": 717
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 2407,
+      "ytd2025": 1896,
+      "ytd2026": 2116
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 1896,
-      "BUS": 48,
-      "CAMION": 914,
-      "PICK UPS": 1280,
-      "SUV": 5102,
-      "VAN": 684
+      "cat": "BUS",
+      "ytd2024": 20,
+      "ytd2025": 48,
+      "ytd2026": 35
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 2116,
-      "BUS": 35,
-      "CAMION": 1642,
-      "PICK UPS": 2022,
-      "SUV": 7298,
-      "VAN": 922
+      "cat": "CAMION",
+      "ytd2024": 769,
+      "ytd2025": 914,
+      "ytd2026": 1642
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 1823,
+      "ytd2025": 1280,
+      "ytd2026": 2022
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 5965,
+      "ytd2025": 5102,
+      "ytd2026": 7298
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 717,
+      "ytd2025": 684,
+      "ytd2026": 922
     }
   ],
   "cat_manabi_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 312,
-      "BUS": 15,
-      "CAMION": 120,
-      "PICK UPS": 240,
-      "SUV": 711,
-      "VAN": 104
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 312,
+      "ytd2025": 240,
+      "ytd2026": 445
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 240,
-      "BUS": 15,
-      "CAMION": 111,
-      "PICK UPS": 175,
-      "SUV": 623,
-      "VAN": 44
+      "cat": "BUS",
+      "ytd2024": 15,
+      "ytd2025": 15,
+      "ytd2026": 10
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 445,
-      "BUS": 10,
-      "CAMION": 177,
-      "PICK UPS": 248,
-      "SUV": 1091,
-      "VAN": 60
+      "cat": "CAMION",
+      "ytd2024": 120,
+      "ytd2025": 111,
+      "ytd2026": 177
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 240,
+      "ytd2025": 175,
+      "ytd2026": 248
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 711,
+      "ytd2025": 623,
+      "ytd2026": 1091
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 104,
+      "ytd2025": 44,
+      "ytd2026": 60
     }
   ],
   "cat_eloro_ytd": [
     {
-      "year": "2024",
-      "AUTOMOV. DE PASAJEROS": 83,
-      "CAMION": 40,
-      "PICK UPS": 98,
-      "SUV": 157,
-      "VAN": 21
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 83,
+      "ytd2025": 33,
+      "ytd2026": 107
     },
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 33,
-      "CAMION": 53,
-      "PICK UPS": 115,
-      "SUV": 91,
-      "VAN": 12
+      "cat": "CAMION",
+      "ytd2024": 40,
+      "ytd2025": 53,
+      "ytd2026": 165
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 107,
-      "CAMION": 165,
-      "PICK UPS": 186,
-      "SUV": 293,
-      "VAN": 33
+      "cat": "PICK UPS",
+      "ytd2024": 98,
+      "ytd2025": 115,
+      "ytd2026": 186
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 157,
+      "ytd2025": 91,
+      "ytd2026": 293
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 21,
+      "ytd2025": 12,
+      "ytd2026": 33
     }
   ],
   "cat_por_provincia_ytd": [
     {
-      "year": "2025",
-      "AUTOMOV. DE PASAJEROS": 4804,
-      "BUS": 198,
-      "CAMION": 2212,
-      "PICK UPS": 4378,
-      "SUV": 13583,
-      "VAN": 1240
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2025": 4804,
+      "ytd2026": 6448
     },
     {
-      "year": "2026",
-      "AUTOMOV. DE PASAJEROS": 6448,
-      "BUS": 106,
-      "CAMION": 3552,
-      "PICK UPS": 5707,
-      "SUV": 20132,
-      "VAN": 1746
+      "cat": "BUS",
+      "ytd2025": 198,
+      "ytd2026": 106
+    },
+    {
+      "cat": "CAMION",
+      "ytd2025": 2212,
+      "ytd2026": 3552
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2025": 4378,
+      "ytd2026": 5707
+    },
+    {
+      "cat": "SUV",
+      "ytd2025": 13583,
+      "ytd2026": 20132
+    },
+    {
+      "cat": "VAN",
+      "ytd2025": 1240,
+      "ytd2026": 1746
     }
   ],
   "ford_cat_por_prov": [
     {
-      "year": "2024",
-      "PICHINCHA": 374,
-      "AUTOMOV. DE PASAJEROS": 1,
-      "PICK UPS": 2,
-      "SUV": null,
-      "VAN": null,
-      "GUAYAS": 183,
-      "MANABÍ": 24,
-      "EL ORO": 2
+      "label": "PICHINCHA",
+      "2024": 374,
+      "2025": 235,
+      "2026": 336,
+      "Total general": 945
     },
     {
-      "year": "2025",
-      "PICHINCHA": 235,
-      "AUTOMOV. DE PASAJEROS": null,
-      "PICK UPS": null,
-      "SUV": null,
-      "VAN": null,
-      "GUAYAS": 114,
-      "MANABÍ": 12,
-      "EL ORO": null
+      "label": "AUTOMOV. DE PASAJEROS",
+      "2024": 1,
+      "2025": null,
+      "2026": 6,
+      "Total general": 7
     },
     {
-      "year": "2026",
-      "PICHINCHA": 336,
-      "AUTOMOV. DE PASAJEROS": null,
-      "PICK UPS": 11,
-      "SUV": 7,
-      "VAN": 1,
-      "GUAYAS": 169,
-      "MANABÍ": 51,
-      "EL ORO": 18
+      "label": "PICK UPS",
+      "2024": 247,
+      "2025": 114,
+      "2026": 79,
+      "Total general": 440
+    },
+    {
+      "label": "SUV",
+      "2024": 126,
+      "2025": 121,
+      "2026": 250,
+      "Total general": 497
+    },
+    {
+      "label": "VAN",
+      "2024": null,
+      "2025": null,
+      "2026": 1,
+      "Total general": 1
+    },
+    {
+      "label": "GUAYAS",
+      "2024": 183,
+      "2025": 114,
+      "2026": 169,
+      "Total general": 466
+    },
+    {
+      "label": "AUTOMOV. DE PASAJEROS",
+      "2024": null,
+      "2025": null,
+      "2026": 2,
+      "Total general": 2
+    },
+    {
+      "label": "PICK UPS",
+      "2024": 84,
+      "2025": 49,
+      "2026": 47,
+      "Total general": 180
+    },
+    {
+      "label": "SUV",
+      "2024": 99,
+      "2025": 65,
+      "2026": 120,
+      "Total general": 284
+    },
+    {
+      "label": "MANABÍ",
+      "2024": 24,
+      "2025": 12,
+      "2026": 51,
+      "Total general": 87
+    },
+    {
+      "label": "AUTOMOV. DE PASAJEROS",
+      "2024": 1,
+      "2025": null,
+      "2026": null,
+      "Total general": 1
+    },
+    {
+      "label": "PICK UPS",
+      "2024": 18,
+      "2025": 4,
+      "2026": 13,
+      "Total general": 35
+    },
+    {
+      "label": "SUV",
+      "2024": 5,
+      "2025": 8,
+      "2026": 38,
+      "Total general": 51
+    },
+    {
+      "label": "EL ORO",
+      "2024": 2,
+      "2025": null,
+      "2026": 18,
+      "Total general": 20
+    },
+    {
+      "label": "PICK UPS",
+      "2024": 2,
+      "2025": null,
+      "2026": 11,
+      "Total general": 13
+    },
+    {
+      "label": "SUV",
+      "2024": null,
+      "2025": null,
+      "2026": 7,
+      "Total general": 7
     }
   ],
   "combustible_suv_nacional": [
     {
-      "year": "2024",
-      "SUV": 19603,
-      "DIESEL": 418,
-      "ELECTRICO BEV": 254,
-      "GASOLINA": 15287,
-      "HIBRIDO": 3644
+      "cat": "SUV",
+      "ytd2024": 19603,
+      "ytd2025": 17175,
+      "ytd2026": 25942
     },
     {
-      "year": "2025",
-      "SUV": 17175,
-      "DIESEL": 312,
-      "ELECTRICO BEV": 645,
-      "GASOLINA": 11956,
-      "HIBRIDO": 4262
+      "cat": "DIESEL",
+      "ytd2024": 418,
+      "ytd2025": 312,
+      "ytd2026": 336
     },
     {
-      "year": "2026",
-      "SUV": 25942,
-      "DIESEL": 336,
-      "ELECTRICO BEV": 2164,
-      "GASOLINA": 15217,
-      "HIBRIDO": 8225
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 254,
+      "ytd2025": 645,
+      "ytd2026": 2164
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 15287,
+      "ytd2025": 11956,
+      "ytd2026": 15217
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 3644,
+      "ytd2025": 4262,
+      "ytd2026": 8225
     }
   ],
   "combustible_suv_prov": [
     {
-      "year": "2024",
-      "SUV": 15438,
-      "EL ORO": 157,
-      "DIESEL": 209,
-      "ELECTRICO BEV": 202,
-      "GASOLINA": 6221,
-      "HIBRIDO": 1973,
-      "GUAYAS": 5965,
-      "MANABÍ": 711,
-      "PICHINCHA": 8605
+      "cat": "SUV",
+      "ytd2024": 15438,
+      "ytd2025": 13583,
+      "ytd2026": 20132
     },
     {
-      "year": "2025",
-      "SUV": 13583,
-      "EL ORO": 91,
-      "DIESEL": 171,
-      "ELECTRICO BEV": 456,
-      "GASOLINA": 4907,
-      "HIBRIDO": 2233,
-      "GUAYAS": 5102,
-      "MANABÍ": 623,
-      "PICHINCHA": 7767
+      "cat": "EL ORO",
+      "ytd2024": 157,
+      "ytd2025": 91,
+      "ytd2026": 293
     },
     {
-      "year": "2026",
-      "SUV": 20132,
-      "EL ORO": 293,
-      "DIESEL": 111,
-      "ELECTRICO BEV": 1258,
-      "GASOLINA": 5850,
-      "HIBRIDO": 4231,
-      "GUAYAS": 7298,
-      "MANABÍ": 1091,
-      "PICHINCHA": 11450
+      "cat": "DIESEL",
+      "ytd2024": 2,
+      "ytd2025": null,
+      "ytd2026": 9
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 7
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 125,
+      "ytd2025": 85,
+      "ytd2026": 231
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 30,
+      "ytd2025": 6,
+      "ytd2026": 46
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 5965,
+      "ytd2025": 5102,
+      "ytd2026": 7298
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 121,
+      "ytd2025": 75,
+      "ytd2026": 112
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 34,
+      "ytd2025": 100,
+      "ytd2026": 373
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 4818,
+      "ytd2025": 3681,
+      "ytd2026": 4531
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 992,
+      "ytd2025": 1246,
+      "ytd2026": 2282
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 711,
+      "ytd2025": 623,
+      "ytd2026": 1091
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 11,
+      "ytd2025": 7,
+      "ytd2026": 22
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 5,
+      "ytd2025": 25,
+      "ytd2026": 277
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 601,
+      "ytd2025": 482,
+      "ytd2026": 560
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 94,
+      "ytd2025": 109,
+      "ytd2026": 232
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 8605,
+      "ytd2025": 7767,
+      "ytd2026": 11450
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 209,
+      "ytd2025": 171,
+      "ytd2026": 111
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 202,
+      "ytd2025": 456,
+      "ytd2026": 1258
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 6221,
+      "ytd2025": 4907,
+      "ytd2026": 5850
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 1973,
+      "ytd2025": 2233,
+      "ytd2026": 4231
     }
   ],
   "combustible_pu_nacional": [
     {
-      "year": "2024",
-      "PICK UPS": 7465,
-      "DIESEL": 6180,
-      "ELECTRICO BEV": 1,
-      "GASOLINA": 1139,
-      "HIBRIDO": 145
+      "cat": "PICK UPS",
+      "ytd2024": 7465,
+      "ytd2025": 6410,
+      "ytd2026": 8724
     },
     {
-      "year": "2025",
-      "PICK UPS": 6410,
-      "DIESEL": 5360,
-      "ELECTRICO BEV": 4,
-      "GASOLINA": 867,
-      "HIBRIDO": 179
+      "cat": "DIESEL",
+      "ytd2024": 6180,
+      "ytd2025": 5360,
+      "ytd2026": 6680
     },
     {
-      "year": "2026",
-      "PICK UPS": 8724,
-      "DIESEL": 6680,
-      "ELECTRICO BEV": 14,
-      "GASOLINA": 1537,
-      "HIBRIDO": 493
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 1,
+      "ytd2025": 4,
+      "ytd2026": 14
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 1139,
+      "ytd2025": 867,
+      "ytd2026": 1537
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 145,
+      "ytd2025": 179,
+      "ytd2026": 493
     }
   ],
   "combustible_pu_prov": [
     {
-      "year": "2024",
-      "PICK UPS": 5252,
-      "EL ORO": 98,
-      "DIESEL": 2602,
-      "GASOLINA": 437,
-      "HIBRIDO": 51,
-      "GUAYAS": 1823,
-      "ELECTRICO BEV": 1,
-      "MANABÍ": 240,
-      "PICHINCHA": 3091
+      "cat": "PICK UPS",
+      "ytd2024": 5252,
+      "ytd2025": 4378,
+      "ytd2026": 5707
     },
     {
-      "year": "2025",
-      "PICK UPS": 4378,
-      "EL ORO": 115,
-      "DIESEL": 2345,
-      "GASOLINA": 365,
-      "HIBRIDO": 96,
-      "GUAYAS": 1280,
-      "ELECTRICO BEV": 2,
-      "MANABÍ": 175,
-      "PICHINCHA": 2808
+      "cat": "EL ORO",
+      "ytd2024": 98,
+      "ytd2025": 115,
+      "ytd2026": 186
     },
     {
-      "year": "2026",
-      "PICK UPS": 5707,
-      "EL ORO": 186,
-      "DIESEL": 2363,
-      "GASOLINA": 673,
-      "HIBRIDO": 204,
-      "GUAYAS": 2022,
-      "ELECTRICO BEV": 11,
-      "MANABÍ": 248,
-      "PICHINCHA": 3251
+      "cat": "DIESEL",
+      "ytd2024": 89,
+      "ytd2025": 106,
+      "ytd2026": 146
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 9,
+      "ytd2025": 9,
+      "ytd2026": 14
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 26
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 1823,
+      "ytd2025": 1280,
+      "ytd2026": 2022
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 1425,
+      "ytd2025": 1011,
+      "ytd2026": 1584
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": null,
+      "ytd2025": 1,
+      "ytd2026": null
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 327,
+      "ytd2025": 212,
+      "ytd2026": 322
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 71,
+      "ytd2025": 56,
+      "ytd2026": 116
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 240,
+      "ytd2025": 175,
+      "ytd2026": 248
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 188,
+      "ytd2025": 157,
+      "ytd2026": 182
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 48,
+      "ytd2025": 15,
+      "ytd2026": 41
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 4,
+      "ytd2025": 3,
+      "ytd2026": 25
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 3091,
+      "ytd2025": 2808,
+      "ytd2026": 3251
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 2602,
+      "ytd2025": 2345,
+      "ytd2026": 2363
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 1,
+      "ytd2025": 2,
+      "ytd2026": 11
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 437,
+      "ytd2025": 365,
+      "ytd2026": 673
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 51,
+      "ytd2025": 96,
+      "ytd2026": 204
     }
   ],
   "combustible": [
@@ -2095,164 +2447,356 @@
   ],
   "suv_segmentos_nacional": [
     {
-      "year": "2024",
-      "B SUV": 8784,
-      "C SUV": 8399,
-      "D SUV": 2026,
-      "E SUV": 159,
-      "PREMIUM SUV": 235
+      "cat": "B SUV",
+      "ytd2024": 8784,
+      "ytd2025": 7969,
+      "ytd2026": 11529
     },
     {
-      "year": "2025",
-      "B SUV": 7969,
-      "C SUV": 7302,
-      "D SUV": 1507,
-      "E SUV": 132,
-      "PREMIUM SUV": 265
+      "cat": "C SUV",
+      "ytd2024": 8399,
+      "ytd2025": 7302,
+      "ytd2026": 11638
     },
     {
-      "year": "2026",
-      "B SUV": 11529,
-      "C SUV": 11638,
-      "D SUV": 2189,
-      "E SUV": 265,
-      "PREMIUM SUV": 321
+      "cat": "D SUV",
+      "ytd2024": 2026,
+      "ytd2025": 1507,
+      "ytd2026": 2189
+    },
+    {
+      "cat": "E SUV",
+      "ytd2024": 159,
+      "ytd2025": 132,
+      "ytd2026": 265
+    },
+    {
+      "cat": "PREMIUM SUV",
+      "ytd2024": 235,
+      "ytd2025": 265,
+      "ytd2026": 321
     }
   ],
   "suv_segmentos": [
     {
-      "year": "2024",
-      "B SUV": 6834,
-      "C SUV": 6669,
-      "D SUV": 1563,
-      "E SUV": 150,
-      "PREMIUM SUV": 222
+      "cat": "B SUV",
+      "ytd2024": 6834,
+      "ytd2025": 6134,
+      "ytd2026": 8651
     },
     {
-      "year": "2025",
-      "B SUV": 6134,
-      "C SUV": 5893,
-      "D SUV": 1183,
-      "E SUV": 117,
-      "PREMIUM SUV": 256
+      "cat": "C SUV",
+      "ytd2024": 6669,
+      "ytd2025": 5893,
+      "ytd2026": 9266
     },
     {
-      "year": "2026",
-      "B SUV": 8651,
-      "C SUV": 9266,
-      "D SUV": 1683,
-      "E SUV": 225,
-      "PREMIUM SUV": 307
+      "cat": "D SUV",
+      "ytd2024": 1563,
+      "ytd2025": 1183,
+      "ytd2026": 1683
+    },
+    {
+      "cat": "E SUV",
+      "ytd2024": 150,
+      "ytd2025": 117,
+      "ytd2026": 225
+    },
+    {
+      "cat": "PREMIUM SUV",
+      "ytd2024": 222,
+      "ytd2025": 256,
+      "ytd2026": 307
     }
   ],
   "suv_seg_por_provincia": [
     {
-      "year": "2024",
-      "B SUV": 6834,
-      "PICHINCHA": 152,
-      "GUAYAS": 70,
-      "MANABÍ": null,
-      "EL ORO": null,
-      "C SUV": 6669,
-      "D SUV": 1563,
-      "E SUV": 150,
-      "PREMIUM SUV": 222
+      "cat": "B SUV",
+      "ytd2024": 6834,
+      "ytd2025": 6134,
+      "ytd2026": 8651
     },
     {
-      "year": "2025",
-      "B SUV": 6134,
-      "PICHINCHA": 170,
-      "GUAYAS": 86,
-      "MANABÍ": null,
-      "EL ORO": null,
-      "C SUV": 5893,
-      "D SUV": 1183,
-      "E SUV": 117,
-      "PREMIUM SUV": 256
+      "cat": "PICHINCHA",
+      "ytd2024": 3745,
+      "ytd2025": 3318,
+      "ytd2026": 4847
     },
     {
-      "year": "2026",
-      "B SUV": 8651,
-      "PICHINCHA": 181,
-      "GUAYAS": 124,
-      "MANABÍ": 1,
-      "EL ORO": 1,
-      "C SUV": 9266,
-      "D SUV": 1683,
-      "E SUV": 225,
-      "PREMIUM SUV": 307
+      "cat": "GUAYAS",
+      "ytd2024": 2658,
+      "ytd2025": 2432,
+      "ytd2026": 3242
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 348,
+      "ytd2025": 334,
+      "ytd2026": 431
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": 83,
+      "ytd2025": 50,
+      "ytd2026": 131
+    },
+    {
+      "cat": "C SUV",
+      "ytd2024": 6669,
+      "ytd2025": 5893,
+      "ytd2026": 9266
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 3802,
+      "ytd2025": 3502,
+      "ytd2026": 5402
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 2515,
+      "ytd2025": 2131,
+      "ytd2026": 3181
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 288,
+      "ytd2025": 233,
+      "ytd2026": 568
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": 64,
+      "ytd2025": 27,
+      "ytd2026": 115
+    },
+    {
+      "cat": "D SUV",
+      "ytd2024": 1563,
+      "ytd2025": 1183,
+      "ytd2026": 1683
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 832,
+      "ytd2025": 713,
+      "ytd2026": 888
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 650,
+      "ytd2025": 407,
+      "ytd2026": 674
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 71,
+      "ytd2025": 50,
+      "ytd2026": 80
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": 10,
+      "ytd2025": 13,
+      "ytd2026": 41
+    },
+    {
+      "cat": "E SUV",
+      "ytd2024": 150,
+      "ytd2025": 117,
+      "ytd2026": 225
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 74,
+      "ytd2025": 64,
+      "ytd2026": 132
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 72,
+      "ytd2025": 46,
+      "ytd2026": 77
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 4,
+      "ytd2025": 6,
+      "ytd2026": 11
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": null,
+      "ytd2025": 1,
+      "ytd2026": 5
+    },
+    {
+      "cat": "PREMIUM SUV",
+      "ytd2024": 222,
+      "ytd2025": 256,
+      "ytd2026": 307
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 152,
+      "ytd2025": 170,
+      "ytd2026": 181
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 70,
+      "ytd2025": 86,
+      "ytd2026": 124
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 1
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 1
     }
   ],
   "pickup_cat_nacional": [
     {
-      "year": "2024",
-      "COMPACT PICK UPS": 216,
-      "FULL SIZE PICK UPS": 312,
-      "MID SIZE PICK UPS": 6937
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 216,
+      "ytd2025": 292,
+      "ytd2026": 276
     },
     {
-      "year": "2025",
-      "COMPACT PICK UPS": 292,
-      "FULL SIZE PICK UPS": 252,
-      "MID SIZE PICK UPS": 5866
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 312,
+      "ytd2025": 252,
+      "ytd2026": 421
     },
     {
-      "year": "2026",
-      "COMPACT PICK UPS": 276,
-      "FULL SIZE PICK UPS": 421,
-      "MID SIZE PICK UPS": 8027
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 6937,
+      "ytd2025": 5866,
+      "ytd2026": 8027
     }
   ],
   "pickup_cat_ytd": [
     {
-      "year": "2024",
-      "COMPACT PICK UPS": 142,
-      "FULL SIZE PICK UPS": 229,
-      "MID SIZE PICK UPS": 4881
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 142,
+      "ytd2025": 190,
+      "ytd2026": 181
     },
     {
-      "year": "2025",
-      "COMPACT PICK UPS": 190,
-      "FULL SIZE PICK UPS": 204,
-      "MID SIZE PICK UPS": 3984
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 229,
+      "ytd2025": 204,
+      "ytd2026": 314
     },
     {
-      "year": "2026",
-      "COMPACT PICK UPS": 181,
-      "FULL SIZE PICK UPS": 314,
-      "MID SIZE PICK UPS": 5212
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 4881,
+      "ytd2025": 3984,
+      "ytd2026": 5212
     }
   ],
   "pu_cat_por_prov": [
     {
-      "year": "2024",
-      "EL ORO": 98,
-      "COMPACT PICK UPS": 87,
-      "FULL SIZE PICK UPS": 107,
-      "MID SIZE PICK UPS": 2897,
-      "GUAYAS": 1823,
-      "MANABÍ": 240,
-      "PICHINCHA": 3091
+      "cat": "EL ORO",
+      "ytd2024": 98,
+      "ytd2025": 115,
+      "ytd2026": 186
     },
     {
-      "year": "2025",
-      "EL ORO": 115,
-      "COMPACT PICK UPS": 138,
-      "FULL SIZE PICK UPS": 113,
-      "MID SIZE PICK UPS": 2557,
-      "GUAYAS": 1280,
-      "MANABÍ": 175,
-      "PICHINCHA": 2808
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 2,
+      "ytd2025": 3,
+      "ytd2026": 1
     },
     {
-      "year": "2026",
-      "EL ORO": 186,
-      "COMPACT PICK UPS": 131,
-      "FULL SIZE PICK UPS": 158,
-      "MID SIZE PICK UPS": 2962,
-      "GUAYAS": 2022,
-      "MANABÍ": 248,
-      "PICHINCHA": 3251
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 1,
+      "ytd2025": null,
+      "ytd2026": 15
+    },
+    {
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 95,
+      "ytd2025": 112,
+      "ytd2026": 170
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 1823,
+      "ytd2025": 1280,
+      "ytd2026": 2022
+    },
+    {
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 46,
+      "ytd2025": 42,
+      "ytd2026": 41
+    },
+    {
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 108,
+      "ytd2025": 86,
+      "ytd2026": 122
+    },
+    {
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 1669,
+      "ytd2025": 1152,
+      "ytd2026": 1859
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 240,
+      "ytd2025": 175,
+      "ytd2026": 248
+    },
+    {
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 7,
+      "ytd2025": 7,
+      "ytd2026": 8
+    },
+    {
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 13,
+      "ytd2025": 5,
+      "ytd2026": 19
+    },
+    {
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 220,
+      "ytd2025": 163,
+      "ytd2026": 221
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 3091,
+      "ytd2025": 2808,
+      "ytd2026": 3251
+    },
+    {
+      "cat": "COMPACT PICK UPS",
+      "ytd2024": 87,
+      "ytd2025": 138,
+      "ytd2026": 131
+    },
+    {
+      "cat": "FULL SIZE PICK UPS",
+      "ytd2024": 107,
+      "ytd2025": 113,
+      "ytd2026": 158
+    },
+    {
+      "cat": "MID SIZE PICK UPS",
+      "ytd2024": 2897,
+      "ytd2025": 2557,
+      "ytd2026": 2962
     }
   ],
   "suv_25_40_gas": {
@@ -5737,170 +6281,350 @@
   },
   "ford_comb_suv_nacional": [
     {
-      "year": "2024",
-      "SUV": 257,
-      "GASOLINA": 236,
-      "HIBRIDO": 21
+      "cat": "SUV",
+      "ytd2024": 257,
+      "ytd2025": 223,
+      "ytd2026": 471
     },
     {
-      "year": "2025",
-      "SUV": 223,
-      "GASOLINA": 157,
-      "HIBRIDO": 66
+      "cat": "GASOLINA",
+      "ytd2024": 236,
+      "ytd2025": 157,
+      "ytd2026": 170
     },
     {
-      "year": "2026",
-      "SUV": 471,
-      "GASOLINA": 170,
-      "HIBRIDO": 301
+      "cat": "HIBRIDO",
+      "ytd2024": 21,
+      "ytd2025": 66,
+      "ytd2026": 301
     }
   ],
   "ford_comb_pu_nacional": [
     {
-      "year": "2024",
-      "PICK UPS": 469,
-      "DIESEL": 348,
-      "ELECTRICO BEV": 1,
-      "GASOLINA": 86,
-      "HIBRIDO": 34
+      "cat": "PICK UPS",
+      "ytd2024": 469,
+      "ytd2025": 209,
+      "ytd2026": 208
     },
     {
-      "year": "2025",
-      "PICK UPS": 209,
-      "DIESEL": 110,
-      "ELECTRICO BEV": 1,
-      "GASOLINA": 21,
-      "HIBRIDO": 77
+      "cat": "DIESEL",
+      "ytd2024": 348,
+      "ytd2025": 110,
+      "ytd2026": 74
     },
     {
-      "year": "2026",
-      "PICK UPS": 208,
-      "DIESEL": 74,
-      "ELECTRICO BEV": null,
-      "GASOLINA": 46,
-      "HIBRIDO": 88
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 1,
+      "ytd2025": 1,
+      "ytd2026": null
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 86,
+      "ytd2025": 21,
+      "ytd2026": 46
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 34,
+      "ytd2025": 77,
+      "ytd2026": 88
     }
   ],
   "ford_comb_suv_prov": [
     {
-      "year": "2024",
-      "SUV": 230,
-      "EL ORO": null,
-      "GASOLINA": 121,
-      "HIBRIDO": 5,
-      "GUAYAS": 99,
-      "MANABÍ": 5,
-      "PICHINCHA": 126
+      "cat": "SUV",
+      "ytd2024": 230,
+      "ytd2025": 194,
+      "ytd2026": 415
     },
     {
-      "year": "2025",
-      "SUV": 194,
-      "EL ORO": null,
-      "GASOLINA": 86,
-      "HIBRIDO": 35,
-      "GUAYAS": 65,
-      "MANABÍ": 8,
-      "PICHINCHA": 121
+      "cat": "EL ORO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 7
     },
     {
-      "year": "2026",
-      "SUV": 415,
-      "EL ORO": 7,
-      "GASOLINA": 83,
-      "HIBRIDO": 167,
-      "GUAYAS": 120,
-      "MANABÍ": 38,
-      "PICHINCHA": 250
+      "cat": "GASOLINA",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 2
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 5
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 99,
+      "ytd2025": 65,
+      "ytd2026": 120
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 84,
+      "ytd2025": 46,
+      "ytd2026": 47
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 15,
+      "ytd2025": 19,
+      "ytd2026": 73
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 5,
+      "ytd2025": 8,
+      "ytd2026": 38
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 4,
+      "ytd2025": 6,
+      "ytd2026": 6
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 1,
+      "ytd2025": 2,
+      "ytd2026": 32
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 126,
+      "ytd2025": 121,
+      "ytd2026": 250
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 121,
+      "ytd2025": 86,
+      "ytd2026": 83
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 5,
+      "ytd2025": 35,
+      "ytd2026": 167
     }
   ],
   "ford_comb_pu_prov": [
     {
-      "year": "2024",
-      "PICK UPS": 351,
-      "EL ORO": 2,
-      "DIESEL": 197,
-      "GASOLINA": 44,
-      "GUAYAS": 84,
-      "ELECTRICO BEV": 1,
-      "HIBRIDO": 5,
-      "MANABÍ": 18,
-      "PICHINCHA": 247
+      "cat": "PICK UPS",
+      "ytd2024": 351,
+      "ytd2025": 167,
+      "ytd2026": 150
     },
     {
-      "year": "2025",
-      "PICK UPS": 167,
-      "EL ORO": null,
-      "DIESEL": 60,
-      "GASOLINA": 11,
-      "GUAYAS": 49,
-      "ELECTRICO BEV": null,
-      "HIBRIDO": 43,
-      "MANABÍ": 4,
-      "PICHINCHA": 114
+      "cat": "EL ORO",
+      "ytd2024": 2,
+      "ytd2025": null,
+      "ytd2026": 11
     },
     {
-      "year": "2026",
-      "PICK UPS": 150,
-      "EL ORO": 11,
-      "DIESEL": 19,
-      "GASOLINA": 22,
-      "GUAYAS": 47,
-      "ELECTRICO BEV": null,
-      "HIBRIDO": 38,
-      "MANABÍ": 13,
-      "PICHINCHA": 79
+      "cat": "DIESEL",
+      "ytd2024": 1,
+      "ytd2025": null,
+      "ytd2026": 8
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 1,
+      "ytd2025": null,
+      "ytd2026": 3
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 84,
+      "ytd2025": 49,
+      "ytd2026": 47
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 42,
+      "ytd2025": 19,
+      "ytd2026": 17
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": null,
+      "ytd2025": 1,
+      "ytd2026": null
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 19,
+      "ytd2025": 2,
+      "ytd2026": null
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 23,
+      "ytd2025": 27,
+      "ytd2026": 30
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 18,
+      "ytd2025": 4,
+      "ytd2026": 13
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 11,
+      "ytd2025": 4,
+      "ytd2026": 5
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 7,
+      "ytd2025": null,
+      "ytd2026": 1
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 7
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 247,
+      "ytd2025": 114,
+      "ytd2026": 79
+    },
+    {
+      "cat": "DIESEL",
+      "ytd2024": 197,
+      "ytd2025": 60,
+      "ytd2026": 19
+    },
+    {
+      "cat": "ELECTRICO BEV",
+      "ytd2024": 1,
+      "ytd2025": null,
+      "ytd2026": null
+    },
+    {
+      "cat": "GASOLINA",
+      "ytd2024": 44,
+      "ytd2025": 11,
+      "ytd2026": 22
+    },
+    {
+      "cat": "HIBRIDO",
+      "ytd2024": 5,
+      "ytd2025": 43,
+      "ytd2026": 38
     }
   ],
   "ford_suv_seg_nacional": [
     {
-      "year": "2024",
-      "C SUV": 201,
-      "D SUV": 19,
-      "E SUV": 37
+      "cat": "C SUV",
+      "ytd2024": 201,
+      "ytd2025": 159,
+      "ytd2026": 349
     },
     {
-      "year": "2025",
-      "C SUV": 159,
-      "D SUV": 26,
-      "E SUV": 38
+      "cat": "D SUV",
+      "ytd2024": 19,
+      "ytd2025": 26,
+      "ytd2026": 78
     },
     {
-      "year": "2026",
-      "C SUV": 349,
-      "D SUV": 78,
-      "E SUV": 44
+      "cat": "E SUV",
+      "ytd2024": 37,
+      "ytd2025": 38,
+      "ytd2026": 44
     }
   ],
   "ford_suv_seg_prov": [
     {
-      "year": "2024",
-      "C SUV": 178,
-      "PICHINCHA": 11,
-      "GUAYAS": 23,
-      "MANABÍ": null,
-      "EL ORO": null,
-      "D SUV": 18,
-      "E SUV": 34
+      "cat": "C SUV",
+      "ytd2024": 178,
+      "ytd2025": 140,
+      "ytd2026": 316
     },
     {
-      "year": "2025",
-      "C SUV": 140,
-      "PICHINCHA": 19,
-      "GUAYAS": 11,
-      "MANABÍ": 4,
-      "EL ORO": null,
-      "D SUV": 20,
-      "E SUV": 34
+      "cat": "PICHINCHA",
+      "ytd2024": 111,
+      "ytd2025": 87,
+      "ytd2026": 190
     },
     {
-      "year": "2026",
-      "C SUV": 316,
-      "PICHINCHA": 17,
-      "GUAYAS": 13,
-      "MANABÍ": null,
-      "EL ORO": 1,
-      "D SUV": 69,
-      "E SUV": 30
+      "cat": "GUAYAS",
+      "ytd2024": 63,
+      "ytd2025": 49,
+      "ytd2026": 88
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 4,
+      "ytd2025": 4,
+      "ytd2026": 32
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 6
+    },
+    {
+      "cat": "D SUV",
+      "ytd2024": 18,
+      "ytd2025": 20,
+      "ytd2026": 69
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 4,
+      "ytd2025": 15,
+      "ytd2026": 43
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 13,
+      "ytd2025": 5,
+      "ytd2026": 19
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": 1,
+      "ytd2025": null,
+      "ytd2026": 6
+    },
+    {
+      "cat": "EL ORO",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 1
+    },
+    {
+      "cat": "E SUV",
+      "ytd2024": 34,
+      "ytd2025": 34,
+      "ytd2026": 30
+    },
+    {
+      "cat": "GUAYAS",
+      "ytd2024": 23,
+      "ytd2025": 11,
+      "ytd2026": 13
+    },
+    {
+      "cat": "PICHINCHA",
+      "ytd2024": 11,
+      "ytd2025": 19,
+      "ytd2026": 17
+    },
+    {
+      "cat": "MANABÍ",
+      "ytd2024": null,
+      "ytd2025": 4,
+      "ytd2026": null
     }
   ],
   "precios_competidores": {
