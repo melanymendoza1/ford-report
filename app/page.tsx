@@ -364,7 +364,7 @@ export default function Page() {
             { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
             { l: 'Ford Nacional YTD', v: N(fT.ytd2026), s: `↑ +${dFord}% vs ${N(fT.ytd2025)} un. (2025 YTD)`, c: '#10B981' },
             { l: 'Market Share Ford', v: `${msF}%`, s: `vs ${ms25}% (2025 YTD)`, c: C.gld },
-            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4)), s: `Proyección lineal · ${(data as any).months_ytd || 3}m × ${Math.round(12 / ((data as any).months_ytd || 3))}`, c: '#94A3B8' },
+            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4)), s: `Proyección lineal · ${(data as any).months_ytd || 4}m × ${Math.round(12 / ((data as any).months_ytd || 4))}`, c: '#94A3B8' },
           ].map((k, i) => <div key={i} style={{ background: 'rgba(255,255,255,.07)', borderRadius: 14, padding: '16px 20px', borderLeft: `4px solid ${k.c}` }}>
             <div style={{ fontSize: 10, color: '#7BA8D4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>{k.l}</div>
             <div style={{ fontSize: 32, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{k.v}</div>
@@ -2812,17 +2812,17 @@ function T12({ d }: { d: any }) {
       v26: getVal('suv_25_40_fhev', '2026', ['TERRITORY TITANIUM']), v25: 0, segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'Escape 1.5', trim: 'Titanium', fuel: 'Gasolina', price: '$35,990', img: '/images/escape15.png',
       v26: getVal('suv_25_40_gas', '2026', ['ESCAPE']), v25: getVal('suv_25_40_gas', '2025', ['ESCAPE']), segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
-    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$46,990', img: '/images/escapestline.png',
+    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$44,990', img: '/images/escapestline.png',
       v26: getVal('suv_40_50', '2026', ['ESCAPE ST']), v25: getVal('suv_40_50', '2025', ['ESCAPE ST']), segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
     { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
       v26: getVal('suv_55_80', '2026', ['EVEREST']), v25: getVal('suv_55_80', '2025', ['EVEREST']), segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
-    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$79,990', img: '/images/exploreractive.png',
+    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$89,990', img: '/images/exploreractive.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER ACTIVE']), v25: getVal('suv_60_80', '2025', ['EXPLORER ACTIVE']), segment: 'SUV 60-80K', highlight: 'Estable' },
-    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$94,990', img: '/images/explorerplatinum.png',
+    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$98,990', img: '/images/explorerplatinum.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER PLATINUM']), v25: getVal('suv_60_80', '2025', ['EXPLORER PLATINUM']), segment: 'SUV 60-80K', highlight: 'Premium' },
     { name: 'Bronco', trim: 'Wildtrak · Badlands', fuel: 'Gasolina', price: '$119,990', img: '/images/bronco.png',
       v26: getVal('suv_80plus', '2026', ['BRONCO']), v25: getVal('suv_80plus', '2025', ['BRONCO']), segment: 'SUV +80K', highlight: 'Sin unidades YTD' },
-    { name: 'Expedition', trim: 'Platinum', fuel: 'Gasolina', price: '$129,990', img: '/images/expeditionplatinum.png',
+    { name: 'Expedition', trim: 'Platinum', fuel: 'Gasolina', price: '$139,990', img: '/images/expeditionplatinum.png',
       v26: getVal('suv_80plus', '2026', ['EXPEDITION']), v25: getVal('suv_80plus', '2025', ['EXPEDITION']), segment: 'SUV +80K', highlight: 'Premium estable' },
   ]
   const pickups = [
@@ -2832,9 +2832,9 @@ function T12({ d }: { d: any }) {
     { name: 'Ranger XLT', trim: 'XLT', fuel: 'Diesel TA 4x4', price: '$67,990', img: '/images/rangerxlt.png',
       v26: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
       v25: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0, segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
-    { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$75,990', img: '/images/f150xlt.png',
+    { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$79,990', img: '/images/f150xlt.png',
       v26: getVal('pick_fullsize', '2026', ['F150 XLT', 'F-150 XLT']), v25: getVal('pick_fullsize', '2025', ['F150 XLT', 'F-150 XLT']), segment: 'Full Size', highlight: '#1 vs RAM' },
-    { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$85,990 – $95,990', img: '/images/f150lariat.png',
+    { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$89,990 – $99,990', img: '/images/f150lariat.png',
       v26: getVal('pick_fullsize', '2026', ['F150 LARIAT', 'F150 PLATINUM']), v25: getVal('pick_fullsize', '2025', ['F150 LARIAT', 'F150 PLATINUM']), segment: 'Full Size Premium', highlight: 'Dominio premium' },
     { name: 'F-150 Raptor', trim: 'Raptor', fuel: 'Gasolina', price: '$119,990', img: '/images/f150platinum.png',
       v26: getVal('pick_fullsize', '2026', ['F150 RAPTOR', 'F-150 RAPTOR']), v25: getVal('pick_fullsize', '2025', ['F150 RAPTOR', 'F-150 RAPTOR']), segment: 'Full Size', highlight: 'Performance' },
@@ -2933,7 +2933,7 @@ function T12({ d }: { d: any }) {
             <td style={{ padding: '12px 14px', textAlign: 'right', color: C.sub }}>{N(r.ytd2025)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right', fontWeight: 700, color: C.navy }}>{N(r.ytd2026)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right' }}><Dl a={r.ytd2026} b={r.ytd2025} /></td>
-            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0))}</td>
+            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0, (d as any).months_ytd || 4))}</td>
           </tr>
         )}</tbody>
       </table>
