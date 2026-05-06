@@ -10,7 +10,7 @@ const C = { night: '#081534', navy: '#133A7C', steel: '#2A6BAC', sky: '#47A8E5',
 const SEG: Record<string, string> = { 'B SUV': 'BSUV', 'C SUV': 'Compact', 'D SUV': 'Midsize', 'E SUV': 'Full Size', 'PREMIUM SUV': 'Premium' }
 const cn = (c: string) => ({ 'AUTOMOV. DE PASAJEROS': 'Automóviles', 'SUV': 'SUV', 'PICK UPS': 'Pick Ups', 'CAMION': 'Camiones', 'BUS': 'Buses', 'VAN': 'Vans' }[c] || c)
 const sn = (s: string) => SEG[s] || s
-const fc = (v: number) => { const m = (data as any).months_ytd || 3; return Math.round(v / m * 12) }
+const fc = (v: number, m = 3) => Math.round(v / m * 12)
 const gr = (c: number, gap = 16) => ({ display: 'grid' as const, gridTemplateColumns: `repeat(${c},1fr)`, gap, marginBottom: 20 })
 const PROVS = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
 const pn = (p: string) => ({ 'PICHINCHA': 'Pichincha', 'GUAYAS': 'Guayas', 'MANABÍ': 'Manabí', 'EL ORO': 'El Oro', 'ZONA ORGU': 'Zona Orgu', 'NACIONAL': 'Nacional', 'TODAS': 'Todas' }[p] || p)
@@ -364,7 +364,7 @@ export default function Page() {
             { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
             { l: 'Ford Nacional YTD', v: N(fT.ytd2026), s: `↑ +${dFord}% vs ${N(fT.ytd2025)} un. (2025 YTD)`, c: '#10B981' },
             { l: 'Market Share Ford', v: `${msF}%`, s: `vs ${ms25}% (2025 YTD)`, c: C.gld },
-            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0)), s: `Proyección lineal · ${(data as any).months_ytd || 3}m × ${Math.round(12 / ((data as any).months_ytd || 3))}`, c: '#94A3B8' },
+            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4)), s: `Proyección lineal · ${(data as any).months_ytd || 3}m × ${Math.round(12 / ((data as any).months_ytd || 3))}`, c: '#94A3B8' },
           ].map((k, i) => <div key={i} style={{ background: 'rgba(255,255,255,.07)', borderRadius: 14, padding: '16px 20px', borderLeft: `4px solid ${k.c}` }}>
             <div style={{ fontSize: 10, color: '#7BA8D4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>{k.l}</div>
             <div style={{ fontSize: 32, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{k.v}</div>
@@ -2859,7 +2859,7 @@ function T12({ d }: { d: any }) {
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0))}</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4))}</div>
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Forecast 2026</div>
         </div>
       </div>
