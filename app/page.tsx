@@ -797,7 +797,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['E-SUV (Full Size) creció +92% — liderado por Expedition. Compact SUV (+57%) es donde está el volumen: Territory compite aquí', 'Midsize SUV +42% — Everest crece +75% en este segmento. Ford tiene presencia en todos los niveles del mercado']} />
+    <Ins items={['Compact SUV (+57%) es donde está el volumen del mercado — Territory compite directamente aquí', 'Midsize SUV +42% — Everest crece +75% en este segmento. Ford tiene presencia relevante en todos los niveles']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -2297,7 +2297,7 @@ function T9({ d }: { d: any }) {
 
   return <>
     <Hd tag="PickUp Segmentos" title="El mercado Pickup segmento a segmento" />
-    <Ins items={['Mid Size concentra el 89% del volumen Pickup — Ranger y F-150 son los dos pilares del negocio pickup Ford', 'Full Size creció fuertemente en ZO este año — F-150 con 15 un. en lo que va del año muestra demanda activa en el segmento']} />
+    <Ins items={['Mid Size concentra el 89% del volumen Pickup — Ranger y F-150 son los dos pilares del negocio pickup Ford', 'Full Size: F-150 con 80 un. en ZO en lo que va del año — el segmento premium pickup se mantiene activo']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -3025,7 +3025,7 @@ function T12({ d }: { d: any }) {
 
   return <>
     <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Q1 2026 · Todos los modelos" />
-    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford', 'F-150 +29%, Everest +75% — premium lidera. La estrategia de electrificación e híbridos está funcionando']} />
+    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford', 'F-150 crece +29% y Everest +75% — los modelos de mayor valor del portafolio crecen por encima del mercado']} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
