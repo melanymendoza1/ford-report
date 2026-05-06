@@ -1356,6 +1356,7 @@ function T6({ d }: { d: any }) {
     const terms = filters[brand] || []
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
+    let total = 0
     // Track which terms are already covered by dot-subtotal keys to avoid double-count
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
@@ -1594,6 +1595,7 @@ function T7({ d }: { d: any }) {
     const terms = activeFilters[brand] || []
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
+    let total = 0
     // Track which terms are already covered by dot-subtotal keys to avoid double-count
     const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
@@ -1666,8 +1668,20 @@ function T7({ d }: { d: any }) {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
     let total = 0
+    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (k.includes(' . ') && k.startsWith('FORD . ')) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
@@ -1982,8 +1996,20 @@ function T8({ d }: { d: any }) {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
     let total = 0
+    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (k.includes(' . ') && k.startsWith('FORD . ')) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
@@ -2399,8 +2425,20 @@ function T10({ d }: { d: any }) {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
     let total = 0
+    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (k.includes(' . ') && k.startsWith('FORD . ')) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
@@ -2684,16 +2722,21 @@ function T11({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = provMarcas[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    const matched: string[] = []
-    Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
-    })
     let total = 0
-    matched.forEach(k => {
-      const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
-      const parts = k.split(' . ')
-      const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
-      if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
+    const coveredByDot = new Set<string>()
+    Object.entries(row).forEach(([k, v]) => {
+      if (k.includes(' . ') && k.startsWith('FORD . ')) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
