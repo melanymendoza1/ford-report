@@ -2625,7 +2625,7 @@ function T10({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={50000} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
@@ -2954,7 +2954,7 @@ function T11({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={65000} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
