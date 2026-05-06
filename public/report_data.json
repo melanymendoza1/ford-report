@@ -119,6 +119,12 @@
       "ytd2024": 1411,
       "ytd2025": 1240,
       "ytd2026": 1746
+    },
+    {
+      "cat": "Total general",
+      "ytd2024": 30337,
+      "ytd2025": 26416,
+      "ytd2026": 37691
     }
   ],
   "ford_ytd": [
@@ -145,6 +151,12 @@
       "ytd2024": null,
       "ytd2025": null,
       "ytd2026": 1
+    },
+    {
+      "cat": "Total general",
+      "ytd2024": 583,
+      "ytd2025": 361,
+      "ytd2026": 574
     }
   ],
   "provincias_ytd": [
@@ -7039,5 +7051,81 @@
     "report_month": "Abril 2026",
     "months_ytd": 4,
     "version": "v16"
-  }
+  },
+  "mercado_ytd_nacional": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 8082,
+      "ytd2025": 6102,
+      "ytd2026": 8239
+    },
+    {
+      "cat": "BUS",
+      "ytd2024": 254,
+      "ytd2025": 352,
+      "ytd2026": 250
+    },
+    {
+      "cat": "CAMION",
+      "ytd2024": 3063,
+      "ytd2025": 3506,
+      "ytd2026": 5341
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 7465,
+      "ytd2025": 6410,
+      "ytd2026": 8724
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 19603,
+      "ytd2025": 17175,
+      "ytd2026": 25942
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": 1679,
+      "ytd2025": 1468,
+      "ytd2026": 2183
+    },
+    {
+      "cat": "Total general",
+      "ytd2024": 40146,
+      "ytd2025": 35014,
+      "ytd2026": 50680
+    }
+  ],
+  "ford_ytd_nacional": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "ytd2024": 4,
+      "ytd2025": 1,
+      "ytd2026": 9
+    },
+    {
+      "cat": "PICK UPS",
+      "ytd2024": 469,
+      "ytd2025": 209,
+      "ytd2026": 208
+    },
+    {
+      "cat": "SUV",
+      "ytd2024": 257,
+      "ytd2025": 223,
+      "ytd2026": 471
+    },
+    {
+      "cat": "VAN",
+      "ytd2024": null,
+      "ytd2025": null,
+      "ytd2026": 1
+    },
+    {
+      "cat": "Total general",
+      "ytd2024": 730,
+      "ytd2025": 433,
+      "ytd2026": 689
+    }
+  ]
 }

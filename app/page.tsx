@@ -325,8 +325,11 @@ export default function Page() {
 
   const ytdM = ((data as any).mercado_ytd || []) as any[]
   const ytdF = ((data as any).ford_ytd || []) as any[]
-  const mT = ytdM.find((r: any) => r.cat === 'Total general') || {} as any
-  const fT = ytdF.find((r: any) => r.cat === 'Total general') || {} as any
+  // Hero uses Nacional totals; scope cards use Zona Orgu
+  const ytdMNac = ((data as any).mercado_ytd_nacional || ytdM) as any[]
+  const ytdFNac = ((data as any).ford_ytd_nacional || ytdF) as any[]
+  const mT = ytdMNac.find((r: any) => r.cat === 'Total general') || {} as any
+  const fT = ytdFNac.find((r: any) => r.cat === 'Total general') || {} as any
   const dInd = mT.ytd2025 ? ((mT.ytd2026 - mT.ytd2025) / mT.ytd2025 * 100).toFixed(1) : '0'
   const dFord = fT.ytd2025 ? ((fT.ytd2026 - fT.ytd2025) / fT.ytd2025 * 100).toFixed(1) : '0'
   const msF = mT.ytd2026 ? ((fT.ytd2026 || 0) / mT.ytd2026 * 100).toFixed(2) : '0'
