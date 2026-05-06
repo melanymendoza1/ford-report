@@ -464,12 +464,29 @@ function T1({ d }: { d: any }) {
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...provOrder.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
     {/* Hero KPIs */}
-    <div style={gr(4)}>
-      <KPI label={`Industria ${scopeLabel}`} value={N(totInd26)} sub={`${totInd25 ? `${((totInd26-totInd25)/totInd25*100)>=0?'↑ +':'↓ '}${Math.abs((totInd26-totInd25)/totInd25*100).toFixed(1)}%` : ''} vs ${N(totInd25)} un. (2025 YTD)`} />
-      <KPI label={`Ford ${scopeLabel}`} value={N(totFord26)} sub={`${totFord25 ? `${((totFord26-totFord25)/totFord25*100)>=0?'↑ +':'↓ '}${Math.abs((totFord26-totFord25)/totFord25*100).toFixed(1)}%` : ''} vs ${N(totFord25)} un. (2025 YTD)`} accent="navy" />
-      <KPI label="Crecimiento Industria" value={totInd25 ? `${((totInd26 - totInd25) / totInd25 * 100).toFixed(1)}%` : '—'} sub="vs 2025 YTD" accent="green" />
-      <KPI label="MS Ford" value={totInd26 ? `${(totFord26 / totInd26 * 100).toFixed(2)}%` : '—'} sub={scopeLabel} accent="gold" />
-    </div>
+    {(() => {
+      const dInd = totInd25 ? ((totInd26 - totInd25) / totInd25 * 100) : 0
+      const dFord = totFord25 ? ((totFord26 - totFord25) / totFord25 * 100) : 0
+      const dMS = totInd25 ? (totFord26/totInd26*100 - totFord25/totInd25*100) : 0
+      const cards = [
+        { label: `Industria ${scopeLabel}`, v26: totInd26, v25: totInd25, delta: dInd, accent: C.ac },
+        { label: `Ford ${scopeLabel}`, v26: totFord26, v25: totFord25, delta: dFord, accent: C.navy },
+        { label: 'Crecimiento Industria', v26: totInd26, v25: totInd25, delta: dInd, accent: C.up, isGrowth: true },
+        { label: 'MS Ford', v26: totFord26, v25: totFord25, delta: dMS, accent: C.gld, isMS: true },
+      ]
+      return <div style={gr(4)}>{cards.map((c, i) => {
+        const u = c.delta >= 0
+        const val = c.isGrowth ? `${dInd.toFixed(1)}%` : c.isMS ? `${(totFord26/totInd26*100).toFixed(2)}%` : N(c.v26)
+        const sub = c.isGrowth ? `vs ${(totFord25/totInd25*100).toFixed(2)}% en 2025` : c.isMS ? scopeLabel : `2025 YTD: ${N(c.v25)}`
+        const badge = !c.isGrowth && !c.isMS && c.v25 ? `${u ? '↑' : '↓'} ${u ? '+' : ''}${c.delta.toFixed(1)}% vs ${N(c.v25)} un.` : null
+        return <Card key={i} s={{ borderLeft: `4px solid ${c.accent}` }}>
+          <div style={{ fontSize: 11, fontWeight: 600, color: C.mut, marginBottom: 8 }}>{c.label}</div>
+          <div style={{ fontSize: 28, fontWeight: 700, color: C.txt, lineHeight: 1 }}>{val}</div>
+          <div style={{ fontSize: 12, color: C.sub, marginTop: 6 }}>{sub}</div>
+          {badge && <div style={{ marginTop: 8 }}><span style={{ fontSize: 11, fontWeight: 600, padding: '2px 10px', borderRadius: 20, background: u ? C.upB : C.dnB, color: u ? C.up : C.dn }}>{badge}</span></div>}
+        </Card>
+      })}</div>
+    })()}
 
     {/* Chart with Ind + Ford bars */}
     <Card s={{ marginBottom: 20 }}>
