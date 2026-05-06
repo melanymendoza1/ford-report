@@ -1109,16 +1109,28 @@ function T5({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
+    // Track which terms are already covered by dot-subtotal keys to avoid double-count
+    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
       if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        // Provincial format: BRAND . MODEL
-        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-      } else if (scope === 'NACIONAL' && !k.includes(' . ')) {
-        // Nacional format: raw model names — match against filter terms
-        // Skip other brand names (short uppercase words)
-        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+        // Dot-subtotal key: BRAND . MODEL aggregate
+        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (matchingTerms.length) {
+          total += ((v as number) || 0)
+          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
+        }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === brand || k.includes(' . ')) return
+      // Flat format: raw model names
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const matchingTerms = terms.filter((t: string) => 
+          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
+        )
+        if (matchingTerms.length) total += ((v as number) || 0)
       }
     })
     // No fallback — if no filtered models found, return 0
@@ -1593,6 +1605,14 @@ function T7({ d }: { d: any }) {
         if (k === 'year' || k === brand) return
         if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
           total += ((v as number) || 0)
+        } else if (!k.includes(' . ') && k !== brand) {
+          // Flat format (v16): no brand prefix — check all model keys under this brand
+          // Only count keys that appear after the brand total in the row
+          // Use brand total as gate: only count if brand has volume
+          const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+          if (!isBrandKey && row[brand] && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+            total += ((v as number) || 0)
+          }
         }
       })
     })
