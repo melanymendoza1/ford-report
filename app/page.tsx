@@ -2879,7 +2879,7 @@ function T12({ d }: { d: any }) {
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4))}</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, (d as any).months_ytd || 4))}</div>
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Forecast 2026</div>
         </div>
       </div>
