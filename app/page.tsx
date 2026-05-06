@@ -356,8 +356,8 @@ export default function Page() {
     {/* HERO — ONLY ON INDUSTRIA */}
     {tab === 'ind' && <div style={{ background: `linear-gradient(135deg,${C.night},#0F2B5E)`, padding: '28px 32px 32px' }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Q1 2026 · YTD Comparable ene-feb-mar-abr</div>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.8x más rápido que el mercado</h1>
+        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Abril 2026 · YTD Comparable ene-feb-mar-abr</div>
+        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.32x más rápido que el mercado</h1>
         <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar-abr 2026 vs 2025)</p>
         <div style={gr(4, 16)}>
           {[
@@ -659,8 +659,8 @@ function T2({ d }: { d: any }) {
 
   const catLabel = cat === 'suv' ? 'SUVs' : 'Pickups'
   const insItems = cat === 'suv'
-    ? ['El shift de gasolina a híbrido se acelera. HEV pasó de 17% a 23% del mix en un año', 'Ford capturó esta tendencia con Territory']
-    : ['Diesel sigue siendo el 77% del volumen pickup', 'Hibrido pickup crece — tendencia emergente a monitorear']
+    ? ['El HEV SUV Nacional creció +93%: de 4.262 a 8.225 un. — el combustible que más crece en el mercado', 'Ford HEV SUV: de 66 a 301 un. (+356%) — Territory fue el motor. El mix Ford pasó de 30% a 64% híbrido']
+    : ['Diesel domina el 77% del volumen pickup — Ranger sigue siendo el core del negocio', 'F-150 HEV crece: de 77 a 88 un. (+14%) — la electrificación llega primero al segmento premium']
 
   return <>
     <Hd tag="Combustibles" title="Análisis por tipo de combustible" />
@@ -797,7 +797,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['Full Size SUV creció +92% — el mayor crecimiento de todos los segmentos. Ford Everest captura este momentum con +75%', 'Compact SUV es el volumen del mercado (+57%) — Territory y Escape compiten aquí con fuerza creciente']} />
+    <Ins items={['E-SUV (Full Size) creció +92% — liderado por Expedition. Compact SUV (+57%) es donde está el volumen: Territory compite aquí', 'Midsize SUV +42% — Everest crece +75% en este segmento. Ford tiene presencia en todos los niveles del mercado']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -1192,7 +1192,7 @@ function T5({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 25-40K" title="Análisis de marcas · Rango $25K-$40K Híbrido" />
-    <Ins items={['Territory NEW ingresa con 267 un. nacionales en 4 meses — sin precedente en el portafolio Ford Ecuador', 'Ford sube al #4 en HEV 25-40K: Toyota 698 · KIA 543 · Changan 297 · Ford 289', 'El mix Ford SUV se voltea: Híbrido pasa de 30% → 64% del volumen en un año']} />
+    <Ins items={['Territory ingresa con 267 un. en 4 meses — modelo sin historial previo que ya representa el 38% del volumen total Ford', 'Ford sube al #4 en HEV 25-40K: Toyota 698 · KIA 543 · Changan 297 · Ford 267 Territory + 22 Escape FHEV']} />
 
     {/* Territory card + Territory Effect */}
     <div style={gr(2)}>
@@ -1424,7 +1424,7 @@ function T6({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 40-50K" title="Análisis de marcas · Rango $40K-$50K Híbrido" />
-    <Ins items={['Escape ST-Line cae -56%: Territory canibaliza desde abajo, Nissan X-Trail compite de frente al mismo precio de $44,990', 'Decisión pendiente: ¿reposicionar el ST-Line o dejar que Territory absorba el segmento 40-50K?']} />
+    <Ins items={['Escape ST-Line cae -56% (27→12 un.): Territory canibaliza desde abajo a $35,990, X-Trail compite de frente a $44,990', 'Decisión pendiente: ¿reposicionar ST-Line o consolidar Territory como el HEV Ford en rango 25-50K?']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px' }}>
@@ -1736,7 +1736,7 @@ function T7({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV 55-80K" title="Análisis de marcas · Rango $55K-$80K" />
-    <Ins items={['Everest crece +75% — el modelo con mayor momentum en todo el portafolio Ford en este segmento', 'Explorer Active cae -29%: presión de Nissan Pathfinder y la brecha precio-propuesta de valor a revisar']} />
+    <Ins items={['Everest crece +75% en Midsize — el mejor momentum de Ford en SUVs este año', 'Explorer Active cae -29%: producto americano con exposición a aranceles. Revisar disponibilidad de inventario y política de importación']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -2075,7 +2075,7 @@ function T8({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV +80K" title="Análisis de marcas · Rango +$80K" />
-    <Ins items={['Segmento +80K: 91 un. en ZO — Ford toma el #3 con Expedition. Toyota (LC) y Chevrolet (Tahoe) dominan con 50 y 35 un.', 'Explorer Platinum sin unidades 2026 YTD — evaluar disponibilidad de inventario para no perder presencia en premium']} />
+    <Ins items={['Segmento +80K: Ford con 18 un. totales (Expedition 4 + Explorer Plat 14) — Toyota LC domina con 50 un., Chevrolet Tahoe con 35 un.', 'Explorer Platinum: 14 un. en el rango 60-80K y avanza. Expedition estable en 4 un. — segmento de alto margen a defender']} />
 
     <div style={gr(3)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px' }}>
@@ -2297,7 +2297,7 @@ function T9({ d }: { d: any }) {
 
   return <>
     <Hd tag="PickUp Segmentos" title="El mercado Pickup segmento a segmento" />
-    <Ins items={['Mid Size concentra el 89% del volumen Pickup — Ranger XL y XLT son el core del negocio pickup Ford', 'Full Size creció de 0 a 15 un. en ZO — F-150 está activando un segmento que antes no existía en Orgu']} />
+    <Ins items={['Mid Size concentra el 89% del volumen Pickup — Ranger y F-150 son los dos pilares del negocio pickup Ford', 'Full Size creció fuertemente en ZO este año — F-150 con 15 un. en lo que va del año muestra demanda activa en el segmento']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -2804,7 +2804,7 @@ function T11({ d }: { d: any }) {
 
   return <>
     <Hd tag="Pick Up Full Size" title="Análisis de marcas · F-150" />
-    <Ins items={['F-150 crece +29% (78→101 un.) — el producto de mayor precio Ford crece. Platinum es el trim más vendido con 29 un.', 'Raptor: 12 unidades en nicho de alto margen y sin presión competitiva directa — mantener visibilidad']} />
+    <Ins items={['F-150 crece +29% (78→101 un.) — XLT lidera con 42 un., Platinum con 29 un., Lariat 18 un., Raptor 12 un.', 'F-150 es el pickup de mayor margen del portafolio Ford — crecimiento en todos los trims confirma posicionamiento premium']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -3025,7 +3025,7 @@ function T12({ d }: { d: any }) {
 
   return <>
     <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Q1 2026 · Todos los modelos" />
-    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — el mejor arranque en años y 1.32x más rápido que la industria', 'Territory redefine el mix: Híbrido ya es el 64% del volumen SUV Ford, arriba desde 30% en 2025', 'F-150 crece +29%, Everest +75% — los productos premium lideran. La estrategia de portafolio está funcionando']} />
+    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford', 'F-150 +29%, Everest +75% — premium lidera. La estrategia de electrificación e híbridos está funcionando']} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
