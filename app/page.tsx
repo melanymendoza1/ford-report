@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client'
 import { useState, useEffect, useMemo } from 'react'
 import { ReportData } from './types'
@@ -10,7 +9,7 @@ const C = { night: '#081534', navy: '#133A7C', steel: '#2A6BAC', sky: '#47A8E5',
 const SEG: Record<string, string> = { 'B SUV': 'BSUV', 'C SUV': 'Compact', 'D SUV': 'Midsize', 'E SUV': 'Full Size', 'PREMIUM SUV': 'Premium' }
 const cn = (c: string) => ({ 'AUTOMOV. DE PASAJEROS': 'Automóviles', 'SUV': 'SUV', 'PICK UPS': 'Pick Ups', 'CAMION': 'Camiones', 'BUS': 'Buses', 'VAN': 'Vans' }[c] || c)
 const sn = (s: string) => SEG[s] || s
-const fc = (v: number, m = 3) => Math.round(v / m * 12)
+const fc = (v: number) => Math.round(v / 3 * 12)
 const gr = (c: number, gap = 16) => ({ display: 'grid' as const, gridTemplateColumns: `repeat(${c},1fr)`, gap, marginBottom: 20 })
 const PROVS = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
 const pn = (p: string) => ({ 'PICHINCHA': 'Pichincha', 'GUAYAS': 'Guayas', 'MANABÍ': 'Manabí', 'EL ORO': 'El Oro', 'ZONA ORGU': 'Zona Orgu', 'NACIONAL': 'Nacional', 'TODAS': 'Todas' }[p] || p)
@@ -114,7 +113,7 @@ function SubTab({ tabs, active, onChange }: { tabs: { id: string, label: string 
 }
 
 /* BBC — Bubble Brand Chart */
-function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string, hotMin?: number }) {
+function BBC({ brands, scopeLabel }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string }) {
   if (!brands.length) return null
   const allModels = brands.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
   const maxVol = Math.max(...allModels.map(m => m.vol), 1)
@@ -142,7 +141,7 @@ function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: 
     priceBuckets[bucket] = (priceBuckets[bucket] || 0) + 1
   })
   const hotBucket = Object.entries(priceBuckets).sort((a, b) => b[1] - a[1])[0]
-  const hotRange = hotMin !== undefined ? hotMin : (hotBucket ? Number(hotBucket[0]) : -1)
+  const hotRange = hotBucket ? Number(hotBucket[0]) : -1
 
   const fmtPrice = (p: number) => `$${p.toLocaleString('es-EC')}`
 
@@ -325,11 +324,8 @@ export default function Page() {
 
   const ytdM = ((data as any).mercado_ytd || []) as any[]
   const ytdF = ((data as any).ford_ytd || []) as any[]
-  // Hero uses Nacional totals; scope cards use Zona Orgu
-  const ytdMNac = ((data as any).mercado_ytd_nacional || ytdM) as any[]
-  const ytdFNac = ((data as any).ford_ytd_nacional || ytdF) as any[]
-  const mT = ytdMNac.find((r: any) => r.cat === 'Total general') || {} as any
-  const fT = ytdFNac.find((r: any) => r.cat === 'Total general') || {} as any
+  const mT = ytdM.find((r: any) => r.cat === 'Total general') || {} as any
+  const fT = ytdF.find((r: any) => r.cat === 'Total general') || {} as any
   const dInd = mT.ytd2025 ? ((mT.ytd2026 - mT.ytd2025) / mT.ytd2025 * 100).toFixed(1) : '0'
   const dFord = fT.ytd2025 ? ((fT.ytd2026 - fT.ytd2025) / fT.ytd2025 * 100).toFixed(1) : '0'
   const msF = mT.ytd2026 ? ((fT.ytd2026 || 0) / mT.ytd2026 * 100).toFixed(2) : '0'
@@ -356,15 +352,15 @@ export default function Page() {
     {/* HERO — ONLY ON INDUSTRIA */}
     {tab === 'ind' && <div style={{ background: `linear-gradient(135deg,${C.night},#0F2B5E)`, padding: '28px 32px 32px' }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Abril 2026 · YTD Comparable ene-feb-mar-abr</div>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.32x más rápido que el mercado</h1>
-        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar-abr 2026 vs 2025)</p>
+        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Q1 2026 · YTD Comparable ene-feb-mar</div>
+        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.8x más rápido que el mercado</h1>
+        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar 2026 vs 2025)</p>
         <div style={gr(4, 16)}>
           {[
             { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
             { l: 'Ford Nacional YTD', v: N(fT.ytd2026), s: `↑ +${dFord}% vs ${N(fT.ytd2025)} un. (2025 YTD)`, c: '#10B981' },
             { l: 'Market Share Ford', v: `${msF}%`, s: `vs ${ms25}% (2025 YTD)`, c: C.gld },
-            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0, (data as any).months_ytd || 4)), s: `Proyección lineal · ${(data as any).months_ytd || 4}m × ${Math.round(12 / ((data as any).months_ytd || 4))}`, c: '#94A3B8' },
+            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0)), s: 'Proyección lineal · 3m × 4', c: '#94A3B8' },
           ].map((k, i) => <div key={i} style={{ background: 'rgba(255,255,255,.07)', borderRadius: 14, padding: '16px 20px', borderLeft: `4px solid ${k.c}` }}>
             <div style={{ fontSize: 10, color: '#7BA8D4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>{k.l}</div>
             <div style={{ fontSize: 32, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{k.v}</div>
@@ -391,7 +387,7 @@ export default function Page() {
     </main>
 
     <footer style={{ borderTop: `1px solid ${C.brd}`, padding: '20px 32px', textAlign: 'center', background: C.w }}>
-      <p style={{ fontSize: 11, color: C.mut, margin: 0 }}>Datos a {data.report_month} · Fuente: AEADE Matriculación · YTD comparable ene-feb-mar-abr · Orgu Ford Ecuador</p>
+      <p style={{ fontSize: 11, color: C.mut, margin: 0 }}>Datos a {data.report_month} · Fuente: AEADE Matriculación · YTD comparable ene-feb-mar · Orgu Ford Ecuador</p>
     </footer>
   </div>
 }
@@ -410,10 +406,8 @@ function T1({ d }: { d: any }) {
   // Build data based on scope
   const getScopeData = () => {
     if (scope === 'NACIONAL') {
-      const nacM = ((d.mercado_ytd_nacional || []) as any[]).filter((r: any) => r.cat !== 'Total general')
-      const nacF = (d.ford_ytd_nacional || []) as any[]
-      return nacM.map((r: any) => {
-        const f = nacF.find((fr: any) => fr.cat === r.cat) || {} as any
+      return ytdM.map((r: any) => {
+        const f = ytdF.find((fr: any) => fr.cat === r.cat) || {} as any
         return { cat: r.cat, ind25: r.ytd2025, ind26: r.ytd2026, ford25: f.ytd2025 || 0, ford26: f.ytd2026 || 0 }
       })
     }
@@ -445,10 +439,10 @@ function T1({ d }: { d: any }) {
 
   const scopeData = getScopeData()
   const scopeLabel = scope === 'NACIONAL' ? 'Nacional' : scope === 'ZONA ORGU' ? 'Zona Orgu' : scope
-  const totInd25 = scopeData.reduce((s: number, r: any) => s + r.ind25, 0)
-  const totInd26 = scopeData.reduce((s: number, r: any) => s + r.ind26, 0)
-  const totFord25 = scopeData.reduce((s: number, r: any) => s + r.ford25, 0)
-  const totFord26 = scopeData.reduce((s: number, r: any) => s + r.ford26, 0)
+  const totInd25 = scopeData.reduce((s, r) => s + r.ind25, 0)
+  const totInd26 = scopeData.reduce((s, r) => s + r.ind26, 0)
+  const totFord25 = scopeData.reduce((s, r) => s + r.ford25, 0)
+  const totFord26 = scopeData.reduce((s, r) => s + r.ford26, 0)
 
   const chartData = scopeData.map(r => {
     const pct = r.ind25 ? ((r.ind26 - r.ind25) / r.ind25 * 100).toFixed(1) : '0'
@@ -458,35 +452,18 @@ function T1({ d }: { d: any }) {
 
   return <>
     <Hd tag="Industria Nacional + Zona Orgu" title="Análisis de mercado automotriz" />
-    <Ins items={['Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande', 'Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual']} />
+    <Ins items={['El mercado ecuatoriano crece +41.7% YTD. Ford crece 1.8x más rápido que la industria (+73.2%)', 'Estamos ganando share en un mercado que se expande — la mejor combinación posible']} />
 
     {/* Scope selector */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...provOrder.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
     {/* Hero KPIs */}
-    {(() => {
-      const dInd = totInd25 ? ((totInd26 - totInd25) / totInd25 * 100) : 0
-      const dFord = totFord25 ? ((totFord26 - totFord25) / totFord25 * 100) : 0
-      const dMS = totInd25 ? (totFord26/totInd26*100 - totFord25/totInd25*100) : 0
-      const cards = [
-        { label: `Industria ${scopeLabel}`, v26: totInd26, v25: totInd25, delta: dInd, accent: C.ac },
-        { label: `Ford ${scopeLabel}`, v26: totFord26, v25: totFord25, delta: dFord, accent: C.navy },
-        { label: 'Crecimiento Industria', v26: totInd26, v25: totInd25, delta: dInd, accent: C.up, isGrowth: true },
-        { label: 'MS Ford', v26: totFord26, v25: totFord25, delta: dMS, accent: C.gld, isMS: true },
-      ]
-      return <div style={gr(4)}>{cards.map((c, i) => {
-        const u = c.delta >= 0
-        const val = c.isGrowth ? `${dInd.toFixed(1)}%` : c.isMS ? `${(totFord26/totInd26*100).toFixed(2)}%` : N(c.v26)
-        const sub = c.isGrowth ? `vs ${(totFord25/totInd25*100).toFixed(2)}% en 2025` : c.isMS ? scopeLabel : `2025 YTD: ${N(c.v25)}`
-        const badge = !c.isGrowth && !c.isMS && c.v25 ? `${u ? '↑' : '↓'} ${u ? '+' : ''}${c.delta.toFixed(1)}% vs ${N(c.v25)} un.` : null
-        return <Card key={i} s={{ borderLeft: `4px solid ${c.accent}` }}>
-          <div style={{ fontSize: 11, fontWeight: 600, color: C.mut, marginBottom: 8 }}>{c.label}</div>
-          <div style={{ fontSize: 28, fontWeight: 700, color: C.txt, lineHeight: 1 }}>{val}</div>
-          <div style={{ fontSize: 12, color: C.sub, marginTop: 6 }}>{sub}</div>
-          {badge && <div style={{ marginTop: 8 }}><span style={{ fontSize: 11, fontWeight: 600, padding: '2px 10px', borderRadius: 20, background: u ? C.upB : C.dnB, color: u ? C.up : C.dn }}>{badge}</span></div>}
-        </Card>
-      })}</div>
-    })()}
+    <div style={gr(4)}>
+      <KPI label={`Industria ${scopeLabel}`} value={N(totInd26)} sub={`vs ${N(totInd25)} un. (2025 YTD)`} />
+      <KPI label={`Ford ${scopeLabel}`} value={N(totFord26)} sub={`vs ${N(totFord25)} un. (2025 YTD)`} accent="navy" />
+      <KPI label="Crecimiento Industria" value={totInd25 ? `${((totInd26 - totInd25) / totInd25 * 100).toFixed(1)}%` : '—'} sub="vs 2025 YTD" accent="green" />
+      <KPI label="MS Ford" value={totInd26 ? `${(totFord26 / totInd26 * 100).toFixed(2)}%` : '—'} sub={scopeLabel} accent="gold" />
+    </div>
 
     {/* Chart with Ind + Ford bars */}
     <Card s={{ marginBottom: 20 }}>
@@ -659,8 +636,8 @@ function T2({ d }: { d: any }) {
 
   const catLabel = cat === 'suv' ? 'SUVs' : 'Pickups'
   const insItems = cat === 'suv'
-    ? ['El HEV SUV Nacional creció +93%: de 4.262 a 8.225 un. — el combustible que más crece en el mercado', 'Ford HEV SUV: de 66 a 301 un. (+356%) — Territory fue el motor. El mix Ford pasó de 30% a 64% híbrido']
-    : ['Diesel domina el 77% del volumen pickup — Ranger sigue siendo el core del negocio', 'F-150 HEV crece: de 77 a 88 un. (+14%) — la electrificación llega primero al segmento premium']
+    ? ['El shift de gasolina a híbrido se acelera. HEV pasó de 17% a 23% del mix en un año', 'Ford capturó esta tendencia con Territory']
+    : ['Diesel sigue siendo el 77% del volumen pickup', 'Hibrido pickup crece — tendencia emergente a monitorear']
 
   return <>
     <Hd tag="Combustibles" title="Análisis por tipo de combustible" />
@@ -797,7 +774,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['Compact SUV (+57%) es donde está el volumen del mercado — Territory compite directamente aquí', 'Midsize SUV +42% — Everest crece +75% en este segmento. Ford tiene presencia relevante en todos los niveles']} />
+    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -960,7 +937,7 @@ function T4({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Gasolina 25-40K" title="Análisis de marcas · Rango $25K-$40K Gasolina" />
-    <Ins items={['Escape 1.5 Gasolina: unidades residuales de inventario — segmento cedido intencionalmente al híbrido', 'Mazda lidera con 655 un. (34% MS). Ford no compite en gas puro — estrategia de portafolio correcta']} />
+    <Ins items={['Escape 1.5 ya no se está importando. El volumen residual son unidades de inventario', 'La estrategia de Ford apunta al híbrido con Territory en este rango de precio']} />
 
     <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px', marginBottom: 24 }}>
       <img src="/images/escape15.png" alt="Escape 1.5" style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
@@ -970,10 +947,10 @@ function T4({ d }: { d: any }) {
       </div>
       <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{fordEntry?.v26 || 0}</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>14</div>
           <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
         </div>
-        <Dl a={fordEntry?.v26 || 0} b={fordEntry?.v25 || 0} />
+        <Dl a={14} b={45} />
       </div>
     </Card>
 
@@ -1003,7 +980,7 @@ function T4({ d }: { d: any }) {
 
     {/* BBC — Bubble Brand Chart */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const priceKey = 'SUV GAS 25 - 40'
       const prices = (d.precios_competidores?.[priceKey] || []) as any[]
       // Ford first — Escape Titanium 1.5 only (not ST-Line)
@@ -1019,45 +996,31 @@ function T4({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
       // Recalculate MS
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       // Ford first
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={(scope === 'MANABÍ' || scope === 'EL ORO') ? 35000 : undefined} scopeLabel={scopeLabel} />
     })()}
 
     {/* Insight */}
@@ -1126,28 +1089,16 @@ function T5({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track which terms are already covered by dot-subtotal keys to avoid double-count
-    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
       if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        // Dot-subtotal key: BRAND . MODEL aggregate
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
-      }
-    })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      // Flat format: raw model names
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) => 
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
+        // Provincial format: BRAND . MODEL
+        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      } else if (scope === 'NACIONAL' && !k.includes(' . ')) {
+        // Nacional format: raw model names — match against filter terms
+        // Skip other brand names (short uppercase words)
+        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
     })
     // No fallback — if no filtered models found, return 0
@@ -1192,7 +1143,7 @@ function T5({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 25-40K" title="Análisis de marcas · Rango $25K-$40K Híbrido" />
-    <Ins items={['Territory ingresa con 267 un. en 4 meses — modelo sin historial previo que ya representa el 38% del volumen total Ford', 'Ford sube al #4 en HEV 25-40K: Toyota 698 · KIA 543 · Changan 297 · Ford 267 Territory + 22 Escape FHEV']} />
+    <Ins items={['Territory es el modelo que cambió el juego. 201 unidades en su primer Q1 completo', 'A $35,990 en HEV, captura exactamente donde el mercado está migrando']} />
 
     {/* Territory card + Territory Effect */}
     <div style={gr(2)}>
@@ -1242,72 +1193,6 @@ function T5({ d }: { d: any }) {
     {/* Selector for rankings */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
-    {/* BBC */}
-    {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
-      const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
-      const fordModels = [{ name: 'Territory', price: 35990, vol: fordEntry?.v26 || 0 }]
-      const bbcBrands = filteredBrands.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
-        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
-        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
-          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
-          const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
-        })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
-      // Brands with volume but no price — place at range average with negative price flag
-      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
-      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
-      // Add fallback bubble for brands with volume but no matching price trims
-      bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
-        }
-      })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
-      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
-      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
-    })()}
-
     {/* Ranking */}
     <Card s={{ marginBottom: 16 }}>
       <Lbl>Top marcas · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
@@ -1320,7 +1205,52 @@ function T5({ d }: { d: any }) {
       </>}
     </Card>
 
-    <Ins items={['Territory Titanium Plus a $35,990 compite de frente con Corolla Cross MID ($35,999) — mismo precio, más tecnología Ford', 'Corolla Cross lidera el BBC con 698 un. — Territory con 267 un. en 4 meses es la entrada más fuerte al segmento']} />
+
+    {/* BBC */}
+    {(() => {
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
+      const fordModels = [{ name: 'Territory', price: 35990, vol: fordEntry?.v26 || 0 }]
+      const bbcBrands = filteredBrands.map(b => {
+        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
+        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
+          // Match trim to actual volume — flexible word matching
+          const row = rows.find((r: any) => r.year === '2026') || {} as any
+          let vol = 0
+          Object.entries(row).forEach(([k, v]) => {
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+          })
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+        })
+        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+      }).filter(b => b.totalVol > 0)
+      // Brands with volume but no price — place at range average with negative price flag
+      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
+      // Add fallback bubble for brands with volume but no matching price trims
+      bbcBrands.forEach(b => {
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        if (matchedVol === 0 && b.totalVol > 0) {
+          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        }
+      })
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
+      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
+      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+    })()}
+
+    <Ins items={['Territory a $35,990 compite directamente con Corolla Cross ($35,999) y Niro ($28,499)', 'El rango HEV 25-40K es el de mayor crecimiento. Ford capturo esta tendencia con Territory']} />
   </>
 }
 
@@ -1357,32 +1287,17 @@ function T6({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track which terms are already covered by dot-subtotal keys to avoid double-count
-    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
       if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        // Dot-subtotal key: BRAND . MODEL aggregate
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
+        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      } else if (scope === 'NACIONAL' && !k.includes(' . ')) {
+        // Skip brand-level keys (short uppercase names) — only sum trim-level keys
+        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      // Flat format: raw model names (Nacional and v16 provincial flat keys)
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) =>
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
-      }
-    })
-    // Fallback: brand sells only one model in segment (brand total = model total)
-    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
+    // No fallback — if no filtered models found, return 0
     return total
   }
 
@@ -1424,14 +1339,14 @@ function T6({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 40-50K" title="Análisis de marcas · Rango $40K-$50K Híbrido" />
-    <Ins items={['Escape ST-Line cae -56% (27→12 un.): Territory canibaliza desde abajo a $35,990, X-Trail compite de frente a $44,990', 'Decisión pendiente: ¿reposicionar ST-Line o consolidar Territory como el HEV Ford en rango 25-50K?']} />
+    <Ins items={['Escape ST-Line cae -50%. Territory captura volumen en el rango inferior', 'Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px' }}>
         <img src="/images/escapestline.png" alt="Escape ST-Line" style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 18, fontWeight: 700, color: C.txt }}>Escape ST-Line</div>
-          <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>$44,990 · HEV</div>
+          <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>$46,990 · HEV</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
@@ -1473,72 +1388,6 @@ function T6({ d }: { d: any }) {
     {/* Selector */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
-    {/* BBC */}
-    {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
-      const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
-      const fordModels = [{ name: 'Escape ST-Line', price: 44990, vol: fordEntry?.v26 || 0 }]
-      const bbcBrands = filteredBrands.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
-        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
-        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
-          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
-          const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
-        })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
-      // Brands with volume but no price — place at range average with negative price flag
-      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
-      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
-      // Add fallback bubble for brands with volume but no matching price trims
-      bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
-        }
-      })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
-      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
-      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
-    })()}
-
     {/* Ranking */}
     <Card s={{ marginBottom: 16 }}>
       <Lbl>Top marcas · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
@@ -1551,7 +1400,52 @@ function T6({ d }: { d: any }) {
       </>}
     </Card>
 
-    <Ins items={['Escape ST-Line a $44,990 compite con X-Trail ($43,990-$48,990) y RAV4 ($45,999-$51,999) — propuesta de valor a defender', 'Nissan X-Trail lidera con 146 un. El ST-Line necesita diferenciación clara frente al X-Trail']} />
+
+    {/* BBC */}
+    {(() => {
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
+      const fordModels = [{ name: 'Escape ST-Line', price: 46990, vol: fordEntry?.v26 || 0 }]
+      const bbcBrands = filteredBrands.map(b => {
+        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
+        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
+          // Match trim to actual volume — flexible word matching
+          const row = rows.find((r: any) => r.year === '2026') || {} as any
+          let vol = 0
+          Object.entries(row).forEach(([k, v]) => {
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+          })
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+        })
+        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+      }).filter(b => b.totalVol > 0)
+      // Brands with volume but no price — place at range average with negative price flag
+      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
+      // Add fallback bubble for brands with volume but no matching price trims
+      bbcBrands.forEach(b => {
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        if (matchedVol === 0 && b.totalVol > 0) {
+          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        }
+      })
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
+      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
+      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+    })()}
+
+    <Ins items={['Escape ST-Line a $46,990 compite con Xtrail ($43,990-$48,990) y RAV4 ($45,999-$51,999)', 'Territory canibaliza al ST-Line desde el rango inferior. Monitorear reposicionamiento']} />
   </>
 }
 
@@ -1598,32 +1492,16 @@ function T7({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track which terms are already covered by dot-subtotal keys to avoid double-count
-    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
-      if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        // Dot-subtotal key: BRAND . MODEL aggregate
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
+      if (scope !== 'NACIONAL' && k.includes(' . ') && k.startsWith(brand + ' . ')) {
+        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      } else if (!k.includes(' . ')) {
+        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      // Flat format: raw model names (Nacional and v16 provincial flat keys)
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) =>
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
-      }
-    })
-    // Fallback: brand sells only one model in segment (brand total = model total)
-    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
+    // No fallback — if no filtered models found, return 0
     return total
   }
 
@@ -1649,26 +1527,12 @@ function T7({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
-      let brandTotal = 0
-      let foundModel = false
-      // Pass 1: dot keys
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
+        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
+          total += ((v as number) || 0)
         }
       })
-      // Pass 2: flat model keys
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
-        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
-      })
-      // Fallback: if no model keys matched, use brand total (brand sells only one model in segment)
-      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
-      total += brandTotal
     })
     return total
   }
@@ -1677,23 +1541,10 @@ function T7({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0; let foundModel = false
-    const coveredByDot = new Set<string>()
+    let total = 0
     Object.entries(row).forEach(([k, v]) => {
-      if (k.includes(' . ') && k.startsWith('FORD . ')) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
-      }
+      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); foundModel = true }
-      }
-    })
-    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
 
@@ -1736,7 +1587,7 @@ function T7({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV 55-80K" title="Análisis de marcas · Rango $55K-$80K" />
-    <Ins items={['Everest crece +75% en Midsize — el mejor momentum de Ford en SUVs este año', 'Explorer Active cae -29%: producto americano con exposición a aranceles. Revisar disponibilidad de inventario y política de importación']} />
+    <Ins items={['Everest sube a #3 con +82% de crecimiento. Explorer Active se mantiene estable', 'Ambos modelos consolidan la presencia de Ford en el rango medio-alto']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -1757,7 +1608,7 @@ function T7({ d }: { d: any }) {
         <img src="/images/exploreractive.png" alt="Explorer" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer Active</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$89,990</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$79,990</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
@@ -1796,12 +1647,25 @@ function T7({ d }: { d: any }) {
     {/* Scope selector for ranking */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
+    {/* Ranking */}
+    <Card s={{ marginBottom: 16 }}>
+      <Lbl>Top marcas · {sub === 'everest' ? 'Everest' : 'Explorer'} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
+      {top10.map((b, i) => <RankBar key={b.brand + scope + sub} rank={i + 1} name={b.brand} val={b.v26} max={maxV} ford={b.brand === 'FORD'} v25={b.v25} models={getModelNames(b.brand).map(m => ({ n: b.brand + ' · ' + m, v: b.v26 }))} />)}
+      {!fordIn && fordEntry && fordEntry.v26 > 0 && <>
+        <div style={{ borderTop: `2px dashed ${C.brd}`, margin: '14px 0', position: 'relative' }}>
+          <span style={{ position: 'absolute', top: -10, left: 16, background: C.w, padding: '0 8px', fontSize: 10, fontWeight: 700, color: C.ac }}>FORD · #{fordPos}</span>
+        </div>
+        <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
+      </>}
+    </Card>
+
+    {/* Evolution */}
     {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pk = sub === 'everest' ? 'SUV  55 - 80 everest' : 'SUV  55 - 80 explorer'
       const fm = sub === 'everest' ? 'Everest' : 'Explorer Active'
-      const fp = sub === 'everest' ? 69990 : 89990
+      const fp = sub === 'everest' ? 69990 : 79990
       const prices = (d.precios_competidores?.[pk] || []) as any[]
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const bbcBrands = filteredBrands.map(b => {
@@ -1814,68 +1678,34 @@ function T7({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
     })()}
-
-    {/* Ranking */}
-    <Card s={{ marginBottom: 16 }}>
-      <Lbl>Top marcas · {sub === 'everest' ? 'Everest' : 'Explorer'} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
-      {top10.map((b, i) => <RankBar key={b.brand + scope + sub} rank={i + 1} name={b.brand} val={b.v26} max={maxV} ford={b.brand === 'FORD'} v25={b.v25} models={getModelNames(b.brand).map(m => ({ n: b.brand + ' · ' + m, v: b.v26 }))} />)}
-      {!fordIn && fordEntry && fordEntry.v26 > 0 && <>
-        <div style={{ borderTop: `2px dashed ${C.brd}`, margin: '14px 0', position: 'relative' }}>
-          <span style={{ position: 'absolute', top: -10, left: 16, background: C.w, padding: '0 8px', fontSize: 10, fontWeight: 700, color: C.ac }}>FORD · #{fordPos}</span>
-        </div>
-        <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
-      </>}
-    </Card>
   </>
 }
 
@@ -1941,30 +1771,15 @@ function T8({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track covered terms to avoid double-count with dot subtotals
-    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
-      if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
+      if (scope !== 'NACIONAL' && k.includes(' . ') && k.startsWith(brand + ' . ')) {
+        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      } else if (!k.includes(' . ')) {
+        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) =>
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
-      }
-    })
-    // Fallback: brand sells only one model in segment (brand total = model total)
-    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -1989,26 +1804,10 @@ function T8({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
-      let brandTotal = 0
-      let foundModel = false
-      // Pass 1: dot keys
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
+        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       })
-      // Pass 2: flat model keys
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
-        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
-      })
-      // Fallback: if no model keys matched, use brand total (brand sells only one model in segment)
-      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
-      total += brandTotal
     })
     return total
   }
@@ -2017,23 +1816,10 @@ function T8({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0; let foundModel = false
-    const coveredByDot = new Set<string>()
+    let total = 0
     Object.entries(row).forEach(([k, v]) => {
-      if (k.includes(' . ') && k.startsWith('FORD . ')) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
-      }
+      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); foundModel = true }
-      }
-    })
-    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2075,14 +1861,14 @@ function T8({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV +80K" title="Análisis de marcas · Rango +$80K" />
-    <Ins items={['Segmento +80K: Ford con 18 un. totales (Expedition 4 + Explorer Plat 14) — Toyota LC domina con 50 un., Chevrolet Tahoe con 35 un.', 'Explorer Platinum: 14 un. en el rango 60-80K y avanza. Expedition estable en 4 un. — segmento de alto margen a defender']} />
+    <Ins items={['Segmento premium de bajo volumen pero alto margen', 'Expedition, Bronco y Explorer Platinum posicionan a Ford en el tope del mercado']} />
 
     <div style={gr(3)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px' }}>
         <img src="/images/expeditionplatinum.png" alt="Expedition" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Expedition</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$139,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$129,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_expedition', '2026'))}</div>
@@ -2093,7 +1879,7 @@ function T8({ d }: { d: any }) {
         <img src="/images/bronco.png" alt="Bronco" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Bronco</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$129,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$119,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_bronco', '2026'))}</div>
@@ -2104,7 +1890,7 @@ function T8({ d }: { d: any }) {
         <img src="/images/explorerplatinum.png" alt="Explorer Platinum" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Explorer Platinum</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$99,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$94,990</div>
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_explorer_plat', '2026'))}</div>
@@ -2138,13 +1924,24 @@ function T8({ d }: { d: any }) {
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
-    {/* BBC */}
+    <Card s={{ marginBottom: 16 }}>
+      <Lbl>Top marcas · {subLabel} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
+      {top10.length === 0 && <div style={{ padding: '24px 16px', textAlign: 'center', color: C.mut, fontSize: 13 }}>No hay matriculación al 2026 YTD en este segmento</div>}
+      {top10.map((b, i) => <RankBar key={b.brand + scope + sub} rank={i + 1} name={b.brand} val={b.v26} max={maxV} ford={b.brand === 'FORD'} v25={b.v25} models={getModelNames(b.brand).map(m => ({ n: b.brand + ' · ' + m, v: b.v26 }))} />)}
+      {!fordIn && fordEntry && fordEntry.v26 > 0 && <>
+        <div style={{ borderTop: `2px dashed ${C.brd}`, margin: '14px 0', position: 'relative' }}>
+          <span style={{ position: 'absolute', top: -10, left: 16, background: C.w, padding: '0 8px', fontSize: 10, fontWeight: 700, color: C.ac }}>FORD · #{fordPos}</span>
+        </div>
+        <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
+      </>}
+    </Card>
 
+    {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pkMap: Record<string,string> = { 'expedition': 'SUV  80 plus expedition', 'bronco': '', 'explorer_plat': 'SUV  80 plus explorer' }
       const fmMap: Record<string,string> = { 'expedition': 'Expedition', 'bronco': 'Bronco', 'explorer_plat': 'Explorer Platinum' }
-      const fpMap: Record<string,number> = { 'expedition': 139990, 'bronco': 129990, 'explorer_plat': 99990 }
+      const fpMap: Record<string,number> = { 'expedition': 129990, 'bronco': 119990, 'explorer_plat': 94990 }
       const pk = pkMap[sub] || ''
       if (!pk) return null
       const prices = (d.precios_competidores?.[pk] || []) as any[]
@@ -2159,68 +1956,34 @@ function T8({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
       bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
         if (matchedVol === 0 && b.totalVol > 0) {
           const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
           if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
         }
       })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} hotMin={sub === 'explorer_plat' ? 90000 : undefined} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
     })()}
-
-    <Card s={{ marginBottom: 16 }}>
-      <Lbl>Top marcas · {subLabel} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
-      {top10.length === 0 && <div style={{ padding: '24px 16px', textAlign: 'center', color: C.mut, fontSize: 13 }}>No hay matriculación al 2026 YTD en este segmento</div>}
-      {top10.map((b, i) => <RankBar key={b.brand + scope + sub} rank={i + 1} name={b.brand} val={b.v26} max={maxV} ford={b.brand === 'FORD'} v25={b.v25} models={getModelNames(b.brand).map(m => ({ n: b.brand + ' · ' + m, v: b.v26 }))} />)}
-      {!fordIn && fordEntry && fordEntry.v26 > 0 && <>
-        <div style={{ borderTop: `2px dashed ${C.brd}`, margin: '14px 0', position: 'relative' }}>
-          <span style={{ position: 'absolute', top: -10, left: 16, background: C.w, padding: '0 8px', fontSize: 10, fontWeight: 700, color: C.ac }}>FORD · #{fordPos}</span>
-        </div>
-        <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
-      </>}
-    </Card>
   </>
 }
 
@@ -2297,7 +2060,7 @@ function T9({ d }: { d: any }) {
 
   return <>
     <Hd tag="PickUp Segmentos" title="El mercado Pickup segmento a segmento" />
-    <Ins items={['Mid Size concentra el 89% del volumen Pickup — Ranger y F-150 son los dos pilares del negocio pickup Ford', 'Full Size: F-150 con 80 un. en ZO en lo que va del año — el segmento premium pickup se mantiene activo']} />
+    <Ins items={['Mid Size concentra el 93% del volumen Pickup', 'Ford compite en Mid Size con Ranger y en Full Size con F-150']} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -2376,30 +2139,15 @@ function T10({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track covered terms to avoid double-count with dot subtotals
-    const coveredByDot = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
-      if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
+      if (scope !== 'NACIONAL' && k.includes(' . ') && k.startsWith(brand + ' . ')) {
+        if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      } else if (!k.includes(' . ')) {
+        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' CD ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) =>
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
-      }
-    })
-    // Fallback: brand sells only one model in segment (brand total = model total)
-    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
     return total
   }
 
@@ -2430,22 +2178,10 @@ function T10({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
-      let brandTotal = 0; let foundModel = false
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
+        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       })
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
-        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
-      })
-      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
-      total += brandTotal
     })
     return total
   }
@@ -2454,23 +2190,10 @@ function T10({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0; let foundModel = false
-    const coveredByDot = new Set<string>()
+    let total = 0
     Object.entries(row).forEach(([k, v]) => {
-      if (k.includes(' . ') && k.startsWith('FORD . ')) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
-      }
+      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); foundModel = true }
-      }
-    })
-    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2503,7 +2226,7 @@ function T10({ d }: { d: any }) {
 
   return <>
     <Hd tag="Pick Up Diesel 4x4" title="Análisis de marcas · Ranger XL y XLT" />
-    <Ins items={['Ranger XL cae -37% — KIA Tasman y Colorado presionan. Defender el precio o defender el volumen, no los dos', 'Ranger XL a $53,990 vs Colorado Work Truck $49,999 — diferencial de $4K visible para el comprador racional']} />
+    <Ins items={['Ranger XL compite en transmisión manual, Ranger XLT en automática', 'Dos mercados distintos con competidores diferentes']} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -2560,74 +2283,6 @@ function T10({ d }: { d: any }) {
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
-    {/* BBC */}
-    {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
-      const fm = sub === 'xl' ? 'Ranger XL' : 'Ranger XLT'
-      const fp = sub === 'xl' ? 53990 : 67990
-      const prices = (d.precios_competidores?.[sub === 'xl' ? 'Pick up XL' : 'Pick up XLT'] || []) as any[]
-      const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
-      const bbcBrands = filteredBrands.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
-        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
-        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
-          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
-          const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
-        })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
-      // Brands with volume but no price — place at range average with negative price flag
-      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
-      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
-      // Add fallback bubble for brands with volume but no matching price trims
-      bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
-        }
-      })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
-      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
-      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} hotMin={50000} scopeLabel={scopeLabel} />
-    })()}
-
     <Card s={{ marginBottom: 16 }}>
       <Lbl>Top marcas · {subLabel} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
       {top10.length === 0 && <div style={{ padding: '24px 16px', textAlign: 'center', color: C.mut, fontSize: 13 }}>No hay matriculación al 2026 YTD en este segmento</div>}
@@ -2639,6 +2294,52 @@ function T10({ d }: { d: any }) {
         <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
       </>}
     </Card>
+
+    {/* BBC */}
+    {(() => {
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const fm = sub === 'xl' ? 'Ranger XL' : 'Ranger XLT'
+      const fp = sub === 'xl' ? 53990 : 67990
+      const prices = (d.precios_competidores?.['Pick up TM'] || []) as any[]
+      const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
+      const bbcBrands = filteredBrands.map(b => {
+        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
+        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
+          // Match trim to actual volume — flexible word matching
+          const row = rows.find((r: any) => r.year === '2026') || {} as any
+          let vol = 0
+          Object.entries(row).forEach(([k, v]) => {
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+          })
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+        })
+        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+      }).filter(b => b.totalVol > 0)
+      // Brands with volume but no price — place at range average with negative price flag
+      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
+      // Add fallback bubble for brands with volume but no matching price trims
+      bbcBrands.forEach(b => {
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        if (matchedVol === 0 && b.totalVol > 0) {
+          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        }
+      })
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
+      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
+      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+    })()}
   </>
 }
 
@@ -2647,12 +2348,11 @@ function T11({ d }: { d: any }) {
   const [scope, setScope] = useState('NACIONAL')
   const nacRows = d.pick_fullsize?.NACIONAL || []
   const provMarcas = d.pick_fullsize?.prov_marcas || {}
-  const filtersXLT = d.model_filters?.pu_fullsize_f150_xlt || {}
-  const filtersLP = d.model_filters?.pu_fullsize_f150_lariat_plat || {}
+  const filtersAll = d.model_filters?.pu_fullsize_all || {}
   const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
   const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
 
-  const activeFilters = sub === 'xlt' ? filtersXLT : filtersLP
+  const activeFilters = filtersAll
 
   const getRawRows = () => {
     if (scope === 'NACIONAL') return nacRows
@@ -2676,30 +2376,26 @@ function T11({ d }: { d: any }) {
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
     let total = 0
-    // Track covered terms to avoid double-count with dot subtotals
-    const coveredByDot = new Set<string>()
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand) return
-      if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
-        const matchingTerms = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (matchingTerms.length) {
-          total += ((v as number) || 0)
-          matchingTerms.forEach(t => coveredByDot.add(t.toUpperCase()))
-        }
-      }
-    })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === brand || k.includes(' . ')) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const matchingTerms = terms.filter((t: string) =>
-          k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase())
-        )
-        if (matchingTerms.length) total += ((v as number) || 0)
-      }
-    })
-    // Fallback: brand sells only one model in segment (brand total = model total)
-    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
+    if (scope === 'NACIONAL') {
+      Object.entries(row).forEach(([k, v]) => {
+        if (k === 'year' || k === brand || k.includes(' . ')) return
+        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' CD ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      })
+    } else {
+      const matched: string[] = []
+      Object.entries(row).forEach(([k]) => {
+        if (k === 'year' || k === brand) return
+        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
+      })
+      matched.forEach(k => {
+        const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
+        // Skip double-prefixed subtotals like "BRAND . BRAND . MODEL"
+        const parts = k.split(' . ')
+        const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
+        if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
+      })
+    }
     return total
   }
 
@@ -2707,7 +2403,7 @@ function T11({ d }: { d: any }) {
     return Object.keys(activeFilters).filter(b => activeFilters[b]?.length > 0)
       .map(b => ({ brand: b, v26: getFilteredTotal(b, '2026'), v25: getFilteredTotal(b, '2025') }))
       .filter(x => x.v26 > 0).sort((a, b) => b.v26 - a.v26)
-  }, [scope, rows, sub])
+  }, [scope, rows)
 
   const top10 = filteredBrands.slice(0, 10)
   const maxV = Math.max(...top10.map(b => b.v26), 1)
@@ -2717,7 +2413,7 @@ function T11({ d }: { d: any }) {
 
   const displayNamesXLT: Record<string,string> = { 'FORD': 'F-150 XLT', 'RAM': 'RAM 1500' }
   const displayNamesLP: Record<string,string> = { 'FORD': 'F-150 Lariat + Platinum', 'CHEVROLET': 'Silverado', 'JEEP': 'Gladiator', 'TOYOTA': 'Tundra', 'GMC': 'Sierra' }
-  const displayNames = sub === 'xlt' ? displayNamesXLT : displayNamesLP
+  const displayNames = { ...displayNamesXLT, ...displayNamesLP }
   const getModelNames = (brand: string) => {
     const dn = displayNames[brand]
     return dn ? [dn] : []
@@ -2731,22 +2427,20 @@ function T11({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
-      let brandTotal = 0; let foundModel = false
+      // Find deepest matching keys only (with specs like AC, CD) to avoid double-counting subtotals
+      const matched: string[] = []
       Object.entries(row).forEach(([k, v]) => {
         if (k === 'year' || k === brand) return
-        if (k.includes(' . ') && k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
+        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
       })
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
-        const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-        if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          brandTotal += ((v as number) || 0); foundModel = true
-        }
+      // For each matched key, only add if no other matched key is a child of it
+      matched.forEach(k => {
+        const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
+        // Skip double-prefixed subtotals like "BRAND . BRAND . MODEL"
+        const parts = k.split(' . ')
+        const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
+        if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
       })
-      if (!foundModel && row[brand]) brandTotal = (row[brand] as number) || 0
-      total += brandTotal
     })
     return total
   }
@@ -2755,23 +2449,17 @@ function T11({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = provMarcas[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0; let foundModel = false
-    const coveredByDot = new Set<string>()
+    const matched: string[] = []
     Object.entries(row).forEach(([k, v]) => {
-      if (k.includes(' . ') && k.startsWith('FORD . ')) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())); foundModel = true }
-      }
+      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
     })
-    Object.entries(row).forEach(([k, v]) => {
-      if (k === 'year' || k === 'FORD' || k.includes(' . ') || !v) return
-      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
-      if (!isBrandKey) {
-        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
-        if (mt.length) { total += ((v as number) || 0); foundModel = true }
-      }
+    let total = 0
+    matched.forEach(k => {
+      const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
+      const parts = k.split(' . ')
+      const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
+      if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
     })
-    if (!foundModel && row['FORD']) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2794,7 +2482,7 @@ function T11({ d }: { d: any }) {
   })
   const lineKeys = [...top5.map(b => shortName(b.brand)), ...(!top5.some(b => b.brand === 'FORD') && fordEntry ? ['FORD'] : [])]
   const scopeLabel = scope === 'NACIONAL' ? 'Nacional' : scope === 'ZONA ORGU' ? 'Zona Orgu' : pn(scope)
-  const subLabel = sub === 'xlt' ? 'F-150 XLT vs RAM' : 'F-150 Lariat + Platinum'
+  const subLabel = 'F-150 XLT · Lariat · Platinum vs Competencia'
 
   // Card values
   const xltV26 = (() => { let t=0; const r=nacRows.find((x:any)=>x.year==='2026')||{} as any; Object.entries(r).forEach(([k,v])=>{ if(k!=='year'&&k!=='FORD'&&!' . '.includes(k)&&(k.toUpperCase().includes('F150 XLT')||k.toUpperCase().includes('F-150 XLT'))&&v) t+=((v as number)||0) }); return t })()
@@ -2804,43 +2492,24 @@ function T11({ d }: { d: any }) {
 
   return <>
     <Hd tag="Pick Up Full Size" title="Análisis de marcas · F-150" />
-    <Ins items={['F-150 crece +29% (78→101 un.) — XLT lidera con 42 un., Platinum con 29 un., Lariat 18 un., Raptor 12 un.', 'F-150 es el pickup de mayor margen del portafolio Ford — crecimiento en todos los trims confirma posicionamiento premium']} />
+    <Ins items={['F-150 XLT domina contra RAM en el segmento de entrada Full Size', 'F-150 Lariat y Platinum compiten contra Silverado, Gladiator, Tundra y Sierra en premium']} />
 
-    <div style={gr(2)}>
-      <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
-        <img src="/images/f150xlt.png" alt="F-150 XLT" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
+    <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
+        <img src="/images/f150xlt.png" alt="F-150" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 XLT</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$75,990</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 XLT · Lariat · Platinum</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$75,990 - $99,990</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(xltV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(allV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={xltV26} b={xltV25} />
+          <Dl a={allV26} b={allV25} />
         </div>
       </Card>
-      <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
-        <div style={{ display: 'flex', gap: 4, flexShrink: 0 }}>
-          <img src="/images/f150lariat.png" alt="F-150 Lariat" style={{ height: 60, objectFit: 'contain' }} />
-          <img src="/images/f150platinum.png" alt="F-150 Platinum" style={{ height: 60, objectFit: 'contain' }} />
-        </div>
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 Lariat + Platinum</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$85,990 - $95,990</div>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
-          <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(lpV26)}</div>
-            <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
-          </div>
-          <Dl a={lpV26} b={lpV25} />
-        </div>
-      </Card>
-    </div>
 
-    <SubTab tabs={[{ id: 'xlt', label: 'F-150 XLT vs RAM' }, { id: 'lp', label: 'F-150 Lariat + Platinum' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
+    
 
     <Card s={{ marginBottom: 20 }}>
       <Lbl>Full Size · {subLabel} · Zona Orgu · YTD 2026 vs 2025</Lbl>
@@ -2864,99 +2533,6 @@ function T11({ d }: { d: any }) {
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
-    {/* BBC */}
-    {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#EB0A1E', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
-      const fm = sub === 'xlt' ? 'F-150 XLT' : 'F-150 Lariat'
-      const fp = sub === 'xlt' ? 79990 : 89990
-      const prices = (d.precios_competidores?.['Full size Pick up'] || []) as any[]
-      // For lariat+plat: two Ford bubbles (Lariat $85,990 and Platinum $95,990)
-      const fordModels = (() => {
-        if (sub !== 'lp') return [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
-        const row = rows.find((r: any) => r.year === '2026') || {} as any
-        const lariTerms = ['LARIAT']
-        const platTerms = ['PLATINUM']
-        const sumTerms = (terms: string[]) => Object.entries(row).reduce((s: number, [k, v]) => {
-          if (k === 'year' || k === 'FORD' || !v) return s
-          let mk = k
-          if (k.includes(' . ')) {
-            if (!k.startsWith('FORD . ')) return s
-            const parts = k.split(' . '); const leaf = parts[parts.length - 1]
-            if (!leaf.includes(' ')) return s
-            mk = leaf
-          }
-          const mkU = mk.toUpperCase()
-          if (terms.every(t => mkU.includes(t)) && !mkU.includes('RAPTOR')) s += ((v as number) || 0)
-          return s
-        }, 0)
-        const lariatVol = sumTerms(lariTerms)
-        const platVol = sumTerms(platTerms)
-        return [
-          { name: 'F-150 Lariat', price: 89990, vol: lariatVol },
-          { name: 'F-150 Platinum', price: 99990, vol: platVol },
-        ]
-      })()
-      const bbcBrands = filteredBrands.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
-        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
-        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
-          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
-          const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.startsWith(b.brand + ' . ')) return  // different brand subtotal
-              // Strip to leaf model name
-              const parts = k.split(' . ')
-              const leaf = parts[parts.length - 1]
-              if (!leaf.includes(' ')) return  // single-word = subtotal, skip
-              matchKey = leaf
-            }
-            const K_STRIP = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','EV','2.0','1.5','1.3','1.6','2.5','3.0','3.5','2.4','2.8','2.2','1.4','1.2','2.3','2.7','3.5','4.0','4.4','5.3','5.8','CVT','TA','TM','6DCT','DCT','BA6','16E','FHEV','ATK','NX4E','BOOSTERJET','EPOWER','NEW','IRG','MX5','DMI','PHEV','FJNACG','F3NA6Y','SPORTBACK','LAREDO','BIGHORN','ETORQUE','FLAGSHIP','TRAILBOSS'])
-            const T_STRIP = new Set(['4X2','4X4','CD','DIESEL','HYBRID','CVT','4.0','2.7','2.3','3.5','3.6','5.3','5.8','4.4','2.0','1.5','1.6','2.5','2.4','2.8','1.4','1.3','1.2'])
-            const normW = (w:string) => { const m=w.match(/^(\d{3,})[A-Z]$/); return m?m[1]:w }
-            const kWords = matchKey.toUpperCase().replace(/-/g,'').split(' ').filter((w:string)=>w&&!K_STRIP.has(w)).map(normW)
-            const tWords = trimKey.replace(/-/g,'').split(' ').filter((w:string)=>w&&!T_STRIP.has(w))
-            if (!tWords.length) return
-            const kPhrase = ' ' + kWords.join(' ') + ' '
-            const tPhrase = ' ' + tWords.join(' ') + ' '
-            if (kPhrase.includes(tPhrase)) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
-        })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
-      // Scale bubble vols to match totalVol (prevents double-count from subtotal keys)
-      bbcBrands.forEach(b => {
-        const matchedTotal = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedTotal > 0 && matchedTotal !== b.totalVol) {
-          const scale = b.totalVol / matchedTotal
-          b.models.forEach(m => { m.vol = Math.round(m.vol * scale) })
-        }
-      })
-      // Brands with volume but no price — place at range average with negative price flag
-      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
-      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s: number, p: number) => s + p, 0) / allPricesInBBC.length : 0
-      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
-      // Add fallback bubble for brands with volume but no matching price trims
-      bbcBrands.forEach(b => {
-        const matchedVol = b.models.reduce((s: number, m: any) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s: number, p: number) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
-        }
-      })
-      const totalSeg = bbcBrands.reduce((s: number, x: any) => s + x.totalVol, 0)
-      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
-      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} hotMin={65000} scopeLabel={scopeLabel} />
-    })()}
-
     <Card s={{ marginBottom: 16 }}>
       <Lbl>Top marcas · {subLabel} · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
       {top10.length === 0 && <div style={{ padding: '24px 16px', textAlign: 'center', color: C.mut, fontSize: 13 }}>No hay matriculación al 2026 YTD en este segmento</div>}
@@ -2968,8 +2544,56 @@ function T11({ d }: { d: any }) {
         <RankBar rank={fordPos} name="FORD" val={fordEntry.v26} max={maxV} ford v25={fordEntry.v25} models={getModelNames('FORD').map(m => ({ n: 'FORD · ' + m, v: fordEntry.v26 }))} />
       </>}
     </Card>
+
+    {/* BBC */}
+    {(() => {
+      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
+      const fm = 'F-150'
+      const fp = 79990
+      const prices = (d.precios_competidores?.['Full size Pick up'] || []) as any[]
+      const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
+      const bbcBrands = filteredBrands.map(b => {
+        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
+        const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
+          // Match trim to actual volume — flexible word matching
+          const row = rows.find((r: any) => r.year === '2026') || {} as any
+          let vol = 0
+          Object.entries(row).forEach(([k, v]) => {
+            if (k === 'year' || k === b.brand || k.includes(' . ')) return
+            const kNorm = k.toUpperCase().replace(/-/g, '')
+            const tNorm = trimKey.replace(/-/g, '')
+            const words = tNorm.split(' ')
+            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+          })
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+        })
+        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+      }).filter(b => b.totalVol > 0)
+      // Brands with volume but no price — place at range average with negative price flag
+      const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
+      const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
+      bbcBrands.forEach(b => { b.models.forEach(m => { if (m.price === 0 && m.vol > 0 && avgPrice > 0) m.price = -avgPrice }) })
+      // Add fallback bubble for brands with volume but no matching price trims
+      bbcBrands.forEach(b => {
+        const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
+        if (matchedVol === 0 && b.totalVol > 0) {
+          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
+          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
+          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        }
+      })
+      const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
+      bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
+      bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
+      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+    })()}
   </>
-}
+}  const allV26 = xltV26 + lpV26
+  const allV25 = xltV25 + lpV25
+  
 
 function T12({ d }: { d: any }) {
   const ytdF = (d.ford_ytd || []) as any[]
@@ -2995,17 +2619,17 @@ function T12({ d }: { d: any }) {
       v26: getVal('suv_25_40_fhev', '2026', ['TERRITORY TITANIUM']), v25: 0, segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'Escape 1.5', trim: 'Titanium', fuel: 'Gasolina', price: '$35,990', img: '/images/escape15.png',
       v26: getVal('suv_25_40_gas', '2026', ['ESCAPE']), v25: getVal('suv_25_40_gas', '2025', ['ESCAPE']), segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
-    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$44,990', img: '/images/escapestline.png',
+    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$46,990', img: '/images/escapestline.png',
       v26: getVal('suv_40_50', '2026', ['ESCAPE ST']), v25: getVal('suv_40_50', '2025', ['ESCAPE ST']), segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
     { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
       v26: getVal('suv_55_80', '2026', ['EVEREST']), v25: getVal('suv_55_80', '2025', ['EVEREST']), segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
-    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$89,990', img: '/images/exploreractive.png',
+    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$79,990', img: '/images/exploreractive.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER ACTIVE']), v25: getVal('suv_60_80', '2025', ['EXPLORER ACTIVE']), segment: 'SUV 60-80K', highlight: 'Estable' },
-    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$99,990', img: '/images/explorerplatinum.png',
+    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$94,990', img: '/images/explorerplatinum.png',
       v26: getVal('suv_60_80', '2026', ['EXPLORER PLATINUM']), v25: getVal('suv_60_80', '2025', ['EXPLORER PLATINUM']), segment: 'SUV 60-80K', highlight: 'Premium' },
     { name: 'Bronco', trim: 'Wildtrak · Badlands', fuel: 'Gasolina', price: '$119,990', img: '/images/bronco.png',
       v26: getVal('suv_80plus', '2026', ['BRONCO']), v25: getVal('suv_80plus', '2025', ['BRONCO']), segment: 'SUV +80K', highlight: 'Sin unidades YTD' },
-    { name: 'Expedition', trim: 'Platinum', fuel: 'Gasolina', price: '$139,990', img: '/images/expeditionplatinum.png',
+    { name: 'Expedition', trim: 'Platinum', fuel: 'Gasolina', price: '$129,990', img: '/images/expeditionplatinum.png',
       v26: getVal('suv_80plus', '2026', ['EXPEDITION']), v25: getVal('suv_80plus', '2025', ['EXPEDITION']), segment: 'SUV +80K', highlight: 'Premium estable' },
   ]
   const pickups = [
@@ -3015,9 +2639,9 @@ function T12({ d }: { d: any }) {
     { name: 'Ranger XLT', trim: 'XLT', fuel: 'Diesel TA 4x4', price: '$67,990', img: '/images/rangerxlt.png',
       v26: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
       v25: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0, segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
-    { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$79,990', img: '/images/f150xlt.png',
+    { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$75,990', img: '/images/f150xlt.png',
       v26: getVal('pick_fullsize', '2026', ['F150 XLT', 'F-150 XLT']), v25: getVal('pick_fullsize', '2025', ['F150 XLT', 'F-150 XLT']), segment: 'Full Size', highlight: '#1 vs RAM' },
-    { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$89,990 – $99,990', img: '/images/f150lariat.png',
+    { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$85,990 – $95,990', img: '/images/f150lariat.png',
       v26: getVal('pick_fullsize', '2026', ['F150 LARIAT', 'F150 PLATINUM']), v25: getVal('pick_fullsize', '2025', ['F150 LARIAT', 'F150 PLATINUM']), segment: 'Full Size Premium', highlight: 'Dominio premium' },
     { name: 'F-150 Raptor', trim: 'Raptor', fuel: 'Gasolina', price: '$119,990', img: '/images/f150platinum.png',
       v26: getVal('pick_fullsize', '2026', ['F150 RAPTOR', 'F-150 RAPTOR']), v25: getVal('pick_fullsize', '2025', ['F150 RAPTOR', 'F-150 RAPTOR']), segment: 'Full Size', highlight: 'Performance' },
@@ -3025,7 +2649,7 @@ function T12({ d }: { d: any }) {
 
   return <>
     <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Q1 2026 · Todos los modelos" />
-    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford', 'F-150 crece +29% y Everest +75% — los modelos de mayor valor del portafolio crecen por encima del mercado']} />
+    <Ins items={['Ford Ecuador cierra Q1 2026 con el mejor arranque en 3 años', 'Territory redefine el mix, F-150 lidera Full Size, y Everest escala']} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
@@ -3042,7 +2666,7 @@ function T12({ d }: { d: any }) {
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, (d as any).months_ytd || 4))}</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0))}</div>
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Forecast 2026</div>
         </div>
       </div>
@@ -3116,7 +2740,7 @@ function T12({ d }: { d: any }) {
             <td style={{ padding: '12px 14px', textAlign: 'right', color: C.sub }}>{N(r.ytd2025)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right', fontWeight: 700, color: C.navy }}>{N(r.ytd2026)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right' }}><Dl a={r.ytd2026} b={r.ytd2025} /></td>
-            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0, (d as any).months_ytd || 4))}</td>
+            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0))}</td>
           </tr>
         )}</tbody>
       </table>
