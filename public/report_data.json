@@ -6425,7 +6425,13 @@
         "modelo": "Land Cruiser Prado 250",
         "trim": "AC",
         "combustible": "Gasolina",
-        "precio": 132074
+        "precio": 132074,
+        "vol_override": {
+          "NACIONAL": 49,
+          "PICHINCHA": 24,
+          "GUAYAS": 6,
+          "ZONA ORGU": 30
+        }
       },
       {
         "marca": "Toyota",
@@ -6439,7 +6445,11 @@
         "modelo": "TAHOE",
         "trim": "Z71",
         "combustible": "Gasolina",
-        "precio": 131999
+        "precio": 131999,
+        "vol_override": {
+          "MANABÍ": 5,
+          "EL ORO": 1
+        }
       }
     ],
     "SUV  80 plus explorer": [
