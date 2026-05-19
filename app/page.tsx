@@ -850,30 +850,25 @@ function T4({ d }: { d: any }) {
     const terms = filters[brand] || []
     if (!terms.length) return 0
     const row = rows.find((r: any) => r.year === yr) || {} as any
-    const allKeys = Object.keys(row).filter(k => k !== 'year')
-
-    if (scope === 'NACIONAL') {
-      let total = 0
-      allKeys.forEach(k => {
-        if (k === brand) return
-        const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
-        if (isBrandKey || k.includes(' . ')) return
-        terms.forEach(term => {
-          if (k.toUpperCase().includes(term.toUpperCase())) total += (row[k] || 0)
-        })
-      })
-      return total
-    } else {
-      // Provincial: brand · model format
-      let total = 0
-      allKeys.forEach(k => {
-        if (!k.startsWith(brand + ' . ')) return
-        if (terms.some(t => k.toUpperCase().includes(t.toUpperCase()))) total += (row[k] || 0)
-      })
-      // If no model-level keys, use brand total (provincial often only has brand)
-      if (total === 0 && row[brand]) return row[brand] || 0
-      return total
-    }
+    let total = 0
+    const coveredByDot = new Set<string>()
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === brand) return
+      if (k.includes(' . ') && k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+        if (mt.length) { total += ((v as number) || 0); mt.forEach(t => coveredByDot.add(t.toUpperCase())) }
+      }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (k === 'year' || k === brand || k.includes(' . ') || !v) return
+      const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
+      if (!isBrandKey) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !coveredByDot.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
+    })
+    if (total === 0 && terms.length > 0 && (row[brand] as number) > 0) total = (row[brand] as number) || 0
+    return total
   }
 
   // Build filtered brand data for ranking
