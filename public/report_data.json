@@ -7805,5 +7805,70 @@
       "Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share",
       "Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford"
     ]
+  },
+  "ford_cards": {
+    "T4_gas_25_40": {
+      "model": "Escape 1.5",
+      "price": 35990,
+      "fuel": "Gasolina",
+      "v26": null,
+      "v25": null
+    },
+    "T5_hev_25_40": {
+      "model": "Territory Titanium Plus",
+      "price": 35990,
+      "fuel": "Híbrido",
+      "v26": null,
+      "v25": null
+    },
+    "T6_hev_40_50": {
+      "model": "Escape ST-Line",
+      "price": 44990,
+      "fuel": "Híbrido",
+      "v26": null,
+      "v25": null
+    },
+    "T7_everest": {
+      "model": "Everest Active",
+      "price": 69990,
+      "fuel": "Diésel",
+      "v26": null,
+      "v25": null
+    },
+    "T7_explorer_active": {
+      "model": "Explorer Active",
+      "price": 89990,
+      "fuel": "Gasolina",
+      "v26": null,
+      "v25": null
+    },
+    "T8_suv_80plus": {
+      "model": "Explorer Platinum",
+      "price": 99990,
+      "fuel": "Gasolina",
+      "v26": null,
+      "v25": null
+    },
+    "T10_ranger_xl": {
+      "model": "Ranger XL",
+      "price": 53990,
+      "fuel": "Diésel",
+      "v26": null,
+      "v25": null
+    },
+    "T11_ranger_xlt": {
+      "model": "Ranger XLT",
+      "price": 67990,
+      "fuel": "Diésel",
+      "v26": null,
+      "v25": null
+    },
+    "T11_fullsize": {
+      "model": "F-150 XLT",
+      "price": 79990,
+      "fuel": "Gasolina",
+      "v26": null,
+      "v25": null
+    }
   }
 }

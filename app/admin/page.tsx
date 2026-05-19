@@ -320,7 +320,7 @@ export default function AdminPage() {
   const [sha, setSha] = useState('')
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState('')
-  const [tab, setTab] = useState<'bbc' | 'filtros' | 'insights'>('bbc')
+  const [tab, setTab] = useState<'bbc' | 'fordcards' | 'filtros' | 'insights'>('bbc')
   const [activeSeg, setActiveSeg] = useState('SUV GAS 25 - 40')
   const [loginMsg, setLoginMsg] = useState('')
   const [drawer, setDrawer] = useState<{ entry: any, segKey: string, idx: number } | null>(null)
@@ -468,7 +468,7 @@ export default function AdminPage() {
 
       {/* Tab bar */}
       <div style={{ background: C.w, borderBottom: `1px solid ${C.brd}`, padding: '0 24px', display: 'flex' }}>
-        {[['bbc', '📊 BBC — Burbujas'], ['filtros', '🔧 Filtros de Modelos'], ['insights', '💬 Insights']].map(([t, lbl]) => (
+        {[['bbc', '📊 BBC'], ['fordcards', '🔵 Ford Cards'], ['filtros', '🔧 Filtros'], ['insights', '💬 Insights']].map(([t, lbl]) => (
           <button key={t} onClick={() => setTab(t as any)}
             style={{ padding: '14px 22px', background: 'none', border: 'none', borderBottom: tab === t ? `3px solid ${C.sky}` : '3px solid transparent', color: tab === t ? C.sky : '#64748B', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
             {lbl}
@@ -575,6 +575,48 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+        {tab === 'fordcards' && (
+          <div style={{ padding: '24px 28px', maxWidth: 1100, margin: '0 auto' }}>
+            <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 10, padding: '12px 20px', marginBottom: 20, fontSize: 13, color: '#1E40AF' }}>
+              <strong>Ford Cards:</strong> Card de Ford en cada tab. Modelo, precio, combustible, volumen. Vacío = usa Excel.
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(460px, 1fr))', gap: 18 }}>
+              {Object.entries(data.ford_cards || {}).map(([key, card]: [string, any]) => (
+                <div key={key} style={{ background: C.w, borderRadius: 12, border: '1px solid ' + C.brd, overflow: 'hidden' }}>
+                  <div style={{ padding: '12px 20px', background: C.navy, color: C.w, fontSize: 13, fontWeight: 700 }}>{INS_LABELS[key] || key}</div>
+                  <div style={{ padding: 16, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: 10 }}>
+                      {(['model','price','fuel'] as string[]).map((f,fi) => (
+                        <div key={f}>
+                          <label style={{ fontSize: 11, fontWeight: 700, color: '#64748B', display: 'block', marginBottom: 4 }}>{['MODELO','PRECIO $','COMBUSTIBLE'][fi]}</label>
+                          <input type={f==='price'?'number':'text'} value={card[f]??''} onChange={e => mutate((d:any)=>{ d.ford_cards[key][f] = f==='price' ? (e.target.value ? Number(e.target.value) : null) : e.target.value })}
+                            style={{ width:'100%', padding:'7px 10px', border:'1.5px solid '+C.brd, borderRadius:7, fontSize:13, fontWeight:700, outline:'none', boxSizing:'border-box' as any }} />
+                        </div>
+                      ))}
+                    </div>
+                    <div style={{ background: '#F8FAFC', borderRadius: 10, padding: '12px 14px', border: '1px solid ' + C.brd }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: '#64748B', marginBottom: 8 }}>VOLUMEN - vacio = usa Excel</div>
+                      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8 }}>
+                        {(['v26','v25'] as string[]).map((f,fi) => (
+                          <div key={f}>
+                            <label style={{ fontSize: 11, color: '#64748B', display: 'block', marginBottom: 4 }}>{['2026 YTD','2025 YTD'][fi]}</label>
+                            <input type='number' value={card[f]??''} placeholder='Auto Excel' onChange={e => mutate((d:any)=>{ d.ford_cards[key][f] = e.target.value ? Number(e.target.value) : null })}
+                              style={{ width:'100%', padding:'8px 10px', border:'1.5px solid '+(card[f]!=null?C.sky:C.brd), borderRadius:7, fontSize:16, fontWeight:card[f]!=null?700:400, color:card[f]!=null?C.navy:'#94A3B8', outline:'none', boxSizing:'border-box' as any, background:card[f]!=null?'#EFF6FF':C.w }} />
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div style={{ display:'flex', alignItems:'center', gap:14, padding:'10px 14px', background:'#F0F9FF', borderRadius:10 }}>
+                      <div style={{ flex:1 }}><div style={{ fontWeight:700, color:C.dark }}>{card.model||'--'}</div><div style={{ fontSize:12, color:C.sky }}>${(card.price||0).toLocaleString()} . {card.fuel||'--'}</div></div>
+                      <div style={{ textAlign:'right' }}>{card.v26!=null ? <div style={{ fontSize:24, fontWeight:700, color:C.navy }}>{card.v26}</div> : <div style={{ fontSize:12, color:C.mut, fontStyle:'italic' }}>Auto Excel</div>}{card.v25!=null && <div style={{ fontSize:11, color:C.mut }}>vs {card.v25}</div>}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
       {/* ═══ INSIGHTS TAB ═══ */}
       {tab === 'insights' && (

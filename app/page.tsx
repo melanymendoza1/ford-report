@@ -938,20 +938,28 @@ function T4({ d }: { d: any }) {
     <Hd tag="SUV Gasolina 25-40K" title="Análisis de marcas · Rango $25K-$40K Gasolina" />
     <Ins items={[...(d.insights?.['T3_suv_segmentos'] || [])]} />
 
-    <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px', marginBottom: 24 }}>
-      <img src="/images/escape15.png" alt="Escape 1.5" style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
-      <div style={{ flex: 1 }}>
-        <div style={{ fontSize: 18, fontWeight: 700, color: C.txt }}>Escape 1.5</div>
-        <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>{precio?.precio || '$35,990'} · Gasolina</div>
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>14</div>
-          <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
+    {(() => {
+      const fc4 = d.ford_cards?.['T4_gas_25_40'] || {}
+      const fv26 = fc4.v26 != null ? fc4.v26 : (fordEntry?.v26 || 0)
+      const fv25 = fc4.v25 != null ? fc4.v25 : (fordEntry?.v25 || 0)
+      const fmodel = fc4.model || 'Escape 1.5'
+      const fprice = fc4.price || precio?.precio || 35990
+      const ffuel = fc4.fuel || 'Gasolina'
+      return <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px', marginBottom: 24 }}>
+        <img src="/images/escape15.png" alt={fmodel} style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 18, fontWeight: 700, color: C.txt }}>{fmodel}</div>
+          <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>${N(fprice)} · {ffuel}</div>
         </div>
-        <Dl a={14} b={45} />
-      </div>
-    </Card>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(fv26)}</div>
+            <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
+          </div>
+          <Dl a={fv26} b={fv25} />
+        </div>
+      </Card>
+    })()}
 
     {/* Province chart — always Zona Orgu with Ford + MS */}
     <Card s={{ marginBottom: 20 }}>
@@ -983,7 +991,8 @@ function T4({ d }: { d: any }) {
       const priceKey = 'SUV GAS 25 - 40'
       const prices = (d.precios_competidores?.[priceKey] || []) as any[]
       // Ford first — Escape Titanium 1.5 only (not ST-Line)
-      const fordModels = [{ name: 'Escape 1.5', price: 35990, vol: fordEntry?.v26 || 0 }]
+      const fc4bbc = d.ford_cards?.['T4_gas_25_40'] || {}
+      const fordModels = [{ name: fc4bbc.model || 'Escape 1.5', price: fc4bbc.price || 35990, vol: fc4bbc.v26 != null ? fc4bbc.v26 : (fordEntry?.v26 || 0) }]
       const allBrandsForBBC = [...filteredBrands]
       const bbcBrands = allBrandsForBBC.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
@@ -1062,6 +1071,8 @@ function T5({ d }: { d: any }) {
 
   const r26nac = nacRows.find((r: any) => r.year === '2026') || {} as any
   const fordVal = (() => {
+    const fc5h = (d.ford_cards?.['T5_hev_25_40'] || {}) as any
+    if (fc5h.v26 != null) return fc5h.v26
     const terms = filters['FORD'] || []
     let total = 0
     Object.entries(r26nac).forEach(([k, v]) => {
@@ -1070,6 +1081,7 @@ function T5({ d }: { d: any }) {
     })
     return total || 0
   })()
+
 
   const getRawRows = () => {
     if (scope === 'NACIONAL') return nacRows
@@ -1205,7 +1217,8 @@ function T5({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
-      const fordModels = [{ name: 'Territory', price: 35990, vol: fordEntry?.v26 || 0 }]
+      const fc5 = d.ford_cards?.['T5_hev_25_40'] || {}
+      const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
       const bbcBrands = filteredBrands.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1272,7 +1285,8 @@ function T5({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
-      const fordModels = [{ name: 'Territory', price: 35990, vol: fordEntry?.v26 || 0 }]
+      const fc5 = d.ford_cards?.['T5_hev_25_40'] || {}
+      const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
       const bbcBrands = filteredBrands.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1423,10 +1437,10 @@ function T6({ d }: { d: any }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(fordEntry?.v26 || 0)}</div>
+            <div style={{ fontSize: 36, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{(() => { const f6=(d.ford_cards?.['T6_hev_40_50'] as any)||{}; return f6.v26!=null?f6.v26:(fordEntry?.v26||0) })()}</div>
             <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
           </div>
-          <Dl a={fordEntry?.v26 || 0} b={fordEntry?.v25 || 0} />
+          <Dl a={(()=>{const f6=(d.ford_cards?.['T6_hev_40_50'] as any)||{};return f6.v26!=null?f6.v26:(fordEntry?.v26||0)})()} b={(()=>{const f6=(d.ford_cards?.['T6_hev_40_50'] as any)||{};return f6.v25!=null?f6.v25:(fordEntry?.v25||0)})()}  />
         </div>
       </Card>
       <Card s={{ background: C.dnB, border: `1px solid #FECACA`, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '24px 28px' }}>
@@ -1466,7 +1480,8 @@ function T6({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
-      const fordModels = [{ name: 'Escape ST-Line', price: 46990, vol: fordEntry?.v26 || 0 }]
+      const fc6 = d.ford_cards?.['T6_hev_40_50'] || {}
+      const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
       const bbcBrands = filteredBrands.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1533,7 +1548,8 @@ function T6({ d }: { d: any }) {
     {(() => {
       const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
-      const fordModels = [{ name: 'Escape ST-Line', price: 46990, vol: fordEntry?.v26 || 0 }]
+      const fc6 = d.ford_cards?.['T6_hev_40_50'] || {}
+      const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
       const bbcBrands = filteredBrands.map(b => {
         if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
