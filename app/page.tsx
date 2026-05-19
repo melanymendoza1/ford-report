@@ -401,8 +401,8 @@ function T1({ d }: { d: any }) {
   const nacM = (d.mercado_ytd_nacional || []).filter((r: any) => r.cat !== 'Total general')
   const nacF = (d.ford_ytd_nacional || []) as any[]
   const provOrder = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
-  const provs = provOrder.map(p => (d.provincias_ytd || []).find((r: any) => r.prov === p)).filter(Boolean)
-  const fProvs = d.ford_provincias_ytd || []
+  const provs = provOrder.map(p => { const r = (d.provincias_ytd || []).find((x: any) => (x.label||x.prov) === p); return r ? {...r, prov: r.label||r.prov} : null }).filter(Boolean)
+  const fProvs = (d.ford_provincias_ytd || []).map((r: any) => ({...r, prov: r.label||r.prov}))
   const fordCatProv = d.ford_cat_por_prov || []
   const cats = ['AUTOMOV. DE PASAJEROS', 'BUS', 'CAMION', 'PICK UPS', 'SUV', 'VAN']
 
@@ -433,7 +433,7 @@ function T1({ d }: { d: any }) {
       fordCatProv.forEach((r: any) => {
         if (provOrder.includes(r.label)) fcur = r.label
         else if (fcur && targetProvs.includes(fcur) && r.label === cat) {
-          ford25 += (r['2025'] || 0); ford26 += (r['2026'] || 0)
+          ford25 += (r['ytd2025'] || r['2025'] || 0); ford26 += (r['ytd2026'] || r['2026'] || 0)
         }
       })
       return { cat, ind25, ind26, ford25, ford26 }
