@@ -323,8 +323,8 @@ export default function Page() {
   useEffect(() => { fetch('/report_data.json').then(r => r.json()).then(setData) }, [])
   if (!data) return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: C.bg }}><div style={{ fontSize: 16, color: C.navy, fontWeight: 600 }}>Cargando reporte…</div></div>
 
-  const ytdM = ((data as any).mercado_ytd || []) as any[]
-  const ytdF = ((data as any).ford_ytd || []) as any[]
+  const ytdM = ((data as any).mercado_ytd_nacional || []) as any[]
+  const ytdF = ((data as any).ford_ytd_nacional || []) as any[]
   const mT = ytdM.find((r: any) => r.cat === 'Total general') || {} as any
   const fT = ytdF.find((r: any) => r.cat === 'Total general') || {} as any
   const dInd = mT.ytd2025 ? ((mT.ytd2026 - mT.ytd2025) / mT.ytd2025 * 100).toFixed(1) : '0'
@@ -353,9 +353,9 @@ export default function Page() {
     {/* HERO — ONLY ON INDUSTRIA */}
     {tab === 'ind' && <div style={{ background: `linear-gradient(135deg,${C.night},#0F2B5E)`, padding: '28px 32px 32px' }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Q1 2026 · YTD Comparable ene-feb-mar</div>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.8x más rápido que el mercado</h1>
-        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar 2026 vs 2025)</p>
+        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Abril 2026 · YTD Comparable ene-feb-mar-abr</div>
+        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.32x más rápido que el mercado</h1>
+        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar-abr 2026 vs 2025)</p>
         <div style={gr(4, 16)}>
           {[
             { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
@@ -453,7 +453,7 @@ function T1({ d }: { d: any }) {
 
   return <>
     <Hd tag="Industria Nacional + Zona Orgu" title="Análisis de mercado automotriz" />
-    <Ins items={['El mercado ecuatoriano crece +41.7% YTD. Ford crece 1.8x más rápido que la industria (+73.2%)', 'Estamos ganando share en un mercado que se expande — la mejor combinación posible']} />
+    <Ins items={['Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande', 'Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual']} />
 
     {/* Scope selector */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...provOrder.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
@@ -3041,8 +3041,8 @@ function T12({ d }: { d: any }) {
   ]
 
   return <>
-    <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Q1 2026 · Todos los modelos" />
-    <Ins items={['Ford Ecuador cierra Q1 2026 con el mejor arranque en 3 años', 'Territory redefine el mix, F-150 lidera Full Size, y Everest escala']} />
+    <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Abril 2026 · Todos los modelos" />
+    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford']} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
