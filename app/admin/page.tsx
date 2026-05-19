@@ -72,12 +72,30 @@ function computeVol(row: Record<string,any>, brand: string, trimKey: string, oth
   return vol > 0 ? vol : (row[brand] as number) || 0
 }
 
-function buildBBCData(data: any, seg: string) {
+function getRow26(data: any, seg: string, scope: string): Record<string,any> {
+  const [dataKey] = SEG_DATA[seg] || []
+  if (!dataKey) return {}
+  const section = data[dataKey] || {}
+  const PROVS = ['PICHINCHA','GUAYAS','MANABI','EL ORO']
+  const PMAP: Record<string,string> = {'MANABI':'MANABÍ'}
+  if (scope === 'NACIONAL') {
+    return (section.NACIONAL || []).find((r: any) => r.year === '2026') || {}
+  }
+  const pm = section.prov_marcas || {}
+  const targets = scope === 'ZONA ORGU' ? ['PICHINCHA','GUAYAS','MANABÍ','EL ORO'] : [scope]
+  const agg: Record<string,any> = { year: '2026' }
+  targets.forEach((p: string) => {
+    const rows = (pm[p] || pm[PMAP[p] || p] || [])
+    const row = rows.find((r: any) => r.year === '2026') || {}
+    Object.entries(row).forEach(([k,v]) => { if (k !== 'year') agg[k] = (agg[k] || 0) + ((v as number) || 0) })
+  })
+  return agg
+}
+
+function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
   const [dataKey, filterKey] = SEG_DATA[seg] || []
   if (!dataKey) return []
-  const section = data[dataKey] || {}
-  const nac = section.NACIONAL || []
-  const r26 = nac.find((r: any) => r.year === '2026') || {}
+  const r26 = getRow26(data, seg, scope)
   const prices = data.precios_competidores?.[seg] || []
   const filters = data.model_filters?.[filterKey] || {}
 
@@ -99,8 +117,8 @@ function buildBBCData(data: any, seg: string) {
 }
 
 // ── BBC Visual Component ─────────────────────────────────────────────────
-function BBCView({ data, seg, onClickBubble }: { data: any, seg: string, onClickBubble: (e: any, segKey: string, idx: number) => void }) {
-  const brands = buildBBCData(data, seg)
+function BBCView({ data, seg, scope, onClickBubble }: { data: any, seg: string, scope: string, onClickBubble: (e: any, segKey: string, idx: number) => void }) {
+  const brands = buildBBCData(data, seg, scope)
   if (!brands.length) return <div style={{ padding: 32, color: C.mut, textAlign: 'center' }}>Sin datos para este segmento</div>
 
   const allM = brands.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
@@ -179,6 +197,7 @@ function EditDrawer({ entry, segKey, idx, onSave, onDelete, onClose }: any) {
         <div>
           <div style={{ color: C.sky, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase' }}>Editando burbuja</div>
           <div style={{ color: '#fff', fontSize: 17, fontWeight: 700, marginTop: 2 }}>{entry.marca} {entry.modelo} {entry.trim}</div>
+          <div style={{ color: '#93C5FD', fontSize: 11, marginTop: 2 }}>Modifica el Trim si el volumen no cuadra</div>
         </div>
         <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', borderRadius: 8, width: 36, height: 36, fontSize: 20 }}>×</button>
       </div>
@@ -249,6 +268,8 @@ export default function AdminPage() {
   const [activeSeg, setActiveSeg] = useState('SUV GAS 25 - 40')
   const [loginMsg, setLoginMsg] = useState('')
   const [drawer, setDrawer] = useState<{ entry: any, segKey: string, idx: number } | null>(null)
+  const [bbcScope, setBbcScope] = useState('NACIONAL')
+  const SCOPES = ['NACIONAL','ZONA ORGU','PICHINCHA','GUAYAS','MANABÍ','EL ORO']
 
   const fetchData = useCallback(async (tok: string) => {
     const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
@@ -401,9 +422,18 @@ export default function AdminPage() {
             <div style={{ background: C.w, borderRadius: 14, border: `1px solid ${C.brd}`, overflow: 'hidden' }}>
               <div style={{ padding: '16px 24px', borderBottom: `1px solid ${C.brd}`, background: '#F8FAFC', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <div>
-                  <div style={{ fontSize: 18, fontWeight: 700, color: C.night }}>BBC — {SEG_LABELS[activeSeg]}</div>
-                  <div style={{ fontSize: 12, color: C.mut, marginTop: 3 }}>
-                    Haz <strong>click en cualquier burbuja</strong> para editar su precio, trim o eliminarla ✎
+                  <div>
+                    <div style={{ fontSize: 18, fontWeight: 700, color: C.night }}>BBC — {SEG_LABELS[activeSeg]}</div>
+                    <div style={{ fontSize: 12, color: C.mut, marginTop: 3 }}>Haz <strong>click en cualquier burbuja</strong> para editar · El volumen viene del Excel AEADE según el Trim</div>
+                  </div>
+                  {/* Scope selector */}
+                  <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap' }}>
+                    {SCOPES.map((s: string) => (
+                      <button key={s} onClick={() => setBbcScope(s)}
+                        style={{ padding: '5px 12px', borderRadius: 99, border: 'none', cursor: 'pointer', fontSize: 12, fontWeight: 600, background: bbcScope === s ? C.navy : '#F1F5F9', color: bbcScope === s ? '#fff' : '#475569' }}>
+                        {s === 'NACIONAL' ? '🌎 Nacional' : s === 'ZONA ORGU' ? '📍 Zona Orgu' : s}
+                      </button>
+                    ))}
                   </div>
                 </div>
                 <button onClick={() => {
@@ -417,7 +447,7 @@ export default function AdminPage() {
                 </button>
               </div>
               <div style={{ padding: '20px 24px' }}>
-                <BBCView data={data} seg={activeSeg} onClickBubble={onBubbleClick} />
+                <BBCView data={data} seg={activeSeg} scope={bbcScope} onClickBubble={onBubbleClick} />
               </div>
 
               {/* Tabla de entradas del segmento */}
