@@ -997,11 +997,17 @@ function T4({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1210,11 +1216,17 @@ function T5({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1266,11 +1278,17 @@ function T5({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1449,11 +1467,17 @@ function T6({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1505,11 +1529,17 @@ function T6({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1755,11 +1785,17 @@ function T7({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -1814,11 +1850,17 @@ function T7({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2080,11 +2122,17 @@ function T8({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2141,11 +2189,17 @@ function T8({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2485,11 +2539,17 @@ function T10({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2543,11 +2603,17 @@ function T10({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2819,11 +2885,17 @@ function T11({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })
@@ -2879,11 +2951,17 @@ function T11({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           let vol = 0
           Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand || k.includes(' . ')) return
-            const kNorm = k.toUpperCase().replace(/-/g, '')
+            if (k === 'year' || k === b.brand) return
+            let matchKey = k
+            if (k.includes(' . ')) {
+              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
+              const parts = k.split(' . ')
+              matchKey = parts[parts.length - 1]
+            }
+            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
             const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ')
-            if (words.every(w => kNorm.includes(w))) vol += ((v as number) || 0)
+            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
+            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
         })

@@ -14074,8 +14074,7 @@
         "F150 CC XLT"
       ],
       "RAM": [
-        "RAM 1500",
-        "RAM DT 1500"
+        "RAM 1500"
       ]
     },
     "pu_fullsize_f150_lariat_plat": {
@@ -14110,8 +14109,7 @@
         "RAPTOR"
       ],
       "RAM": [
-        "RAM 1500",
-        "RAM DT 1500"
+        "RAM 1500"
       ],
       "CHEVROLET": [
         "SILVERADO"
@@ -14996,7 +14994,7 @@
         "modelo": "GLADIATOR",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": null
+        "precio": 135990
       },
       {
         "marca": "Toyota",
