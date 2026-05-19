@@ -742,16 +742,17 @@ function T3({ d }: { d: any }) {
   const fordPP = useMemo(() => {
     const r: Record<string, Record<string, any>> = {}; let cs = ''
     fordSegProv.forEach((x: any) => {
-      if (['B SUV','C SUV','D SUV','E SUV','PREMIUM SUV'].includes(x.label)) { cs = x.label; r[cs] = {} }
-      else if (cs && PROVS.includes(x.label)) r[cs][x.label] = x
+      const lbl = x.seg||x.label
+      if (['B SUV','C SUV','D SUV','E SUV','PREMIUM SUV'].includes(lbl)) { cs = lbl; r[cs] = {} }
+      else if (cs && PROVS.includes(lbl)) r[cs][lbl] = x
     })
     return r
   }, [fordSegProv])
 
   const getFordSeg = (seg: string, sc: string) => {
-    if (sc === 'NACIONAL') { const f = fordSegNac.find((r: any) => r.label === seg); return { f26: f?.['2026'] || 0, f25: f?.['2025'] || 0 } }
+    if (sc === 'NACIONAL') { const f = fordSegNac.find((r: any) => (r.seg||r.label) === seg); return { f26: f?.y2026 || f?.['2026'] || 0, f25: f?.y2025 || f?.['2025'] || 0 } }
     const tgt = sc === 'ZONA ORGU' ? PROVS : [sc]
-    let f26 = 0, f25 = 0; tgt.forEach(p => { const v = fordPP[seg]?.[p]; if (v) { f26 += (v['2026'] || 0); f25 += (v['2025'] || 0) } })
+    let f26 = 0, f25 = 0; tgt.forEach(p => { const v = fordPP[seg]?.[p]; if (v) { f26 += (v.y2026||v['2026']||0); f25 += (v.y2025||v['2025']||0) } })
     return { f26, f25 }
   }
 
@@ -761,7 +762,7 @@ function T3({ d }: { d: any }) {
     const tgt = scope === 'ZONA ORGU' ? PROVS : [scope]
     return Object.entries(segGroups).map(([seg, pds]) => {
       let y24=0,y25=0,y26=0
-      pds.filter((p: any) => tgt.includes(p.label)).forEach((p: any) => { y24+=(p.ytd2024||0); y25+=(p.ytd2025||0); y26+=(p.ytd2026||0) })
+      pds.filter((p: any) => tgt.includes(p.label)).forEach((p: any) => { y24+=(p.y2024||p.ytd2024||0); y25+=(p.y2025||p.ytd2025||0); y26+=(p.y2026||p.ytd2026||0) })
       return { seg, y2024: y24, y2025: y25, y2026: y26 }
     })
   }
