@@ -6285,7 +6285,10 @@
         "modelo": "Xtrail",
         "trim": "Advance",
         "combustible": "Hibrido",
-        "precio": 43990
+        "precio": 43990,
+        "vol_override": {
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Nissan",
@@ -6306,14 +6309,26 @@
         "modelo": "Rav4",
         "trim": "XLE",
         "combustible": "Hibrido",
-        "precio": 48999
+        "precio": 48999,
+        "vol_override": {
+          "MANABÍ": 0,
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Toyota",
         "modelo": "Rav4",
         "trim": "Limited",
         "combustible": "Hibrido",
-        "precio": 51999
+        "precio": 51999,
+        "vol_override": {
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Subaru",
