@@ -6128,13 +6128,6 @@
       {
         "marca": "Mitsubishi",
         "modelo": "Eclipse cross",
-        "trim": "AC",
-        "combustible": "Gasolina",
-        "precio": 31990
-      },
-      {
-        "marca": "Mitsubishi",
-        "modelo": "Eclipse cross",
         "trim": "GLX",
         "combustible": "Gasolina",
         "precio": 39990

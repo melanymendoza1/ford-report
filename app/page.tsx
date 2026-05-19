@@ -1002,10 +1002,13 @@ function T4({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1221,10 +1224,13 @@ function T5({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1283,10 +1289,13 @@ function T5({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1472,10 +1481,13 @@ function T6({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1534,10 +1546,13 @@ function T6({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1790,10 +1805,13 @@ function T7({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -1855,10 +1873,13 @@ function T7({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2127,10 +2148,13 @@ function T8({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2194,10 +2218,13 @@ function T8({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2544,10 +2571,13 @@ function T10({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2608,10 +2638,13 @@ function T10({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2890,10 +2923,13 @@ function T11({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
@@ -2956,10 +2992,13 @@ function T11({ d }: { d: any }) {
               const parts = k.split(' . ')
               matchKey = parts[parts.length - 1]
             }
-            const kNorm = matchKey.toUpperCase().replace(/-/g, '')
-            const tNorm = trimKey.replace(/-/g, '')
-            const words = tNorm.split(' ').filter((w: string) => w.length > 1)
-            if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
+            const STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+            const STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/\./g,'')
+            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K.has(w) && w.length > 1))
+            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T.has(w) && w.length > 1)
+            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w))) vol += ((v as number) || 0)
           })
           return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
