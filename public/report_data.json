@@ -159,7 +159,7 @@
       "ytd2026": 20841
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "ytd2024": 1502,
       "ytd2025": 1208,
       "ytd2026": 2031
@@ -185,7 +185,7 @@
       "ytd2026": 336
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "ytd2024": 24,
       "ytd2025": 12,
       "ytd2026": 51
@@ -205,163 +205,163 @@
   ],
   "combustible_suv_nacional": [
     {
-      "label": "SUV",
       "2024": 19603,
       "2025": 17175,
       "2026": 25942,
+      "label": "SUV",
       "2026 FCTS": 103768
     },
     {
-      "label": "DIESEL",
       "2024": 418,
       "2025": 312,
       "2026": 336,
+      "label": "DIESEL",
       "2026 FCTS": 1344
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 254,
       "2025": 645,
       "2026": 2164,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 8656
     },
     {
-      "label": "GASOLINA",
       "2024": 15287,
       "2025": 11956,
       "2026": 15217,
+      "label": "GASOLINA",
       "2026 FCTS": 60868
     },
     {
-      "label": "HIBRIDO",
       "2024": 3644,
       "2025": 4262,
       "2026": 8225,
+      "label": "HIBRIDO",
       "2026 FCTS": 32900
     },
     {
-      "label": "Total general",
       "2024": 19603,
       "2025": 17175,
       "2026": 25942,
+      "label": "Total general",
       "2026 FCTS": 103768
     }
   ],
   "ford_comb_suv_nacional": [
     {
-      "label": "SUV",
       "2024": 257,
       "2025": 223,
       "2026": 471,
+      "label": "SUV",
       "2026 FCTS": 1884
     },
     {
-      "label": "GASOLINA",
       "2024": 236,
       "2025": 157,
       "2026": 170,
+      "label": "GASOLINA",
       "2026 FCTS": 680
     },
     {
-      "label": "HIBRIDO",
       "2024": 21,
       "2025": 66,
       "2026": 301,
+      "label": "HIBRIDO",
       "2026 FCTS": 1204
     },
     {
-      "label": "Total general",
       "2024": 257,
       "2025": 223,
       "2026": 471,
+      "label": "Total general",
       "2026 FCTS": 1884
     }
   ],
   "combustible_pu_nacional": [
     {
-      "label": "PICK UPS",
       "2024": 7465,
       "2025": 6410,
       "2026": 8724,
+      "label": "PICK UPS",
       "2026 FCTS": 34896
     },
     {
-      "label": "DIESEL",
       "2024": 6180,
       "2025": 5360,
       "2026": 6680,
+      "label": "DIESEL",
       "2026 FCTS": 26720
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 1,
       "2025": 4,
       "2026": 14,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 56
     },
     {
-      "label": "GASOLINA",
       "2024": 1139,
       "2025": 867,
       "2026": 1537,
+      "label": "GASOLINA",
       "2026 FCTS": 6148
     },
     {
-      "label": "HIBRIDO",
       "2024": 145,
       "2025": 179,
       "2026": 493,
+      "label": "HIBRIDO",
       "2026 FCTS": 1972
     },
     {
-      "label": "Total general",
       "2024": 7465,
       "2025": 6410,
       "2026": 8724,
+      "label": "Total general",
       "2026 FCTS": 34896
     }
   ],
   "ford_comb_pu_nacional": [
     {
-      "label": "PICK UPS",
       "2024": 469,
       "2025": 209,
       "2026": 208,
+      "label": "PICK UPS",
       "2026 FCTS": 832
     },
     {
-      "label": "DIESEL",
       "2024": 348,
       "2025": 110,
       "2026": 74,
+      "label": "DIESEL",
       "2026 FCTS": 296
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 1,
       "2025": 1,
       "2026": null,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 0
     },
     {
-      "label": "GASOLINA",
       "2024": 86,
       "2025": 21,
       "2026": 46,
+      "label": "GASOLINA",
       "2026 FCTS": 184
     },
     {
-      "label": "HIBRIDO",
       "2024": 34,
       "2025": 77,
       "2026": 88,
+      "label": "HIBRIDO",
       "2026 FCTS": 352
     },
     {
-      "label": "Total general",
       "2024": 469,
       "2025": 209,
       "2026": 208,
+      "label": "Total general",
       "2026 FCTS": 832
     }
   ],
@@ -454,7 +454,7 @@
       "y2026": 3242
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "y2024": 348,
       "y2025": 334,
       "y2026": 431
@@ -484,7 +484,7 @@
       "y2026": 3181
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "y2024": 288,
       "y2025": 233,
       "y2026": 568
@@ -514,7 +514,7 @@
       "y2026": 674
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "y2024": 71,
       "y2025": 50,
       "y2026": 80
@@ -544,7 +544,7 @@
       "y2026": 77
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "y2024": 4,
       "y2025": 6,
       "y2026": 11
@@ -580,7 +580,7 @@
       "y2026": 1
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "y2024": null,
       "y2025": null,
       "y2026": 1
@@ -1433,7 +1433,7 @@
           "GS8 GT AC 2.0 5P 4X2 TA": 1
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "KIA": 23,
@@ -1603,7 +1603,7 @@
         "ytd2026": 593
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 71,
         "ytd2025": 60,
         "ytd2026": 62
@@ -2200,7 +2200,7 @@
           "C10 COMFORT EDITION 210 EVRE AC 5P 4X2 TA EV": 1
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "FORD": 1,
@@ -2348,7 +2348,7 @@
         "ytd2026": 997
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 33,
         "ytd2025": 29,
         "ytd2026": 109
@@ -2597,7 +2597,7 @@
           "DEEPAL G318 AC 1.5 5P 4X4 TA HYBRID": 2
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "NISSAN": 9,
@@ -2667,7 +2667,7 @@
         "ytd2026": 159
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 10,
         "ytd2025": 5,
         "ytd2026": 16
@@ -2888,7 +2888,7 @@
           "MONTERO SPORT TD PLUS AC 2.4 5P 4X4 TA DIESEL": 2
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "CHEVROLET": 10,
@@ -3228,7 +3228,7 @@
         "ytd2026": null
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 11,
         "ytd2025": 8,
         "ytd2026": 32
@@ -3662,7 +3662,7 @@
           "COMPASS SERIE ST AC 1.5 5P 4X2 TA": 1
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "TOYOTA": 1
@@ -4237,7 +4237,7 @@
         "ytd2026": null
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 1,
         "ytd2025": 8,
         "ytd2026": 10
@@ -4489,7 +4489,7 @@
           "NEW EXPEDITION PLATINIUM AC 3.5 5P 4X4 TA": 1
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024"
         },
@@ -4896,7 +4896,7 @@
         "ytd2026": null
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": null,
         "ytd2025": 1,
         "ytd2026": 1
@@ -4977,7 +4977,7 @@
       "ytd2026": 1859
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "ytd2024": 240,
       "ytd2025": 175,
       "ytd2026": 248
@@ -5177,7 +5177,7 @@
           "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 7
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "CHEVROLET": 5,
@@ -5247,7 +5247,7 @@
         "ytd2026": 30
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 9,
         "ytd2025": 28,
         "ytd2026": 11
@@ -5435,7 +5435,7 @@
           "ISUZU": 2
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "CHEVROLET": 4,
@@ -5502,7 +5502,7 @@
         "ytd2026": 50
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 7,
         "ytd2025": 4,
         "ytd2026": 12
@@ -5869,7 +5869,7 @@
           "GLADIATOR SPORT AC 3.6 CD 4X4 TA": 1
         }
       ],
-      "MANABÍ": [
+      "MANABÃ": [
         {
           "year": "2024",
           "RAM": 4,
@@ -5953,7 +5953,7 @@
         "ytd2026": 97
       },
       {
-        "label": "MANABÍ",
+        "label": "MANABÃ",
         "ytd2024": 13,
         "ytd2025": 4,
         "ytd2026": 11
@@ -5971,79 +5971,79 @@
       "modelo": "Escape",
       "trim": "Titanium",
       "combustible": "Gasolina",
-      "precio": 35990.0
+      "precio": 35990
     },
     {
       "modelo": "Territory",
       "trim": "Titanium plus",
-      "combustible": "Híbrido",
-      "precio": 35990.0
+      "combustible": "HÃ­brido",
+      "precio": 35990
     },
     {
       "modelo": "Escape",
       "trim": "ST-Line",
-      "combustible": "Híbrido",
-      "precio": 44990.0
+      "combustible": "HÃ­brido",
+      "precio": 44990
     },
     {
       "modelo": "Everest",
       "trim": "Active",
       "combustible": "Gasolina",
-      "precio": 69990.0
+      "precio": 69990
     },
     {
       "modelo": "Explorer",
       "trim": "Active",
       "combustible": "Gasolina",
-      "precio": 89990.0
+      "precio": 89990
     },
     {
       "modelo": "Explorer",
       "trim": "Platinum",
       "combustible": "Gasolina",
-      "precio": 99990.0
+      "precio": 99990
     },
     {
       "modelo": "Expedition",
       "trim": "Platinum",
       "combustible": "Gasolina",
-      "precio": 139990.0
+      "precio": 139990
     },
     {
       "modelo": "Bronco",
       "trim": "Badlands",
       "combustible": "Gasolina",
-      "precio": 129990.0
+      "precio": 129990
     },
     {
       "modelo": "Ranger",
       "trim": "XL",
-      "combustible": "Diésel",
-      "precio": 53990.0
+      "combustible": "DiÃ©sel",
+      "precio": 53990
     },
     {
       "modelo": "Ranger",
       "trim": "XLT",
-      "combustible": "Diésel",
-      "precio": 67990.0
+      "combustible": "DiÃ©sel",
+      "precio": 67990
     },
     {
       "modelo": "F-150",
       "trim": "XLT",
       "combustible": "Gasolina",
-      "precio": 79990.0
+      "precio": 79990
     },
     {
       "modelo": "F-150",
       "trim": "Lariat",
       "combustible": "Gasolina",
-      "precio": 89990.0
+      "precio": 89990
     },
     {
       "modelo": "F-150",
       "trim": "Platinum",
       "combustible": "Gasolina",
-      "precio": 99990.0
+      "precio": 99990
     }
   ],
   "precios_competidores": {
@@ -6053,28 +6053,43 @@
         "modelo": "CX-5",
         "trim": "Core",
         "combustible": "Gasolina",
-        "precio": 38999
+        "precio": 38999,
+        "vol_override": {
+          "NACIONAL": 342,
+          "PICHINCHA": 177,
+          "MANABÍ": 11
+        }
       },
       {
         "marca": "Kia",
         "modelo": "Sportage",
         "trim": "GT",
         "combustible": "Gasolina",
-        "precio": 28499
+        "precio": 28499,
+        "vol_override": {
+          "MANABÍ": 14
+        }
       },
       {
         "marca": "Kia",
         "modelo": "Sportage",
         "trim": "GTL",
         "combustible": "Gasolina",
-        "precio": 43999
+        "precio": 43999,
+        "vol_override": {
+          "MANABÍ": 2,
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Nissan",
         "modelo": "Qashqai",
         "trim": "Advance",
         "combustible": "Gasolina",
-        "precio": 34990
+        "precio": 34990,
+        "vol_override": {
+          "MANABÍ": 5
+        }
       },
       {
         "marca": "Peugeot",
@@ -6084,39 +6099,24 @@
         "precio": 39990
       },
       {
-        "marca": "Peugeot",
-        "modelo": "3008",
-        "trim": "ACT",
-        "combustible": "Gasolina",
-        "precio": 49990
-      },
-      {
         "marca": "Hyundai",
         "modelo": "Tucson",
         "trim": "GLR",
         "combustible": "Gasolina",
-        "precio": 35499
-      },
-      {
-        "marca": "Hyundai",
-        "modelo": "Tucson",
-        "trim": "GLS",
-        "combustible": "Gasolina",
-        "precio": null
-      },
-      {
-        "marca": "Hyundai",
-        "modelo": "Tucson",
-        "trim": "HGS",
-        "combustible": "Gasolina",
-        "precio": null
+        "precio": 35499,
+        "vol_override": {
+          "MANABÍ": 2
+        }
       },
       {
         "marca": "Toyota",
         "modelo": "Rav4",
         "trim": "CVT",
         "combustible": "Gasolina",
-        "precio": 42450
+        "precio": 42450,
+        "vol_override": {
+          "MANABÍ": 1
+        }
       },
       {
         "marca": "Jetour",
@@ -6131,6 +6131,31 @@
         "trim": "GLX",
         "combustible": "Gasolina",
         "precio": 39990
+      },
+      {
+        "marca": "Mitsubishi",
+        "modelo": "Eclipse Cross",
+        "trim": "AC",
+        "combustible": "Gasolina",
+        "precio": 31990,
+        "vol_override": {
+          "NACIONAL": 3,
+          "PICHINCHA": 2,
+          "GUAYAS": 1
+        }
+      },
+      {
+        "marca": "Ford",
+        "modelo": "Escape",
+        "trim": "Titanium 1.5",
+        "combustible": "Gasolina",
+        "precio": 35990,
+        "vol_override": {
+          "PICHINCHA": 3,
+          "GUAYAS": 14,
+          "NACIONAL": 17,
+          "ZONA ORGU": 17
+        }
       }
     ],
     "SUV  HEV 25 - 40": [
@@ -7048,7 +7073,7 @@
       "ytd2026": 120
     },
     {
-      "label": "MANABÍ",
+      "label": "MANABÃ",
       "ytd2024": 24,
       "ytd2025": 12,
       "ytd2026": 51
@@ -7098,534 +7123,534 @@
   ],
   "combustible_suv_prov": [
     {
-      "label": "SUV",
       "2024": 15438,
       "2025": 13583,
       "2026": 20132,
+      "label": "SUV",
       "2026 FCTS": 80528
     },
     {
-      "label": "EL ORO",
       "2024": 157,
       "2025": 91,
       "2026": 293,
+      "label": "EL ORO",
       "2026 FCTS": 1172
     },
     {
-      "label": "DIESEL",
       "2024": 2,
       "2025": null,
       "2026": 9,
+      "label": "DIESEL",
       "2026 FCTS": 36
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": null,
       "2025": null,
       "2026": 7,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 28
     },
     {
-      "label": "GASOLINA",
       "2024": 125,
       "2025": 85,
       "2026": 231,
+      "label": "GASOLINA",
       "2026 FCTS": 924
     },
     {
-      "label": "HIBRIDO",
       "2024": 30,
       "2025": 6,
       "2026": 46,
+      "label": "HIBRIDO",
       "2026 FCTS": 184
     },
     {
-      "label": "GUAYAS",
       "2024": 5965,
       "2025": 5102,
       "2026": 7298,
+      "label": "GUAYAS",
       "2026 FCTS": 29192
     },
     {
-      "label": "DIESEL",
       "2024": 121,
       "2025": 75,
       "2026": 112,
+      "label": "DIESEL",
       "2026 FCTS": 448
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 34,
       "2025": 100,
       "2026": 373,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 1492
     },
     {
-      "label": "GASOLINA",
       "2024": 4818,
       "2025": 3681,
       "2026": 4531,
+      "label": "GASOLINA",
       "2026 FCTS": 18124
     },
     {
-      "label": "HIBRIDO",
       "2024": 992,
       "2025": 1246,
       "2026": 2282,
+      "label": "HIBRIDO",
       "2026 FCTS": 9128
     },
     {
-      "label": "MANABÍ",
       "2024": 711,
       "2025": 623,
       "2026": 1091,
+      "label": "MANABÃ",
       "2026 FCTS": 4364
     },
     {
-      "label": "DIESEL",
       "2024": 11,
       "2025": 7,
       "2026": 22,
+      "label": "DIESEL",
       "2026 FCTS": 88
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 5,
       "2025": 25,
       "2026": 277,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 1108
     },
     {
-      "label": "GASOLINA",
       "2024": 601,
       "2025": 482,
       "2026": 560,
+      "label": "GASOLINA",
       "2026 FCTS": 2240
     },
     {
-      "label": "HIBRIDO",
       "2024": 94,
       "2025": 109,
       "2026": 232,
+      "label": "HIBRIDO",
       "2026 FCTS": 928
     },
     {
-      "label": "PICHINCHA",
       "2024": 8605,
       "2025": 7767,
       "2026": 11450,
+      "label": "PICHINCHA",
       "2026 FCTS": 45800
     },
     {
-      "label": "DIESEL",
       "2024": 209,
       "2025": 171,
       "2026": 111,
+      "label": "DIESEL",
       "2026 FCTS": 444
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 202,
       "2025": 456,
       "2026": 1258,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 5032
     },
     {
-      "label": "GASOLINA",
       "2024": 6221,
       "2025": 4907,
       "2026": 5850,
+      "label": "GASOLINA",
       "2026 FCTS": 23400
     },
     {
-      "label": "HIBRIDO",
       "2024": 1973,
       "2025": 2233,
       "2026": 4231,
+      "label": "HIBRIDO",
       "2026 FCTS": 16924
     },
     {
-      "label": "Total general",
       "2024": 15438,
       "2025": 13583,
       "2026": 20132,
+      "label": "Total general",
       "2026 FCTS": 80528
     }
   ],
   "ford_comb_suv_prov": [
     {
-      "label": "SUV",
       "2024": 230,
       "2025": 194,
       "2026": 415,
+      "label": "SUV",
       "2026 FCTS": 1660
     },
     {
-      "label": "EL ORO",
       "2024": null,
       "2025": null,
       "2026": 7,
+      "label": "EL ORO",
       "2026 FCTS": 28
     },
     {
-      "label": "GASOLINA",
       "2024": null,
       "2025": null,
       "2026": 2,
+      "label": "GASOLINA",
       "2026 FCTS": 8
     },
     {
-      "label": "HIBRIDO",
       "2024": null,
       "2025": null,
       "2026": 5,
+      "label": "HIBRIDO",
       "2026 FCTS": 20
     },
     {
-      "label": "GUAYAS",
       "2024": 99,
       "2025": 65,
       "2026": 120,
+      "label": "GUAYAS",
       "2026 FCTS": 480
     },
     {
-      "label": "GASOLINA",
       "2024": 84,
       "2025": 46,
       "2026": 47,
+      "label": "GASOLINA",
       "2026 FCTS": 188
     },
     {
-      "label": "HIBRIDO",
       "2024": 15,
       "2025": 19,
       "2026": 73,
+      "label": "HIBRIDO",
       "2026 FCTS": 292
     },
     {
-      "label": "MANABÍ",
       "2024": 5,
       "2025": 8,
       "2026": 38,
+      "label": "MANABÃ",
       "2026 FCTS": 152
     },
     {
-      "label": "GASOLINA",
       "2024": 4,
       "2025": 6,
       "2026": 6,
+      "label": "GASOLINA",
       "2026 FCTS": 24
     },
     {
-      "label": "HIBRIDO",
       "2024": 1,
       "2025": 2,
       "2026": 32,
+      "label": "HIBRIDO",
       "2026 FCTS": 128
     },
     {
-      "label": "PICHINCHA",
       "2024": 126,
       "2025": 121,
       "2026": 250,
+      "label": "PICHINCHA",
       "2026 FCTS": 1000
     },
     {
-      "label": "GASOLINA",
       "2024": 121,
       "2025": 86,
       "2026": 83,
+      "label": "GASOLINA",
       "2026 FCTS": 332
     },
     {
-      "label": "HIBRIDO",
       "2024": 5,
       "2025": 35,
       "2026": 167,
+      "label": "HIBRIDO",
       "2026 FCTS": 668
     },
     {
-      "label": "Total general",
       "2024": 230,
       "2025": 194,
       "2026": 415,
+      "label": "Total general",
       "2026 FCTS": 1660
     }
   ],
   "combustible_pu_prov": [
     {
-      "label": "PICK UPS",
       "2024": 5252,
       "2025": 4378,
       "2026": 5707,
+      "label": "PICK UPS",
       "2026 FCTS": 22828
     },
     {
-      "label": "EL ORO",
       "2024": 98,
       "2025": 115,
       "2026": 186,
+      "label": "EL ORO",
       "2026 FCTS": 744
     },
     {
-      "label": "DIESEL",
       "2024": 89,
       "2025": 106,
       "2026": 146,
+      "label": "DIESEL",
       "2026 FCTS": 584
     },
     {
-      "label": "GASOLINA",
       "2024": 9,
       "2025": 9,
       "2026": 14,
+      "label": "GASOLINA",
       "2026 FCTS": 56
     },
     {
-      "label": "HIBRIDO",
       "2024": null,
       "2025": null,
       "2026": 26,
+      "label": "HIBRIDO",
       "2026 FCTS": 104
     },
     {
-      "label": "GUAYAS",
       "2024": 1823,
       "2025": 1280,
       "2026": 2022,
+      "label": "GUAYAS",
       "2026 FCTS": 8088
     },
     {
-      "label": "DIESEL",
       "2024": 1425,
       "2025": 1011,
       "2026": 1584,
+      "label": "DIESEL",
       "2026 FCTS": 6336
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": null,
       "2025": 1,
       "2026": null,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 0
     },
     {
-      "label": "GASOLINA",
       "2024": 327,
       "2025": 212,
       "2026": 322,
+      "label": "GASOLINA",
       "2026 FCTS": 1288
     },
     {
-      "label": "HIBRIDO",
       "2024": 71,
       "2025": 56,
       "2026": 116,
+      "label": "HIBRIDO",
       "2026 FCTS": 464
     },
     {
-      "label": "MANABÍ",
       "2024": 240,
       "2025": 175,
       "2026": 248,
+      "label": "MANABÃ",
       "2026 FCTS": 992
     },
     {
-      "label": "DIESEL",
       "2024": 188,
       "2025": 157,
       "2026": 182,
+      "label": "DIESEL",
       "2026 FCTS": 728
     },
     {
-      "label": "GASOLINA",
       "2024": 48,
       "2025": 15,
       "2026": 41,
+      "label": "GASOLINA",
       "2026 FCTS": 164
     },
     {
-      "label": "HIBRIDO",
       "2024": 4,
       "2025": 3,
       "2026": 25,
+      "label": "HIBRIDO",
       "2026 FCTS": 100
     },
     {
-      "label": "PICHINCHA",
       "2024": 3091,
       "2025": 2808,
       "2026": 3251,
+      "label": "PICHINCHA",
       "2026 FCTS": 13004
     },
     {
-      "label": "DIESEL",
       "2024": 2602,
       "2025": 2345,
       "2026": 2363,
+      "label": "DIESEL",
       "2026 FCTS": 9452
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 1,
       "2025": 2,
       "2026": 11,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 44
     },
     {
-      "label": "GASOLINA",
       "2024": 437,
       "2025": 365,
       "2026": 673,
+      "label": "GASOLINA",
       "2026 FCTS": 2692
     },
     {
-      "label": "HIBRIDO",
       "2024": 51,
       "2025": 96,
       "2026": 204,
+      "label": "HIBRIDO",
       "2026 FCTS": 816
     },
     {
-      "label": "Total general",
       "2024": 5252,
       "2025": 4378,
       "2026": 5707,
+      "label": "Total general",
       "2026 FCTS": 22828
     }
   ],
   "ford_comb_pu_prov": [
     {
-      "label": "PICK UPS",
       "2024": 351,
       "2025": 167,
       "2026": 150,
+      "label": "PICK UPS",
       "2026 FCTS": 600
     },
     {
-      "label": "EL ORO",
       "2024": 2,
       "2025": null,
       "2026": 11,
+      "label": "EL ORO",
       "2026 FCTS": 44
     },
     {
-      "label": "DIESEL",
       "2024": 1,
       "2025": null,
       "2026": 8,
+      "label": "DIESEL",
       "2026 FCTS": 32
     },
     {
-      "label": "GASOLINA",
       "2024": 1,
       "2025": null,
       "2026": 3,
+      "label": "GASOLINA",
       "2026 FCTS": 12
     },
     {
-      "label": "GUAYAS",
       "2024": 84,
       "2025": 49,
       "2026": 47,
+      "label": "GUAYAS",
       "2026 FCTS": 188
     },
     {
-      "label": "DIESEL",
       "2024": 42,
       "2025": 19,
       "2026": 17,
+      "label": "DIESEL",
       "2026 FCTS": 68
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": null,
       "2025": 1,
       "2026": null,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 0
     },
     {
-      "label": "GASOLINA",
       "2024": 19,
       "2025": 2,
       "2026": null,
+      "label": "GASOLINA",
       "2026 FCTS": 0
     },
     {
-      "label": "HIBRIDO",
       "2024": 23,
       "2025": 27,
       "2026": 30,
+      "label": "HIBRIDO",
       "2026 FCTS": 120
     },
     {
-      "label": "MANABÍ",
       "2024": 18,
       "2025": 4,
       "2026": 13,
+      "label": "MANABÃ",
       "2026 FCTS": 52
     },
     {
-      "label": "DIESEL",
       "2024": 11,
       "2025": 4,
       "2026": 5,
+      "label": "DIESEL",
       "2026 FCTS": 20
     },
     {
-      "label": "GASOLINA",
       "2024": 7,
       "2025": null,
       "2026": 1,
+      "label": "GASOLINA",
       "2026 FCTS": 4
     },
     {
-      "label": "HIBRIDO",
       "2024": null,
       "2025": null,
       "2026": 7,
+      "label": "HIBRIDO",
       "2026 FCTS": 28
     },
     {
-      "label": "PICHINCHA",
       "2024": 247,
       "2025": 114,
       "2026": 79,
+      "label": "PICHINCHA",
       "2026 FCTS": 316
     },
     {
-      "label": "DIESEL",
       "2024": 197,
       "2025": 60,
       "2026": 19,
+      "label": "DIESEL",
       "2026 FCTS": 76
     },
     {
-      "label": "ELECTRICO BEV",
       "2024": 1,
       "2025": null,
       "2026": null,
+      "label": "ELECTRICO BEV",
       "2026 FCTS": 0
     },
     {
-      "label": "GASOLINA",
       "2024": 44,
       "2025": 11,
       "2026": 22,
+      "label": "GASOLINA",
       "2026 FCTS": 88
     },
     {
-      "label": "HIBRIDO",
       "2024": 5,
       "2025": 43,
       "2026": 38,
+      "label": "HIBRIDO",
       "2026 FCTS": 152
     },
     {
-      "label": "Total general",
       "2024": 351,
       "2025": 167,
       "2026": 150,
+      "label": "Total general",
       "2026 FCTS": 600
     }
   ],
@@ -7679,7 +7704,7 @@
       "y2026": 88
     },
     {
-      "seg": "MANABÍ",
+      "seg": "MANABÃ",
       "y2024": 4,
       "y2025": 4,
       "y2026": 32
@@ -7709,7 +7734,7 @@
       "y2026": 19
     },
     {
-      "seg": "MANABÍ",
+      "seg": "MANABÃ",
       "y2024": 1,
       "y2025": null,
       "y2026": 6
@@ -7739,7 +7764,7 @@
       "y2026": 17
     },
     {
-      "seg": "MANABÍ",
+      "seg": "MANABÃ",
       "y2024": null,
       "y2025": 4,
       "y2026": null
@@ -7753,21 +7778,21 @@
   ],
   "insights": {
     "T1_industria": [
-      "Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande",
-      "Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual"
+      "Ford crece 1.32x mÃ¡s rÃ¡pido que la industria â ganamos share mientras el mercado se expande",
+      "ProyecciÃ³n 2026: ~2.070 unidades Ford Â· Mercado ~132K si mantenemos el ritmo actual"
     ],
     "T2_combustibles": [
       "BSUV y Compact concentran el 80% del volumen SUV",
       "Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition"
     ],
     "T3_suv_segmentos": [
-      "Escape 1.5 ya no se está importando. El volumen residual son unidades de inventario",
-      "La estrategia de Ford apunta al híbrido con Territory en este rango de precio"
+      "Escape 1.5 ya no se estÃ¡ importando. El volumen residual son unidades de inventario",
+      "La estrategia de Ford apunta al hÃ­brido con Territory en este rango de precio"
     ],
     "T4_gas_25_40": [],
     "T5_hev_25_40": [
-      "Territory es el modelo que cambió el juego. 201 unidades en su primer Q1 completo",
-      "A $35,990 en HEV, captura exactamente donde el mercado está migrando"
+      "Territory es el modelo que cambiÃ³ el juego. 201 unidades en su primer Q1 completo",
+      "A $35,990 en HEV, captura exactamente donde el mercado estÃ¡ migrando"
     ],
     "T6_hev_40_50": [
       "Territory a $35,990 compite directamente con Corolla Cross ($35,999) y Niro ($28,499)",
@@ -7775,7 +7800,7 @@
     ],
     "T7_everest": [
       "Escape ST-Line cae -50%. Territory captura volumen en el rango inferior",
-      "Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación"
+      "Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicaciÃ³n"
     ],
     "T7_explorer_active": [
       "Escape ST-Line a $46,990 compite con Xtrail ($43,990-$48,990) y RAV4 ($45,999-$51,999)",
@@ -7794,7 +7819,7 @@
       "Ford compite en Mid Size con Ranger y en Full Size con F-150"
     ],
     "T11_ranger_xlt": [
-      "Ranger XL compite en transmisión manual, Ranger XLT en automática",
+      "Ranger XL compite en transmisiÃ³n manual, Ranger XLT en automÃ¡tica",
       "Dos mercados distintos con competidores diferentes"
     ],
     "T11_fullsize": [
@@ -7802,7 +7827,7 @@
       "F-150 Lariat y Platinum compiten contra Silverado, Gladiator, Tundra y Sierra en premium"
     ],
     "T12_portafolio": [
-      "Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share",
+      "Ford cierra Abril 2026 con +59% de crecimiento â 1.32x mÃ¡s rÃ¡pido que la industria y ganando market share",
       "Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford"
     ]
   },
@@ -7817,21 +7842,21 @@
     "T5_hev_25_40": {
       "model": "Territory Titanium Plus",
       "price": 35990,
-      "fuel": "Híbrido",
+      "fuel": "HÃ­brido",
       "v26": null,
       "v25": null
     },
     "T6_hev_40_50": {
       "model": "Escape ST-Line",
       "price": 44990,
-      "fuel": "Híbrido",
+      "fuel": "HÃ­brido",
       "v26": null,
       "v25": null
     },
     "T7_everest": {
       "model": "Everest Active",
       "price": 69990,
-      "fuel": "Diésel",
+      "fuel": "DiÃ©sel",
       "v26": null,
       "v25": null
     },
@@ -7852,14 +7877,14 @@
     "T10_ranger_xl": {
       "model": "Ranger XL",
       "price": 53990,
-      "fuel": "Diésel",
+      "fuel": "DiÃ©sel",
       "v26": null,
       "v25": null
     },
     "T11_ranger_xlt": {
       "model": "Ranger XLT",
       "price": 67990,
-      "fuel": "Diésel",
+      "fuel": "DiÃ©sel",
       "v26": null,
       "v25": null
     },
