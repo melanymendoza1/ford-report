@@ -7750,5 +7750,60 @@
       "y2025": 194,
       "y2026": 415
     }
-  ]
+  ],
+  "insights": {
+    "T1_industria": [
+      "Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande",
+      "Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual"
+    ],
+    "T2_combustibles": [
+      "BSUV y Compact concentran el 80% del volumen SUV",
+      "Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition"
+    ],
+    "T3_suv_segmentos": [
+      "Escape 1.5 ya no se está importando. El volumen residual son unidades de inventario",
+      "La estrategia de Ford apunta al híbrido con Territory en este rango de precio"
+    ],
+    "T4_gas_25_40": [],
+    "T5_hev_25_40": [
+      "Territory es el modelo que cambió el juego. 201 unidades en su primer Q1 completo",
+      "A $35,990 en HEV, captura exactamente donde el mercado está migrando"
+    ],
+    "T6_hev_40_50": [
+      "Territory a $35,990 compite directamente con Corolla Cross ($35,999) y Niro ($28,499)",
+      "El rango HEV 25-40K es el de mayor crecimiento. Ford capturo esta tendencia con Territory"
+    ],
+    "T7_everest": [
+      "Escape ST-Line cae -50%. Territory captura volumen en el rango inferior",
+      "Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación"
+    ],
+    "T7_explorer_active": [
+      "Escape ST-Line a $46,990 compite con Xtrail ($43,990-$48,990) y RAV4 ($45,999-$51,999)",
+      "Territory canibaliza al ST-Line desde el rango inferior. Monitorear reposicionamiento"
+    ],
+    "T8_suv_80plus": [
+      "Everest sube a #3 con +82% de crecimiento. Explorer Active se mantiene estable",
+      "Ambos modelos consolidan la presencia de Ford en el rango medio-alto"
+    ],
+    "T9_pu_categoria": [
+      "Segmento premium de bajo volumen pero alto margen",
+      "Expedition, Bronco y Explorer Platinum posicionan a Ford en el tope del mercado"
+    ],
+    "T10_ranger_xl": [
+      "Mid Size concentra el 93% del volumen Pickup",
+      "Ford compite en Mid Size con Ranger y en Full Size con F-150"
+    ],
+    "T11_ranger_xlt": [
+      "Ranger XL compite en transmisión manual, Ranger XLT en automática",
+      "Dos mercados distintos con competidores diferentes"
+    ],
+    "T11_fullsize": [
+      "F-150 XLT domina contra RAM en el segmento de entrada Full Size",
+      "F-150 Lariat y Platinum compiten contra Silverado, Gladiator, Tundra y Sierra en premium"
+    ],
+    "T12_portafolio": [
+      "Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share",
+      "Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford"
+    ]
+  }
 }

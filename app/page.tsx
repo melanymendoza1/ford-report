@@ -455,7 +455,7 @@ function T1({ d }: { d: any }) {
 
   return <>
     <Hd tag="Industria Nacional + Zona Orgu" title="Análisis de mercado automotriz" />
-    <Ins items={['Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande', 'Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual']} />
+    <Ins items={[...(d.insights?.['T1_industria'] || [])]} />
 
     {/* Scope selector */}
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...provOrder.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
@@ -778,7 +778,7 @@ function T3({ d }: { d: any }) {
 
   return <>
     <Hd tag="Segmentación SUV · Nacional + Zona Orgu" title="El mercado SUV segmento a segmento" />
-    <Ins items={['BSUV y Compact concentran el 80% del volumen SUV', 'Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition']} />
+    <Ins items={[...(d.insights?.['T2_combustibles'] || [])]} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -936,7 +936,7 @@ function T4({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Gasolina 25-40K" title="Análisis de marcas · Rango $25K-$40K Gasolina" />
-    <Ins items={['Escape 1.5 ya no se está importando. El volumen residual son unidades de inventario', 'La estrategia de Ford apunta al híbrido con Territory en este rango de precio']} />
+    <Ins items={[...(d.insights?.['T3_suv_segmentos'] || [])]} />
 
     <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px', marginBottom: 24 }}>
       <img src="/images/escape15.png" alt="Escape 1.5" style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
@@ -1034,10 +1034,7 @@ function T4({ d }: { d: any }) {
     })()}
 
     {/* Insight */}
-    <Ins items={[
-      `El rango de $35K-$40K concentra el mayor volumen. Ford compite con Escape 1.5 a $35,990 pero ya no se importa`,
-      `Mazda CX-5, Nissan Qashqai y KIA Sportage dominan este segmento. La estrategia Ford migra al híbrido con Territory`
-    ]} />
+    <Ins items={[...(d.insights?.['T4_gas_25_40'] || [])]} />
 
     {/* Ranking — filtered brand totals */}
     <Card s={{ marginBottom: 16 }}>
@@ -1153,7 +1150,7 @@ function T5({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 25-40K" title="Análisis de marcas · Rango $25K-$40K Híbrido" />
-    <Ins items={['Territory es el modelo que cambió el juego. 201 unidades en su primer Q1 completo', 'A $35,990 en HEV, captura exactamente donde el mercado está migrando']} />
+    <Ins items={[...(d.insights?.['T5_hev_25_40'] || [])]} />
 
     {/* Territory card + Territory Effect */}
     <div style={gr(2)}>
@@ -1326,7 +1323,7 @@ function T5({ d }: { d: any }) {
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
     })()}
 
-    <Ins items={['Territory a $35,990 compite directamente con Corolla Cross ($35,999) y Niro ($28,499)', 'El rango HEV 25-40K es el de mayor crecimiento. Ford capturo esta tendencia con Territory']} />
+    <Ins items={[...(d.insights?.['T6_hev_40_50'] || [])]} />
   </>
 }
 
@@ -1415,7 +1412,7 @@ function T6({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV Híbrido 40-50K" title="Análisis de marcas · Rango $40K-$50K Híbrido" />
-    <Ins items={['Escape ST-Line cae -50%. Territory captura volumen en el rango inferior', 'Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación']} />
+    <Ins items={[...(d.insights?.['T7_everest'] || [])]} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px' }}>
@@ -1587,7 +1584,7 @@ function T6({ d }: { d: any }) {
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
     })()}
 
-    <Ins items={['Escape ST-Line a $46,990 compite con Xtrail ($43,990-$48,990) y RAV4 ($45,999-$51,999)', 'Territory canibaliza al ST-Line desde el rango inferior. Monitorear reposicionamiento']} />
+    <Ins items={[...(d.insights?.['T7_explorer_active'] || [])]} />
   </>
 }
 
@@ -1729,7 +1726,7 @@ function T7({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV 55-80K" title="Análisis de marcas · Rango $55K-$80K" />
-    <Ins items={['Everest sube a #3 con +82% de crecimiento. Explorer Active se mantiene estable', 'Ambos modelos consolidan la presencia de Ford en el rango medio-alto']} />
+    <Ins items={[...(d.insights?.['T8_suv_80plus'] || [])]} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -2072,7 +2069,7 @@ function T8({ d }: { d: any }) {
 
   return <>
     <Hd tag="SUV +80K" title="Análisis de marcas · Rango +$80K" />
-    <Ins items={['Segmento premium de bajo volumen pero alto margen', 'Expedition, Bronco y Explorer Platinum posicionan a Ford en el tope del mercado']} />
+    <Ins items={[...(d.insights?.['T9_pu_categoria'] || [])]} />
 
     <div style={gr(3)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px' }}>
@@ -2342,7 +2339,7 @@ function T9({ d }: { d: any }) {
 
   return <>
     <Hd tag="PickUp Segmentos" title="El mercado Pickup segmento a segmento" />
-    <Ins items={['Mid Size concentra el 93% del volumen Pickup', 'Ford compite en Mid Size con Ranger y en Full Size con F-150']} />
+    <Ins items={[...(d.insights?.['T10_ranger_xl'] || [])]} />
 
     <SubTab tabs={[{ id: 'NACIONAL', label: pn('NACIONAL') }, { id: 'ZONA ORGU', label: pn('ZONA ORGU') }, ...PROVS.map(p => ({ id: p, label: pn(p) }))]} active={scope} onChange={setScope} />
 
@@ -2508,7 +2505,7 @@ function T10({ d }: { d: any }) {
 
   return <>
     <Hd tag="Pick Up Diesel 4x4" title="Análisis de marcas · Ranger XL y XLT" />
-    <Ins items={['Ranger XL compite en transmisión manual, Ranger XLT en automática', 'Dos mercados distintos con competidores diferentes']} />
+    <Ins items={[...(d.insights?.['T11_ranger_xlt'] || [])]} />
 
     <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -2848,7 +2845,7 @@ function T11({ d }: { d: any }) {
 
   return <>
     <Hd tag="Pick Up Full Size" title="Análisis de marcas · F-150" />
-    <Ins items={['F-150 XLT domina contra RAM en el segmento de entrada Full Size', 'F-150 Lariat y Platinum compiten contra Silverado, Gladiator, Tundra y Sierra en premium']} />
+    <Ins items={[...(d.insights?.['T11_fullsize'] || [])]} />
 
     <div style={gr(3)}>
     <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -3105,7 +3102,7 @@ function T12({ d }: { d: any }) {
 
   return <>
     <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Abril 2026 · Todos los modelos" />
-    <Ins items={['Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share', 'Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford']} />
+    <Ins items={[...(d.insights?.['T12_portafolio'] || [])]} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
