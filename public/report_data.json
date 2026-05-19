@@ -6233,14 +6233,14 @@
         "precio": 37990
       },
       {
-        "marca": "Reanult",
+        "marca": "Renault",
         "modelo": "Arkana",
         "trim": "Alpine",
         "combustible": "Hibrido",
         "precio": 28990
       },
       {
-        "marca": "Reanult",
+        "marca": "Renault",
         "modelo": "Arkana",
         "trim": "Techno",
         "combustible": "Hibrido",
@@ -6582,8 +6582,18 @@
       "BYD": [
         "SONG"
       ],
-      "HYUNDAI": [],
-      "CHANGAN": []
+      "HYUNDAI": [
+        "KONA",
+        "TUCSON NX4K"
+      ],
+      "CHANGAN": [],
+      "SUZUKI": [
+        "S-CROSS",
+        "XL7"
+      ],
+      "RENAULT": [
+        "ARKANA"
+      ]
     },
     "suv_hib_40_50": {
       "NISSAN": [
