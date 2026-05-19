@@ -72,6 +72,20 @@ function computeVol(row: Record<string,any>, brand: string, trimKey: string, oth
   return vol > 0 ? vol : (row[brand] as number) || 0
 }
 
+function computeVolAdmin(row: Record<string,any>, brand: string, trimKey: string, otherTrims: string[]): number {
+  let vol = 0
+  Object.entries(row).forEach(([k,v]) => {
+    if (!v || k === 'year' || k === brand) return
+    let mk = k
+    if (k.includes(' . ')) {
+      if (!k.toUpperCase().startsWith(brand + ' . ')) return
+      mk = k.split(' . ').pop()!
+    }
+    if (matchTrim(mk, trimKey, otherTrims)) vol += (v as number) || 0
+  })
+  return vol > 0 ? vol : (row[brand] as number) || 0
+}
+
 function getRow26(data: any, seg: string, scope: string): Record<string,any> {
   const [dataKey] = SEG_DATA[seg] || []
   if (!dataKey) return {}
@@ -185,69 +199,111 @@ function BBCView({ data, seg, scope, onClickBubble }: { data: any, seg: string, 
   )
 }
 
+const SCOPES_ALL = ['NACIONAL','ZONA ORGU','PICHINCHA','GUAYAS','MANABÍ','EL ORO']
+
 // ── Edit Drawer ───────────────────────────────────────────────────────────
-function EditDrawer({ entry, segKey, idx, onSave, onDelete, onClose }: any) {
-  const [local, setLocal] = useState({ ...entry })
+function EditDrawer({ entry, segKey, idx, computedVols, onSave, onDelete, onClose }: any) {
+  const [local, setLocal] = useState({ ...entry, vol_override: { ...(entry.vol_override || {}) } })
   const f = (field: string, val: any) => setLocal((p: any) => ({ ...p, [field]: val }))
+  const setVol = (scope: string, val: string) => setLocal((p: any) => ({
+    ...p,
+    vol_override: { ...p.vol_override, [scope]: val === '' ? undefined : Number(val) }
+  }))
+  const clearVol = (scope: string) => setLocal((p: any) => {
+    const v = { ...p.vol_override }; delete v[scope]; return { ...p, vol_override: v }
+  })
+  // Clean undefined from vol_override before saving
+  const handleSave = () => {
+    const clean = { ...local }
+    if (clean.vol_override) {
+      const v: Record<string,number> = {}
+      Object.entries(clean.vol_override).forEach(([k,val]) => { if (val != null) v[k] = val as number })
+      clean.vol_override = Object.keys(v).length > 0 ? v : undefined
+    }
+    onSave(segKey, idx, clean)
+  }
 
   return (
-    <div style={{ position: 'fixed', right: 0, top: 0, bottom: 0, width: 380, background: C.w, boxShadow: '-8px 0 40px rgba(0,0,0,0.15)', zIndex: 1000, display: 'flex', flexDirection: 'column' }}>
+    <div style={{ position: 'fixed', right: 0, top: 0, bottom: 0, width: 420, background: C.w, boxShadow: '-8px 0 40px rgba(0,0,0,0.2)', zIndex: 1000, display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
       <div style={{ background: C.navy, padding: '18px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div>
           <div style={{ color: C.sky, fontSize: 11, letterSpacing: 1, textTransform: 'uppercase' }}>Editando burbuja</div>
-          <div style={{ color: '#fff', fontSize: 17, fontWeight: 700, marginTop: 2 }}>{entry.marca} {entry.modelo} {entry.trim}</div>
-          <div style={{ color: '#93C5FD', fontSize: 11, marginTop: 2 }}>Modifica el Trim si el volumen no cuadra</div>
+          <div style={{ color: '#fff', fontSize: 17, fontWeight: 700, marginTop: 2 }}>{local.marca || 'Nueva'} {local.modelo} {local.trim}</div>
         </div>
         <button onClick={onClose} style={{ background: 'rgba(255,255,255,0.1)', border: 'none', color: '#fff', cursor: 'pointer', borderRadius: 8, width: 36, height: 36, fontSize: 20 }}>×</button>
       </div>
 
       <div style={{ flex: 1, overflowY: 'auto', padding: 24 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-          {[['Marca', 'marca', 'text'], ['Modelo', 'modelo', 'text'], ['Trim (clave AEADE)', 'trim', 'text'], ['Combustible', 'combustible', 'text']].map(([label, field, type]) => (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+
+          {/* Basic fields */}
+          {([['Marca', 'marca'], ['Modelo', 'modelo'], ['Trim', 'trim'], ['Combustible', 'combustible']] as [string,string][]).map(([label, field]) => (
             <div key={field}>
-              <label style={{ fontSize: 11, fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, display: 'block', marginBottom: 6 }}>{label}</label>
-              <input value={local[field] || ''} onChange={e => f(field, e.target.value)} type={type}
-                style={{ width: '100%', padding: '10px 12px', border: `2px solid ${C.brd}`, borderRadius: 8, fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: field === 'trim' ? 'monospace' : 'inherit', fontWeight: field === 'trim' ? 700 : 400 }} />
-              {field === 'trim' && <div style={{ fontSize: 11, color: C.mut, marginTop: 4 }}>Debe coincidir con el texto en los datos AEADE (ej: GT, GLX, Core, Allure)</div>}
+              <label style={{ fontSize: 11, fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, display: 'block', marginBottom: 5 }}>{label}</label>
+              <input value={local[field] || ''} onChange={e => f(field, e.target.value)}
+                style={{ width: '100%', padding: '9px 12px', border: `1.5px solid ${C.brd}`, borderRadius: 8, fontSize: 14, outline: 'none', boxSizing: 'border-box', fontFamily: field === 'trim' ? 'monospace' : 'inherit', fontWeight: field === 'trim' ? 700 : 400 }} />
+              {field === 'trim' && <div style={{ fontSize: 11, color: C.mut, marginTop: 3 }}>Clave que busca el volumen en AEADE. Si el vol está mal, cambia esto.</div>}
             </div>
           ))}
 
+          {/* Price */}
           <div>
-            <label style={{ fontSize: 11, fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, display: 'block', marginBottom: 6 }}>Precio $</label>
+            <label style={{ fontSize: 11, fontWeight: 700, color: '#64748B', textTransform: 'uppercase', letterSpacing: 1, display: 'block', marginBottom: 5 }}>Precio $</label>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-              <span style={{ fontSize: 20, color: C.mut }}>$</span>
+              <span style={{ fontSize: 18, color: C.mut }}>$</span>
               <input value={local.precio ?? ''} onChange={e => f('precio', e.target.value === '' ? null : Number(e.target.value))} type="number"
-                style={{ flex: 1, padding: '10px 12px', border: `2px solid ${C.sky}`, borderRadius: 8, fontSize: 22, fontWeight: 700, color: C.navy, outline: 'none', boxSizing: 'border-box' }} />
+                style={{ flex: 1, padding: '9px 12px', border: `2px solid ${C.sky}`, borderRadius: 8, fontSize: 20, fontWeight: 700, color: C.navy, outline: 'none', boxSizing: 'border-box' }} />
             </div>
           </div>
 
-          {/* Live preview bubble */}
-          <div style={{ background: '#EFF6FF', borderRadius: 12, padding: 16, display: 'flex', alignItems: 'center', gap: 16 }}>
-            <div style={{ width: 56, height: 56, borderRadius: '50%', background: C.steel, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontSize: 11, fontWeight: 700, textAlign: 'center', flexShrink: 0 }}>
-              preview
+          {/* Volume overrides */}
+          <div style={{ background: '#F8FAFC', borderRadius: 12, padding: 16, border: `1px solid ${C.brd}` }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: C.dark, marginBottom: 12, display: 'flex', alignItems: 'center', gap: 8 }}>
+              📊 Volumen por scope
+              <span style={{ fontSize: 11, fontWeight: 400, color: C.mut }}>Deja vacío = usa el Excel automáticamente</span>
             </div>
-            <div>
-              <div style={{ fontSize: 13, fontWeight: 700, color: C.dark }}>{local.marca} {local.modelo}</div>
-              <div style={{ fontSize: 12, fontFamily: 'monospace', color: C.mut }}>{local.trim || '—'}</div>
-              {local.precio && <div style={{ fontSize: 15, fontWeight: 700, color: C.sky, marginTop: 4 }}>${Number(local.precio).toLocaleString()}</div>}
-            </div>
+            {SCOPES_ALL.map(scope => {
+              const computed = computedVols?.[scope] ?? '—'
+              const override = local.vol_override?.[scope]
+              const hasOverride = override != null
+              return (
+                <div key={scope} style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+                  <div style={{ width: 90, fontSize: 12, fontWeight: 600, color: C.dark, flexShrink: 0 }}>{scope === 'NACIONAL' ? '🌎 Nacional' : scope === 'ZONA ORGU' ? '📍 ZO' : scope}</div>
+                  <div style={{ flex: 1, position: 'relative' }}>
+                    <input
+                      value={override ?? ''}
+                      onChange={e => setVol(scope, e.target.value)}
+                      type="number"
+                      placeholder={`Auto: ${computed}`}
+                      style={{ width: '100%', padding: '6px 10px', border: `1.5px solid ${hasOverride ? C.sky : C.brd}`, borderRadius: 7, fontSize: 13, fontWeight: hasOverride ? 700 : 400, color: hasOverride ? C.navy : '#94A3B8', outline: 'none', boxSizing: 'border-box', background: hasOverride ? '#EFF6FF' : C.w }}
+                    />
+                  </div>
+                  {hasOverride && (
+                    <button onClick={() => clearVol(scope)}
+                      style={{ background: '#FEE2E2', border: 'none', color: C.red, cursor: 'pointer', borderRadius: 6, width: 26, height: 26, fontSize: 12, flexShrink: 0 }}>✕</button>
+                  )}
+                  {!hasOverride && <div style={{ width: 26, flexShrink: 0 }} />}
+                </div>
+              )
+            })}
           </div>
+
         </div>
       </div>
 
       {/* Footer */}
-      <div style={{ padding: '16px 24px', borderTop: `1px solid ${C.brd}`, display: 'flex', gap: 10 }}>
+      <div style={{ padding: '14px 24px', borderTop: `1px solid ${C.brd}`, display: 'flex', gap: 10 }}>
         <button onClick={() => onDelete(segKey, idx)}
-          style={{ padding: '10px 16px', background: '#FEE2E2', color: C.red, border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer', flexShrink: 0 }}>
+          style={{ padding: '10px 14px', background: '#FEE2E2', color: C.red, border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer', flexShrink: 0 }}>
           🗑 Eliminar
         </button>
         <button onClick={onClose}
-          style={{ flex: 1, padding: '10px 0', background: '#F1F5F9', color: '#475569', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
+          style={{ flex: 1, padding: '10px 0', background: '#F1F5F9', color: '#475569', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
           Cancelar
         </button>
-        <button onClick={() => onSave(segKey, idx, local)}
-          style={{ flex: 1, padding: '10px 0', background: C.navy, color: '#fff', border: 'none', borderRadius: 8, fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
+        <button onClick={handleSave}
+          style={{ flex: 1, padding: '10px 0', background: C.navy, color: '#fff', border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
           ✅ Guardar
         </button>
       </div>
@@ -312,9 +368,30 @@ export default function AdminPage() {
 
   const mutate = (fn: (d: any) => void) => setData((p: any) => { const n = JSON.parse(JSON.stringify(p)); fn(n); return n })
 
+  const computeAllVols = (seg: string, idx: number) => {
+    const entry = data.precios_competidores[seg]?.[idx]
+    if (!entry) return {}
+    const trimKey = ((entry.modelo || '') + ' ' + (entry.trim || '')).trim()
+    const brand = (entry.marca || '').toUpperCase()
+    const otherTrims = (data.precios_competidores[seg] || []).filter((_: any, i: number) => i !== idx && _.modelo === entry.modelo).map((x: any) => x.trim || '')
+    const [dataKey] = SEG_DATA[seg] || []
+    if (!dataKey) return {}
+    const section = data[dataKey] || {}
+    const pm = section.prov_marcas || {}
+    const PROVS_LIST = ['PICHINCHA','GUAYAS','MANABÍ','EL ORO']
+    const g = (rows: any[]) => (rows || []).find((r: any) => r.year === '2026') || {}
+    const vols: Record<string,number> = {}
+    vols['NACIONAL'] = computeVolAdmin(g(section.NACIONAL), brand, trimKey, otherTrims)
+    const zo: Record<string,any> = { year:'2026' }
+    PROVS_LIST.forEach(p => { Object.entries(g(pm[p])).forEach(([k,v]) => { if(k!=='year') zo[k]=(zo[k]||0)+((v as number)||0) }) })
+    vols['ZONA ORGU'] = computeVolAdmin(zo, brand, trimKey, otherTrims)
+    PROVS_LIST.forEach(p => { vols[p] = computeVolAdmin(g(pm[p]), brand, trimKey, otherTrims) })
+    return vols
+  }
+
   const onBubbleClick = (m: any, seg: string, idx: number) => {
     const entry = data.precios_competidores[seg][idx]
-    setDrawer({ entry, segKey: seg, idx })
+    setDrawer({ entry, segKey: seg, idx, computedVols: computeAllVols(seg, idx) } as any)
   }
 
   const onDrawerSave = (segKey: string, idx: number, updated: any) => {
@@ -455,7 +532,7 @@ export default function AdminPage() {
                 <div style={{ fontSize: 12, fontWeight: 700, color: C.mut, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10, marginTop: 8 }}>Todas las entradas de este segmento</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8 }}>
                   {(data.precios_competidores[activeSeg] || []).map((e: any, i: number) => (
-                    <button key={i} onClick={() => setDrawer({ entry: e, segKey: activeSeg, idx: i })}
+                    <button key={i} onClick={() => setDrawer({ entry: e, segKey: activeSeg, idx: i, computedVols: computeAllVols(activeSeg, i) } as any)}
                       style={{ background: e.precio ? '#EFF6FF' : '#FFFBEB', border: `1.5px solid ${e.precio ? C.sky : C.yellow}`, borderRadius: 10, padding: '8px 14px', fontSize: 12, cursor: 'pointer', textAlign: 'left' }}>
                       <span style={{ fontWeight: 700, color: C.navy }}>{e.marca}</span>
                       <span style={{ color: '#475569' }}> {e.modelo}</span>
@@ -535,7 +612,7 @@ export default function AdminPage() {
       {drawer && (
         <>
           <div onClick={() => setDrawer(null)} style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.4)', zIndex: 999 }} />
-          <EditDrawer entry={drawer.entry} segKey={drawer.segKey} idx={drawer.idx}
+          <EditDrawer entry={drawer.entry} segKey={drawer.segKey} idx={drawer.idx} computedVols={(drawer as any).computedVols}
             onSave={onDrawerSave} onDelete={onDrawerDelete} onClose={() => setDrawer(null)} />
         </>
       )}

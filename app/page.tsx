@@ -1012,7 +1012,7 @@ function T4({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
@@ -1233,7 +1233,7 @@ function T5({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1300,7 +1300,7 @@ function T5({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1494,7 +1494,7 @@ function T6({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1561,7 +1561,7 @@ function T6({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1822,7 +1822,7 @@ function T7({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1892,7 +1892,7 @@ function T7({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2169,7 +2169,7 @@ function T8({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2241,7 +2241,7 @@ function T8({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2596,7 +2596,7 @@ function T10({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2665,7 +2665,7 @@ function T10({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2952,7 +2952,7 @@ function T11({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -3023,7 +3023,7 @@ function T11({ d }: { d: any }) {
             const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
             if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
