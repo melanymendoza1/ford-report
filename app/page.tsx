@@ -1009,7 +1009,7 @@ function T4({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
@@ -1228,7 +1228,7 @@ function T5({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1290,7 +1290,7 @@ function T5({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1479,7 +1479,7 @@ function T6({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1541,7 +1541,7 @@ function T6({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1797,7 +1797,7 @@ function T7({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1862,7 +1862,7 @@ function T7({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2134,7 +2134,7 @@ function T8({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2201,7 +2201,7 @@ function T8({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2551,7 +2551,7 @@ function T10({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2615,7 +2615,7 @@ function T10({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2897,7 +2897,7 @@ function T11({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2963,7 +2963,7 @@ function T11({ d }: { d: any }) {
             const words = tNorm.split(' ').filter((w: string) => w.length > 1)
             if (words.length > 0 && words.every((w: string) => kNorm.includes(w))) vol += ((v as number) || 0)
           })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol }
+          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: vol > 0 ? vol : b.v26 }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
