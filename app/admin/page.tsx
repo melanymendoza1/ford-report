@@ -121,7 +121,8 @@ function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
     const models = bPrices.filter((p: any) => p.precio != null).map((p: any) => {
       const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
       const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
-      const vol = computeVol(r26, brand, trimKey, others)
+      const rawVol = computeVol(r26, brand, trimKey, others)
+      const vol = (p as any).vol_override?.[scope] != null ? (p as any).vol_override[scope] : rawVol
       return { name: trimKey, price: Number(p.precio), vol, idx: prices.indexOf(p) }
     })
     const totalVol = (r26[brand] as number) || 0
@@ -515,9 +516,10 @@ export default function AdminPage() {
                 </div>
                 <button onClick={() => {
                   const seg = activeSeg
-                  mutate(d => d.precios_competidores[seg].push({ marca: '', modelo: '', trim: '', combustible: 'Gasolina', precio: null }))
-                  const idx = data.precios_competidores[seg].length
-                  setDrawer({ entry: { marca: '', modelo: '', trim: '', combustible: 'Gasolina', precio: null }, segKey: seg, idx })
+                  const newEntry = { marca: '', modelo: '', trim: '', combustible: 'Gasolina', precio: null }
+                  const newIdx = (data.precios_competidores[seg] || []).length
+                  mutate((d:any) => { if (!d.precios_competidores[seg]) d.precios_competidores[seg]=[]; d.precios_competidores[seg].push({...newEntry}) })
+                  setDrawer({ entry: newEntry, segKey: seg, idx: newIdx, computedVols: {} } as any)
                 }}
                   style={{ padding: '8px 18px', background: C.sky, color: C.w, border: 'none', borderRadius: 8, fontSize: 13, fontWeight: 700, cursor: 'pointer' }}>
                   + Nueva burbuja
