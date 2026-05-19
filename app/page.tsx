@@ -2403,7 +2403,7 @@ function T11({ d }: { d: any }) {
     return Object.keys(activeFilters).filter(b => activeFilters[b]?.length > 0)
       .map(b => ({ brand: b, v26: getFilteredTotal(b, '2026'), v25: getFilteredTotal(b, '2025') }))
       .filter(x => x.v26 > 0).sort((a, b) => b.v26 - a.v26)
-  }, [scope, rows)
+  }, [scope, rows])
 
   const top10 = filteredBrands.slice(0, 10)
   const maxV = Math.max(...top10.map(b => b.v26), 1)
