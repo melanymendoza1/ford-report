@@ -6472,14 +6472,30 @@
         "modelo": "Pilot",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 106000
+        "precio": 106000,
+        "vol_override": {
+          "NACIONAL": 4,
+          "PICHINCHA": 3,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0,
+          "ZONA ORGU": 3
+        }
       },
       {
         "marca": "BMW",
         "modelo": "X5",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 119999
+        "precio": 119999,
+        "vol_override": {
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
+        }
       }
     ],
     "Pick up TM": [
@@ -6576,21 +6592,42 @@
         "modelo": "1500",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 72999
+        "precio": 72999,
+        "vol_override": {
+          "NACIONAL": 93,
+          "PICHINCHA": 37,
+          "GUAYAS": 38,
+          "MANABÍ": 2,
+          "EL ORO": 8,
+          "ZONA ORGU": 79
+        }
       },
       {
         "marca": "Chevrolet",
         "modelo": "Silverado",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 91499
+        "precio": 91499,
+        "vol_override": {
+          "NACIONAL": 23,
+          "PICHINCHA": 3,
+          "GUAYAS": 8,
+          "MANABÍ": 1,
+          "ZONA ORGU": 12
+        }
       },
       {
         "marca": "Jeep",
         "modelo": "GLADIATOR",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 135990
+        "precio": 135990,
+        "vol_override": {
+          "NACIONAL": 12,
+          "PICHINCHA": 5,
+          "GUAYAS": 1,
+          "ZONA ORGU": 6
+        }
       },
       {
         "marca": "Toyota",
