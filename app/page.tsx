@@ -398,6 +398,8 @@ function T1({ d }: { d: any }) {
   const [scope, setScope] = useState('NACIONAL')
   const ytdM = (d.mercado_ytd || []).filter((r: any) => r.cat !== 'Total general')
   const ytdF = (d.ford_ytd || []) as any[]
+  const nacM = (d.mercado_ytd_nacional || []).filter((r: any) => r.cat !== 'Total general')
+  const nacF = (d.ford_ytd_nacional || []) as any[]
   const provOrder = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
   const provs = provOrder.map(p => (d.provincias_ytd || []).find((r: any) => r.prov === p)).filter(Boolean)
   const fProvs = d.ford_provincias_ytd || []
@@ -407,8 +409,8 @@ function T1({ d }: { d: any }) {
   // Build data based on scope
   const getScopeData = () => {
     if (scope === 'NACIONAL') {
-      return ytdM.map((r: any) => {
-        const f = ytdF.find((fr: any) => fr.cat === r.cat) || {} as any
+      return nacM.map((r: any) => {
+        const f = nacF.find((fr: any) => fr.cat === r.cat) || {} as any
         return { cat: r.cat, ind25: r.ytd2025, ind26: r.ytd2026, ford25: f.ytd2025 || 0, ford26: f.ytd2026 || 0 }
       })
     }
