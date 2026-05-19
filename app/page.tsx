@@ -2490,6 +2490,8 @@ function T11({ d }: { d: any }) {
   const xltV25 = (() => { let t=0; const r=nacRows.find((x:any)=>x.year==='2025')||{} as any; Object.entries(r).forEach(([k,v])=>{ if(k!=='year'&&k!=='FORD'&&!k.includes(' . ')&&(k.toUpperCase().includes('F150 XLT')||k.toUpperCase().includes('F-150 XLT'))&&v) t+=((v as number)||0) }); return t })()
   const lpV26 = (() => { let t=0; const r=nacRows.find((x:any)=>x.year==='2026')||{} as any; const terms=['F150 LARIAT','F150 PLATINUM','F-150 LARIAT','F-150 PLATINUM']; Object.entries(r).forEach(([k,v])=>{ if(k!=='year'&&k!=='FORD'&&!k.includes(' . ')&&terms.some(tt=>k.toUpperCase().includes(tt.toUpperCase()))&&v) t+=((v as number)||0) }); return t })()
   const lpV25 = (() => { let t=0; const r=nacRows.find((x:any)=>x.year==='2025')||{} as any; const terms=['F150 LARIAT','F150 PLATINUM','F-150 LARIAT','F-150 PLATINUM']; Object.entries(r).forEach(([k,v])=>{ if(k!=='year'&&k!=='FORD'&&!k.includes(' . ')&&terms.some(tt=>k.toUpperCase().includes(tt.toUpperCase()))&&v) t+=((v as number)||0) }); return t })()
+  const allV26 = xltV26 + lpV26
+  const allV25 = xltV25 + lpV25
 
   return <>
     <Hd tag="Pick Up Full Size" title="Análisis de marcas · F-150" />
@@ -2592,9 +2594,7 @@ function T11({ d }: { d: any }) {
       return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
     })()}
   </>
-}  const allV26 = xltV26 + lpV26
-  const allV25 = xltV25 + lpV25
-  
+}
 
 function T12({ d }: { d: any }) {
   const ytdF = (d.ford_ytd || []) as any[]
