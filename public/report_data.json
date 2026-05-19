@@ -6375,7 +6375,15 @@
         "modelo": "CX90",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 64999
+        "precio": 64999,
+        "vol_override": {
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Kia",
@@ -6389,7 +6397,12 @@
         "modelo": "Palisade",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 79999
+        "precio": 79999,
+        "vol_override": {
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0
+        }
       },
       {
         "marca": "Subaru",
