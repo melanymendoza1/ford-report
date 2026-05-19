@@ -1113,9 +1113,7 @@ function T5({ d }: { d: any }) {
       if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
         // Provincial format: BRAND . MODEL
         if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-      } else if (scope === 'NACIONAL' && !k.includes(' . ')) {
-        // Nacional format: raw model names — match against filter terms
-        // Skip other brand names (short uppercase words)
+      } else if (!k.includes(' . ')) {
         const isBrandKey = k === k.toUpperCase() && k.length < 15 && !k.includes(' AC ') && !k.includes(' 5P')
         if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
@@ -1378,8 +1376,7 @@ function T6({ d }: { d: any }) {
       if (k === 'year' || k === brand) return
       if (k.includes(' . ') && k.startsWith(brand + ' . ')) {
         if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-      } else if (scope === 'NACIONAL' && !k.includes(' . ')) {
-        // Skip brand-level keys (short uppercase names) — only sum trim-level keys
+      } else if (!k.includes(' . ')) {
         const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
         if (!isBrandKey && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       }
@@ -1649,7 +1646,7 @@ function T7({ d }: { d: any }) {
     let total = 0
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
-      if (scope !== 'NACIONAL' && k.includes(' . ') && k.startsWith(brand + ' . ')) {
+      if (k.includes(' . ') && k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) {
         if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       } else if (!k.includes(' . ')) {
         const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
@@ -1682,10 +1679,20 @@ function T7({ d }: { d: any }) {
     Object.keys(activeFilters).forEach(brand => {
       const terms = activeFilters[brand] || []
       if (!terms.length) return
+      const covered = new Set<string>()
       Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) {
-          total += ((v as number) || 0)
+        if (k === 'year' || k === brand || !v) return
+        if (k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) {
+          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+          if (mt.length) { total += ((v as number) || 0); mt.forEach(t => covered.add(t.toUpperCase())) }
+        }
+      })
+      Object.entries(row).forEach(([k, v]) => {
+        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
+        const isBrandOnly = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+        if (!isBrandOnly) {
+          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !covered.has(t.toUpperCase()))
+          if (mt.length) total += ((v as number) || 0)
         }
       })
     })
@@ -1696,9 +1703,19 @@ function T7({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; const covered = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (!v || !k.toUpperCase().startsWith('FORD . ')) return
+      const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+      if (mt.length) { total += ((v as number) || 0); mt.forEach(t => covered.add(t.toUpperCase())) }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (!v || k === 'year' || k === 'FORD' || k.includes(' . ')) return
+      const isBrandOnly = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+      if (!isBrandOnly) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !covered.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
@@ -1997,7 +2014,7 @@ function T8({ d }: { d: any }) {
     let total = 0
     Object.entries(row).forEach(([k, v]) => {
       if (k === 'year' || k === brand) return
-      if (scope !== 'NACIONAL' && k.includes(' . ') && k.startsWith(brand + ' . ')) {
+      if (k.includes(' . ') && k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) {
         if (terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
       } else if (!k.includes(' . ')) {
         const isBrandKey = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
@@ -2040,9 +2057,19 @@ function T8({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; const covered = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (!v || !k.toUpperCase().startsWith('FORD . ')) return
+      const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+      if (mt.length) { total += ((v as number) || 0); mt.forEach(t => covered.add(t.toUpperCase())) }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (!v || k === 'year' || k === 'FORD' || k.includes(' . ')) return
+      const isBrandOnly = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+      if (!isBrandOnly) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !covered.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
@@ -2485,9 +2512,19 @@ function T10({ d }: { d: any }) {
     if (!terms.length) return 0
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
+    let total = 0; const covered = new Set<string>()
     Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
+      if (!v || !k.toUpperCase().startsWith('FORD . ')) return
+      const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
+      if (mt.length) { total += ((v as number) || 0); mt.forEach(t => covered.add(t.toUpperCase())) }
+    })
+    Object.entries(row).forEach(([k, v]) => {
+      if (!v || k === 'year' || k === 'FORD' || k.includes(' . ')) return
+      const isBrandOnly = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
+      if (!isBrandOnly) {
+        const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !covered.has(t.toUpperCase()))
+        if (mt.length) total += ((v as number) || 0)
+      }
     })
     return total
   }
