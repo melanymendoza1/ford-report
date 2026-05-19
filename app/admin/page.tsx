@@ -333,7 +333,8 @@ export default function AdminPage() {
     const json = await res.json()
     if (!json.sha) { setLoginMsg('Token sin acceso'); return false }
     setSha(json.sha)
-    setData(JSON.parse(atob(json.content.replace(/\n/g, ''))))
+    const _b = Uint8Array.from(atob(json.content.replace(/\n/g,'')), (c:string) => c.charCodeAt(0))
+    setData(JSON.parse(new TextDecoder('utf-8').decode(_b)))
     return true
   }, [])
 
