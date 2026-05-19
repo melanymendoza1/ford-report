@@ -174,10 +174,8 @@ function BBCView({ data, seg, scope, onClickBubble }: { data: any, seg: string, 
         return <g key={b.brand}>
           <rect x={PAD.l + bi * colW + 2} y={H - PAD.b + 10} width={colW - 4} height={68} rx={6} fill={b.color} />
           <text x={cx} y={H - PAD.b + 27} textAnchor="middle" fontSize={11} fontWeight={700} fill="#fff">{b.brand}</text>
-          <text x={cx} y={H - PAD.b + 42} textAnchor="middle" fontSize={9} fill="rgba(255,255,255,0.85)">VOL: {b.totalVol}</text>
-          <text x={cx} y={H - PAD.b + 56} textAnchor="middle" fontSize={9} fill="rgba(255,255,255,0.85)">
-            {b.models.reduce((s, m) => s + m.vol, 0)} un. mapeadas
-          </text>
+          <text x={cx} y={H - PAD.b + 42} textAnchor="middle" fontSize={9} fill="rgba(255,255,255,0.9)">{(() => { const mapped = b.models.reduce((s:number,m:any)=>s+m.vol,0); return mapped === b.totalVol ? `VOL: ${mapped}` : `${mapped} / ${b.totalVol}` })()}</text>
+          <text x={cx} y={H - PAD.b + 57} textAnchor="middle" fontSize={8} fill="rgba(255,255,255,0.65)">{b.models.reduce((s:number,m:any)=>s+m.vol,0) === b.totalVol ? 'un. YTD' : 'mapeadas / total'}</text>
           {b.models.map((m, mi) => {
             const r = rScale(m.vol)
             const y = yScale(m.price)
