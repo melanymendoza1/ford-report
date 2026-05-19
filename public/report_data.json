@@ -6171,7 +6171,10 @@
         "modelo": "Corolla Cross",
         "trim": "Mid",
         "combustible": "Hibrido",
-        "precio": 34199
+        "precio": 34199,
+        "vol_override": {
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Kia",
@@ -6192,14 +6195,23 @@
         "modelo": "Tiggo 7",
         "trim": "PRO LUXURY",
         "combustible": "Hibrido",
-        "precio": 29990
+        "precio": 29990,
+        "vol_override": {
+          "MANABÍ": 0
+        }
       },
       {
         "marca": "Hyundai",
         "modelo": "Kona",
         "trim": "AC",
         "combustible": "Hibrido",
-        "precio": 31990
+        "precio": 31990,
+        "vol_override": {
+          "PICHINCHA": 23,
+          "NACIONAL": 45,
+          "GUAYAS": 12,
+          "MANABÍ": 1
+        }
       },
       {
         "marca": "Hyundai",
@@ -6220,14 +6232,10 @@
         "modelo": "Kona",
         "trim": "L",
         "combustible": "Hibrido",
-        "precio": 29999
-      },
-      {
-        "marca": "Hyundai",
-        "modelo": "Tucson",
-        "trim": "",
-        "combustible": "Hibrido",
-        "precio": 39499
+        "precio": 29999,
+        "vol_override": {
+          "GUAYAS": 13
+        }
       },
       {
         "marca": "Subaru",
@@ -6241,14 +6249,10 @@
         "modelo": "Crosstrek",
         "trim": "I-L",
         "combustible": "Hibrido",
-        "precio": 35490
-      },
-      {
-        "marca": "Suzuki",
-        "modelo": "S-Cross",
-        "trim": "GLX",
-        "combustible": "Hibrido",
-        "precio": 31990
+        "precio": 35490,
+        "vol_override": {
+          "EL ORO": 0
+        }
       },
       {
         "marca": "BYD",
@@ -6269,7 +6273,10 @@
         "modelo": "Arkana",
         "trim": "Techno",
         "combustible": "Hibrido",
-        "precio": 32990
+        "precio": 32990,
+        "vol_override": {
+          "MANABÍ": 0
+        }
       }
     ],
     "SUV  HEV 40 - 50": [
