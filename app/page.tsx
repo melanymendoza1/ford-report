@@ -995,7 +995,7 @@ function T4({ d }: { d: any }) {
       const fordModels = [{ name: fc4bbc.model || 'Escape 1.5', price: fc4bbc.price || 35990, vol: fc4bbc.v26 != null ? fc4bbc.v26 : (fordEntry?.v26 || 0) }]
       const _pcB2=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src2=['FORD',..._pcB2.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src2.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1219,7 +1219,7 @@ function T5({ d }: { d: any }) {
       const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1288,7 +1288,7 @@ function T5({ d }: { d: any }) {
       const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1483,7 +1483,7 @@ function T6({ d }: { d: any }) {
       const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1552,7 +1552,7 @@ function T6({ d }: { d: any }) {
       const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1834,7 +1834,7 @@ function T7({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -1905,7 +1905,7 @@ function T7({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -2193,7 +2193,7 @@ function T8({ d }: { d: any }) {
       const fordModels = [{ name: fmMap[sub], price: fpMap[sub], vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -2266,7 +2266,7 @@ function T8({ d }: { d: any }) {
       const fordModels = [{ name: fmMap[sub], price: fpMap[sub], vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -2632,7 +2632,7 @@ function T10({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -2702,7 +2702,7 @@ function T10({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -2990,7 +2990,7 @@ function T11({ d }: { d: any }) {
       ]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
@@ -3062,7 +3062,7 @@ function T11({ d }: { d: any }) {
       ]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
       const bbcBrands = _src.map(b => {
-        if (b.brand === 'FORD') return { brand: 'FORD', models: fordModels, totalVol: b.v26, ms: 0, color: BRAND_COLORS['FORD'] }
+        // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()

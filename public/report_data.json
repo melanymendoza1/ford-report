@@ -6160,6 +6160,13 @@
     ],
     "SUV  HEV 25 - 40": [
       {
+        "marca": "Ford",
+        "modelo": "Territory",
+        "trim": "TERRITORY TITANIUM",
+        "combustible": "Híbrido",
+        "precio": 35990
+      },
+      {
         "marca": "Toyota",
         "modelo": "Corolla Cross",
         "trim": "High",
@@ -6281,6 +6288,13 @@
     ],
     "SUV  HEV 40 - 50": [
       {
+        "marca": "Ford",
+        "modelo": "Escape",
+        "trim": "ST-LINE",
+        "combustible": "Híbrido",
+        "precio": 44990
+      },
+      {
         "marca": "Nissan",
         "modelo": "Xtrail",
         "trim": "Advance",
@@ -6377,6 +6391,13 @@
       }
     ],
     "SUV  55 - 80 explorer": [
+      {
+        "marca": "Ford",
+        "modelo": "Explorer",
+        "trim": "EXPLORER ACTIVE",
+        "combustible": "Gasolina",
+        "precio": 89990
+      },
       {
         "marca": "Mazda",
         "modelo": "CX90",
@@ -6480,6 +6501,13 @@
     ],
     "SUV  80 plus explorer": [
       {
+        "marca": "Ford",
+        "modelo": "Explorer",
+        "trim": "EXPLORER PLATINUM",
+        "combustible": "Gasolina",
+        "precio": 102000
+      },
+      {
         "marca": "Jeep",
         "modelo": "Grand Cherokee",
         "trim": "",
@@ -6526,6 +6554,13 @@
     ],
     "Pick up TM": [
       {
+        "marca": "Ford",
+        "modelo": "Ranger",
+        "trim": "RANGER XL",
+        "combustible": "Diésel",
+        "precio": 53990
+      },
+      {
         "marca": "Chevrolet",
         "modelo": "Colorado",
         "trim": "",
@@ -6562,6 +6597,13 @@
       }
     ],
     "Pick up TA": [
+      {
+        "marca": "Ford",
+        "modelo": "Ranger",
+        "trim": "RANGER XLT",
+        "combustible": "Diésel",
+        "precio": 67990
+      },
       {
         "marca": "Chevrolet",
         "modelo": "Colorado",
@@ -6613,6 +6655,13 @@
       }
     ],
     "Full size Pick up": [
+      {
+        "marca": "Ford",
+        "modelo": "F-150",
+        "trim": "XLT",
+        "combustible": "Gasolina",
+        "precio": 79990
+      },
       {
         "marca": "Ram",
         "modelo": "1500",

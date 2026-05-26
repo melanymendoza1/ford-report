@@ -116,7 +116,9 @@ function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
   const BRAND_COLORS: Record<string,string> = { FORD:'#133A7C', TOYOTA:'#CC0000', KIA:'#BA0C2F', MAZDA:'#E65100', NISSAN:'#1A1A1A', HYUNDAI:'#002C5F', CHEVROLET:'#D4AC0D', MITSUBISHI:'#E30613', SUBARU:'#1C4CA3', PEUGEOT:'#192D6E', RAM:'#8B0000', GREAT_WALL:'#1B5E20', SUZUKI:'#003087', RENAULT:'#FFCC00', BYD:'#1C3E6E', CHERY:'#0D5EAF', JEEP:'#2E7D32', BMW:'#1C69D4', HONDA:'#CC0000', NISSAN2:'#C3002F' }
   const DEF_COLORS = ['#DC2626','#059669','#D97706','#7C3AED','#0891B2','#BE185D','#4338CA','#65A30D','#0EA5E9']
 
-  return Object.keys(filters).filter(b => (filters[b] as string[]).length > 0).map((brand, bi) => {
+  const _pBrands = [...new Set(prices.filter((p: any) => p.precio != null).map((p: any) => (p.marca || '').toUpperCase()).filter(Boolean))]
+  const _bList = ['FORD', ..._pBrands.filter(b => b !== 'FORD')]
+  return _bList.map((brand, bi) => {
     const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === brand)
     const models = bPrices.filter((p: any) => p.precio != null).map((p: any) => {
       const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
@@ -128,7 +130,7 @@ function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
     const totalVol = (r26[brand] as number) || 0
     const color = BRAND_COLORS[brand] || DEF_COLORS[bi % DEF_COLORS.length]
     return { brand, models, totalVol, color }
-  }).filter(b => b.models.length > 0)
+  }).filter(b => b.models.length > 0 || b.brand === 'FORD')
 }
 
 // ── BBC Visual Component ─────────────────────────────────────────────────
