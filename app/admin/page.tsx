@@ -319,7 +319,7 @@ export default function AdminPage() {
   const [sha, setSha] = useState('')
   const [saving, setSaving] = useState(false)
   const [saveMsg, setSaveMsg] = useState('')
-  const [tab, setTab] = useState<'bbc' | 'fordcards' | 'filtros' | 'insights'>('bbc')
+  const [tab, setTab] = useState<'bbc' | 'fordcards' | 'hotlines' | 'filtros' | 'insights'>('bbc')
   const [activeSeg, setActiveSeg] = useState('SUV GAS 25 - 40')
   const [loginMsg, setLoginMsg] = useState('')
   const [drawer, setDrawer] = useState<{ entry: any, segKey: string, idx: number } | null>(null)
@@ -468,7 +468,7 @@ export default function AdminPage() {
 
       {/* Tab bar */}
       <div style={{ background: C.w, borderBottom: `1px solid ${C.brd}`, padding: '0 24px', display: 'flex' }}>
-        {[['bbc', '📊 BBC'], ['fordcards', '🔵 Ford Cards'], ['filtros', '🔧 Filtros'], ['insights', '💬 Insights']].map(([t, lbl]) => (
+        {[['bbc', '📊 BBC'], ['fordcards', '🔵 Ford Cards'], ['hotlines', '📏 Hotlines'], ['filtros', '🔧 Filtros'], ['insights', '💬 Insights']].map(([t, lbl]) => (
           <button key={t} onClick={() => setTab(t as any)}
             style={{ padding: '14px 22px', background: 'none', border: 'none', borderBottom: tab === t ? `3px solid ${C.sky}` : '3px solid transparent', color: tab === t ? C.sky : '#64748B', fontWeight: 700, fontSize: 14, cursor: 'pointer' }}>
             {lbl}
@@ -576,6 +576,21 @@ export default function AdminPage() {
           </div>
         </div>
       )}
+
+        {tab === 'hotlines' && (
+          <div style={{ padding: '24px 28px', maxWidth: 700, margin: '0 auto' }}>
+            <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: 10, padding: '12px 20px', marginBottom: 20, fontSize: 13, color: '#1E40AF' }}>Hotlines BBC: Define el rango de precio destacado en cada BBC. Ingresa el precio minimo. Ej: 45000 destaca $45K-$50K. Vacio = automatico.</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+              {Object.entries(data.bbc_hotlines || {}).map(([seg, val]: [string, any]) => (
+                <div key={seg} style={{ display:'flex', alignItems:'center', gap:16, background:C.w, padding:'14px 20px', borderRadius:10, border:'1px solid '+C.brd }}>
+                  <div style={{ flex:1, fontWeight:700, color:C.dark, fontSize:14 }}>{SEG_LABELS[seg] || seg}</div>
+                  <input type='number' value={val??''} placeholder='Auto' onChange={e => mutate((d:any)=>{ d.bbc_hotlines[seg] = e.target.value ? Number(e.target.value) : null })} style={{ width:110, padding:'8px 10px', border:'1.5px solid '+(val!=null?C.sky:C.brd), borderRadius:7, fontSize:15, fontWeight:val!=null?700:400, color:val!=null?C.navy:'#94A3B8', outline:'none', textAlign:'right' as any }} />
+                  <div style={{ fontSize:12, color:C.mut, minWidth:120 }}>{val!=null ? '$'+Number(val).toLocaleString()+' - $'+(Number(val)+5000).toLocaleString() : 'Auto'}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {tab === 'fordcards' && (
           <div style={{ padding: '24px 28px', maxWidth: 1100, margin: '0 auto' }}>

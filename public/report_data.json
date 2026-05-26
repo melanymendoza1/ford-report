@@ -5976,13 +5976,13 @@
     {
       "modelo": "Territory",
       "trim": "Titanium plus",
-      "combustible": "HÃ­brido",
+      "combustible": "Híbrido",
       "precio": 35990
     },
     {
       "modelo": "Escape",
       "trim": "ST-Line",
-      "combustible": "HÃ­brido",
+      "combustible": "Híbrido",
       "precio": 44990
     },
     {
@@ -6018,13 +6018,13 @@
     {
       "modelo": "Ranger",
       "trim": "XL",
-      "combustible": "DiÃ©sel",
+      "combustible": "Diésel",
       "precio": 53990
     },
     {
       "modelo": "Ranger",
       "trim": "XLT",
-      "combustible": "DiÃ©sel",
+      "combustible": "Diésel",
       "precio": 67990
     },
     {
@@ -6340,6 +6340,13 @@
     ],
     "SUV  55 - 80 everest": [
       {
+        "marca": "Ford",
+        "modelo": "Everest Active",
+        "trim": "EVEREST",
+        "combustible": "Diésel",
+        "precio": 69990
+      },
+      {
         "marca": "Chevrolet",
         "modelo": "Trailblazer",
         "trim": "High country",
@@ -6421,6 +6428,19 @@
     ],
     "SUV  80 plus expedition": [
       {
+        "marca": "Ford",
+        "modelo": "Expedition",
+        "trim": "EXPEDITION",
+        "combustible": "Gasolina",
+        "precio": 129990,
+        "vol_override": {
+          "NACIONAL": 4,
+          "PICHINCHA": 1,
+          "GUAYAS": 2,
+          "ZONA ORGU": 3
+        }
+      },
+      {
         "marca": "Toyota",
         "modelo": "Land Cruiser Prado 250",
         "trim": "AC",
@@ -6430,6 +6450,8 @@
           "NACIONAL": 49,
           "PICHINCHA": 24,
           "GUAYAS": 6,
+          "MANABÍ": 0,
+          "EL ORO": 0,
           "ZONA ORGU": 30
         }
       },
@@ -6447,8 +6469,12 @@
         "combustible": "Gasolina",
         "precio": 131999,
         "vol_override": {
+          "NACIONAL": 35,
+          "PICHINCHA": 14,
+          "GUAYAS": 15,
           "MANABÍ": 5,
-          "EL ORO": 1
+          "EL ORO": 1,
+          "ZONA ORGU": 35
         }
       }
     ],
@@ -6756,9 +6782,6 @@
       "MAZDA": [
         "CX-90",
         "CX90"
-      ],
-      "HONDA": [
-        "PILOT"
       ],
       "KIA": [
         "SORENTO"
@@ -7865,21 +7888,21 @@
   ],
   "insights": {
     "T1_industria": [
-      "Ford crece 1.32x mÃ¡s rÃ¡pido que la industria â ganamos share mientras el mercado se expande",
-      "ProyecciÃ³n 2026: ~2.070 unidades Ford Â· Mercado ~132K si mantenemos el ritmo actual"
+      "Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande",
+      "Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual"
     ],
     "T2_combustibles": [
       "BSUV y Compact concentran el 80% del volumen SUV",
       "Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition"
     ],
     "T3_suv_segmentos": [
-      "Escape 1.5 ya no se estÃ¡ importando. El volumen residual son unidades de inventario",
-      "La estrategia de Ford apunta al hÃ­brido con Territory en este rango de precio"
+      "Escape 1.5 ya no se está importando. El volumen residual son unidades de inventario",
+      "La estrategia de Ford apunta al híbrido con Territory en este rango de precio"
     ],
     "T4_gas_25_40": [],
     "T5_hev_25_40": [
-      "Territory es el modelo que cambiÃ³ el juego. 201 unidades en su primer Q1 completo",
-      "A $35,990 en HEV, captura exactamente donde el mercado estÃ¡ migrando"
+      "Territory es el modelo que cambió el juego. 201 unidades en su primer Q1 completo",
+      "A $35,990 en HEV, captura exactamente donde el mercado está migrando"
     ],
     "T6_hev_40_50": [
       "Territory a $35,990 compite directamente con Corolla Cross ($35,999) y Niro ($28,499)",
@@ -7887,7 +7910,7 @@
     ],
     "T7_everest": [
       "Escape ST-Line cae -50%. Territory captura volumen en el rango inferior",
-      "Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicaciÃ³n"
+      "Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación"
     ],
     "T7_explorer_active": [
       "Escape ST-Line a $46,990 compite con Xtrail ($43,990-$48,990) y RAV4 ($45,999-$51,999)",
@@ -7906,7 +7929,7 @@
       "Ford compite en Mid Size con Ranger y en Full Size con F-150"
     ],
     "T11_ranger_xlt": [
-      "Ranger XL compite en transmisiÃ³n manual, Ranger XLT en automÃ¡tica",
+      "Ranger XL compite en transmisión manual, Ranger XLT en automática",
       "Dos mercados distintos con competidores diferentes"
     ],
     "T11_fullsize": [
@@ -7914,7 +7937,7 @@
       "F-150 Lariat y Platinum compiten contra Silverado, Gladiator, Tundra y Sierra en premium"
     ],
     "T12_portafolio": [
-      "Ford cierra Abril 2026 con +59% de crecimiento â 1.32x mÃ¡s rÃ¡pido que la industria y ganando market share",
+      "Ford cierra Abril 2026 con +59% de crecimiento — 1.32x más rápido que la industria y ganando market share",
       "Territory con 267 un. en 4 meses redefine el portafolio: representa el 38% del volumen total Ford"
     ]
   },
@@ -7929,21 +7952,21 @@
     "T5_hev_25_40": {
       "model": "Territory Titanium Plus",
       "price": 35990,
-      "fuel": "HÃ­brido",
+      "fuel": "Híbrido",
       "v26": null,
       "v25": null
     },
     "T6_hev_40_50": {
       "model": "Escape ST-Line",
       "price": 44990,
-      "fuel": "HÃ­brido",
+      "fuel": "Híbrido",
       "v26": null,
       "v25": null
     },
     "T7_everest": {
       "model": "Everest Active",
       "price": 69990,
-      "fuel": "DiÃ©sel",
+      "fuel": "Diésel",
       "v26": null,
       "v25": null
     },
@@ -7964,14 +7987,14 @@
     "T10_ranger_xl": {
       "model": "Ranger XL",
       "price": 53990,
-      "fuel": "DiÃ©sel",
+      "fuel": "Diésel",
       "v26": null,
       "v25": null
     },
     "T11_ranger_xlt": {
       "model": "Ranger XLT",
       "price": 67990,
-      "fuel": "DiÃ©sel",
+      "fuel": "Diésel",
       "v26": null,
       "v25": null
     },
@@ -7982,5 +8005,396 @@
       "v26": null,
       "v25": null
     }
+  },
+  "pick_diesel": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "CHEVROLET": 148,
+        "COLORADO LT AC 2.8 CD 4X4 TM DIESEL": 30,
+        "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 177,
+        "TOYOTA": 46,
+        "HILUX 2.4 CD 4X4 TM DIESEL": 205,
+        "LC 79 T DSL-E AC 4.5 CD 4X4 TM DIESEL": 1,
+        "MAZDA": 13,
+        "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 35,
+        "FORD": 2,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 6,
+        "ZXAUTO": 1,
+        "GRAND LION XTD AC 2.3 CD 4X4 TM DIESEL": 1,
+        "NISSAN": 4,
+        "FRONTIER XE AC 2.5 CD 4X4 TM DIESEL": 2,
+        "Total general": 218,
+        "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 35,
+        "COLORADO LTZ AC 2.8 CD 4X4 TA DIESEL": 74,
+        "COLORADO Z71 AC 2.8 CD 4X4 TA DIESEL": 39,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 2,
+        "HILUX 2.8 CD 4X4 TA DIESEL": 46,
+        "FRONTIER PRO-4X AC 2.5 CD 4X4 TA DIESEL": 4,
+        "MITSUBISHI": 1,
+        "L200 GLS PLUS AC 2.4 CD 4X4 TA DIESEL": 1,
+        "NEW BT-50 AC 3.0 CD 4X4 TA DIESEL": 13,
+        "GREAT WALL": 4,
+        "POER AC 2.0 CD 4X4 TA DIESEL": 4
+      },
+      {
+        "year": "2025",
+        "CHEVROLET": 48,
+        "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 454,
+        "TOYOTA": 14,
+        "HILUX 2.4 CD 4X4 TM DIESEL": 195,
+        "MAZDA": 80,
+        "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 80,
+        "FORD": 39,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 51,
+        "KIA": 2,
+        "TASMAN LX AC 2.2 CD 4X4 TM DIESEL": 1,
+        "ZXAUTO": 1,
+        "GRAND LION XTD AC 2.3 CD 4X4 TM DIESEL": 1,
+        "Total general": 140,
+        "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 48,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 39,
+        "HILUX 2.8 CD 4X4 TA DIESEL": 14,
+        "NISSAN": 16,
+        "FRONTIER PRO-4X AC 2.5 CD 4X4 TA DIESEL": 4,
+        "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 12,
+        "MITSUBISHI": 17,
+        "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 17,
+        "TASMAN X-LINE AC 2.2 CD 4X4 TA DIESEL": 1,
+        "TASMAN X-PRO AC 2.2 CD 4X4 TA DIESEL": 1,
+        "GREAT WALL": 4,
+        "POER AC 2.0 CD 4X4 TA DIESEL": 4
+      },
+      {
+        "year": "2026",
+        "TOYOTA": 18,
+        "HILUX 2.4 CD 4X4 TM DIESEL": 90,
+        "MAZDA": 58,
+        "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 58,
+        "FORD": 39,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 32,
+        "KIA": 10,
+        "TASMAN LX AC 2.2 CD 4X4 TM DIESEL": 9,
+        "Total general": 204,
+        "CHEVROLET": 88,
+        "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 40,
+        "COLORADO WT AC 2.8 CD 4X4 TA DIESEL": 48,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 39,
+        "HILUX 2.8 CD 4X4 TA DIESEL": 18,
+        "NISSAN": 12,
+        "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 12,
+        "ISUZU": 27,
+        "ISUZU PICKUP RBD PLUS AC 3.0 CD 4X4 TA DIESEL": 21,
+        "ISUZU RBD AC 3.0 5P 4X4 TA DIESEL": 6,
+        "MITSUBISHI": 8,
+        "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 8,
+        "TASMAN LX AC 2.2 CD 4X4 TA DIESEL": 10,
+        "SINOTRUK": 2,
+        "BOLDEN OFF ROAD AC 2.0 CD 4X4 TA DIESEL": 2
+      }
+    ],
+    "FORD": [
+      {
+        "year": "2024",
+        "FORD": 8,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 6,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 2,
+        "Total general": 8
+      },
+      {
+        "year": "2025",
+        "FORD": 90,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 51,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 39,
+        "Total general": 90
+      },
+      {
+        "year": "2026",
+        "FORD": 71,
+        "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 32,
+        "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 39,
+        "Total general": 71
+      }
+    ],
+    "prov_marcas": {
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 4,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 5,
+          "TOYOTA": 2,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 3,
+          "MAZDA": 1,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 1,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 3,
+          "COLORADO Z71 AC 2.8 CD 4X4 TA DIESEL": 1,
+          "FORD": 1,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 1
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 2,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 23,
+          "TOYOTA": 1,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 3,
+          "FORD": 2,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 2,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 2,
+          "NISSAN": 1,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 1
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 4,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 4,
+          "FORD": 2,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 3,
+          "MAZDA": 3,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 3,
+          "KIA": 1,
+          "TASMAN LX AC 2.2 CD 4X4 TM DIESEL": 1,
+          "CHEVROLET": 7,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 2,
+          "COLORADO WT AC 2.8 CD 4X4 TA DIESEL": 5,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 2,
+          "NISSAN": 1,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 1,
+          "ISUZU": 1
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 4,
+          "COLORADO LT AC 2.8 CD 4X4 TM DIESEL": 2,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 2,
+          "TOYOTA": 1,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 3,
+          "COLORADO LTZ AC 2.8 CD 4X4 TA DIESEL": 1,
+          "COLORADO Z71 AC 2.8 CD 4X4 TA DIESEL": 3
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 24,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 24,
+          "TOYOTA": 1,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 1
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 2,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 2,
+          "FORD": 6,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 2,
+          "CHEVROLET": 7,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 5,
+          "COLORADO WT AC 2.8 CD 4X4 TA DIESEL": 2,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 6,
+          "ISUZU": 2
+        }
+      ],
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "CHEVROLET": 57,
+          "COLORADO LT AC 2.8 CD 4X4 TM DIESEL": 12,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 105,
+          "TOYOTA": 20,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 68,
+          "LC 79 T DSL-E AC 4.5 CD 4X4 TM DIESEL": 1,
+          "MAZDA": 6,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 17,
+          "FORD": 5,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 5,
+          "NISSAN": 2,
+          "FRONTIER XE AC 2.5 CD 4X4 TM DIESEL": 2,
+          "ZXAUTO": 1,
+          "GRAND LION XTD AC 2.3 CD 4X4 TM DIESEL": 1,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 9,
+          "COLORADO LTZ AC 2.8 CD 4X4 TA DIESEL": 32,
+          "COLORADO Z71 AC 2.8 CD 4X4 TA DIESEL": 16,
+          "FRONTIER PRO-4X AC 2.5 CD 4X4 TA DIESEL": 2,
+          "GREAT WALL": 1
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 16,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 245,
+          "TOYOTA": 3,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 71,
+          "MAZDA": 68,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 68,
+          "FORD": 18,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 30,
+          "KIA": 2,
+          "TASMAN LX AC 2.2 CD 4X4 TM DIESEL": 1,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 16,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 18,
+          "NISSAN": 5,
+          "FRONTIER PRO-4X AC 2.5 CD 4X4 TA DIESEL": 2,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 3,
+          "MITSUBISHI": 10,
+          "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 10,
+          "GREAT WALL": 4
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 4,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 37,
+          "MAZDA": 35,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 35,
+          "FORD": 8,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 9,
+          "KIA": 5,
+          "TASMAN LX AC 2.2 CD 4X4 TM DIESEL": 4,
+          "CHEVROLET": 18,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 11,
+          "COLORADO WT AC 2.8 CD 4X4 TA DIESEL": 7,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 8,
+          "NISSAN": 5,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 5,
+          "MITSUBISHI": 1,
+          "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 1,
+          "ISUZU": 8
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "TOYOTA": 6,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 28,
+          "CHEVROLET": 38,
+          "COLORADO LT AC 2.8 CD 4X4 TM DIESEL": 7,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 14,
+          "MAZDA": 6,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 4,
+          "FORD": 1,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 1,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 6,
+          "COLORADO LTZ AC 2.8 CD 4X4 TA DIESEL": 25,
+          "COLORADO Z71 AC 2.8 CD 4X4 TA DIESEL": 7,
+          "MITSUBISHI": 1,
+          "L200 GLS PLUS AC 2.4 CD 4X4 TA DIESEL": 1,
+          "GREAT WALL": 2
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 4,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 21,
+          "CHEVROLET": 15,
+          "D-MAX CRDI PREMIER AC 2.5 CD 4X4 TM DIESEL": 36,
+          "MAZDA": 4,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 4,
+          "FORD": 12,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 3,
+          "ZXAUTO": 1,
+          "GRAND LION XTD AC 2.3 CD 4X4 TM DIESEL": 1,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 15,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 12,
+          "NISSAN": 5,
+          "FRONTIER PRO-4X AC 2.5 CD 4X4 TA DIESEL": 1,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 4,
+          "MITSUBISHI": 3,
+          "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 3
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 5,
+          "HILUX 2.4 CD 4X4 TM DIESEL": 11,
+          "MAZDA": 12,
+          "NEW BT-50 AC 3.0 CD 4X4 TM DIESEL": 12,
+          "FORD": 9,
+          "RANGER XL AC 2.0 CD 4X4 TM DIESEL": 7,
+          "CHEVROLET": 23,
+          "COLORADO HIGH COUNTRY AC 2.8 CD 4X4 TA DIESEL": 9,
+          "COLORADO WT AC 2.8 CD 4X4 TA DIESEL": 14,
+          "RANGER XLT AC 2.0 CD 4X4 TA DIESEL": 9,
+          "NISSAN": 5,
+          "FRONTIER SE AC 2.5 CD 4X4 TA DIESEL": 5,
+          "MITSUBISHI": 2,
+          "TRITON GLS AC 2.4 CD 4X4 TA DIESEL": 2,
+          "KIA": 4,
+          "ISUZU": 2
+        }
+      ]
+    },
+    "por_provincia": [
+      {
+        "label": "EL ORO",
+        "ytd2024": 7,
+        "ytd2025": 25,
+        "ytd2026": 4
+      },
+      {
+        "label": "GUAYAS",
+        "ytd2024": 54,
+        "ytd2025": 65,
+        "ytd2026": 30
+      },
+      {
+        "label": "MANABÍ",
+        "ytd2024": 9,
+        "ytd2025": 28,
+        "ytd2026": 11
+      },
+      {
+        "label": "PICHINCHA",
+        "ytd2024": 211,
+        "ytd2025": 415,
+        "ytd2026": 85
+      }
+    ]
+  },
+  "pickup_cat_ytd": [
+    {
+      "seg": "COMPACT PICK UPS",
+      "ytd2024": 142,
+      "ytd2025": 190,
+      "ytd2026": 181
+    },
+    {
+      "seg": "FULL SIZE PICK UPS",
+      "ytd2024": 229,
+      "ytd2025": 204,
+      "ytd2026": 314
+    },
+    {
+      "seg": "MID SIZE PICK UPS",
+      "ytd2024": 4881,
+      "ytd2025": 3984,
+      "ytd2026": 5212
+    }
+  ],
+  "pickup_cat_nacional": [
+    {
+      "seg": "MID SIZE PICK UPS",
+      "ytd2024": 671,
+      "ytd2025": 918,
+      "ytd2026": 393
+    },
+    {
+      "seg": "FULL SIZE PICK UPS",
+      "ytd2024": 302,
+      "ytd2025": 220,
+      "ytd2026": 355
+    },
+    {
+      "seg": "COMPACT PICK UPS",
+      "ytd2024": 0,
+      "ytd2025": 0,
+      "ytd2026": 0
+    }
+  ],
+  "bbc_hotlines": {
+    "SUV GAS 25 - 40": null,
+    "SUV  HEV 25 - 40": null,
+    "SUV  HEV 40 - 50": 45000,
+    "SUV  55 - 80 everest": null,
+    "SUV  55 - 80 explorer": 80000,
+    "SUV  80 plus expedition": null,
+    "SUV  80 plus explorer": null,
+    "Pick up TM": null,
+    "Pick up TA": null,
+    "Full size Pick up": null
   }
 }

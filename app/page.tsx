@@ -114,7 +114,7 @@ function SubTab({ tabs, active, onChange }: { tabs: { id: string, label: string 
 }
 
 /* BBC — Bubble Brand Chart */
-function BBC({ brands, scopeLabel }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string }) {
+function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string, hotMin?: number }) {
   if (!brands.length) return null
   const allModels = brands.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
   const maxVol = Math.max(...allModels.map(m => m.vol), 1)
@@ -142,7 +142,7 @@ function BBC({ brands, scopeLabel }: { brands: { brand: string, models: { name: 
     priceBuckets[bucket] = (priceBuckets[bucket] || 0) + 1
   })
   const hotBucket = Object.entries(priceBuckets).sort((a, b) => b[1] - a[1])[0]
-  const hotRange = hotBucket ? Number(hotBucket[0]) : -1
+  const hotRange = hotMin != null ? hotMin : (hotBucket ? Number(hotBucket[0]) : -1)
 
   const fmtPrice = (p: number) => `$${p.toLocaleString('es-EC')}`
 
@@ -1264,7 +1264,7 @@ function T5({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={d.bbc_hotlines?.['SUV  HEV 25 - 40'] ?? undefined} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
@@ -1332,7 +1332,7 @@ function T5({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={d.bbc_hotlines?.['SUV  HEV 40 - 50'] ?? 45000} scopeLabel={scopeLabel} />
     })()}
 
     <Ins items={[...(d.insights?.['T6_hev_40_50'] || [])]} />
