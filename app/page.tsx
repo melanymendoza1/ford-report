@@ -320,7 +320,7 @@ function BrandRanking({ data, dataKey, wlKey, fordModel }: { data: any, dataKey:
 export default function Page() {
   const [data, setData] = useState<ReportData | null>(null)
   const [tab, setTab] = useState('ind')
-  useEffect(() => { fetch('/report_data.json').then(r => r.json()).then(setData) }, [])
+  useEffect(() => { fetch(`/report_data.json?v=${Date.now()}`).then(r => r.json()).then(setData) }, [])
   if (!data) return <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100vh', background: C.bg }}><div style={{ fontSize: 16, color: C.navy, fontWeight: 600 }}>Cargando reporte…</div></div>
 
   const ytdM = ((data as any).mercado_ytd_nacional || []) as any[]
