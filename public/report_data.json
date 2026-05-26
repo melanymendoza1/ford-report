@@ -6164,14 +6164,30 @@
         "modelo": "Territory",
         "trim": "TERRITORY TITANIUM",
         "combustible": "Híbrido",
-        "precio": 35990
+        "precio": 35990,
+        "vol_override": {
+          "NACIONAL": 267,
+          "ZONA ORGU": 246,
+          "PICHINCHA": 148,
+          "GUAYAS": 66,
+          "MANABÍ": 27,
+          "EL ORO": 5
+        }
       },
       {
         "marca": "Toyota",
         "modelo": "Corolla Cross",
         "trim": "High",
         "combustible": "Hibrido",
-        "precio": 37499
+        "precio": 37499,
+        "vol_override": {
+          "NACIONAL": 244,
+          "ZONA ORGU": 189,
+          "PICHINCHA": 125,
+          "GUAYAS": 58,
+          "MANABÍ": 5,
+          "EL ORO": 1
+        }
       },
       {
         "marca": "Toyota",
@@ -6180,7 +6196,12 @@
         "combustible": "Hibrido",
         "precio": 34199,
         "vol_override": {
-          "EL ORO": 0
+          "EL ORO": 0,
+          "NACIONAL": 258,
+          "ZONA ORGU": 220,
+          "PICHINCHA": 137,
+          "GUAYAS": 80,
+          "MANABÍ": 1
         }
       },
       {
@@ -6188,14 +6209,30 @@
         "modelo": "Niro",
         "trim": "AC",
         "combustible": "Hibrido",
-        "precio": 28499
+        "precio": 28499,
+        "vol_override": {
+          "NACIONAL": 438,
+          "ZONA ORGU": 362,
+          "PICHINCHA": 254,
+          "GUAYAS": 106,
+          "MANABÍ": 9,
+          "EL ORO": 2
+        }
       },
       {
         "marca": "Kia",
         "modelo": "Niro",
         "trim": "GT",
         "combustible": "Hibrido",
-        "precio": 30499
+        "precio": 30499,
+        "vol_override": {
+          "NACIONAL": 104,
+          "ZONA ORGU": 89,
+          "PICHINCHA": 54,
+          "GUAYAS": 23,
+          "MANABÍ": 9,
+          "EL ORO": 3
+        }
       },
       {
         "marca": "Chery",
@@ -6204,7 +6241,12 @@
         "combustible": "Hibrido",
         "precio": 29990,
         "vol_override": {
-          "MANABÍ": 0
+          "MANABÍ": 0,
+          "NACIONAL": 2,
+          "ZONA ORGU": 2,
+          "PICHINCHA": 1,
+          "GUAYAS": 1,
+          "EL ORO": 0
         }
       },
       {
@@ -6216,8 +6258,10 @@
         "vol_override": {
           "PICHINCHA": 23,
           "NACIONAL": 45,
-          "GUAYAS": 12,
-          "MANABÍ": 1
+          "GUAYAS": 13,
+          "MANABÍ": 1,
+          "EL ORO": 0,
+          "ZONA ORGU": 37
         }
       },
       {
@@ -6241,7 +6285,11 @@
         "combustible": "Hibrido",
         "precio": 29999,
         "vol_override": {
-          "GUAYAS": 13
+          "GUAYAS": 12,
+          "MANABÍ": 3,
+          "PICHINCHA": 28,
+          "ZONA ORGU": 43,
+          "NACIONAL": 57
         }
       },
       {
