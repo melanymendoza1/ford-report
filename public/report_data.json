@@ -6682,10 +6682,6 @@
       "HYUNDAI": [
         "TUCSON"
       ],
-      "SUZUKI": [
-        "S-CROSS",
-        "SCROSS"
-      ],
       "TOYOTA": [
         "RAV4",
         "RAV 4"
@@ -6728,10 +6724,6 @@
         "TUCSON NX4K"
       ],
       "CHANGAN": [],
-      "SUZUKI": [
-        "S-CROSS",
-        "XL7"
-      ],
       "RENAULT": [
         "ARKANA"
       ]
@@ -6785,9 +6777,6 @@
       ],
       "KIA": [
         "SORENTO"
-      ],
-      "MITSUBISHI": [
-        "OUTLANDER"
       ],
       "HYUNDAI": [
         "PALISADE"
@@ -6885,9 +6874,6 @@
       ],
       "TOYOTA": [
         "HILUX 2.8 CD 4X4 TA"
-      ],
-      "MAZDA": [
-        "NEW BT-50 AC 3.0 CD 4X4 TA"
       ],
       "NISSAN": [
         "FRONTIER PRO-4X",
