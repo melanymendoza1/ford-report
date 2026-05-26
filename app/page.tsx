@@ -6,6 +6,30 @@ import { N, getBrandColor, shortName } from './utils'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 /* ═══ TOKENS ═══ */
+const BBC_STOP_K = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
+const BBC_STOP_T = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
+const BBC_GENERIC = new Set([...Array.from(BBC_STOP_K), 'AC'])
+const bbcRmv = (s: string) => s.replace(/-/g,'').replace(/[.]/g,'').toUpperCase()
+function bbcMatchTrim(mk: string, tk: string, others: string[]): boolean {
+  const kW = new Set(bbcRmv(mk).split(' ').filter((w:string) => !BBC_STOP_K.has(w) && w.length >= 1))
+  const tW = bbcRmv(tk).split(' ').filter((w:string) => !BBC_STOP_T.has(w) && w.length >= 1)
+  if (!tW.length || !tW.every((w:string) => kW.has(w))) return false
+  const sibs = others.flatMap((t:string) => bbcRmv(t).split(' ').filter((w:string) => !BBC_GENERIC.has(w) && w.length >= 1))
+  return !sibs.some((s:string) => kW.has(s))
+}
+function bbcVol(row: Record<string,any>, brand: string, trimKey: string, others: string[]): number {
+  let vol = 0
+  Object.entries(row).forEach(([k,v]) => {
+    if (!v || k === 'year' || k === brand) return
+    let mk = k
+    if (k.includes(' . ')) {
+      if (!k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) return
+      mk = k.split(' . ').pop()!
+    }
+    if (bbcMatchTrim(mk, trimKey, others)) vol += (v as number) || 0
+  })
+  return vol > 0 ? vol : (row[brand] as number) || 0
+}
 const C = { night: '#081534', navy: '#133A7C', steel: '#2A6BAC', sky: '#47A8E5', bg: '#F0F4F8', w: '#FFF', brd: '#E8ECF1', mut: '#8896AB', txt: '#1A2332', sub: '#5A6B80', up: '#0D9F6E', upB: '#ECFDF5', dn: '#DC2626', dnB: '#FEF2F2', ac: '#3B82F6', acB: '#EFF6FF', gld: '#F59E0B', glB: '#FFFBEB' }
 const SEG: Record<string, string> = { 'B SUV': 'BSUV', 'C SUV': 'Compact', 'D SUV': 'Midsize', 'E SUV': 'Full Size', 'PREMIUM SUV': 'Premium' }
 const cn = (c: string) => ({ 'AUTOMOV. DE PASAJEROS': 'Automóviles', 'SUV': 'SUV', 'PICK UPS': 'Pick Ups', 'CAMION': 'Camiones', 'BUS': 'Buses', 'VAN': 'Vans' }[c] || c)
@@ -998,30 +1022,12 @@ function T4({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
@@ -1222,30 +1228,12 @@ function T5({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1291,30 +1279,12 @@ function T5({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1486,30 +1456,12 @@ function T6({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1555,30 +1507,12 @@ function T6({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1837,30 +1771,12 @@ function T7({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -1908,30 +1824,12 @@ function T7({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2196,30 +2094,12 @@ function T8({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2269,30 +2149,12 @@ function T8({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2635,30 +2497,12 @@ function T10({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2705,30 +2549,12 @@ function T10({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -2993,30 +2819,12 @@ function T11({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
@@ -3065,30 +2873,12 @@ function T11({ d }: { d: any }) {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
-          const trimKey = `${p.modelo} ${p.trim || ''}`.trim().toUpperCase()
+          const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
-          // Match trim to actual volume — flexible word matching
           const row = rows.find((r: any) => r.year === '2026') || {} as any
-          let vol = 0
-          Object.entries(row).forEach(([k, v]) => {
-            if (k === 'year' || k === b.brand) return
-            let matchKey = k
-            if (k.includes(' . ')) {
-              if (!k.toUpperCase().startsWith(b.brand.toUpperCase() + ' . ')) return
-              const parts = k.split(' . ')
-              matchKey = parts[parts.length - 1]
-            }
-            const STOP_K2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT','NX4E','NX4','B01','DT','HEV','FHEV','MHEV','PHEV','SX2','SX','EV','ECOBOOST','ETORQUE','BIGHORN','TRAILBOSS','Z71','CREW','CAB','TOURING'])
-            const STOP_T2 = new Set(['5P','4X2','4X4','CD','DIESEL','HYBRID','HIBRIDO','TA','TM','FWD','AWD','20','15','16','18','25','35','40','13','CVT','DSG','DCT','MT'])
-            const GENERIC2 = new Set([...Array.from(STOP_K2), 'AC'])
-            const sibWords2 = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).flatMap((x:any) => (x.trim||'').toUpperCase().replace(/-/g,'').replace(/[.]/g,'').split(' ').filter((w:string) => !GENERIC2.has(w) && w.length >= 1))
-            const kNormStr = matchKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const tNormStr = trimKey.toUpperCase().replace(/-/g,'').replace(/[.]/g,'')
-            const kWords = new Set(kNormStr.split(' ').filter((w:string) => !STOP_K2.has(w) && w.length >= 1))
-            const tWords = tNormStr.split(' ').filter((w:string) => !STOP_T2.has(w) && w.length >= 1)
-            if (tWords.length > 0 && tWords.every((w:string) => kWords.has(w)) && !sibWords2.some((s:string) => kWords.has(s))) vol += ((v as number) || 0)
-          })
-          return { name: `${p.modelo} ${p.trim || ''}`.trim(), price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : (vol > 0 ? vol : b.v26)) }
+          const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
+          const computedVol = bbcVol(row, b.brand, trimKey, others)
+          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
         return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
