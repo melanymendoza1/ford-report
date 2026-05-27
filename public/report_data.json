@@ -6553,7 +6553,7 @@
         "modelo": "Explorer",
         "trim": "EXPLORER PLATINUM",
         "combustible": "Gasolina",
-        "precio": 102000
+        "precio": 99990
       },
       {
         "marca": "Jeep",
@@ -8472,10 +8472,10 @@
     "SUV GAS 25 - 40": null,
     "SUV  HEV 25 - 40": null,
     "SUV  HEV 40 - 50": 45000,
-    "SUV  55 - 80 everest": null,
+    "SUV  55 - 80 everest": 60000,
     "SUV  55 - 80 explorer": 80000,
     "SUV  80 plus expedition": null,
-    "SUV  80 plus explorer": null,
+    "SUV  80 plus explorer": 95000,
     "Pick up TM": null,
     "Pick up TA": null,
     "Full size Pick up": null
