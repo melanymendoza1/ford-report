@@ -2674,14 +2674,14 @@ function T11({ d }: { d: any }) {
 }
 
 function T12({ d }: { d: any }) {
-  const ytdF = (d.ford_ytd || []) as any[]
+  // Use NACIONAL totals for T12 hero
+  const ytdF = (d.ford_ytd_nacional || []) as any[]
   const fT = ytdF.find((r: any) => r.cat === 'Total general') || {} as any
-  const mktT = (d.mercado_ytd || []).find((r: any) => r.cat === 'Total general') || {} as any
+  const mktT = (d.mercado_ytd_nacional || []).find((r: any) => r.cat === 'Total general') || {} as any
   const ms = mktT.ytd2026 ? ((fT.ytd2026 || 0) / mktT.ytd2026 * 100).toFixed(2) : '0'
   const growth = fT.ytd2025 ? ((fT.ytd2026 / fT.ytd2025 - 1) * 100).toFixed(1) : '0'
   const months = d.months_ytd || 5
 
-  // Get vol from ford_cards first, then vol_override NACIONAL, then trim match
   const cardVal = (key: string, yr: string) => {
     const card = (d.ford_cards?.[key] as any)
     if (!card) return 0
@@ -2691,22 +2691,21 @@ function T12({ d }: { d: any }) {
     const entries = (d.precios_competidores?.[seg] || []) as any[]
     const ford = entries.find((e: any) => e.marca?.toUpperCase() === 'FORD')
     if (!ford) return 0
-    const vo = ford.vol_override || {}
-    return vo['NACIONAL'] || 0
+    return (ford.vol_override || {})['NACIONAL'] || 0
   }
 
   const suvs = [
     { name: 'New Territory', trim: 'Titanium · Titanium Plus', fuel: 'HEV', price: '$35,990', img: '/images/territory.png',
       v26: cardVal('T5_hev_25_40', '2026') || pcVal('SUV  HEV 25 - 40', '2026'),
-      v25: cardVal('T5_hev_25_40', '2025') || pcVal('SUV  HEV 25 - 40', '2025'),
+      v25: cardVal('T5_hev_25_40', '2025') || 0,
       segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'Escape 1.5', trim: 'Titanium', fuel: 'Gasolina', price: '$35,990', img: '/images/escape15.png',
       v26: cardVal('T4_gas_25_40', '2026') || pcVal('SUV GAS 25 - 40', '2026'),
-      v25: cardVal('T4_gas_25_40', '2025') || pcVal('SUV GAS 25 - 40', '2025'),
+      v25: cardVal('T4_gas_25_40', '2025') || 0,
       segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
     { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$46,990', img: '/images/escapestline.png',
       v26: cardVal('T6_hev_40_50', '2026') || pcVal('SUV  HEV 40 - 50', '2026'),
-      v25: cardVal('T6_hev_40_50', '2025') || pcVal('SUV  HEV 40 - 50', '2025'),
+      v25: cardVal('T6_hev_40_50', '2025') || 0,
       segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
     { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
       v26: cardVal('T7_everest', '2026') || 103,
@@ -2738,16 +2737,20 @@ function T12({ d }: { d: any }) {
       v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
       v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
       segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
-    { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$75,990', img: '/images/f150xlt.png',
+    { name: 'F-150 XLT', trim: 'XLT', fuel: 'Gasolina', price: '$75,990', img: '/images/f150xlt.png',
       v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
       v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
       segment: 'Full Size', highlight: '#1 vs RAM' },
-    { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$85,990 – $95,990', img: '/images/f150lariat.png',
-      v26: cardVal('T11_lariat', '2026') || cardVal('T11_platinum', '2026'),
-      v25: cardVal('T11_lariat', '2025') || cardVal('T11_platinum', '2025'),
+    { name: 'F-150 Lariat', trim: 'Lariat', fuel: 'Gasolina', price: '$85,990', img: '/images/f150lariat.png',
+      v26: cardVal('T11_lariat', '2026'),
+      v25: cardVal('T11_lariat', '2025'),
       segment: 'Full Size Premium', highlight: 'Dominio premium' },
+    { name: 'F-150 Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$95,990', img: '/images/f150platinum.png',
+      v26: cardVal('T11_platinum', '2026'),
+      v25: cardVal('T11_platinum', '2025'),
+      segment: 'Full Size Premium', highlight: 'Premium' },
     { name: 'F-150 Raptor', trim: 'Raptor', fuel: 'Gasolina', price: '$119,990', img: '/images/f150platinum.png',
-      v26: 0, v25: 0, segment: 'Full Size', highlight: 'Performance' },
+      v26: 12, v25: 0, segment: 'Full Size', highlight: 'Performance · Nuevo' },
   ]
 
   return <>
@@ -2758,7 +2761,7 @@ function T12({ d }: { d: any }) {
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 36, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{N(fT.ytd2026)}</div>
-          <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Unidades YTD</div>
+          <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Unidades YTD Nacional</div>
         </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 36, fontWeight: 700, color: '#4ADE80', lineHeight: 1 }}>+{growth}%</div>
@@ -2766,7 +2769,7 @@ function T12({ d }: { d: any }) {
         </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 36, fontWeight: 700, color: C.sky, lineHeight: 1 }}>{ms}%</div>
-          <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share</div>
+          <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share Nacional</div>
         </div>
         <div style={{ textAlign: 'center' }}>
           <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, months))}</div>
