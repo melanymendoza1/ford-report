@@ -11132,7 +11132,12 @@
         "combustible": "Diésel",
         "precio": 69990,
         "vol_override": {
-          "NACIONAL": 56
+          "NACIONAL": 56,
+          "PICHINCHA": 21,
+          "GUAYAS": 23,
+          "MANABÍ": 6,
+          "EL ORO": 2,
+          "ZONA ORGU": 52
         }
       },
       {
@@ -11158,11 +11163,11 @@
         "precio": 73999,
         "vol_override": {
           "NACIONAL": 141,
-          "PICHINCHA": 50,
-          "GUAYAS": 26,
-          "MANABÍ": 1,
+          "PICHINCHA": 70,
+          "GUAYAS": 34,
+          "MANABÍ": 2,
           "EL ORO": 0,
-          "ZONA ORGU": 77
+          "ZONA ORGU": 106
         }
       },
       {
