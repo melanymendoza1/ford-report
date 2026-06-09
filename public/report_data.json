@@ -11962,23 +11962,23 @@
     "T7_everest": {
       "model": "Everest Active",
       "price": 69990,
-      "fuel": "Diésel",
-      "v26": null,
-      "v25": null
+      "fuel": "Gasolina",
+      "v26": 56,
+      "v25": 31
     },
     "T7_explorer_active": {
       "model": "Explorer Active",
       "price": 89990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 18,
+      "v25": 25
     },
     "T8_suv_80plus": {
       "model": "Explorer Platinum",
       "price": 99990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 22,
+      "v25": 3
     },
     "T10_ranger_xl": {
       "model": "Ranger XL",
