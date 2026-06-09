@@ -11045,9 +11045,12 @@
         "modelo": "Xtrail",
         "trim": "Advance",
         "combustible": "Hibrido",
-        "precio": 43990,
+        "precio": 41990,
         "vol_override": {
-          "NACIONAL": 41
+          "NACIONAL": 41,
+          "PICHINCHA": 29,
+          "GUAYAS": 7,
+          "EL ORO": 0
         }
       },
       {
@@ -11055,9 +11058,11 @@
         "modelo": "Xtrail",
         "trim": "Exclusive",
         "combustible": "Hibrido",
-        "precio": 48990,
+        "precio": 46990,
         "vol_override": {
-          "NACIONAL": 134
+          "NACIONAL": 134,
+          "PICHINCHA": 70,
+          "GUAYAS": 41
         }
       },
       {
@@ -11067,7 +11072,9 @@
         "combustible": "Hibrido",
         "precio": 45999,
         "vol_override": {
-          "NACIONAL": 165
+          "NACIONAL": 165,
+          "PICHINCHA": 89,
+          "GUAYAS": 31
         }
       },
       {
@@ -11077,7 +11084,11 @@
         "combustible": "Hibrido",
         "precio": 48999,
         "vol_override": {
-          "NACIONAL": 23
+          "NACIONAL": 23,
+          "PICHINCHA": 7,
+          "GUAYAS": 9,
+          "MANABÍ": 0,
+          "EL ORO": 0
         }
       },
       {
