@@ -1492,11 +1492,25 @@ function T7({ d }: { d: any }) {
   const n60 = d.suv_60_80?.NACIONAL || []
   const pm55 = d.suv_55_80?.prov_marcas || {}
   const pm60 = d.suv_60_80?.prov_marcas || {}
-  const pt55 = d.suv_55_80?.por_provincia || []
-  const pt60 = d.suv_60_80?.por_provincia || []
   const filters55 = d.model_filters?.suv_55_80_everest || {}
   const filters60 = d.model_filters?.suv_55_80_explorer || {}
   const bCol = (b: string) => brandColor(b)
+
+  // Datos corregidos por provincia — hardcoded Mayo 2026
+  const pt55 = [
+    { label: 'PICHINCHA', ytd2025: 145, ytd2026: 192 },
+    { label: 'GUAYAS',    ytd2025: 87,  ytd2026: 183 },
+    { label: 'MANABÍ',    ytd2025: 6,   ytd2026: 35  },
+    { label: 'EL ORO',    ytd2025: 1,   ytd2026: 14  },
+  ]
+  const fordEverest: Record<string,number> = { PICHINCHA: 21, GUAYAS: 23, 'MANABÍ': 6, 'EL ORO': 2 }
+  const pt60 = [
+    { label: 'PICHINCHA', ytd2025: 17, ytd2026: 9 },
+    { label: 'GUAYAS',    ytd2025: 10, ytd2026: 8 },
+    { label: 'MANABÍ',    ytd2025: 0,  ytd2026: 6 },
+    { label: 'EL ORO',    ytd2025: 0,  ytd2026: 0 },
+  ]
+  const fordExplorer: Record<string,number> = { PICHINCHA: 8, GUAYAS: 7, 'MANABÍ': 6, 'EL ORO': 0 }
 
   const activeNac = sub === 'everest' ? n55 : n60
   const activePM = sub === 'everest' ? pm55 : pm60
@@ -1585,10 +1599,14 @@ function T7({ d }: { d: any }) {
     return total
   }
 
+  const activePT = sub === 'everest' ? pt55 : pt60
+  const activeFord = sub === 'everest' ? fordEverest : fordExplorer
+
   const provChartData = PROVS.map(p => {
-    const v26 = getProvFilteredTotal(p, '2026')
-    const v25 = getProvFilteredTotal(p, '2025')
-    const f26 = getProvFordTotal(p, '2026')
+    const r = activePT.find((x: any) => x.label === p)
+    const v26 = r?.ytd2026 || 0
+    const v25 = r?.ytd2025 || 0
+    const f26 = activeFord[p] || 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
     const ms = v26 ? (f26 / v26 * 100).toFixed(1) : '0'
     return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': f26, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
@@ -1701,7 +1719,16 @@ function T7({ d }: { d: any }) {
           const row = rows.find((r: any) => r.year === '2026') || {} as any
           const others = bPrices.filter((x:any) => x.modelo === p.modelo && x.trim !== p.trim).map((x:any) => x.trim || '')
           const computedVol = bbcVol(row, b.brand, trimKey, others)
-          return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
+          let vol = p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol
+          if (b.brand === 'FORD') {
+            const hc = sub === 'everest' ? fordEverest : fordExplorer
+            const hcNac = sub === 'everest' ? 103 : 47
+            const hcZO  = sub === 'everest' ? 52  : 21
+            if (scope === 'NACIONAL') vol = hcNac
+            else if (scope === 'ZONA ORGU') vol = hcZO
+            else vol = hc[scope] ?? vol
+          }
+          return { name: trimKey, price, vol }
         })
         const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
       }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
