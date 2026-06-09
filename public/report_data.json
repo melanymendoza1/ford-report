@@ -3752,54 +3752,30 @@
     }
   ],
   "pu_diesel_por_prov": {
-    "MANABÍ": [
+    "EL ORO": [
       {
         "brand": "CHEVROLET",
-        "y2024": 12.0,
-        "y2025": 27.0,
-        "y2026": 7.0
+        "y2024": 9.0,
+        "y2025": 24.0,
+        "y2026": 8.0
       },
       {
         "brand": "TOYOTA",
-        "y2024": 8.0,
-        "y2025": 4.0,
-        "y2026": 4.0
-      },
-      {
-        "brand": "FORD",
-        "y2024": 1.0,
-        "y2025": 2.0,
-        "y2026": 6.0
-      },
-      {
-        "brand": "MAZDA",
-        "y2024": 1.0,
+        "y2024": 5.0,
         "y2025": 1.0,
-        "y2026": 3.0
-      },
-      {
-        "brand": "KIA",
-        "y2024": 0,
-        "y2025": 0,
         "y2026": 2.0
       },
       {
-        "brand": "NISSAN",
+        "brand": "FORD",
         "y2024": 0,
         "y2025": 1.0,
-        "y2026": 1.0
-      },
-      {
-        "brand": "GREAT WALL",
-        "y2024": 1.0,
-        "y2025": 0,
-        "y2026": 0
+        "y2026": 8.0
       },
       {
         "brand": "ISUZU",
         "y2024": 0,
         "y2025": 0,
-        "y2026": 1.0
+        "y2026": 2.0
       }
     ],
     "PICHINCHA": [
@@ -3926,30 +3902,54 @@
         "y2026": 2.0
       }
     ],
-    "EL ORO": [
+    "MANABÍ": [
       {
         "brand": "CHEVROLET",
-        "y2024": 9.0,
-        "y2025": 24.0,
-        "y2026": 8.0
+        "y2024": 12.0,
+        "y2025": 27.0,
+        "y2026": 7.0
       },
       {
         "brand": "TOYOTA",
-        "y2024": 5.0,
-        "y2025": 1.0,
-        "y2026": 2.0
+        "y2024": 8.0,
+        "y2025": 4.0,
+        "y2026": 4.0
       },
       {
         "brand": "FORD",
+        "y2024": 1.0,
+        "y2025": 2.0,
+        "y2026": 6.0
+      },
+      {
+        "brand": "MAZDA",
+        "y2024": 1.0,
+        "y2025": 1.0,
+        "y2026": 3.0
+      },
+      {
+        "brand": "KIA",
+        "y2024": 0,
+        "y2025": 0,
+        "y2026": 2.0
+      },
+      {
+        "brand": "NISSAN",
         "y2024": 0,
         "y2025": 1.0,
-        "y2026": 8.0
+        "y2026": 1.0
+      },
+      {
+        "brand": "GREAT WALL",
+        "y2024": 1.0,
+        "y2025": 0,
+        "y2026": 0
       },
       {
         "brand": "ISUZU",
         "y2024": 0,
         "y2025": 0,
-        "y2026": 2.0
+        "y2026": 1.0
       }
     ]
   },
@@ -7030,442 +7030,506 @@
   ],
   "combustible_suv_nacional": [
     {
-      "combustible": "DIESEL",
-      "y2024": 483.0,
-      "y2025": 473.0,
-      "y2026": 421.0
+      "label": "DIESEL",
+      "2024": 483.0,
+      "2025": 473.0,
+      "2026": 421.0
     },
     {
-      "combustible": "ELECTRICO BEV",
-      "y2024": 336.0,
-      "y2025": 795.0,
-      "y2026": 2749.0
+      "label": "ELECTRICO BEV",
+      "2024": 336.0,
+      "2025": 795.0,
+      "2026": 2749.0
     },
     {
-      "combustible": "GASOLINA",
-      "y2024": 18185.0,
-      "y2025": 15252.0,
-      "y2026": 19004.0
+      "label": "GASOLINA",
+      "2024": 18185.0,
+      "2025": 15252.0,
+      "2026": 19004.0
     },
     {
-      "combustible": "HIBRIDO",
-      "y2024": 4411.0,
-      "y2025": 5519.0,
-      "y2026": 10314.0
+      "label": "HIBRIDO",
+      "2024": 4411.0,
+      "2025": 5519.0,
+      "2026": 10314.0
     }
   ],
-  "combustible_suv_prov": {
-    "EL ORO": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 2.0,
-        "y2025": 2.0,
-        "y2026": 13.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": null,
-        "y2025": null,
-        "y2026": 7.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 155.0,
-        "y2025": 119.0,
-        "y2026": 279.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 34.0,
-        "y2025": 8.0,
-        "y2026": 57.0
-      }
-    ],
-    "GUAYAS": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 136.0,
-        "y2025": 112.0,
-        "y2026": 137.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": 45.0,
-        "y2025": 132.0,
-        "y2026": 514.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 5744.0,
-        "y2025": 4675.0,
-        "y2026": 5729.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 1238.0,
-        "y2025": 1601.0,
-        "y2026": 2908.0
-      }
-    ],
-    "MANABÍ": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 13.0,
-        "y2025": 8.0,
-        "y2026": 27.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": 7.0,
-        "y2025": 30.0,
-        "y2026": 322.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 722.0,
-        "y2025": 620.0,
-        "y2026": 729.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 121.0,
-        "y2025": 145.0,
-        "y2026": 296.0
-      }
-    ],
-    "PICHINCHA": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 241.0,
-        "y2025": 259.0,
-        "y2026": 143.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": 268.0,
-        "y2025": 550.0,
-        "y2026": 1569.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 7362.0,
-        "y2025": 6224.0,
-        "y2026": 7206.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 2344.0,
-        "y2025": 2896.0,
-        "y2026": 5217.0
-      }
-    ]
-  },
+  "combustible_suv_prov": [
+    {
+      "label": "EL ORO",
+      "2024": 191.0,
+      "2025": 129.0,
+      "2026": 356.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 2.0,
+      "2025": 2.0,
+      "2026": 13.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": null,
+      "2025": null,
+      "2026": 7.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 155.0,
+      "2025": 119.0,
+      "2026": 279.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 34.0,
+      "2025": 8.0,
+      "2026": 57.0
+    },
+    {
+      "label": "GUAYAS",
+      "2024": 7163.0,
+      "2025": 6520.0,
+      "2026": 9288.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 136.0,
+      "2025": 112.0,
+      "2026": 137.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": 45.0,
+      "2025": 132.0,
+      "2026": 514.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 5744.0,
+      "2025": 4675.0,
+      "2026": 5729.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 1238.0,
+      "2025": 1601.0,
+      "2026": 2908.0
+    },
+    {
+      "label": "MANABÍ",
+      "2024": 863.0,
+      "2025": 803.0,
+      "2026": 1374.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 13.0,
+      "2025": 8.0,
+      "2026": 27.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": 7.0,
+      "2025": 30.0,
+      "2026": 322.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 722.0,
+      "2025": 620.0,
+      "2026": 729.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 121.0,
+      "2025": 145.0,
+      "2026": 296.0
+    },
+    {
+      "label": "PICHINCHA",
+      "2024": 10215.0,
+      "2025": 9929.0,
+      "2026": 14135.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 241.0,
+      "2025": 259.0,
+      "2026": 143.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": 268.0,
+      "2025": 550.0,
+      "2026": 1569.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 7362.0,
+      "2025": 6224.0,
+      "2026": 7206.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 2344.0,
+      "2025": 2896.0,
+      "2026": 5217.0
+    }
+  ],
   "ford_comb_suv_nacional": [
     {
-      "combustible": "GASOLINA",
-      "y2024": 275.0,
-      "y2025": 200.0,
-      "y2026": 220.0
+      "label": "GASOLINA",
+      "2024": 275.0,
+      "2025": 200.0,
+      "2026": 220.0
     },
     {
-      "combustible": "HIBRIDO",
-      "y2024": 21.0,
-      "y2025": 89.0,
-      "y2026": 343.0
+      "label": "HIBRIDO",
+      "2024": 21.0,
+      "2025": 89.0,
+      "2026": 343.0
     }
   ],
-  "ford_comb_suv_prov": {
-    "EL ORO": [
-      {
-        "combustible": "GASOLINA",
-        "y2024": null,
-        "y2025": null,
-        "y2026": 3.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": null,
-        "y2025": null,
-        "y2026": 7.0
-      }
-    ],
-    "GUAYAS": [
-      {
-        "combustible": "GASOLINA",
-        "y2024": 101.0,
-        "y2025": 61.0,
-        "y2026": 63.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 15.0,
-        "y2025": 26.0,
-        "y2026": 91.0
-      }
-    ],
-    "MANABÍ": [
-      {
-        "combustible": "GASOLINA",
-        "y2024": 7.0,
-        "y2025": 6.0,
-        "y2026": 8.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 1.0,
-        "y2025": 3.0,
-        "y2026": 34.0
-      }
-    ],
-    "PICHINCHA": [
-      {
-        "combustible": "GASOLINA",
-        "y2024": 134.0,
-        "y2025": 106.0,
-        "y2026": 105.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 5.0,
-        "y2025": 46.0,
-        "y2026": 184.0
-      }
-    ]
-  },
+  "ford_comb_suv_prov": [
+    {
+      "label": "EL ORO",
+      "2024": null,
+      "2025": null,
+      "2026": 10.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": null,
+      "2025": null,
+      "2026": 3.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": null,
+      "2025": null,
+      "2026": 7.0
+    },
+    {
+      "label": "GUAYAS",
+      "2024": 116.0,
+      "2025": 87.0,
+      "2026": 154.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 101.0,
+      "2025": 61.0,
+      "2026": 63.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 15.0,
+      "2025": 26.0,
+      "2026": 91.0
+    },
+    {
+      "label": "MANABÍ",
+      "2024": 8.0,
+      "2025": 9.0,
+      "2026": 42.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 7.0,
+      "2025": 6.0,
+      "2026": 8.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 1.0,
+      "2025": 3.0,
+      "2026": 34.0
+    },
+    {
+      "label": "PICHINCHA",
+      "2024": 139.0,
+      "2025": 152.0,
+      "2026": 289.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 134.0,
+      "2025": 106.0,
+      "2026": 105.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 5.0,
+      "2025": 46.0,
+      "2026": 184.0
+    }
+  ],
   "combustible_pu_nacional": [
     {
-      "combustible": "DIESEL",
-      "y2024": 7530.0,
-      "y2025": 6971.0,
-      "y2026": 8515.0
+      "label": "DIESEL",
+      "2024": 7530.0,
+      "2025": 6971.0,
+      "2026": 8515.0
     },
     {
-      "combustible": "ELECTRICO BEV",
-      "y2024": 3.0,
-      "y2025": 7.0,
-      "y2026": 16.0
+      "label": "ELECTRICO BEV",
+      "2024": 3.0,
+      "2025": 7.0,
+      "2026": 16.0
     },
     {
-      "combustible": "GASOLINA",
-      "y2024": 1270.0,
-      "y2025": 1023.0,
-      "y2026": 1767.0
+      "label": "GASOLINA",
+      "2024": 1270.0,
+      "2025": 1023.0,
+      "2026": 1767.0
     },
     {
-      "combustible": "HIBRIDO",
-      "y2024": 163.0,
-      "y2025": 227.0,
-      "y2026": 580.0
+      "label": "HIBRIDO",
+      "2024": 163.0,
+      "2025": 227.0,
+      "2026": 580.0
     }
   ],
-  "combustible_pu_prov": {
-    "EL ORO": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 116.0,
-        "y2025": 125.0,
-        "y2026": 165.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 8.0,
-        "y2025": 10.0,
-        "y2026": 18.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": null,
-        "y2025": null,
-        "y2026": 26.0
-      }
-    ],
-    "GUAYAS": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 1756.0,
-        "y2025": 1338.0,
-        "y2026": 1996.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": null,
-        "y2025": 1.0,
-        "y2026": null
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 367.0,
-        "y2025": 241.0,
-        "y2026": 374.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 73.0,
-        "y2025": 69.0,
-        "y2026": 141.0
-      }
-    ],
-    "MANABÍ": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 240.0,
-        "y2025": 200.0,
-        "y2026": 226.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 53.0,
-        "y2025": 18.0,
-        "y2026": 50.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 4.0,
-        "y2025": 3.0,
-        "y2026": 31.0
-      }
-    ],
-    "PICHINCHA": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 3124.0,
-        "y2025": 3079.0,
-        "y2026": 3145.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": 2.0,
-        "y2025": 5.0,
-        "y2026": 15.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 491.0,
-        "y2025": 437.0,
-        "y2026": 755.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 62.0,
-        "y2025": 124.0,
-        "y2026": 231.0
-      }
-    ]
-  },
+  "combustible_pu_prov": [
+    {
+      "label": "EL ORO",
+      "2024": 124.0,
+      "2025": 135.0,
+      "2026": 209.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 116.0,
+      "2025": 125.0,
+      "2026": 165.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 8.0,
+      "2025": 10.0,
+      "2026": 18.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": null,
+      "2025": null,
+      "2026": 26.0
+    },
+    {
+      "label": "GUAYAS",
+      "2024": 2196.0,
+      "2025": 1649.0,
+      "2026": 2511.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 1756.0,
+      "2025": 1338.0,
+      "2026": 1996.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": null,
+      "2025": 1.0,
+      "2026": null
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 367.0,
+      "2025": 241.0,
+      "2026": 374.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 73.0,
+      "2025": 69.0,
+      "2026": 141.0
+    },
+    {
+      "label": "MANABÍ",
+      "2024": 297.0,
+      "2025": 221.0,
+      "2026": 307.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 240.0,
+      "2025": 200.0,
+      "2026": 226.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 53.0,
+      "2025": 18.0,
+      "2026": 50.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 4.0,
+      "2025": 3.0,
+      "2026": 31.0
+    },
+    {
+      "label": "PICHINCHA",
+      "2024": 3679.0,
+      "2025": 3645.0,
+      "2026": 4146.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 3124.0,
+      "2025": 3079.0,
+      "2026": 3145.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": 2.0,
+      "2025": 5.0,
+      "2026": 15.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 491.0,
+      "2025": 437.0,
+      "2026": 755.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 62.0,
+      "2025": 124.0,
+      "2026": 231.0
+    }
+  ],
   "ford_comb_pu_nacional": [
     {
-      "combustible": "DIESEL",
-      "y2024": 435.0,
-      "y2025": 144.0,
-      "y2026": 99.0
+      "label": "DIESEL",
+      "2024": 435.0,
+      "2025": 144.0,
+      "2026": 99.0
     },
     {
-      "combustible": "ELECTRICO BEV",
-      "y2024": 1.0,
-      "y2025": 1.0,
-      "y2026": null
+      "label": "ELECTRICO BEV",
+      "2024": 1.0,
+      "2025": 1.0,
+      "2026": null
     },
     {
-      "combustible": "GASOLINA",
-      "y2024": 90.0,
-      "y2025": 31.0,
-      "y2026": 47.0
+      "label": "GASOLINA",
+      "2024": 90.0,
+      "2025": 31.0,
+      "2026": 47.0
     },
     {
-      "combustible": "HIBRIDO",
-      "y2024": 34.0,
-      "y2025": 85.0,
-      "y2026": 94.0
+      "label": "HIBRIDO",
+      "2024": 34.0,
+      "2025": 85.0,
+      "2026": 94.0
     }
   ],
-  "ford_comb_pu_prov": {
-    "EL ORO": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 1.0,
-        "y2025": 1.0,
-        "y2026": 8.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 1.0,
-        "y2025": 1.0,
-        "y2026": 3.0
-      }
-    ],
-    "GUAYAS": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 56.0,
-        "y2025": 25.0,
-        "y2026": 22.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": null,
-        "y2025": 1.0,
-        "y2026": null
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 21.0,
-        "y2025": 3.0,
-        "y2026": 1.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 23.0,
-        "y2025": 28.0,
-        "y2026": 31.0
-      }
-    ],
-    "MANABÍ": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 11.0,
-        "y2025": 4.0,
-        "y2026": 6.0
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 7.0,
-        "y2025": null,
-        "y2026": 1.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": null,
-        "y2025": null,
-        "y2026": 9.0
-      }
-    ],
-    "PICHINCHA": [
-      {
-        "combustible": "DIESEL",
-        "y2024": 242.0,
-        "y2025": 81.0,
-        "y2026": 31.0
-      },
-      {
-        "combustible": "ELECTRICO BEV",
-        "y2024": 1.0,
-        "y2025": null,
-        "y2026": null
-      },
-      {
-        "combustible": "GASOLINA",
-        "y2024": 45.0,
-        "y2025": 18.0,
-        "y2026": 22.0
-      },
-      {
-        "combustible": "HIBRIDO",
-        "y2024": 5.0,
-        "y2025": 47.0,
-        "y2026": 40.0
-      }
-    ]
-  },
+  "ford_comb_pu_prov": [
+    {
+      "label": "EL ORO",
+      "2024": 2.0,
+      "2025": 2.0,
+      "2026": 11.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 1.0,
+      "2025": 1.0,
+      "2026": 8.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 1.0,
+      "2025": 1.0,
+      "2026": 3.0
+    },
+    {
+      "label": "GUAYAS",
+      "2024": 100.0,
+      "2025": 57.0,
+      "2026": 54.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 56.0,
+      "2025": 25.0,
+      "2026": 22.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": null,
+      "2025": 1.0,
+      "2026": null
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 21.0,
+      "2025": 3.0,
+      "2026": 1.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 23.0,
+      "2025": 28.0,
+      "2026": 31.0
+    },
+    {
+      "label": "MANABÍ",
+      "2024": 18.0,
+      "2025": 4.0,
+      "2026": 16.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 11.0,
+      "2025": 4.0,
+      "2026": 6.0
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 7.0,
+      "2025": null,
+      "2026": 1.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": null,
+      "2025": null,
+      "2026": 9.0
+    },
+    {
+      "label": "PICHINCHA",
+      "2024": 293.0,
+      "2025": 146.0,
+      "2026": 93.0
+    },
+    {
+      "label": "DIESEL",
+      "2024": 242.0,
+      "2025": 81.0,
+      "2026": 31.0
+    },
+    {
+      "label": "ELECTRICO BEV",
+      "2024": 1.0,
+      "2025": null,
+      "2026": null
+    },
+    {
+      "label": "GASOLINA",
+      "2024": 45.0,
+      "2025": 18.0,
+      "2026": 22.0
+    },
+    {
+      "label": "HIBRIDO",
+      "2024": 5.0,
+      "2025": 47.0,
+      "2026": 40.0
+    }
+  ],
   "suv_segmentos": [
     {
       "seg": "B SUV",
@@ -7563,56 +7627,189 @@
       "fcts2026": 163
     }
   ],
-  "suv_seg_por_provincia": {
-    "PICHINCHA": [],
-    "GUAYAS": [],
-    "MANABÍ": [],
-    "EL ORO": [
-      {
-        "seg": "C SUV",
-        "y2024": 7157.0,
-        "y2025": 6874.0,
-        "y2026": 9893.0
-      },
-      {
-        "seg": "D SUV",
-        "y2024": 2465.0,
-        "y2025": 1756.0,
-        "y2026": 2624.0
-      },
-      {
-        "seg": "E SUV",
-        "y2024": 176.0,
-        "y2025": 153.0,
-        "y2026": 267.0
-      },
-      {
-        "seg": "PREMIUM SUV",
-        "y2024": 286.0,
-        "y2025": 325.0,
-        "y2026": 396.0
-      }
-    ]
-  },
-  "ford_suv_seg_prov": {
-    "PICHINCHA": [],
-    "GUAYAS": [],
-    "MANABÍ": [],
-    "EL ORO": [
-      {
-        "seg": "D SUV",
-        "y2024": 23.0,
-        "y2025": 26.0,
-        "y2026": 90.0
-      },
-      {
-        "seg": "E SUV",
-        "y2024": 42.0,
-        "y2025": 38.0,
-        "y2026": 49.0
-      }
-    ]
-  },
+  "suv_seg_por_provincia": [
+    {
+      "label": "B SUV"
+    },
+    {
+      "label": "PICHINCHA",
+      "y2024": 4538.0,
+      "y2025": 4576.0,
+      "y2026": 6640.0,
+      "_seg": "B SUV"
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 3276.0,
+      "y2025": 3187.0,
+      "y2026": 4371.0,
+      "_seg": "B SUV"
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 426.0,
+      "y2025": 442.0,
+      "y2026": 799.0,
+      "_seg": "B SUV"
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 108.0,
+      "y2025": 68.0,
+      "y2026": 163.0,
+      "_seg": "B SUV"
+    },
+    {
+      "label": "C SUV"
+    },
+    {
+      "label": "PICHINCHA",
+      "y2024": 4120.0,
+      "y2025": 4038.0,
+      "y2026": 5762.0,
+      "_seg": "C SUV"
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 2656.0,
+      "y2025": 2524.0,
+      "y2026": 3561.0,
+      "_seg": "C SUV"
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 327.0,
+      "y2025": 281.0,
+      "y2026": 438.0,
+      "_seg": "C SUV"
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 54.0,
+      "y2025": 31.0,
+      "y2026": 132.0,
+      "_seg": "C SUV"
+    },
+    {
+      "label": "D SUV"
+    },
+    {
+      "label": "PICHINCHA",
+      "y2024": 1282.0,
+      "y2025": 1019.0,
+      "y2026": 1357.0,
+      "_seg": "D SUV"
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 1050.0,
+      "y2025": 638.0,
+      "y2026": 1091.0,
+      "_seg": "D SUV"
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 105.0,
+      "y2025": 73.0,
+      "y2026": 122.0,
+      "_seg": "D SUV"
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 28.0,
+      "y2025": 26.0,
+      "y2026": 54.0,
+      "_seg": "D SUV"
+    },
+    {
+      "label": "E SUV"
+    },
+    {
+      "label": "PICHINCHA",
+      "y2024": 87.0,
+      "y2025": 83.0,
+      "y2026": 144.0,
+      "_seg": "E SUV"
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 83.0,
+      "y2025": 59.0,
+      "y2026": 103.0,
+      "_seg": "E SUV"
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 5.0,
+      "y2025": 7.0,
+      "y2026": 14.0,
+      "_seg": "E SUV"
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 1.0,
+      "y2025": 4.0,
+      "y2026": 6.0,
+      "_seg": "E SUV"
+    },
+    {
+      "label": "PREMIUM SUV"
+    },
+    {
+      "label": "PICHINCHA",
+      "y2024": 188.0,
+      "y2025": 213.0,
+      "y2026": 232.0,
+      "_seg": "PREMIUM SUV"
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 98.0,
+      "y2025": 112.0,
+      "y2026": 162.0,
+      "_seg": "PREMIUM SUV"
+    },
+    {
+      "label": "EL ORO",
+      "y2024": null,
+      "y2025": null,
+      "y2026": 1.0,
+      "_seg": "PREMIUM SUV"
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": null,
+      "y2025": null,
+      "y2026": 1.0,
+      "_seg": "PREMIUM SUV"
+    }
+  ],
+  "ford_suv_seg_prov": [
+    {
+      "label": "PICHINCHA"
+    },
+    {
+      "label": "GUAYAS"
+    },
+    {
+      "label": "MANABÍ"
+    },
+    {
+      "label": "EL ORO"
+    },
+    {
+      "label": "D SUV",
+      "y2024": 23.0,
+      "y2025": 26.0,
+      "y2026": 90.0
+    },
+    {
+      "label": "E SUV",
+      "y2024": 42.0,
+      "y2025": 38.0,
+      "y2026": 49.0
+    }
+  ],
   "suv_25_40_gas": {
     "NACIONAL": [
       {
@@ -9414,88 +9611,92 @@
       "fcts2026": 24607
     }
   ],
-  "pu_cat_por_prov": {
-    "EL ORO": [
-      {
-        "seg": "COMPACT PICK UPS",
-        "y2024": 1.0,
-        "y2025": 3.0,
-        "y2026": 3.0
-      },
-      {
-        "seg": "FULL SIZE PICK UPS",
-        "y2024": 1.0,
-        "y2025": null,
-        "y2026": 8.0
-      },
-      {
-        "seg": "MID SIZE PICK UPS",
-        "y2024": 122.0,
-        "y2025": 132.0,
-        "y2026": 198.0
-      }
-    ],
-    "GUAYAS": [
-      {
-        "seg": "COMPACT PICK UPS",
-        "y2024": 41.0,
-        "y2025": 43.0,
-        "y2026": 35.0
-      },
-      {
-        "seg": "FULL SIZE PICK UPS",
-        "y2024": 102.0,
-        "y2025": 95.0,
-        "y2026": 111.0
-      },
-      {
-        "seg": "MID SIZE PICK UPS",
-        "y2024": 2053.0,
-        "y2025": 1511.0,
-        "y2026": 2365.0
-      }
-    ],
-    "MANABÍ": [
-      {
-        "seg": "COMPACT PICK UPS",
-        "y2024": 7.0,
-        "y2025": 8.0,
-        "y2026": 9.0
-      },
-      {
-        "seg": "FULL SIZE PICK UPS",
-        "y2024": 11.0,
-        "y2025": 5.0,
-        "y2026": 21.0
-      },
-      {
-        "seg": "MID SIZE PICK UPS",
-        "y2024": 279.0,
-        "y2025": 208.0,
-        "y2026": 277.0
-      }
-    ],
-    "PICHINCHA": [
-      {
-        "seg": "COMPACT PICK UPS",
-        "y2024": 88.0,
-        "y2025": 148.0,
-        "y2026": 128.0
-      },
-      {
-        "seg": "FULL SIZE PICK UPS",
-        "y2024": 93.0,
-        "y2025": 105.0,
-        "y2026": 125.0
-      },
-      {
-        "seg": "MID SIZE PICK UPS",
-        "y2024": 3498.0,
-        "y2025": 3392.0,
-        "y2026": 3893.0
-      }
-    ]
-  },
+  "pu_cat_por_prov": [
+    {
+      "label": "EL ORO"
+    },
+    {
+      "label": "COMPACT PICK UPS",
+      "ytd2024": 1.0,
+      "ytd2025": 3.0,
+      "ytd2026": 3.0
+    },
+    {
+      "label": "FULL SIZE PICK UPS",
+      "ytd2024": 1.0,
+      "ytd2025": null,
+      "ytd2026": 8.0
+    },
+    {
+      "label": "MID SIZE PICK UPS",
+      "ytd2024": 122.0,
+      "ytd2025": 132.0,
+      "ytd2026": 198.0
+    },
+    {
+      "label": "GUAYAS"
+    },
+    {
+      "label": "COMPACT PICK UPS",
+      "ytd2024": 41.0,
+      "ytd2025": 43.0,
+      "ytd2026": 35.0
+    },
+    {
+      "label": "FULL SIZE PICK UPS",
+      "ytd2024": 102.0,
+      "ytd2025": 95.0,
+      "ytd2026": 111.0
+    },
+    {
+      "label": "MID SIZE PICK UPS",
+      "ytd2024": 2053.0,
+      "ytd2025": 1511.0,
+      "ytd2026": 2365.0
+    },
+    {
+      "label": "MANABÍ"
+    },
+    {
+      "label": "COMPACT PICK UPS",
+      "ytd2024": 7.0,
+      "ytd2025": 8.0,
+      "ytd2026": 9.0
+    },
+    {
+      "label": "FULL SIZE PICK UPS",
+      "ytd2024": 11.0,
+      "ytd2025": 5.0,
+      "ytd2026": 21.0
+    },
+    {
+      "label": "MID SIZE PICK UPS",
+      "ytd2024": 279.0,
+      "ytd2025": 208.0,
+      "ytd2026": 277.0
+    },
+    {
+      "label": "PICHINCHA"
+    },
+    {
+      "label": "COMPACT PICK UPS",
+      "ytd2024": 88.0,
+      "ytd2025": 148.0,
+      "ytd2026": 128.0
+    },
+    {
+      "label": "FULL SIZE PICK UPS",
+      "ytd2024": 93.0,
+      "ytd2025": 105.0,
+      "ytd2026": 125.0
+    },
+    {
+      "label": "MID SIZE PICK UPS",
+      "ytd2024": 3498.0,
+      "ytd2025": 3392.0,
+      "ytd2026": 3893.0
+    }
+  ],
   "pick_diesel_tm": {
     "NACIONAL": [
       {
@@ -9637,7 +9838,21 @@
           "FORD": 2.0
         }
       ]
-    }
+    },
+    "FORD": [
+      {
+        "year": "2024",
+        "FORD": 8.0
+      },
+      {
+        "year": "2025",
+        "FORD": 73.0
+      },
+      {
+        "year": "2026",
+        "FORD": 42.0
+      }
+    ]
   },
   "pick_diesel_ta": {
     "NACIONAL": [
@@ -9813,75 +10028,77 @@
           "TOYOTA": null
         }
       ]
-    }
+    },
+    "FORD": [
+      {
+        "year": "2024",
+        "FORD": 9.0
+      },
+      {
+        "year": "2025",
+        "FORD": 50.0
+      },
+      {
+        "year": "2026",
+        "FORD": 54.0
+      }
+    ]
   },
   "pick_diesel": {
     "NACIONAL": [
       {
         "year": "2024",
-        "CHEVROLET": 232.0,
-        "TOYOTA": 246.0,
-        "MAZDA": 40.0,
-        "KIA": null,
-        "FORD": 8.0,
+        "CHEVROLET": 406.0,
+        "TOYOTA": 298.0,
+        "MAZDA": 54.0,
+        "KIA": 0,
+        "FORD": 17.0,
         "ZXAUTO": 1.0,
-        "NISSAN": 2.0
+        "NISSAN": 7.0
       },
       {
         "year": "2025",
-        "CHEVROLET": 663.0,
-        "TOYOTA": 226.0,
+        "CHEVROLET": 718.0,
+        "TOYOTA": 244.0,
         "MAZDA": 86.0,
-        "KIA": 1.0,
-        "FORD": 73.0,
+        "KIA": 3.0,
+        "FORD": 123.0,
         "ZXAUTO": 1.0,
-        "NISSAN": null
+        "NISSAN": 21.0
       },
       {
         "year": "2026",
-        "CHEVROLET": null,
-        "TOYOTA": 123.0,
+        "CHEVROLET": 112.0,
+        "TOYOTA": 143.0,
         "MAZDA": 77.0,
-        "KIA": 179.0,
-        "FORD": 42.0,
-        "ZXAUTO": null,
-        "NISSAN": null
+        "KIA": 191.0,
+        "FORD": 96.0,
+        "ZXAUTO": 0,
+        "NISSAN": 13.0
       }
     ],
     "prov_marcas": {
-      "MANABÍ": [
+      "EL ORO": [
         {
           "year": "2024",
-          "CHEVROLET": 12.0,
-          "TOYOTA": 8.0,
-          "FORD": 1.0,
-          "MAZDA": 1.0,
-          "KIA": 0,
-          "NISSAN": 0,
-          "GREAT WALL": 1.0,
+          "CHEVROLET": 9.0,
+          "TOYOTA": 5.0,
+          "FORD": 0,
           "ISUZU": 0
         },
         {
           "year": "2025",
-          "CHEVROLET": 27.0,
-          "TOYOTA": 4.0,
-          "FORD": 2.0,
-          "MAZDA": 1.0,
-          "KIA": 0,
-          "NISSAN": 1.0,
-          "GREAT WALL": 0,
+          "CHEVROLET": 24.0,
+          "TOYOTA": 1.0,
+          "FORD": 1.0,
           "ISUZU": 0
         },
         {
           "year": "2026",
-          "CHEVROLET": 7.0,
-          "TOYOTA": 4.0,
-          "FORD": 6.0,
-          "MAZDA": 3.0,
-          "KIA": 2.0,
-          "NISSAN": 1.0,
-          "GREAT WALL": 0,
-          "ISUZU": 1.0
+          "CHEVROLET": 8.0,
+          "TOYOTA": 2.0,
+          "FORD": 8.0,
+          "ISUZU": 2.0
         }
       ],
       "PICHINCHA": [
@@ -9966,30 +10183,56 @@
           "ISUZU": 2.0
         }
       ],
-      "EL ORO": [
+      "MANABÍ": [
         {
           "year": "2024",
-          "CHEVROLET": 9.0,
-          "TOYOTA": 5.0,
-          "FORD": 0,
+          "CHEVROLET": 12.0,
+          "TOYOTA": 8.0,
+          "FORD": 1.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 0,
+          "GREAT WALL": 1.0,
           "ISUZU": 0
         },
         {
           "year": "2025",
-          "CHEVROLET": 24.0,
-          "TOYOTA": 1.0,
-          "FORD": 1.0,
+          "CHEVROLET": 27.0,
+          "TOYOTA": 4.0,
+          "FORD": 2.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
           "ISUZU": 0
         },
         {
           "year": "2026",
-          "CHEVROLET": 8.0,
-          "TOYOTA": 2.0,
-          "FORD": 8.0,
-          "ISUZU": 2.0
+          "CHEVROLET": 7.0,
+          "TOYOTA": 4.0,
+          "FORD": 6.0,
+          "MAZDA": 3.0,
+          "KIA": 2.0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
+          "ISUZU": 1.0
         }
       ]
-    }
+    },
+    "FORD": [
+      {
+        "year": "2024",
+        "FORD": 17.0
+      },
+      {
+        "year": "2025",
+        "FORD": 123.0
+      },
+      {
+        "year": "2026",
+        "FORD": 96.0
+      }
+    ]
   },
   "pick_fullsize": {
     "NACIONAL": [
@@ -10147,7 +10390,21 @@
           "CHEVROLET": null
         }
       ]
-    }
+    },
+    "FORD": [
+      {
+        "year": "2024",
+        "FORD": 48.0
+      },
+      {
+        "year": "2025",
+        "FORD": 86.0
+      },
+      {
+        "year": "2026",
+        "FORD": 107.0
+      }
+    ]
   },
   "precios_competidores": {
     "SUV GAS 25 - 40": [
