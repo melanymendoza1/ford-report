@@ -1702,7 +1702,7 @@ function T7({ d }: { d: any }) {
       const fp = sub === 'everest' ? 69990 : 79990
       const prices = (d.precios_competidores?.[pk] || []) as any[]
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.some((p:any)=>(p.marca||'').toUpperCase()===b.brand && p.precio!=null)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
