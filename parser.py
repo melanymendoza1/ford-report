@@ -1,233 +1,390 @@
 #!/usr/bin/env python3
 """
-COSTADRON / ORGU FORD — Parser de datos AEADE
+ORGU FORD — Parser de datos AEADE v2 (Jun 2026)
 Uso: python parser.py <ruta_al_excel.xlsx>
 Genera: public/report_data.json
 """
 
-import json
-import sys
-import os
+import json, sys, os
 from datetime import datetime
 from openpyxl import load_workbook
 
-PROVINCES = ['NACIONAL', 'PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
+PROVINCES = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
 
 def safe_num(v):
+    if v is None: return None
     try:
         f = float(v)
-        return None if (f != f) else f  # NaN check
+        return None if f != f else f
     except:
         return None
 
 def is_year(v):
-    return v in (2023, 2024, 2025, 2026, '2023', '2024', '2025', '2026')
+    return v in (2024, 2025, 2026, '2024', '2025', '2026')
 
-def extract_by_province(ws):
-    rows = list(ws.iter_rows(min_row=1, max_row=400, min_col=1, max_col=55, values_only=True))
-    result = {}
-    current_prov = 'NACIONAL'
-    i = 0
-    while i < len(rows):
-        row = rows[i]
-        if row[0] == 'Provincia':
-            pv = str(row[1]) if row[1] else ''
-            current_prov = 'NACIONAL' if pv in ('(Varios elementos)', 'All') else pv
-        if row[0] == 'Etiquetas de fila':
-            header = list(row)
-            data_rows = []
+# ─── Generic flat-table extractor ─────────────────────────────────────────────
+# Reads any sheet that has: filter rows, then "Etiquetas de fila" header row,
+# then data rows like (label, 2024, 2025, 2026, Total)
+def extract_flat(ws, max_rows=500):
+    """Returns list of {label, y2024, y2025, y2026} — skips Total general."""
+    rows = list(ws.iter_rows(min_row=1, max_row=max_rows, values_only=True))
+    for i, row in enumerate(rows):
+        if row[0] == 'Etiquetas de fila' and any(is_year(v) for v in row):
+            header = [str(v) for v in row]
+            result = []
             for r in rows[i+1:]:
-                if r[0] is None or r[0] == 'Provincia': break
-                if r[0] == 'WINNERS AND LOSERS': break
-                data_rows.append(list(r))
-            if data_rows and is_year(data_rows[0][0]):
-                if current_prov not in result:
-                    named = []
-                    for dr in [r for r in data_rows if r[0] != 'Total general']:
-                        d = {'year': str(dr[0])}
-                        for j, h in enumerate(header[1:], 1):
-                            if h and 'col_' not in str(h) and 'Total' not in str(h):
-                                val = dr[j] if j < len(dr) else None
-                                d[str(h)] = val if isinstance(val, (int, float)) else None
-                        named.append(d)
-                    result[current_prov] = named
-        i += 1
+                if r[0] is None: break
+                if str(r[0]) == 'Total general': continue
+                d = {'label': r[0]}
+                for j, h in enumerate(header[1:], 1):
+                    if h in ('2024','2025','2026'):
+                        d[f'y{h}'] = safe_num(r[j]) if j < len(r) else None
+                result.append(d)
+            return result
+    return []
+
+# ─── Province-segmented extractor ─────────────────────────────────────────────
+# Handles sheets where data appears as one flat block after "Etiquetas de fila",
+# with province names as data rows (PICHINCHA row → then MAZDA, KIA... then GUAYAS row → ...)
+# brand_level=True  → only brand-level rows per province (skip trim rows)
+# brand_level=False → all rows labeled, no filtering
+TRIM_KEYWORDS = ('AC ','TM ',' TA ','DIESEL','HYBRID','CVT',' HEV','ECOBOOST','TURBO',
+                 'CRDI','VTEC','DOHC','MHEV','PHEV','BEV')
+
+def is_trim_row(label):
+    if len(label) > 40:
+        return True
+    # Check keywords, also check if label ends with common transmission codes
+    if any(kw in label for kw in TRIM_KEYWORDS):
+        return True
+    # Trim rows often end with TA, TM, or contain version numbers like "1.5", "2.0"
+    if label.endswith(' TA') or label.endswith(' TM'):
+        return True
+    import re
+    if re.search(r'\d+\.\d+ \d+P', label):  # e.g. "1.5 5P" engine/body pattern
+        return True
+    return False
+
+def extract_by_province(ws, max_rows=800, brand_level=True):
+    rows = list(ws.iter_rows(min_row=1, max_row=max_rows, values_only=True))
+    result = {}
+
+    # Find the header row with years
+    header_idx = None
+    year_cols = {}
+    for i, row in enumerate(rows):
+        if row[0] == 'Etiquetas de fila' and any(is_year(v) for v in row):
+            header_idx = i
+            for j, h in enumerate(row):
+                if is_year(h):
+                    year_cols[str(h)] = j
+            break
+
+    if header_idx is None:
+        return result
+
+    # Walk data rows — province rows have numbers in year columns AND match PROVINCES
+    current_prov = None
+    for row in rows[header_idx+1:]:
+        if row[0] is None:
+            continue
+        label = str(row[0])
+        if label == 'Total general':
+            continue
+
+        if label in PROVINCES:
+            current_prov = label
+            if current_prov not in result:
+                result[current_prov] = []
+            continue
+
+        if current_prov is None:
+            continue
+
+        if brand_level and is_trim_row(label):
+            continue  # skip trim rows in brand_level mode
+
+        # Skip dot-separated sub-brand labels like "RAM . RAM 1500" or "FORD . FORD F-150"
+        if ' . ' in label:
+            continue
+
+        d = {'brand': label} if brand_level else {'label': label}
+        for yr, col in year_cols.items():
+            d[f'y{yr}'] = safe_num(row[col]) if col < len(row) else None
+        result[current_prov].append(d)
+
     return result
 
-def extract_winners_losers(ws):
-    rows = list(ws.iter_rows(min_row=1, max_row=400, min_col=1, max_col=55, values_only=True))
-    result = {}
-    current_prov = 'NACIONAL'
-    header = None
-    for row in rows:
-        if row[0] == 'Provincia':
-            pv = str(row[1]) if row[1] else ''
-            current_prov = 'NACIONAL' if pv in ('(Varios elementos)', 'All') else pv
+# ─── Nacional brand extractor (no province header) ────────────────────────────
+def extract_nacional_brands(ws, max_rows=600):
+    """For sheets like SUV_GAS_25_40_INDUSTRIA_YTD — brand → trim hierarchy, no province."""
+    rows = list(ws.iter_rows(min_row=1, max_row=max_rows, values_only=True))
+    for i, row in enumerate(rows):
+        if row[0] == 'Etiquetas de fila' and any(is_year(v) for v in row):
+            header = list(row)
+            year_cols = {}
+            for j, h in enumerate(header):
+                if is_year(h):
+                    year_cols[str(h)] = j
+            brands = []
+            j2 = i + 1
+            while j2 < len(rows):
+                r = rows[j2]
+                if r[0] is None: break
+                if str(r[0]) == 'Total general':
+                    j2 += 1; continue
+                label = str(r[0])
+                # Skip trim rows
+                if is_trim_row(label):
+                    j2 += 1; continue
+                d = {'brand': label}
+                for yr, col in year_cols.items():
+                    d[f'y{yr}'] = safe_num(r[col]) if col < len(r) else None
+                brands.append(d)
+                j2 += 1
+            return brands
+    return []
+
+# ─── FY/YTD summary extractor ─────────────────────────────────────────────────
+def extract_summary(ws):
+    """Returns {cat: {y2024, y2025, y2026, fcts2026}} — for FY sheets with forecast."""
+    rows = list(ws.iter_rows(min_row=1, max_row=30, values_only=True))
+    for i, row in enumerate(rows):
         if row[0] == 'Etiquetas de fila':
             header = list(row)
-        if row[0] == 'WINNERS AND LOSERS' and header and current_prov not in result:
-            wl = {}
-            for j, h in enumerate(header[1:], 1):
-                if h and 'col_' not in str(h) and 'Total' not in str(h):
-                    wl[str(h)] = safe_num(row[j] if j < len(row) else None)
-            result[current_prov] = wl
-    return result
+            result = {}
+            for r in rows[i+1:]:
+                if r[0] is None: break
+                if str(r[0]) == 'Total general':
+                    result['_total'] = {
+                        'y2024': safe_num(r[1]),
+                        'y2025': safe_num(r[2]),
+                        'y2026': safe_num(r[3]),
+                    }
+                    # fcts = (ytd/5)*12
+                    if safe_num(r[3]):
+                        result['_total']['fcts2026'] = round((safe_num(r[3]) / 5) * 12)
+                    continue
+                cat = str(r[0])
+                result[cat] = {
+                    'y2024': safe_num(r[1]),
+                    'y2025': safe_num(r[2]),
+                    'y2026': safe_num(r[3]),
+                }
+                if safe_num(r[3]):
+                    result[cat]['fcts2026'] = round((safe_num(r[3]) / 5) * 12)
+            return result
+    return {}
 
-def extract_pickup(ws):
-    rows = list(ws.iter_rows(min_row=1, max_row=400, min_col=1, max_col=20, values_only=True))
+# ─── Province totals extractor ─────────────────────────────────────────────────
+def extract_province_totals(ws):
+    """For PROVINCIAS_YTD, FORD_PROVINCIAS_YTD — returns {prov: {y2024, y2025, y2026}}."""
+    rows = list(ws.iter_rows(min_row=1, max_row=30, values_only=True))
+    for i, row in enumerate(rows):
+        if row[0] == 'Etiquetas de fila':
+            result = {}
+            for r in rows[i+1:]:
+                if r[0] is None: break
+                if str(r[0]) == 'Total general':
+                    result['ZONA ORGU'] = {'y2024': safe_num(r[1]), 'y2025': safe_num(r[2]), 'y2026': safe_num(r[3])}
+                    continue
+                result[str(r[0])] = {'y2024': safe_num(r[1]), 'y2025': safe_num(r[2]), 'y2026': safe_num(r[3])}
+            return result
+    return {}
+
+# ─── Ford category by province ─────────────────────────────────────────────────
+def extract_ford_cat_by_prov(ws):
+    """FORD_CATEGORIA_POR_PROV_YTD — {prov: {cat: {y2024, y2025, y2026}}}"""
+    rows = list(ws.iter_rows(min_row=1, max_row=100, values_only=True))
     result = {}
-    current_prov = 'NACIONAL'
-    i = 0
-    while i < len(rows):
-        row = rows[i]
-        if row[0] == 'Provincia':
-            pv = str(row[1]) if row[1] else ''
-            current_prov = 'NACIONAL' if pv in ('(Varios elementos)', 'All') else pv
-        if (row[0] is None and row[1] and
-                isinstance(row[1], str) and row[1] not in ('Etiquetas de columna',) and
-                i+1 < len(rows) and rows[i+1][0] == 'Etiquetas de fila'):
-            brand_header = list(row)
-            data_rows = []
-            for r in rows[i+2:]:
-                if r[0] is None or r[0] == 'Provincia': break
-                if r[0] == 'Total general': continue
-                data_rows.append(list(r))
-            if data_rows and current_prov not in result:
-                named = []
-                for dr in data_rows:
-                    d = {'year': str(dr[0])}
-                    for j, brand in enumerate(brand_header[1:], 1):
-                        if brand and 'Total' not in str(brand):
-                            v = dr[j] if j < len(dr) else None
-                            d[str(brand)] = v if isinstance(v, (int, float)) else None
-                    named.append(d)
-                result[current_prov] = named
-        i += 1
+    current_prov = None
+    for i, row in enumerate(rows):
+        if row[0] in PROVINCES:
+            current_prov = row[0]
+            result[current_prov] = {}
+        elif current_prov and row[0] and row[0] not in ('Etiquetas de fila', 'Total general', None):
+            label = str(row[0])
+            if label not in PROVINCES and not any(is_year(label) for _ in [1]):
+                result[current_prov][label] = {
+                    'y2024': safe_num(row[1]),
+                    'y2025': safe_num(row[2]),
+                    'y2026': safe_num(row[3]),
+                }
     return result
 
-def detect_report_month(wb):
-    """Detect report month AND number of months from data"""
-    months_es = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
-                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
-    try:
-        ws = wb['PRIMERA PARTE']
-        rows = list(ws.iter_rows(min_row=1, max_row=25, min_col=1, max_col=8, values_only=True))
-        for row in rows:
-            if row[0] == 'AñoMes':
-                val = str(row[1]) if row[1] else 'All'
-                if val != 'All':
-                    if len(val) == 6 and val.isdigit():
-                        month_num = int(val[4:6])
-                        year = val[:4]
-                        # Datos cerrados = mes anterior al actual
-                        months_ytd = month_num - 1
-                        if months_ytd < 1:
-                            months_ytd = 1
-                        return months_es[months_ytd-1] + ' ' + year, months_ytd
-    except:
-        pass
+# ─── Pick Up diesel combined TM+TA ─────────────────────────────────────────────
+def extract_pick_diesel_combined(ws_tm, ws_ta):
+    """Merges TM and TA provincial brand data."""
+    tm = extract_by_province(ws_tm, brand_level=True)
+    ta = extract_by_province(ws_ta, brand_level=True)
+    combined = {}
+    all_provs = set(list(tm.keys()) + list(ta.keys()))
+    for prov in all_provs:
+        brand_map = {}
+        for source in [tm.get(prov, []), ta.get(prov, [])]:
+            for item in source:
+                b = item['brand']
+                if b not in brand_map:
+                    brand_map[b] = {'brand': b, 'y2024': 0, 'y2025': 0, 'y2026': 0}
+                for yr in ('y2024', 'y2025', 'y2026'):
+                    brand_map[b][yr] = (brand_map[b][yr] or 0) + (item.get(yr) or 0)
+        combined[prov] = list(brand_map.values())
+    return combined
 
-    now = datetime.now()
-    months_ytd = now.month - 1 if now.month > 1 else 1
-    return months_es[months_ytd-1] + ' ' + str(now.year), months_ytd
-
+# ─── MAIN ──────────────────────────────────────────────────────────────────────
 def main(excel_path):
     print(f"Leyendo: {excel_path}")
-    wb = load_workbook(excel_path, read_only=False, data_only=True)
+    wb = load_workbook(excel_path, read_only=True, data_only=True)
 
     report = {}
 
-    # Detect month
-    report_month, months_ytd = detect_report_month(wb)
-    report['report_month'] = report_month
+    # ── Metadata ──
+    meta_ws = wb['METADATA']
+    meta_rows = list(meta_ws.iter_rows(max_row=20, values_only=True))
+    meta = {str(r[0]): r[1] for r in meta_rows if r[0] and r[1]}
+    months_ytd = int(meta.get('meses_incluidos', 5))
+    mes_ytd = meta.get('mes_ytd')
+    months_es = ['Enero','Febrero','Marzo','Abril','Mayo','Junio',
+                 'Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre']
+    if hasattr(mes_ytd, 'month'):
+        month_name = months_es[mes_ytd.month - 1] + ' ' + str(mes_ytd.year)
+    else:
+        month_name = 'Mayo 2026'
+    report['report_month'] = month_name
     report['months_ytd'] = months_ytd
-    print(f"Mes detectado: {report_month} ({months_ytd} meses YTD)")
+    print(f"Mes: {month_name} ({months_ytd} meses YTD)")
 
-    # 1. Mercado nacional total
-    ws = wb['PRIMERA PARTE']
-    rows_fp = list(ws.iter_rows(min_row=1, max_row=80, min_col=1, max_col=8, values_only=True))
-    for i, row in enumerate(rows_fp):
-        if row[0] == 'Etiquetas de fila' and row[1] == '2023':
-            nat = []
-            for r in rows_fp[i+1:]:
-                if r[0] is None: break
-                nat.append({'cat': r[0], 'y2023': r[1] or 0, 'y2024': r[2] or 0,
-                            'y2025': r[3] or 0, 'y2026': r[4] or 0})
-            report['mercado_nacional'] = nat
-            break
+    # ── T1: Industria + Ford nacional FY ──
+    print("  T1: Nacional FY/YTD...")
+    ind_fy   = extract_summary(wb['IND_NACIONAL_FY'])
+    ford_fy  = extract_summary(wb['FORD_NACIONAL_FY'])
+    ind_ytd  = extract_summary(wb['IND_NACIONAL_YTD'])
+    ford_ytd = extract_summary(wb['FORD_NACIONAL_YTD'])
+    report['industria_nacional_fy']  = ind_fy
+    report['ford_nacional_fy']       = ford_fy
+    report['industria_nacional_ytd'] = ind_ytd
+    report['ford_nacional_ytd']      = ford_ytd
 
-    # 2. Ford nacional
-    for i, row in enumerate(rows_fp):
-        if row[0] == 'Marca' and row[1] == 'FORD':
-            for j in range(i, min(i+20, len(rows_fp))):
-                if rows_fp[j][0] == 'Etiquetas de fila':
-                    ford_rows = []
-                    for r in rows_fp[j+1:]:
-                        if r[0] is None: break
-                        ford_rows.append({'cat': r[0], 'y2023': r[1] or 0, 'y2024': r[2] or 0,
-                                          'y2025': r[3] or 0, 'y2026': r[4] or 0})
-                    report['ford_nacional'] = ford_rows
-                    break
-            break
+    # ── T2: Zona Orgu FY/YTD ──
+    print("  T2: Zona Orgu FY/YTD...")
+    report['industria_orgu_fy']  = extract_summary(wb['IND_ORGU_FY'])
+    report['ford_orgu_fy']       = extract_summary(wb['FORD_ORGU_FY'])
+    report['industria_orgu_ytd'] = extract_summary(wb['IND_ORGU_YTD'])
+    report['ford_orgu_ytd']      = extract_summary(wb['FORD_ORGU_YTD'])
 
-    # 3. SUV segmentos
-    ws2 = wb['CAT ANALISIS']
-    rows_cat = list(ws2.iter_rows(min_row=1, max_row=30, min_col=1, max_col=8, values_only=True))
-    for i, row in enumerate(rows_cat):
-        if row[0] == 'Etiquetas de fila' and row[1] == '2024':
-            segs = []
-            for r in rows_cat[i+1:]:
-                if r[0] is None or r[0] == 'CAT': break
-                if r[0] != 'Total general':
-                    segs.append({'seg': r[0], 'y2024': r[1] or 0, 'y2025': r[2] or 0,
-                                 'y2026': r[3] or 0, 'fcts2026': round(r[4] or 0)})
-            report['suv_segmentos'] = segs
-            break
+    # ── T2: Provincias ──
+    print("  T2: Provincias...")
+    report['provincias_industria'] = extract_province_totals(wb['PROVINCIAS_YTD'])
+    report['provincias_ford']      = extract_province_totals(wb['FORD_PROVINCIAS_YTD'])
 
-    # 4. Marcas por rango y provincia
-    sheets_map = {
-        'suv_25_40_gas':  'MARCAS 25-40K',
-        'suv_25_40_fhev': 'MARCAS 25-40K FHEV',
-        'suv_40_50':      'MARCAS 40K -50K',
-        'suv_55_80':      'MARCAS 55K -80K',
-        'suv_60_80':      'MARCAS 60K -80K',
-        'suv_80plus':     'MARCAS +80K1',
-    }
-    for key, sheet in sheets_map.items():
-        print(f"  Procesando {sheet}...")
-        report[key] = extract_by_province(wb[sheet])
+    # ── T3: Categorías Orgu ──
+    print("  T3: Categorías...")
+    report['categorias_orgu_ytd']   = extract_summary(wb['CAT_ORGU_YTD'])
+    report['categorias_orgu_fy']    = extract_summary(wb['CAT_ORGU_FY'])
+    report['cat_por_provincia_ytd'] = extract_flat(wb['CAT_POR_PROVINCIA_YTD'])
+    report['ford_cat_por_prov']     = extract_ford_cat_by_prov(wb['FORD_CATEGORIA_POR_PROV_YTD'])
 
-    # 5. Winners & Losers
-    wl_map = {
-        'wl_25_40_gas':  'MARCAS 25-40K',
-        'wl_25_40_fhev': 'MARCAS 25-40K FHEV',
-        'wl_40_50':      'MARCAS 40K -50K',
-        'wl_55_80':      'MARCAS 55K -80K',
-    }
-    for key, sheet in wl_map.items():
-        report[key] = extract_winners_losers(wb[sheet])
+    # ── T4: SUV Segmentos ──
+    print("  T4: SUV Segmentos...")
+    report['suv_segmentos_orgu_ytd'] = extract_summary(wb['SUV_SEGMENTOS_ORGU_YTD'])
+    report['suv_segmentos_orgu_fy']  = extract_summary(wb['SUV_SEGMENTOS_ORGU_FY'])
+    report['suv_segmentos_por_prov'] = extract_by_province(wb['SUV_SEGMENTOS_POR_PROVINCIA_YTD'], brand_level=False)
 
-    # 6. Pick Ups
-    print("  Procesando Pick Ups...")
-    report['pick_diesel']   = extract_pickup(wb['MARCAS PICKDSL'])
-    report['pick_fullsize'] = extract_pickup(wb['MARCAS FULL SIZE'])
+    # ── T5: SUV GAS 25-40K ──
+    print("  T5: SUV GAS 25-40K...")
+    report['suv_gas_25_40_nacional']  = extract_nacional_brands(wb['SUV_GAS_25_40_INDUSTRIA_YTD'])
+    report['suv_gas_25_40_por_prov']  = extract_by_province(wb['SUV_GAS_25_40_POR_PROV_MARCAS'])
+    report['suv_gas_25_40_ford']      = extract_flat(wb['SUV_GAS_25_40_FORD_YTD'])
+    report['suv_gas_25_40_prov_vol']  = extract_province_totals(wb['SUV_GAS_25_40_POR_PROVINCIA_YTD'])
+
+    # ── T6: SUV FHEV 25-40K ──
+    print("  T6: SUV FHEV 25-40K...")
+    report['suv_hib_25_40_nacional']  = extract_nacional_brands(wb['SUV_HIB_25_40_INDUSTRIA_YTD'])
+    report['suv_hib_25_40_por_prov']  = extract_by_province(wb['SUV_HIB_25_40_POR_PROV_MARCAS'])
+    report['suv_hib_25_40_ford']      = extract_flat(wb['SUV_HIB_25_40_FORD_YTD'])
+    report['suv_hib_25_40_prov_vol']  = extract_province_totals(wb['SUV_HIB_25_40_POR_PROVINCIA_YTD'])
+
+    # ── T7: SUV FHEV 40-50K ──
+    print("  T7: SUV FHEV 40-50K...")
+    report['suv_hib_40_50_nacional']  = extract_nacional_brands(wb['SUV_HIB_40_50_INDUSTRIA_YTD'])
+    report['suv_hib_40_50_por_prov']  = extract_by_province(wb['SUV_HIB_40_50_POR_PROV_MARCAS'])
+    report['suv_hib_40_50_ford']      = extract_flat(wb['SUV_HIB_40_50_FORD_YTD'])
+    report['suv_hib_40_50_prov_vol']  = extract_province_totals(wb['SUV_HIB_40_50_POR_PROVINCIA'])
+
+    # ── T8: SUV GAS 55-80K (Everest) ──
+    print("  T8: SUV 55-80K Everest...")
+    report['suv_55_80_everest_nacional'] = extract_nacional_brands(wb['SUV_GAS_55_80_EVEREST_INDUSTRIA'])
+    report['suv_55_80_everest_ford']     = extract_flat(wb['SUV_GAS_55_80_EVEREST_FORD_YTD'])
+    report['suv_55_80_por_prov']         = extract_by_province(wb['SUV_55_80_POR_PROV'])
+
+    # ── T9: SUV GAS 60-80K (Explorer Active) ──
+    print("  T9: SUV 60-80K Explorer...")
+    report['suv_60_80_explorer_nacional'] = extract_nacional_brands(wb['SUV_GAS_55_80_EXPLORER_ACTIVE_I'])
+    report['suv_60_80_explorer_ford']     = extract_flat(wb['SUV_GAS_55_80_EXPLORER_ACTIVE_F'])
+    report['suv_60_80_por_prov']          = extract_by_province(wb['SUV_60_80_POR_PROV'])
+
+    # ── T10: SUV 80K+ ──
+    print("  T10: SUV 80K+...")
+    report['suv_80plus_nacional']  = extract_nacional_brands(wb['SUV_80PLUS_INDUSTRIA_YTD'])
+    report['suv_80plus_ford']      = extract_flat(wb['SUV_80PLUS_FORD_YTD'])
+    report['suv_80plus_por_prov']  = extract_by_province(wb['SUV_80PLUS_POR_PROV'])
+
+    # ── T11: Pick Ups 4x4 Diesel ──
+    print("  T11: Pick Ups Diesel...")
+    report['pu_diesel_tm_nacional']  = extract_nacional_brands(wb['PICKUP_4X4_DSL_50_70_IND_TM'])
+    report['pu_diesel_ta_nacional']  = extract_nacional_brands(wb['PICKUP_4X4_DSL_50_70_IND_TA'])
+    report['pu_diesel_por_prov']     = extract_pick_diesel_combined(
+                                          wb['PU_DIESEL_POR_PROV_MARCAS_TM'],
+                                          wb['PU_DIESEL_POR_PROV_MARCAS_TA'])
+    report['pu_diesel_ford']         = extract_flat(wb['PICKUP_4X4_DSL_50_70_FORD_YTD'])
+    report['pu_diesel_prov_vol_tm']  = extract_province_totals(wb['PICKUP_4X4_DSL_50_70_PROV_TM'])
+    report['pu_diesel_prov_vol_ta']  = extract_province_totals(wb['PICKUP_4X4_DSL_50_70_PROV_TA'])
+
+    # ── T12: Pick Ups Full Size ──
+    print("  T12: Pick Ups Full Size...")
+    report['pu_fullsize_nacional']  = extract_nacional_brands(wb['PICKUP_FULLSIZE_60_100_INDUSTRI'])
+    report['pu_fullsize_por_prov']  = extract_by_province(wb['PU_FULLSIZE_POR_PROV_MARCAS'])
+    report['pu_fullsize_ford']      = extract_flat(wb['PICKUP_FULLSIZE_60_100_FORD_YTD'])
+    report['pu_fullsize_prov_vol']  = extract_province_totals(wb['PICKUP_FULLSIZE_60_100_POR_PROV'])
+
+    # ── TOP 10 Modelos ──
+    print("  Top 10 modelos...")
+    report['top10_modelos'] = extract_flat(wb['TOP10_MODELOS_ORGU_YTD'])
 
     wb.close()
 
-    # Write output
+    # ── Write output ──
     out_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'public', 'report_data.json')
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
+
+    # Preserve existing non-data keys (precios, bbc_hotlines, insights, etc.)
+    existing = {}
+    if os.path.exists(out_path):
+        with open(out_path, 'r', encoding='utf-8') as f:
+            existing = json.load(f)
+        preserve_keys = ['precios_competidores', 'bbc_hotlines', 'model_filters',
+                         'model_display_names', 'insights', 'vol_override', 'ford_cards']
+        for k in preserve_keys:
+            if k in existing:
+                report[k] = existing[k]
+        print(f"  Preservadas {len([k for k in preserve_keys if k in existing])} claves de admin.")
+
     with open(out_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2, default=str)
 
-    print(f"\nListo! Generado en: {out_path}")
-    print(f"Mes del reporte: {report['report_month']}")
-    print(f"Categorías nacionales: {len(report.get('mercado_nacional', []))}")
-    print(f"Provincias en SUV 55-80K: {list(report.get('suv_55_80', {}).keys())}")
+    print(f"\n✅ Listo! → {out_path}")
+    print(f"   Mes: {report['report_month']} ({months_ytd} meses YTD)")
+    ind_total = ind_fy.get('_total', {})
+    ford_total = ford_fy.get('_total', {})
+    print(f"   Industria Nacional FY: 2024={ind_total.get('y2024')} | 2025={ind_total.get('y2025')} | 2026 YTD={ind_total.get('y2026')}")
+    print(f"   Ford Nacional FY:      2024={ford_total.get('y2024')} | 2025={ford_total.get('y2025')} | 2026 YTD={ford_total.get('y2026')}")
+    orgu_total = report['industria_orgu_fy'].get('_total', {})
+    ford_orgu  = report['ford_orgu_fy'].get('_total', {})
+    print(f"   Industria Orgu FY:     2024={orgu_total.get('y2024')} | 2025={orgu_total.get('y2025')} | 2026 YTD={orgu_total.get('y2026')}")
+    print(f"   Ford Orgu FY:          2024={ford_orgu.get('y2024')} | 2025={ford_orgu.get('y2025')} | 2026 YTD={ford_orgu.get('y2026')}")
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
         print("Uso: python parser.py <ruta_excel.xlsx>")
-        print("Ejemplo: python parser.py ~/Downloads/MARKET_OVERVIEW.xlsx")
         sys.exit(1)
     main(sys.argv[1])
