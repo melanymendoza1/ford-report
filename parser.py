@@ -249,30 +249,46 @@ def reshape_for_frontend(report: dict, wb) -> dict:
     ford_nac  = report.get('ford_nacional_ytd', {})
 
     def dict_to_arr(d):
-        return [{'cat': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'),
-                 'y2026': v.get('y2026'), 'fcts2026': v.get('fcts2026')} for k, v in d.items()]
+        """Convert {cat: {y2024,y2025,y2026}} to array with ytd2024/ytd2025/ytd2026 field names.
+        page.tsx expects ytd2025/ytd2026. Includes _total as 'Total general' entry."""
+        rows = []
+        total = d.get('_total')
+        for k, v in d.items():
+            if k == '_total': continue
+            rows.append({'cat': k, 'ytd2024': v.get('y2024'), 'ytd2025': v.get('y2025'),
+                         'ytd2026': v.get('y2026'), 'fcts2026': v.get('fcts2026')})
+        if total:
+            rows.append({'cat': 'Total general', 'ytd2024': total.get('y2024'),
+                         'ytd2025': total.get('y2025'), 'ytd2026': total.get('y2026'),
+                         'fcts2026': total.get('fcts2026')})
+        return rows
 
     out['mercado_ytd']          = dict_to_arr(ind_orgu)
     out['ford_ytd']             = dict_to_arr(ford_orgu)
     out['mercado_ytd_nacional'] = dict_to_arr(ind_nac)
     out['ford_ytd_nacional']    = dict_to_arr(ford_nac)
 
-    # ── T1: provincias_ytd (array con label/y2024/y2025/y2026) ──
+    # ── T1: provincias_ytd (array con label/ytd2024/ytd2025/ytd2026) ──
     out['provincias_ytd'] = [
-        {'label': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'), 'y2026': v.get('y2026')}
+        {'label': k, 'ytd2024': v.get('y2024'), 'ytd2025': v.get('y2025'), 'ytd2026': v.get('y2026')}
         for k, v in report.get('provincias_industria', {}).items()
     ]
     out['ford_provincias_ytd'] = [
-        {'label': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'), 'y2026': v.get('y2026')}
+        {'label': k, 'ytd2024': v.get('y2024'), 'ytd2025': v.get('y2025'), 'ytd2026': v.get('y2026')}
         for k, v in report.get('provincias_ford', {}).items()
     ]
 
-    # ford_cat_por_prov: page.tsx expects [{prov, SUV:{y2024,y2025,y2026}, 'PICK UPS':{...}}]
+    # ford_cat_por_prov: page.tsx espera array flat [{label:'PICHINCHA'}, {label:'SUV', ytd2025, ytd2026}, {label:'GUAYAS'}, ...]
     fcpp = report.get('ford_cat_por_prov', {})
-    out['ford_cat_por_prov'] = [
-        {'prov': prov, **cats}
-        for prov, cats in fcpp.items()
-    ]
+    flat_fcpp = []
+    for prov, cats in fcpp.items():
+        flat_fcpp.append({'label': prov})
+        for cat_name, vals in cats.items():
+            flat_fcpp.append({
+                'label': cat_name,
+                'ytd2024': vals.get('y2024'), 'ytd2025': vals.get('y2025'), 'ytd2026': vals.get('y2026')
+            })
+    out['ford_cat_por_prov'] = flat_fcpp
 
     # ── T2: combustible SUV/PU ──
     def parse_combustible_nac(ws):
