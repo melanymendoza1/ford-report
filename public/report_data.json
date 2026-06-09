@@ -11203,21 +11203,6 @@
         }
       },
       {
-        "marca": "Hyundai",
-        "modelo": "Palisade",
-        "trim": "",
-        "combustible": "Gasolina",
-        "precio": 79999,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
-          "MANABÍ": 0,
-          "EL ORO": 0
-        }
-      },
-      {
         "marca": "Subaru",
         "modelo": "Outback",
         "trim": "",
@@ -11228,21 +11213,6 @@
           "ZONA ORGU": 1,
           "PICHINCHA": 0,
           "GUAYAS": 1,
-          "MANABÍ": 0,
-          "EL ORO": 0
-        }
-      },
-      {
-        "marca": "Nissan",
-        "modelo": "Pathfinder",
-        "trim": "Advance",
-        "combustible": "Gasolina",
-        "precio": 93990,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
           "MANABÍ": 0,
           "EL ORO": 0
         }
@@ -12020,7 +11990,7 @@
     },
     "T7_explorer_active": {
       "model": "Explorer Active",
-      "price": 89990,
+      "price": 89988,
       "fuel": "Gasolina",
       "v26": 21,
       "v25": 25
