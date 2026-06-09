@@ -1730,7 +1730,7 @@ function T7({ d }: { d: any }) {
     {/* Evolution */}
     {/* BBC */}
   </>
-}}
+}
 
 function T8({ d }: { d: any }) {
   const [sub, setSub] = useState('expedition')
@@ -2013,7 +2013,7 @@ function T8({ d }: { d: any }) {
 
     {/* BBC */}
   </>
-}}
+}
 
 function T9({ d }: { d: any }) {
   const [scope, setScope] = useState('NACIONAL')
@@ -2376,7 +2376,7 @@ function T10({ d }: { d: any }) {
 
     <Ins items={[...(d.insights?.['T10_ranger_xl'] || [])]}/>
   </>
-}}
+}
 
 function T11({ d }: { d: any }) {
   const [sub, setSub] = useState('xlt')
@@ -2660,7 +2660,7 @@ function T11({ d }: { d: any }) {
 
     {/* BBC */}
   </>
-}}
+}
 
 function T12({ d }: { d: any }) {
   const ytdF = (d.ford_ytd || []) as any[]
