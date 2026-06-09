@@ -11319,11 +11319,11 @@
         "combustible": "Gasolina",
         "precio": 99990,
         "vol_override": {
-          "NACIONAL": 16,
-          "PICHINCHA": 6,
-          "GUAYAS": 5,
-          "MANABÍ": 1,
-          "ZONA ORGU": 12
+          "NACIONAL": 22,
+          "PICHINCHA": 9,
+          "GUAYAS": 8,
+          "MANABÍ": 0,
+          "ZONA ORGU": 17
         }
       },
       {
@@ -11359,21 +11359,6 @@
           "MANABÍ": 0,
           "EL ORO": 0,
           "ZONA ORGU": 3
-        }
-      },
-      {
-        "marca": "BMW",
-        "modelo": "X5",
-        "trim": "",
-        "combustible": "Gasolina",
-        "precio": 119999,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
-          "MANABÍ": 0,
-          "EL ORO": 0
         }
       }
     ],
