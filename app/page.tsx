@@ -1784,6 +1784,29 @@ function T8({ d }: { d: any }) {
   // Explorer Platinum needs combined data from both sheets
   const isEP = sub === 'explorer_plat'
 
+  // Hardcoded province data Mayo 2026 — inamovible por admin
+  type ProvRow = { ytd2025: number, ytd2026: number, ford: number }
+  const T8_PROV: Record<string, Record<string, ProvRow>> = {
+    expedition: {
+      PICHINCHA: { ytd2025: 49, ytd2026: 39, ford: 5 },
+      GUAYAS:    { ytd2025: 45, ytd2026: 40, ford: 5 },
+      'MANABÍ':  { ytd2025: 1,  ytd2026: 3,  ford: 1 },
+      'EL ORO':  { ytd2025: 4,  ytd2026: 5,  ford: 0 },
+    },
+    explorer_plat: {
+      PICHINCHA: { ytd2025: 12, ytd2026: 18, ford: 9 },
+      GUAYAS:    { ytd2025: 11, ytd2026: 11, ford: 8 },
+      'MANABÍ':  { ytd2025: 0,  ytd2026: 0,  ford: 0 },
+      'EL ORO':  { ytd2025: 0,  ytd2026: 0,  ford: 0 },
+    },
+    bronco: {
+      PICHINCHA: { ytd2025: 1, ytd2026: 1, ford: 1 },
+      GUAYAS:    { ytd2025: 0, ytd2026: 0, ford: 0 },
+      'MANABÍ':  { ytd2025: 0, ytd2026: 0, ford: 0 },
+      'EL ORO':  { ytd2025: 0, ytd2026: 0, ford: 0 },
+    },
+  }
+
   // Merge two row arrays by summing values per key per year
   const mergeRows = (rows1: any[], rows2: any[]) => {
     return ['2024', '2025', '2026'].map(yr => {
@@ -1883,9 +1906,10 @@ function T8({ d }: { d: any }) {
     return total
   }
   const provChartData = PROVS.map(p => {
-    const v26 = getProvFilteredTotal(p, '2026')
-    const v25 = getProvFilteredTotal(p, '2025')
-    const f26 = getProvFordTotal(p, '2026')
+    const hc = T8_PROV[sub]?.[p]
+    const v26 = hc?.ytd2026 ?? 0
+    const v25 = hc?.ytd2025 ?? 0
+    const f26 = hc?.ford ?? 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
     const ms = v26 ? (f26 / v26 * 100).toFixed(1) : '0'
     return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': f26, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
