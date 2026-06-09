@@ -1038,7 +1038,7 @@ function T4({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.models.some(m => m.price > 0))
       // Recalculate MS
       // Add fallback bubble for brands with volume but no matching price trims
@@ -1244,7 +1244,7 @@ function T5({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
@@ -1430,7 +1430,7 @@ function T6({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
@@ -1448,12 +1448,11 @@ function T6({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={d.bbc_hotlines?.['SUV  HEV 40 - 50'] ?? undefined} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
       <Lbl>Top marcas · {scopeLabel} · YTD 2026 vs YTD 2025</Lbl>
-      {top10.map((b, i) => <RankBar key={b.brand + scope} rank={i + 1} name={b.brand} val={b.v26} max={maxV} ford={b.brand === 'FORD'} v25={b.v25} models={getModelNames(b.brand).map(m => ({ n: b.brand + ' · ' + m, v: b.v26 }))} />)}
       {!fordIn && fordEntry && fordEntry.v26 > 0 && <>
         <div style={{ borderTop: `2px dashed ${C.brd}`, margin: '14px 0', position: 'relative' }}>
           <span style={{ position: 'absolute', top: -10, left: 16, background: C.w, padding: '0 8px', fontSize: 10, fontWeight: 700, color: C.ac }}>FORD · #{fordPos}</span>
@@ -1583,6 +1582,8 @@ function T7({ d }: { d: any }) {
         if (mt.length) total += ((v as number) || 0)
       }
     })
+    // Fallback: if no trim match, use FORD brand total from row
+    if (total === 0 && (row['FORD'] as number) > 0) total = (row['FORD'] as number) || 0
     return total
   }
 
@@ -1705,7 +1706,7 @@ function T7({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
@@ -1863,6 +1864,7 @@ function T8({ d }: { d: any }) {
         if (mt.length) total += ((v as number) || 0)
       }
     })
+    if (total === 0 && (row['FORD'] as number) > 0) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -1988,7 +1990,7 @@ function T8({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
@@ -2242,6 +2244,7 @@ function T10({ d }: { d: any }) {
         if (mt.length) total += ((v as number) || 0)
       }
     })
+    if (total === 0 && (row['FORD'] as number) > 0) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2349,7 +2352,7 @@ function T10({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
@@ -2505,6 +2508,7 @@ function T11({ d }: { d: any }) {
       const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
       if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
     })
+    if (total === 0 && (row['FORD'] as number) > 0) total = (row['FORD'] as number) || 0
     return total
   }
   const provChartData = PROVS.map(p => {
@@ -2635,7 +2639,7 @@ function T11({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        return { brand: shortName(b.brand), models, totalVol: b.v26, ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
       }).filter(b => b.totalVol > 0)
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
