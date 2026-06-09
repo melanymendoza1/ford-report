@@ -479,8 +479,9 @@
       "y2026": 2311.0
     }
   ],
-  "ford_cat_por_prov": {
-    "PICHINCHA": {
+  "ford_cat_por_prov": [
+    {
+      "prov": "PICHINCHA",
       "AUTOMOV. DE PASAJEROS": {
         "y2024": 2.0,
         "y2025": 1.0,
@@ -502,7 +503,8 @@
         "y2026": 1.0
       }
     },
-    "GUAYAS": {
+    {
+      "prov": "GUAYAS",
       "AUTOMOV. DE PASAJEROS": {
         "y2024": null,
         "y2025": null,
@@ -519,7 +521,8 @@
         "y2026": 154.0
       }
     },
-    "MANABÍ": {
+    {
+      "prov": "MANABÍ",
       "AUTOMOV. DE PASAJEROS": {
         "y2024": 1.0,
         "y2025": null,
@@ -536,7 +539,8 @@
         "y2026": 42.0
       }
     },
-    "EL ORO": {
+    {
+      "prov": "EL ORO",
       "PICK UPS": {
         "y2024": 2.0,
         "y2025": 2.0,
@@ -548,7 +552,7 @@
         "y2026": 10.0
       }
     }
-  },
+  ],
   "suv_segmentos_orgu_ytd": {
     "B SUV": {
       "y2024": 8348.0,
@@ -3736,94 +3740,6 @@
     }
   ],
   "pu_diesel_por_prov": {
-    "PICHINCHA": [
-      {
-        "brand": "CHEVROLET",
-        "y2024": 194.0,
-        "y2025": 434.0,
-        "y2026": 23.0
-      },
-      {
-        "brand": "TOYOTA",
-        "y2024": 111.0,
-        "y2025": 92.0,
-        "y2026": 58.0
-      },
-      {
-        "brand": "KIA",
-        "y2024": 0,
-        "y2025": 3.0,
-        "y2026": 177.0
-      },
-      {
-        "brand": "MAZDA",
-        "y2024": 28.0,
-        "y2025": 69.0,
-        "y2026": 47.0
-      },
-      {
-        "brand": "FORD",
-        "y2024": 7.0,
-        "y2025": 68.0,
-        "y2026": 29.0
-      },
-      {
-        "brand": "NISSAN",
-        "y2024": 5.0,
-        "y2025": 6.0,
-        "y2026": 6.0
-      },
-      {
-        "brand": "ZXAUTO",
-        "y2024": 1.0,
-        "y2025": 0,
-        "y2026": 0
-      },
-      {
-        "brand": "MITSUBISHI",
-        "y2024": 1.0,
-        "y2025": 13.0,
-        "y2026": 2.0
-      },
-      {
-        "brand": "ISUZU",
-        "y2024": 0,
-        "y2025": 1.0,
-        "y2026": 10.0
-      },
-      {
-        "brand": "GREAT WALL",
-        "y2024": 1.0,
-        "y2025": 4.0,
-        "y2026": 0
-      }
-    ],
-    "EL ORO": [
-      {
-        "brand": "CHEVROLET",
-        "y2024": 9.0,
-        "y2025": 24.0,
-        "y2026": 8.0
-      },
-      {
-        "brand": "TOYOTA",
-        "y2024": 5.0,
-        "y2025": 1.0,
-        "y2026": 2.0
-      },
-      {
-        "brand": "FORD",
-        "y2024": 0,
-        "y2025": 1.0,
-        "y2026": 8.0
-      },
-      {
-        "brand": "ISUZU",
-        "y2024": 0,
-        "y2025": 0,
-        "y2026": 2.0
-      }
-    ],
     "MANABÍ": [
       {
         "brand": "CHEVROLET",
@@ -3928,6 +3844,94 @@
         "y2024": 2.0,
         "y2025": 0,
         "y2026": 0
+      },
+      {
+        "brand": "ISUZU",
+        "y2024": 0,
+        "y2025": 0,
+        "y2026": 2.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "brand": "CHEVROLET",
+        "y2024": 194.0,
+        "y2025": 434.0,
+        "y2026": 23.0
+      },
+      {
+        "brand": "TOYOTA",
+        "y2024": 111.0,
+        "y2025": 92.0,
+        "y2026": 58.0
+      },
+      {
+        "brand": "KIA",
+        "y2024": 0,
+        "y2025": 3.0,
+        "y2026": 177.0
+      },
+      {
+        "brand": "MAZDA",
+        "y2024": 28.0,
+        "y2025": 69.0,
+        "y2026": 47.0
+      },
+      {
+        "brand": "FORD",
+        "y2024": 7.0,
+        "y2025": 68.0,
+        "y2026": 29.0
+      },
+      {
+        "brand": "NISSAN",
+        "y2024": 5.0,
+        "y2025": 6.0,
+        "y2026": 6.0
+      },
+      {
+        "brand": "ZXAUTO",
+        "y2024": 1.0,
+        "y2025": 0,
+        "y2026": 0
+      },
+      {
+        "brand": "MITSUBISHI",
+        "y2024": 1.0,
+        "y2025": 13.0,
+        "y2026": 2.0
+      },
+      {
+        "brand": "ISUZU",
+        "y2024": 0,
+        "y2025": 1.0,
+        "y2026": 10.0
+      },
+      {
+        "brand": "GREAT WALL",
+        "y2024": 1.0,
+        "y2025": 4.0,
+        "y2026": 0
+      }
+    ],
+    "EL ORO": [
+      {
+        "brand": "CHEVROLET",
+        "y2024": 9.0,
+        "y2025": 24.0,
+        "y2026": 8.0
+      },
+      {
+        "brand": "TOYOTA",
+        "y2024": 5.0,
+        "y2025": 1.0,
+        "y2026": 2.0
+      },
+      {
+        "brand": "FORD",
+        "y2024": 0,
+        "y2025": 1.0,
+        "y2026": 8.0
       },
       {
         "brand": "ISUZU",
@@ -6772,6 +6776,3367 @@
       "y2026": 25153.0
     }
   ],
+  "mercado_ytd": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 7830.0,
+      "y2025": 6119.0,
+      "y2026": 8072.0,
+      "fcts2026": 19373
+    },
+    {
+      "cat": "BUS",
+      "y2024": 115.0,
+      "y2025": 236.0,
+      "y2026": 140.0,
+      "fcts2026": 336
+    },
+    {
+      "cat": "CAMION",
+      "y2024": 2520.0,
+      "y2025": 3058.0,
+      "y2026": 4584.0,
+      "fcts2026": 11002
+    },
+    {
+      "cat": "PICK UPS",
+      "y2024": 6296.0,
+      "y2025": 5650.0,
+      "y2026": 7173.0,
+      "fcts2026": 17215
+    },
+    {
+      "cat": "SUV",
+      "y2024": 18432.0,
+      "y2025": 17381.0,
+      "y2026": 25153.0,
+      "fcts2026": 60367
+    },
+    {
+      "cat": "VAN",
+      "y2024": 1680.0,
+      "y2025": 1628.0,
+      "y2026": 2311.0,
+      "fcts2026": 5546
+    },
+    {
+      "cat": "_total",
+      "y2024": 36873.0,
+      "y2025": 34072.0,
+      "y2026": 47433.0,
+      "fcts2026": 113839
+    }
+  ],
+  "ford_ytd": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 3.0,
+      "y2025": 1.0,
+      "y2026": 8.0,
+      "fcts2026": 19
+    },
+    {
+      "cat": "PICK UPS",
+      "y2024": 413.0,
+      "y2025": 209.0,
+      "y2026": 174.0,
+      "fcts2026": 418
+    },
+    {
+      "cat": "SUV",
+      "y2024": 263.0,
+      "y2025": 248.0,
+      "y2026": 495.0,
+      "fcts2026": 1188
+    },
+    {
+      "cat": "VAN",
+      "y2024": null,
+      "y2025": null,
+      "y2026": 1.0,
+      "fcts2026": 2
+    },
+    {
+      "cat": "_total",
+      "y2024": 679.0,
+      "y2025": 458.0,
+      "y2026": 678.0,
+      "fcts2026": 1627
+    }
+  ],
+  "mercado_ytd_nacional": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 10076.0,
+      "y2025": 7778.0,
+      "y2026": 10353.0,
+      "fcts2026": 24847
+    },
+    {
+      "cat": "BUS",
+      "y2024": 307.0,
+      "y2025": 438.0,
+      "y2026": 315.0,
+      "fcts2026": 756
+    },
+    {
+      "cat": "CAMION",
+      "y2024": 3894.0,
+      "y2025": 4840.0,
+      "y2026": 6883.0,
+      "fcts2026": 16519
+    },
+    {
+      "cat": "PICK UPS",
+      "y2024": 8966.0,
+      "y2025": 8228.0,
+      "y2026": 10878.0,
+      "fcts2026": 26107
+    },
+    {
+      "cat": "SUV",
+      "y2024": 23415.0,
+      "y2025": 22039.0,
+      "y2026": 32488.0,
+      "fcts2026": 77971
+    },
+    {
+      "cat": "VAN",
+      "y2024": 2001.0,
+      "y2025": 1949.0,
+      "y2026": 2856.0,
+      "fcts2026": 6854
+    },
+    {
+      "cat": "_total",
+      "y2024": 48659.0,
+      "y2025": 45272.0,
+      "y2026": 63773.0,
+      "fcts2026": 153055
+    }
+  ],
+  "ford_ytd_nacional": [
+    {
+      "cat": "AUTOMOV. DE PASAJEROS",
+      "y2024": 5.0,
+      "y2025": 3.0,
+      "y2026": 9.0,
+      "fcts2026": 22
+    },
+    {
+      "cat": "PICK UPS",
+      "y2024": 560.0,
+      "y2025": 261.0,
+      "y2026": 240.0,
+      "fcts2026": 576
+    },
+    {
+      "cat": "SUV",
+      "y2024": 296.0,
+      "y2025": 289.0,
+      "y2026": 563.0,
+      "fcts2026": 1351
+    },
+    {
+      "cat": "VAN",
+      "y2024": null,
+      "y2025": null,
+      "y2026": 1.0,
+      "fcts2026": 2
+    },
+    {
+      "cat": "_total",
+      "y2024": 861.0,
+      "y2025": 553.0,
+      "y2026": 813.0,
+      "fcts2026": 1951
+    }
+  ],
+  "provincias_ytd": [
+    {
+      "label": "PICHINCHA",
+      "y2024": 20220.0,
+      "y2025": 19344.0,
+      "y2026": 26152.0
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 1835.0,
+      "y2025": 1568.0,
+      "y2026": 2571.0
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 14325.0,
+      "y2025": 12745.0,
+      "y2026": 17780.0
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 493.0,
+      "y2025": 415.0,
+      "y2026": 930.0
+    },
+    {
+      "label": "ZONA ORGU",
+      "y2024": 36873.0,
+      "y2025": 34072.0,
+      "y2026": 47433.0
+    }
+  ],
+  "ford_provincias_ytd": [
+    {
+      "label": "PICHINCHA",
+      "y2024": 434.0,
+      "y2025": 299.0,
+      "y2026": 389.0
+    },
+    {
+      "label": "MANABÍ",
+      "y2024": 27.0,
+      "y2025": 13.0,
+      "y2026": 58.0
+    },
+    {
+      "label": "GUAYAS",
+      "y2024": 216.0,
+      "y2025": 144.0,
+      "y2026": 210.0
+    },
+    {
+      "label": "EL ORO",
+      "y2024": 2.0,
+      "y2025": 2.0,
+      "y2026": 21.0
+    },
+    {
+      "label": "ZONA ORGU",
+      "y2024": 679.0,
+      "y2025": 458.0,
+      "y2026": 678.0
+    }
+  ],
+  "combustible_suv_nacional": [
+    {
+      "combustible": "DIESEL",
+      "y2024": 483.0,
+      "y2025": 473.0,
+      "y2026": 421.0
+    },
+    {
+      "combustible": "ELECTRICO BEV",
+      "y2024": 336.0,
+      "y2025": 795.0,
+      "y2026": 2749.0
+    },
+    {
+      "combustible": "GASOLINA",
+      "y2024": 18185.0,
+      "y2025": 15252.0,
+      "y2026": 19004.0
+    },
+    {
+      "combustible": "HIBRIDO",
+      "y2024": 4411.0,
+      "y2025": 5519.0,
+      "y2026": 10314.0
+    }
+  ],
+  "combustible_suv_prov": {
+    "EL ORO": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 2.0,
+        "y2025": 2.0,
+        "y2026": 13.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": null,
+        "y2025": null,
+        "y2026": 7.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 155.0,
+        "y2025": 119.0,
+        "y2026": 279.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 34.0,
+        "y2025": 8.0,
+        "y2026": 57.0
+      }
+    ],
+    "GUAYAS": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 136.0,
+        "y2025": 112.0,
+        "y2026": 137.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": 45.0,
+        "y2025": 132.0,
+        "y2026": 514.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 5744.0,
+        "y2025": 4675.0,
+        "y2026": 5729.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 1238.0,
+        "y2025": 1601.0,
+        "y2026": 2908.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 13.0,
+        "y2025": 8.0,
+        "y2026": 27.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": 7.0,
+        "y2025": 30.0,
+        "y2026": 322.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 722.0,
+        "y2025": 620.0,
+        "y2026": 729.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 121.0,
+        "y2025": 145.0,
+        "y2026": 296.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 241.0,
+        "y2025": 259.0,
+        "y2026": 143.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": 268.0,
+        "y2025": 550.0,
+        "y2026": 1569.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 7362.0,
+        "y2025": 6224.0,
+        "y2026": 7206.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 2344.0,
+        "y2025": 2896.0,
+        "y2026": 5217.0
+      }
+    ]
+  },
+  "ford_comb_suv_nacional": [
+    {
+      "combustible": "GASOLINA",
+      "y2024": 275.0,
+      "y2025": 200.0,
+      "y2026": 220.0
+    },
+    {
+      "combustible": "HIBRIDO",
+      "y2024": 21.0,
+      "y2025": 89.0,
+      "y2026": 343.0
+    }
+  ],
+  "ford_comb_suv_prov": {
+    "EL ORO": [
+      {
+        "combustible": "GASOLINA",
+        "y2024": null,
+        "y2025": null,
+        "y2026": 3.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": null,
+        "y2025": null,
+        "y2026": 7.0
+      }
+    ],
+    "GUAYAS": [
+      {
+        "combustible": "GASOLINA",
+        "y2024": 101.0,
+        "y2025": 61.0,
+        "y2026": 63.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 15.0,
+        "y2025": 26.0,
+        "y2026": 91.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "combustible": "GASOLINA",
+        "y2024": 7.0,
+        "y2025": 6.0,
+        "y2026": 8.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 1.0,
+        "y2025": 3.0,
+        "y2026": 34.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "combustible": "GASOLINA",
+        "y2024": 134.0,
+        "y2025": 106.0,
+        "y2026": 105.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 5.0,
+        "y2025": 46.0,
+        "y2026": 184.0
+      }
+    ]
+  },
+  "combustible_pu_nacional": [
+    {
+      "combustible": "DIESEL",
+      "y2024": 7530.0,
+      "y2025": 6971.0,
+      "y2026": 8515.0
+    },
+    {
+      "combustible": "ELECTRICO BEV",
+      "y2024": 3.0,
+      "y2025": 7.0,
+      "y2026": 16.0
+    },
+    {
+      "combustible": "GASOLINA",
+      "y2024": 1270.0,
+      "y2025": 1023.0,
+      "y2026": 1767.0
+    },
+    {
+      "combustible": "HIBRIDO",
+      "y2024": 163.0,
+      "y2025": 227.0,
+      "y2026": 580.0
+    }
+  ],
+  "combustible_pu_prov": {
+    "EL ORO": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 116.0,
+        "y2025": 125.0,
+        "y2026": 165.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 8.0,
+        "y2025": 10.0,
+        "y2026": 18.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": null,
+        "y2025": null,
+        "y2026": 26.0
+      }
+    ],
+    "GUAYAS": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 1756.0,
+        "y2025": 1338.0,
+        "y2026": 1996.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": null,
+        "y2025": 1.0,
+        "y2026": null
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 367.0,
+        "y2025": 241.0,
+        "y2026": 374.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 73.0,
+        "y2025": 69.0,
+        "y2026": 141.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 240.0,
+        "y2025": 200.0,
+        "y2026": 226.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 53.0,
+        "y2025": 18.0,
+        "y2026": 50.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 4.0,
+        "y2025": 3.0,
+        "y2026": 31.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 3124.0,
+        "y2025": 3079.0,
+        "y2026": 3145.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": 2.0,
+        "y2025": 5.0,
+        "y2026": 15.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 491.0,
+        "y2025": 437.0,
+        "y2026": 755.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 62.0,
+        "y2025": 124.0,
+        "y2026": 231.0
+      }
+    ]
+  },
+  "ford_comb_pu_nacional": [
+    {
+      "combustible": "DIESEL",
+      "y2024": 435.0,
+      "y2025": 144.0,
+      "y2026": 99.0
+    },
+    {
+      "combustible": "ELECTRICO BEV",
+      "y2024": 1.0,
+      "y2025": 1.0,
+      "y2026": null
+    },
+    {
+      "combustible": "GASOLINA",
+      "y2024": 90.0,
+      "y2025": 31.0,
+      "y2026": 47.0
+    },
+    {
+      "combustible": "HIBRIDO",
+      "y2024": 34.0,
+      "y2025": 85.0,
+      "y2026": 94.0
+    }
+  ],
+  "ford_comb_pu_prov": {
+    "EL ORO": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 1.0,
+        "y2025": 1.0,
+        "y2026": 8.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 1.0,
+        "y2025": 1.0,
+        "y2026": 3.0
+      }
+    ],
+    "GUAYAS": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 56.0,
+        "y2025": 25.0,
+        "y2026": 22.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": null,
+        "y2025": 1.0,
+        "y2026": null
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 21.0,
+        "y2025": 3.0,
+        "y2026": 1.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 23.0,
+        "y2025": 28.0,
+        "y2026": 31.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 11.0,
+        "y2025": 4.0,
+        "y2026": 6.0
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 7.0,
+        "y2025": null,
+        "y2026": 1.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": null,
+        "y2025": null,
+        "y2026": 9.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "combustible": "DIESEL",
+        "y2024": 242.0,
+        "y2025": 81.0,
+        "y2026": 31.0
+      },
+      {
+        "combustible": "ELECTRICO BEV",
+        "y2024": 1.0,
+        "y2025": null,
+        "y2026": null
+      },
+      {
+        "combustible": "GASOLINA",
+        "y2024": 45.0,
+        "y2025": 18.0,
+        "y2026": 22.0
+      },
+      {
+        "combustible": "HIBRIDO",
+        "y2024": 5.0,
+        "y2025": 47.0,
+        "y2026": 40.0
+      }
+    ]
+  },
+  "suv_segmentos": [
+    {
+      "seg": "B SUV",
+      "y2024": 8348.0,
+      "y2025": 8273.0,
+      "y2026": 11973.0,
+      "fcts2026": 28735
+    },
+    {
+      "seg": "C SUV",
+      "y2024": 7157.0,
+      "y2025": 6874.0,
+      "y2026": 9893.0,
+      "fcts2026": 23743
+    },
+    {
+      "seg": "D SUV",
+      "y2024": 2465.0,
+      "y2025": 1756.0,
+      "y2026": 2624.0,
+      "fcts2026": 6298
+    },
+    {
+      "seg": "E SUV",
+      "y2024": 176.0,
+      "y2025": 153.0,
+      "y2026": 267.0,
+      "fcts2026": 641
+    },
+    {
+      "seg": "PREMIUM SUV",
+      "y2024": 286.0,
+      "y2025": 325.0,
+      "y2026": 396.0,
+      "fcts2026": 950
+    }
+  ],
+  "suv_segmentos_nacional": [
+    {
+      "seg": "B SUV",
+      "y2024": 10770.0,
+      "y2025": 10727.0,
+      "y2026": 15787.0,
+      "fcts2026": 37889
+    },
+    {
+      "seg": "C SUV",
+      "y2024": 8994.0,
+      "y2025": 8559.0,
+      "y2026": 12576.0,
+      "fcts2026": 30182
+    },
+    {
+      "seg": "D SUV",
+      "y2024": 3159.0,
+      "y2025": 2248.0,
+      "y2026": 3385.0,
+      "fcts2026": 8124
+    },
+    {
+      "seg": "E SUV",
+      "y2024": 188.0,
+      "y2025": 166.0,
+      "y2026": 321.0,
+      "fcts2026": 770
+    },
+    {
+      "seg": "PREMIUM SUV",
+      "y2024": 304.0,
+      "y2025": 339.0,
+      "y2026": 419.0,
+      "fcts2026": 1006
+    }
+  ],
+  "ford_suv_seg_nacional": [
+    {
+      "seg": "C SUV",
+      "y2024": 226.0,
+      "y2025": 212.0,
+      "y2026": 389.0,
+      "fcts2026": 934
+    },
+    {
+      "seg": "D SUV",
+      "y2024": 24.0,
+      "y2025": 35.0,
+      "y2026": 106.0,
+      "fcts2026": 254
+    },
+    {
+      "seg": "E SUV",
+      "y2024": 46.0,
+      "y2025": 42.0,
+      "y2026": 68.0,
+      "fcts2026": 163
+    }
+  ],
+  "suv_seg_por_provincia": {
+    "PICHINCHA": [],
+    "GUAYAS": [],
+    "MANABÍ": [],
+    "EL ORO": [
+      {
+        "seg": "C SUV",
+        "y2024": 7157.0,
+        "y2025": 6874.0,
+        "y2026": 9893.0
+      },
+      {
+        "seg": "D SUV",
+        "y2024": 2465.0,
+        "y2025": 1756.0,
+        "y2026": 2624.0
+      },
+      {
+        "seg": "E SUV",
+        "y2024": 176.0,
+        "y2025": 153.0,
+        "y2026": 267.0
+      },
+      {
+        "seg": "PREMIUM SUV",
+        "y2024": 286.0,
+        "y2025": 325.0,
+        "y2026": 396.0
+      }
+    ]
+  },
+  "ford_suv_seg_prov": {
+    "PICHINCHA": [],
+    "GUAYAS": [],
+    "MANABÍ": [],
+    "EL ORO": [
+      {
+        "seg": "D SUV",
+        "y2024": 23.0,
+        "y2025": 26.0,
+        "y2026": 90.0
+      },
+      {
+        "seg": "E SUV",
+        "y2024": 42.0,
+        "y2025": 38.0,
+        "y2026": 49.0
+      }
+    ]
+  },
+  "suv_25_40_gas": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "MAZDA": 178.0,
+        "KIA": 424.0,
+        "NISSAN": 407.0,
+        "PEUGEOT": 309.0,
+        "HYUNDAI": 182.0,
+        "TOYOTA": 175.0,
+        "JETOUR": 164.0,
+        "CITROEN": 124.0,
+        "CHEVROLET": 75.0,
+        "FORD": 75.0,
+        "MITSUBISHI": 48.0,
+        "SUZUKI": 132.0,
+        "HONDA": 28.0,
+        "CHANGAN": 124.0,
+        "MG": 63.0,
+        "VOLKSWAGEN": 110.0,
+        "OPEL": 18.0,
+        "FIAT": 46.0,
+        "SKODA": 25.0,
+        "JEEP": null,
+        "CHERY": 40.0,
+        "RENAULT": 8.0,
+        "GAC": 6.0,
+        "DONGFENG": 3.0,
+        "JAC": 6.0,
+        "GREAT WALL": 3.0,
+        "GEELY": 9.0,
+        "AUDI": null,
+        "MAXUS": 6.0,
+        "BAIC": 5.0,
+        "BESTUNE": 5.0,
+        "MINI": 3.0,
+        "DS": null,
+        "MERCEDES BENZ": null
+      },
+      {
+        "year": "2025",
+        "MAZDA": 399.0,
+        "KIA": 392.0,
+        "NISSAN": 159.0,
+        "PEUGEOT": 204.0,
+        "HYUNDAI": 201.0,
+        "TOYOTA": 123.0,
+        "JETOUR": 86.0,
+        "CITROEN": 92.0,
+        "CHEVROLET": 75.0,
+        "FORD": 106.0,
+        "MITSUBISHI": 53.0,
+        "SUZUKI": 23.0,
+        "HONDA": 19.0,
+        "CHANGAN": 7.0,
+        "MG": 43.0,
+        "VOLKSWAGEN": null,
+        "OPEL": 55.0,
+        "FIAT": 4.0,
+        "SKODA": 6.0,
+        "JEEP": 22.0,
+        "CHERY": null,
+        "RENAULT": 8.0,
+        "GAC": 14.0,
+        "DONGFENG": 15.0,
+        "JAC": 3.0,
+        "GREAT WALL": 6.0,
+        "GEELY": null,
+        "AUDI": 7.0,
+        "MAXUS": null,
+        "BAIC": null,
+        "BESTUNE": null,
+        "MINI": null,
+        "DS": 3.0,
+        "MERCEDES BENZ": null
+      },
+      {
+        "year": "2026",
+        "MAZDA": 827.0,
+        "KIA": 457.0,
+        "NISSAN": 202.0,
+        "PEUGEOT": 79.0,
+        "HYUNDAI": 139.0,
+        "TOYOTA": 72.0,
+        "JETOUR": 111.0,
+        "CITROEN": 89.0,
+        "CHEVROLET": 65.0,
+        "FORD": 19.0,
+        "MITSUBISHI": 79.0,
+        "SUZUKI": null,
+        "HONDA": 107.0,
+        "CHANGAN": 2.0,
+        "MG": 22.0,
+        "VOLKSWAGEN": null,
+        "OPEL": null,
+        "FIAT": null,
+        "SKODA": 18.0,
+        "JEEP": 25.0,
+        "CHERY": null,
+        "RENAULT": 14.0,
+        "GAC": 10.0,
+        "DONGFENG": null,
+        "JAC": 3.0,
+        "GREAT WALL": null,
+        "GEELY": null,
+        "AUDI": 1.0,
+        "MAXUS": null,
+        "BAIC": null,
+        "BESTUNE": null,
+        "MINI": null,
+        "DS": null,
+        "MERCEDES BENZ": 1.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "MAZDA": 114.0,
+          "KIA": 170.0,
+          "NISSAN": 181.0,
+          "PEUGEOT": 169.0,
+          "HYUNDAI": 75.0,
+          "TOYOTA": 94.0,
+          "HONDA": 21.0,
+          "MITSUBISHI": 29.0,
+          "SUZUKI": 81.0,
+          "FORD": 37.0,
+          "CITROEN": 40.0,
+          "JETOUR": 39.0,
+          "CHANGAN": 69.0,
+          "VOLKSWAGEN": 62.0,
+          "CHEVROLET": 37.0,
+          "OPEL": 12.0,
+          "FIAT": 28.0,
+          "RENAULT": 8.0,
+          "JEEP": null,
+          "CHERY": 24.0,
+          "SKODA": 9.0,
+          "MG": 4.0,
+          "GAC": 1.0,
+          "GREAT WALL": 2.0,
+          "AUDI": null,
+          "GEELY": 5.0,
+          "JAC": 3.0,
+          "BAIC": 3.0,
+          "DONGFENG": 1.0,
+          "DS": null
+        },
+        {
+          "year": "2025",
+          "MAZDA": 255.0,
+          "KIA": 143.0,
+          "NISSAN": 89.0,
+          "PEUGEOT": 106.0,
+          "HYUNDAI": 104.0,
+          "TOYOTA": 64.0,
+          "HONDA": 13.0,
+          "MITSUBISHI": 32.0,
+          "SUZUKI": 10.0,
+          "FORD": 51.0,
+          "CITROEN": 26.0,
+          "JETOUR": 16.0,
+          "CHANGAN": 4.0,
+          "VOLKSWAGEN": null,
+          "CHEVROLET": 16.0,
+          "OPEL": 31.0,
+          "FIAT": 4.0,
+          "RENAULT": 6.0,
+          "JEEP": 12.0,
+          "CHERY": null,
+          "SKODA": 2.0,
+          "MG": 2.0,
+          "GAC": 4.0,
+          "GREAT WALL": 4.0,
+          "AUDI": 5.0,
+          "GEELY": null,
+          "JAC": 1.0,
+          "BAIC": null,
+          "DONGFENG": 1.0,
+          "DS": 2.0
+        },
+        {
+          "year": "2026",
+          "MAZDA": 456.0,
+          "KIA": 171.0,
+          "NISSAN": 107.0,
+          "PEUGEOT": 52.0,
+          "HYUNDAI": 43.0,
+          "TOYOTA": 29.0,
+          "HONDA": 74.0,
+          "MITSUBISHI": 45.0,
+          "SUZUKI": null,
+          "FORD": 3.0,
+          "CITROEN": 19.0,
+          "JETOUR": 29.0,
+          "CHANGAN": null,
+          "VOLKSWAGEN": null,
+          "CHEVROLET": 7.0,
+          "OPEL": null,
+          "FIAT": null,
+          "RENAULT": 14.0,
+          "JEEP": 12.0,
+          "CHERY": null,
+          "SKODA": 3.0,
+          "MG": 2.0,
+          "GAC": 2.0,
+          "GREAT WALL": null,
+          "AUDI": 1.0,
+          "GEELY": null,
+          "JAC": 1.0,
+          "BAIC": null,
+          "DONGFENG": null,
+          "DS": null
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "KIA": 169.0,
+          "MAZDA": 45.0,
+          "PEUGEOT": 97.0,
+          "NISSAN": 99.0,
+          "HYUNDAI": 42.0,
+          "JETOUR": 67.0,
+          "MG": 57.0,
+          "CITROEN": 46.0,
+          "CHEVROLET": 20.0,
+          "FORD": 31.0,
+          "TOYOTA": 40.0,
+          "MITSUBISHI": 12.0,
+          "SUZUKI": 32.0,
+          "SKODA": 16.0,
+          "CHANGAN": 30.0,
+          "HONDA": 5.0,
+          "OPEL": 3.0,
+          "VOLKSWAGEN": 24.0,
+          "JEEP": null,
+          "CHERY": 12.0,
+          "FIAT": 11.0,
+          "DONGFENG": 2.0,
+          "JAC": 2.0,
+          "MAXUS": 5.0,
+          "GAC": 1.0,
+          "MINI": 3.0,
+          "GEELY": 3.0,
+          "GREAT WALL": 1.0,
+          "AUDI": null,
+          "BAIC": 2.0,
+          "BESTUNE": 1.0,
+          "RENAULT": null
+        },
+        {
+          "year": "2025",
+          "KIA": 170.0,
+          "MAZDA": 78.0,
+          "PEUGEOT": 72.0,
+          "NISSAN": 30.0,
+          "HYUNDAI": 52.0,
+          "JETOUR": 38.0,
+          "MG": 37.0,
+          "CITROEN": 24.0,
+          "CHEVROLET": 42.0,
+          "FORD": 42.0,
+          "TOYOTA": 30.0,
+          "MITSUBISHI": 12.0,
+          "SUZUKI": 8.0,
+          "SKODA": 4.0,
+          "CHANGAN": 3.0,
+          "HONDA": 2.0,
+          "OPEL": 23.0,
+          "VOLKSWAGEN": null,
+          "JEEP": 8.0,
+          "CHERY": null,
+          "FIAT": null,
+          "DONGFENG": 8.0,
+          "JAC": 2.0,
+          "MAXUS": null,
+          "GAC": 2.0,
+          "MINI": null,
+          "GEELY": null,
+          "GREAT WALL": 2.0,
+          "AUDI": 2.0,
+          "BAIC": null,
+          "BESTUNE": null,
+          "RENAULT": 1.0
+        },
+        {
+          "year": "2026",
+          "KIA": 170.0,
+          "MAZDA": 205.0,
+          "PEUGEOT": 17.0,
+          "NISSAN": 48.0,
+          "HYUNDAI": 59.0,
+          "JETOUR": 47.0,
+          "MG": 20.0,
+          "CITROEN": 36.0,
+          "CHEVROLET": 36.0,
+          "FORD": 15.0,
+          "TOYOTA": 17.0,
+          "MITSUBISHI": 18.0,
+          "SUZUKI": null,
+          "SKODA": 15.0,
+          "CHANGAN": 2.0,
+          "HONDA": 22.0,
+          "OPEL": null,
+          "VOLKSWAGEN": null,
+          "JEEP": 9.0,
+          "CHERY": null,
+          "FIAT": null,
+          "DONGFENG": null,
+          "JAC": 2.0,
+          "MAXUS": null,
+          "GAC": 2.0,
+          "MINI": null,
+          "GEELY": null,
+          "GREAT WALL": null,
+          "AUDI": null,
+          "BAIC": null,
+          "BESTUNE": null,
+          "RENAULT": null
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "KIA": 28.0,
+          "MAZDA": 5.0,
+          "NISSAN": 18.0,
+          "HYUNDAI": 4.0,
+          "JETOUR": 5.0,
+          "TOYOTA": 3.0,
+          "CHEVROLET": 3.0,
+          "SUZUKI": 6.0,
+          "CITROEN": 3.0,
+          "DONGFENG": null,
+          "CHANGAN": 3.0,
+          "FORD": null,
+          "CHERY": 2.0,
+          "HONDA": null,
+          "VOLKSWAGEN": 2.0,
+          "JEEP": null,
+          "FIAT": 1.0,
+          "RENAULT": null,
+          "PEUGEOT": null
+        },
+        {
+          "year": "2025",
+          "KIA": 20.0,
+          "MAZDA": 26.0,
+          "NISSAN": 5.0,
+          "HYUNDAI": 7.0,
+          "JETOUR": 7.0,
+          "TOYOTA": 3.0,
+          "CHEVROLET": 2.0,
+          "SUZUKI": null,
+          "CITROEN": 2.0,
+          "DONGFENG": 4.0,
+          "CHANGAN": null,
+          "FORD": 2.0,
+          "CHERY": null,
+          "HONDA": null,
+          "VOLKSWAGEN": null,
+          "JEEP": 1.0,
+          "FIAT": null,
+          "RENAULT": 1.0,
+          "PEUGEOT": 1.0
+        },
+        {
+          "year": "2026",
+          "KIA": 33.0,
+          "MAZDA": 25.0,
+          "NISSAN": 9.0,
+          "HYUNDAI": 5.0,
+          "JETOUR": 2.0,
+          "TOYOTA": 3.0,
+          "CHEVROLET": 3.0,
+          "SUZUKI": null,
+          "CITROEN": 1.0,
+          "DONGFENG": null,
+          "CHANGAN": null,
+          "FORD": 1.0,
+          "CHERY": null,
+          "HONDA": 2.0,
+          "VOLKSWAGEN": null,
+          "JEEP": 1.0,
+          "FIAT": null,
+          "RENAULT": null,
+          "PEUGEOT": null
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "JETOUR": 2.0,
+          "KIA": 4.0,
+          "NISSAN": 7.0,
+          "MAZDA": null,
+          "CITROEN": 1.0,
+          "CHEVROLET": 1.0,
+          "HYUNDAI": 1.0,
+          "SUZUKI": 1.0,
+          "TOYOTA": null,
+          "FIAT": 1.0
+        },
+        {
+          "year": "2025",
+          "JETOUR": 3.0,
+          "KIA": 1.0,
+          "NISSAN": null,
+          "MAZDA": 1.0,
+          "CITROEN": 2.0,
+          "CHEVROLET": 2.0,
+          "HYUNDAI": null,
+          "SUZUKI": null,
+          "TOYOTA": null,
+          "FIAT": null
+        },
+        {
+          "year": "2026",
+          "JETOUR": 8.0,
+          "KIA": 4.0,
+          "NISSAN": null,
+          "MAZDA": 5.0,
+          "CITROEN": 2.0,
+          "CHEVROLET": null,
+          "HYUNDAI": 1.0,
+          "SUZUKI": null,
+          "TOYOTA": 1.0,
+          "FIAT": null
+        }
+      ]
+    },
+    "por_provincia": [
+      {
+        "label": "EL ORO",
+        "y2024": 18.0,
+        "y2025": 9.0,
+        "y2026": 21.0
+      },
+      {
+        "label": "GUAYAS",
+        "y2024": 878.0,
+        "y2025": 692.0,
+        "y2026": 740.0
+      },
+      {
+        "label": "MANABÍ",
+        "y2024": 83.0,
+        "y2025": 81.0,
+        "y2026": 85.0
+      },
+      {
+        "label": "PICHINCHA",
+        "y2024": 1318.0,
+        "y2025": 1003.0,
+        "y2026": 1070.0
+      }
+    ]
+  },
+  "suv_25_40_fhev": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "TOYOTA": 609.0,
+        "GREAT WALL": 180.0,
+        "KIA": 82.0,
+        "CHERY": 139.0,
+        "MAZDA": 364.0,
+        "DFSK": 3.0,
+        "CHANGAN": null,
+        "HYUNDAI": 50.0,
+        "FORD": 21.0,
+        "SUBARU": 91.0,
+        "SUZUKI": 59.0,
+        "RENAULT": null,
+        "GEELY": 131.0,
+        "JEEP": null,
+        "BYD": 50.0,
+        "CHEVROLET": null,
+        "PEUGEOT": null,
+        "BAIC": null,
+        "GAC": 3.0,
+        "NISSAN": null,
+        "JETOUR": null,
+        "OMODA": null,
+        "LYNK AND CO": null,
+        "JAC": null,
+        "DONGFENG": null,
+        "FIAT": null,
+        "JAECOO": null,
+        "HONDA": null,
+        "VENUCIA": null,
+        "LEAPMOTOR": null,
+        "CITROEN": null,
+        "KGM": null,
+        "VOYAH": null,
+        "LEXUS": 1.0,
+        "KAIYI": null
+      },
+      {
+        "year": "2025",
+        "TOYOTA": 624.0,
+        "GREAT WALL": 224.0,
+        "KIA": null,
+        "CHERY": 150.0,
+        "MAZDA": 167.0,
+        "DFSK": 175.0,
+        "CHANGAN": 92.0,
+        "HYUNDAI": 192.0,
+        "FORD": 53.0,
+        "SUBARU": 54.0,
+        "SUZUKI": 36.0,
+        "RENAULT": 93.0,
+        "GEELY": null,
+        "JEEP": null,
+        "BYD": null,
+        "CHEVROLET": 1.0,
+        "PEUGEOT": null,
+        "BAIC": null,
+        "GAC": 3.0,
+        "NISSAN": 97.0,
+        "JETOUR": null,
+        "OMODA": null,
+        "LYNK AND CO": 3.0,
+        "JAC": null,
+        "DONGFENG": 16.0,
+        "FIAT": null,
+        "JAECOO": null,
+        "HONDA": 22.0,
+        "VENUCIA": null,
+        "LEAPMOTOR": null,
+        "CITROEN": null,
+        "KGM": null,
+        "VOYAH": 2.0,
+        "LEXUS": null,
+        "KAIYI": null
+      },
+      {
+        "year": "2026",
+        "TOYOTA": 853.0,
+        "GREAT WALL": 591.0,
+        "KIA": 700.0,
+        "CHERY": 375.0,
+        "MAZDA": null,
+        "DFSK": 327.0,
+        "CHANGAN": 393.0,
+        "HYUNDAI": 227.0,
+        "FORD": 324.0,
+        "SUBARU": 140.0,
+        "SUZUKI": 111.0,
+        "RENAULT": 78.0,
+        "GEELY": 7.0,
+        "JEEP": 130.0,
+        "BYD": 77.0,
+        "CHEVROLET": 106.0,
+        "PEUGEOT": 105.0,
+        "BAIC": 104.0,
+        "GAC": 97.0,
+        "NISSAN": null,
+        "JETOUR": 77.0,
+        "OMODA": 70.0,
+        "LYNK AND CO": 43.0,
+        "JAC": 37.0,
+        "DONGFENG": 21.0,
+        "FIAT": 34.0,
+        "JAECOO": 32.0,
+        "HONDA": null,
+        "VENUCIA": 11.0,
+        "LEAPMOTOR": 5.0,
+        "CITROEN": 5.0,
+        "KGM": 5.0,
+        "VOYAH": null,
+        "LEXUS": null,
+        "KAIYI": 1.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "TOYOTA": 314.0,
+          "GREAT WALL": 98.0,
+          "KIA": 51.0,
+          "MAZDA": 236.0,
+          "CHERY": 58.0,
+          "CHANGAN": null,
+          "HYUNDAI": 30.0,
+          "SUBARU": 80.0,
+          "FORD": 5.0,
+          "DFSK": null,
+          "RENAULT": null,
+          "JEEP": null,
+          "GEELY": 75.0,
+          "SUZUKI": 22.0,
+          "BYD": 43.0,
+          "PEUGEOT": null,
+          "BAIC": null,
+          "NISSAN": null,
+          "OMODA": null,
+          "CHEVROLET": null,
+          "FIAT": null,
+          "GAC": null,
+          "JAECOO": null,
+          "LYNK AND CO": null,
+          "JETOUR": null,
+          "JAC": null,
+          "HONDA": null,
+          "DONGFENG": null,
+          "VENUCIA": null,
+          "LEAPMOTOR": null,
+          "CITROEN": null,
+          "KGM": null,
+          "KAIYI": null,
+          "VOYAH": null,
+          "LEXUS": 1.0
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 331.0,
+          "GREAT WALL": 120.0,
+          "KIA": null,
+          "MAZDA": 127.0,
+          "CHERY": 83.0,
+          "CHANGAN": 54.0,
+          "HYUNDAI": 112.0,
+          "SUBARU": 45.0,
+          "FORD": 27.0,
+          "DFSK": 60.0,
+          "RENAULT": 60.0,
+          "JEEP": null,
+          "GEELY": null,
+          "SUZUKI": 9.0,
+          "BYD": null,
+          "PEUGEOT": null,
+          "BAIC": null,
+          "NISSAN": 53.0,
+          "OMODA": null,
+          "CHEVROLET": 1.0,
+          "FIAT": null,
+          "GAC": null,
+          "JAECOO": null,
+          "LYNK AND CO": null,
+          "JETOUR": null,
+          "JAC": null,
+          "HONDA": 15.0,
+          "DONGFENG": 5.0,
+          "VENUCIA": null,
+          "LEAPMOTOR": null,
+          "CITROEN": null,
+          "KGM": null,
+          "KAIYI": null,
+          "VOYAH": 1.0,
+          "LEXUS": null
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 436.0,
+          "GREAT WALL": 306.0,
+          "KIA": 370.0,
+          "MAZDA": null,
+          "CHERY": 207.0,
+          "CHANGAN": 250.0,
+          "HYUNDAI": 100.0,
+          "SUBARU": 89.0,
+          "FORD": 182.0,
+          "DFSK": 142.0,
+          "RENAULT": 46.0,
+          "JEEP": 83.0,
+          "GEELY": 6.0,
+          "SUZUKI": 49.0,
+          "BYD": 34.0,
+          "PEUGEOT": 76.0,
+          "BAIC": 55.0,
+          "NISSAN": null,
+          "OMODA": 41.0,
+          "CHEVROLET": 32.0,
+          "FIAT": 25.0,
+          "GAC": 25.0,
+          "JAECOO": 24.0,
+          "LYNK AND CO": 24.0,
+          "JETOUR": 22.0,
+          "JAC": 18.0,
+          "HONDA": null,
+          "DONGFENG": 9.0,
+          "VENUCIA": 9.0,
+          "LEAPMOTOR": 4.0,
+          "CITROEN": 3.0,
+          "KGM": 2.0,
+          "KAIYI": 1.0,
+          "VOYAH": null,
+          "LEXUS": null
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "TOYOTA": 159.0,
+          "GREAT WALL": 48.0,
+          "CHERY": 56.0,
+          "DFSK": null,
+          "KIA": 15.0,
+          "FORD": 15.0,
+          "HYUNDAI": 2.0,
+          "MAZDA": 65.0,
+          "SUZUKI": 24.0,
+          "CHANGAN": null,
+          "CHEVROLET": null,
+          "SUBARU": 7.0,
+          "RENAULT": null,
+          "JETOUR": null,
+          "GEELY": 27.0,
+          "JEEP": null,
+          "NISSAN": null,
+          "BAIC": null,
+          "BYD": 5.0,
+          "OMODA": null,
+          "GAC": null,
+          "PEUGEOT": null,
+          "DONGFENG": null,
+          "JAC": null,
+          "HONDA": null,
+          "JAECOO": null,
+          "FIAT": null,
+          "LYNK AND CO": null,
+          "CITROEN": null,
+          "VOYAH": null,
+          "LEAPMOTOR": null
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 175.0,
+          "GREAT WALL": 66.0,
+          "CHERY": 51.0,
+          "DFSK": 73.0,
+          "KIA": null,
+          "FORD": 21.0,
+          "HYUNDAI": 33.0,
+          "MAZDA": 17.0,
+          "SUZUKI": 22.0,
+          "CHANGAN": 20.0,
+          "CHEVROLET": null,
+          "SUBARU": 6.0,
+          "RENAULT": 18.0,
+          "JETOUR": null,
+          "GEELY": null,
+          "JEEP": null,
+          "NISSAN": 23.0,
+          "BAIC": null,
+          "BYD": null,
+          "OMODA": null,
+          "GAC": 1.0,
+          "PEUGEOT": null,
+          "DONGFENG": 7.0,
+          "JAC": null,
+          "HONDA": 6.0,
+          "JAECOO": null,
+          "FIAT": null,
+          "LYNK AND CO": null,
+          "CITROEN": null,
+          "VOYAH": 1.0,
+          "LEAPMOTOR": null
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 214.0,
+          "GREAT WALL": 153.0,
+          "CHERY": 117.0,
+          "DFSK": 130.0,
+          "KIA": 177.0,
+          "FORD": 80.0,
+          "HYUNDAI": 57.0,
+          "MAZDA": null,
+          "SUZUKI": 35.0,
+          "CHANGAN": 61.0,
+          "CHEVROLET": 47.0,
+          "SUBARU": 20.0,
+          "RENAULT": 12.0,
+          "JETOUR": 29.0,
+          "GEELY": 1.0,
+          "JEEP": 26.0,
+          "NISSAN": null,
+          "BAIC": 20.0,
+          "BYD": 14.0,
+          "OMODA": 19.0,
+          "GAC": 15.0,
+          "PEUGEOT": 14.0,
+          "DONGFENG": 6.0,
+          "JAC": 11.0,
+          "HONDA": null,
+          "JAECOO": 4.0,
+          "FIAT": 4.0,
+          "LYNK AND CO": 3.0,
+          "CITROEN": 2.0,
+          "VOYAH": null,
+          "LEAPMOTOR": 1.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "FORD": 1.0,
+          "KIA": 4.0,
+          "TOYOTA": 11.0,
+          "CHERY": 10.0,
+          "HYUNDAI": null,
+          "GREAT WALL": 3.0,
+          "BYD": 2.0,
+          "MAZDA": 7.0,
+          "SUZUKI": 2.0,
+          "JEEP": null,
+          "DFSK": null,
+          "CHEVROLET": null,
+          "NISSAN": null,
+          "BAIC": null,
+          "DONGFENG": null,
+          "RENAULT": null,
+          "JAC": null,
+          "FIAT": null
+        },
+        {
+          "year": "2025",
+          "FORD": 2.0,
+          "KIA": null,
+          "TOYOTA": 6.0,
+          "CHERY": 7.0,
+          "HYUNDAI": 3.0,
+          "GREAT WALL": 3.0,
+          "BYD": null,
+          "MAZDA": 2.0,
+          "SUZUKI": 2.0,
+          "JEEP": null,
+          "DFSK": 1.0,
+          "CHEVROLET": null,
+          "NISSAN": 4.0,
+          "BAIC": null,
+          "DONGFENG": 3.0,
+          "RENAULT": 2.0,
+          "JAC": null,
+          "FIAT": null
+        },
+        {
+          "year": "2026",
+          "FORD": 28.0,
+          "KIA": 25.0,
+          "TOYOTA": 10.0,
+          "CHERY": 8.0,
+          "HYUNDAI": 12.0,
+          "GREAT WALL": 8.0,
+          "BYD": 9.0,
+          "MAZDA": null,
+          "SUZUKI": 5.0,
+          "JEEP": 8.0,
+          "DFSK": 6.0,
+          "CHEVROLET": 6.0,
+          "NISSAN": null,
+          "BAIC": 4.0,
+          "DONGFENG": null,
+          "RENAULT": 1.0,
+          "JAC": 2.0,
+          "FIAT": 1.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "KIA": null,
+          "FORD": null,
+          "DFSK": null,
+          "SUZUKI": 4.0,
+          "CHERY": 4.0,
+          "TOYOTA": 2.0,
+          "JETOUR": null,
+          "SUBARU": null,
+          "CHEVROLET": null,
+          "GREAT WALL": 1.0
+        },
+        {
+          "year": "2025",
+          "KIA": null,
+          "FORD": null,
+          "DFSK": 2.0,
+          "SUZUKI": null,
+          "CHERY": null,
+          "TOYOTA": null,
+          "JETOUR": null,
+          "SUBARU": null,
+          "CHEVROLET": null,
+          "GREAT WALL": null
+        },
+        {
+          "year": "2026",
+          "KIA": 10.0,
+          "FORD": 7.0,
+          "DFSK": 5.0,
+          "SUZUKI": null,
+          "CHERY": null,
+          "TOYOTA": 1.0,
+          "JETOUR": 2.0,
+          "SUBARU": 1.0,
+          "CHEVROLET": 1.0,
+          "GREAT WALL": null
+        }
+      ]
+    },
+    "por_provincia": [
+      {
+        "label": "EL ORO",
+        "y2024": 11.0,
+        "y2025": 2.0,
+        "y2026": 27.0
+      },
+      {
+        "label": "GUAYAS",
+        "y2024": 423.0,
+        "y2025": 540.0,
+        "y2026": 1272.0
+      },
+      {
+        "label": "MANABÍ",
+        "y2024": 40.0,
+        "y2025": 35.0,
+        "y2026": 133.0
+      },
+      {
+        "label": "PICHINCHA",
+        "y2024": 1013.0,
+        "y2025": 1103.0,
+        "y2026": 2670.0
+      }
+    ]
+  },
+  "suv_40_50": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "NISSAN": 426.0,
+        "TOYOTA": 33.0,
+        "BYD": 15.0,
+        "SUBARU": null,
+        "HYUNDAI": null,
+        "GREAT WALL": null,
+        "CHERY": 13.0,
+        "RENAULT": null,
+        "FORD": null,
+        "JETOUR": null,
+        "LYNK AND CO": null,
+        "CHANGAN": null,
+        "GAC": null,
+        "HONDA": null,
+        "BAIC": null,
+        "LEAPMOTOR": null,
+        "DFSK": null,
+        "KGM": null
+      },
+      {
+        "year": "2025",
+        "NISSAN": 24.0,
+        "TOYOTA": 74.0,
+        "BYD": 87.0,
+        "SUBARU": 75.0,
+        "HYUNDAI": null,
+        "GREAT WALL": 26.0,
+        "CHERY": 1.0,
+        "RENAULT": null,
+        "FORD": 36.0,
+        "JETOUR": null,
+        "LYNK AND CO": 12.0,
+        "CHANGAN": null,
+        "GAC": null,
+        "HONDA": null,
+        "BAIC": null,
+        "LEAPMOTOR": 2.0,
+        "DFSK": null,
+        "KGM": null
+      },
+      {
+        "year": "2026",
+        "NISSAN": 175.0,
+        "TOYOTA": 189.0,
+        "BYD": 45.0,
+        "SUBARU": 51.0,
+        "HYUNDAI": 82.0,
+        "GREAT WALL": 51.0,
+        "CHERY": 42.0,
+        "RENAULT": 55.0,
+        "FORD": 19.0,
+        "JETOUR": 48.0,
+        "LYNK AND CO": 36.0,
+        "CHANGAN": 46.0,
+        "GAC": 19.0,
+        "HONDA": 13.0,
+        "BAIC": 12.0,
+        "LEAPMOTOR": null,
+        "DFSK": 2.0,
+        "KGM": 2.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "NISSAN": 263.0,
+          "TOYOTA": 14.0,
+          "BYD": 12.0,
+          "SUBARU": null,
+          "GREAT WALL": null,
+          "RENAULT": null,
+          "HYUNDAI": null,
+          "CHANGAN": null,
+          "CHERY": 7.0,
+          "JETOUR": null,
+          "FORD": null,
+          "LYNK AND CO": null,
+          "HONDA": null,
+          "GAC": null,
+          "BAIC": null,
+          "LEAPMOTOR": null,
+          "DFSK": null
+        },
+        {
+          "year": "2025",
+          "NISSAN": 13.0,
+          "TOYOTA": 31.0,
+          "BYD": 57.0,
+          "SUBARU": 42.0,
+          "GREAT WALL": 16.0,
+          "RENAULT": null,
+          "HYUNDAI": null,
+          "CHANGAN": null,
+          "CHERY": 1.0,
+          "JETOUR": null,
+          "FORD": 19.0,
+          "LYNK AND CO": 1.0,
+          "HONDA": null,
+          "GAC": null,
+          "BAIC": null,
+          "LEAPMOTOR": 2.0,
+          "DFSK": null
+        },
+        {
+          "year": "2026",
+          "NISSAN": 99.0,
+          "TOYOTA": 96.0,
+          "BYD": 19.0,
+          "SUBARU": 31.0,
+          "GREAT WALL": 31.0,
+          "RENAULT": 33.0,
+          "HYUNDAI": 33.0,
+          "CHANGAN": 31.0,
+          "CHERY": 20.0,
+          "JETOUR": 28.0,
+          "FORD": 2.0,
+          "LYNK AND CO": 11.0,
+          "HONDA": 9.0,
+          "GAC": 4.0,
+          "BAIC": 3.0,
+          "LEAPMOTOR": null,
+          "DFSK": 2.0
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "NISSAN": 82.0,
+          "TOYOTA": 12.0,
+          "BYD": 2.0,
+          "SUBARU": null,
+          "HYUNDAI": null,
+          "CHERY": 4.0,
+          "FORD": null,
+          "RENAULT": null,
+          "LYNK AND CO": null,
+          "JETOUR": null,
+          "GREAT WALL": null,
+          "HONDA": null,
+          "CHANGAN": null,
+          "GAC": null,
+          "BAIC": null
+        },
+        {
+          "year": "2025",
+          "NISSAN": 7.0,
+          "TOYOTA": 22.0,
+          "BYD": 13.0,
+          "SUBARU": 17.0,
+          "HYUNDAI": null,
+          "CHERY": null,
+          "FORD": 5.0,
+          "RENAULT": null,
+          "LYNK AND CO": null,
+          "JETOUR": null,
+          "GREAT WALL": 3.0,
+          "HONDA": null,
+          "CHANGAN": null,
+          "GAC": null,
+          "BAIC": null
+        },
+        {
+          "year": "2026",
+          "NISSAN": 48.0,
+          "TOYOTA": 40.0,
+          "BYD": 14.0,
+          "SUBARU": 8.0,
+          "HYUNDAI": 25.0,
+          "CHERY": 18.0,
+          "FORD": 11.0,
+          "RENAULT": 13.0,
+          "LYNK AND CO": 13.0,
+          "JETOUR": 10.0,
+          "GREAT WALL": 2.0,
+          "HONDA": 4.0,
+          "CHANGAN": 3.0,
+          "GAC": 3.0,
+          "BAIC": 3.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "BYD": 1.0,
+          "NISSAN": 11.0,
+          "FORD": null,
+          "CHERY": 1.0,
+          "GREAT WALL": null,
+          "TOYOTA": null,
+          "HYUNDAI": null,
+          "JETOUR": null
+        },
+        {
+          "year": "2025",
+          "BYD": 4.0,
+          "NISSAN": null,
+          "FORD": 1.0,
+          "CHERY": null,
+          "GREAT WALL": 1.0,
+          "TOYOTA": null,
+          "HYUNDAI": null,
+          "JETOUR": null
+        },
+        {
+          "year": "2026",
+          "BYD": 6.0,
+          "NISSAN": null,
+          "FORD": 6.0,
+          "CHERY": 2.0,
+          "GREAT WALL": 2.0,
+          "TOYOTA": 2.0,
+          "HYUNDAI": 2.0,
+          "JETOUR": 1.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "NISSAN": 2.0,
+          "TOYOTA": null
+        },
+        {
+          "year": "2025",
+          "NISSAN": null,
+          "TOYOTA": null
+        },
+        {
+          "year": "2026",
+          "NISSAN": 1.0,
+          "TOYOTA": 1.0
+        }
+      ]
+    },
+    "por_provincia": [
+      {
+        "label": "EL ORO",
+        "y2024": 2.0,
+        "y2025": null,
+        "y2026": 2.0
+      },
+      {
+        "label": "GUAYAS",
+        "y2024": 100.0,
+        "y2025": 67.0,
+        "y2026": 215.0
+      },
+      {
+        "label": "MANABÍ",
+        "y2024": 13.0,
+        "y2025": 6.0,
+        "y2026": 21.0
+      },
+      {
+        "label": "PICHINCHA",
+        "y2024": 296.0,
+        "y2025": 182.0,
+        "y2026": 452.0
+      }
+    ]
+  },
+  "suv_55_80": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "CHEVROLET": 421.0,
+        "CHEVROLET . TRAILBLAZER": 421.0,
+        "TOYOTA": 183.0,
+        "TOYOTA . 4 RUNNER": 5.0,
+        "TOYOTA . COROLLA CROSS": null,
+        "TOYOTA . FORTUNER": 157.0,
+        "TOYOTA . LAND CRUISER FJ": null,
+        "TOYOTA . LAND CRUISER PRADO": null,
+        "TOYOTA . RAV4": 21.0,
+        "FORD": 28.0,
+        "FORD . BRONCO": 2.0,
+        "FORD . EVEREST": null,
+        "FORD . EXPEDITION": null,
+        "FORD . EXPLORER": 26.0,
+        "MITSUBISHI": 50.0,
+        "MITSUBISHI . MONTERO": 47.0,
+        "MITSUBISHI . OUTLANDER": 3.0
+      },
+      {
+        "year": "2025",
+        "CHEVROLET": 132.0,
+        "CHEVROLET . TRAILBLAZER": 132.0,
+        "TOYOTA": 184.0,
+        "TOYOTA . 4 RUNNER": null,
+        "TOYOTA . COROLLA CROSS": null,
+        "TOYOTA . FORTUNER": 177.0,
+        "TOYOTA . LAND CRUISER FJ": null,
+        "TOYOTA . LAND CRUISER PRADO": null,
+        "TOYOTA . RAV4": 7.0,
+        "FORD": 63.0,
+        "FORD . BRONCO": null,
+        "FORD . EVEREST": 31.0,
+        "FORD . EXPEDITION": null,
+        "FORD . EXPLORER": 32.0,
+        "MITSUBISHI": 88.0,
+        "MITSUBISHI . MONTERO": 85.0,
+        "MITSUBISHI . OUTLANDER": 3.0
+      },
+      {
+        "year": "2026",
+        "CHEVROLET": 330.0,
+        "CHEVROLET . TRAILBLAZER": 330.0,
+        "TOYOTA": 206.0,
+        "TOYOTA . 4 RUNNER": 6.0,
+        "TOYOTA . COROLLA CROSS": 1.0,
+        "TOYOTA . FORTUNER": 189.0,
+        "TOYOTA . LAND CRUISER FJ": 5.0,
+        "TOYOTA . LAND CRUISER PRADO": 1.0,
+        "TOYOTA . RAV4": 4.0,
+        "FORD": 103.0,
+        "FORD . BRONCO": 1.0,
+        "FORD . EVEREST": 56.0,
+        "FORD . EXPEDITION": 6.0,
+        "FORD . EXPLORER": 40.0,
+        "MITSUBISHI": 17.0,
+        "MITSUBISHI . MONTERO": 17.0,
+        "MITSUBISHI . OUTLANDER": null
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "CHEVROLET": 206.0,
+          "TOYOTA": 106.0,
+          "MITSUBISHI": 28.0,
+          "FORD": 7.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 57.0,
+          "TOYOTA": 83.0,
+          "MITSUBISHI": 60.0,
+          "FORD": 34.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 93.0,
+          "TOYOTA": 99.0,
+          "MITSUBISHI": 8.0,
+          "FORD": 41.0
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "CHEVROLET": 122.0,
+          "TOYOTA": 36.0,
+          "FORD": 19.0,
+          "MITSUBISHI": 10.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 44.0,
+          "TOYOTA": 55.0,
+          "FORD": 17.0,
+          "MITSUBISHI": 11.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 123.0,
+          "TOYOTA": 53.0,
+          "FORD": 39.0,
+          "MITSUBISHI": 3.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 12.0,
+          "TOYOTA": 1.0,
+          "FORD": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 1.0,
+          "TOYOTA": 6.0,
+          "FORD": 3.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 27.0,
+          "TOYOTA": 5.0,
+          "FORD": 6.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 1.0,
+          "FORD": null,
+          "TOYOTA": null,
+          "MITSUBISHI": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 1.0,
+          "FORD": null,
+          "TOYOTA": 1.0,
+          "MITSUBISHI": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 12.0,
+          "FORD": 2.0,
+          "TOYOTA": null,
+          "MITSUBISHI": null
+        }
+      ]
+    },
+    "por_provincia": []
+  },
+  "suv_60_80": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "TOYOTA": 183.0,
+        "FORD": 28.0,
+        "MAZDA": 12.0,
+        "AUDI": 8.0,
+        "HONDA": 5.0,
+        "KIA": 7.0,
+        "NISSAN": 2.0,
+        "SUBARU": 5.0,
+        "HYUNDAI": 6.0,
+        "BMW": 6.0,
+        "PEUGEOT": 1.0,
+        "DS": 7.0,
+        "MITSUBISHI": 3.0,
+        "JEEP": null,
+        "MERCEDES BENZ": 2.0,
+        "VOLKSWAGEN": 1.0,
+        "SKODA": null,
+        "CHEVROLET": null,
+        "PORSCHE": null,
+        "GREAT WALL": null
+      },
+      {
+        "year": "2025",
+        "TOYOTA": 185.0,
+        "FORD": 63.0,
+        "MAZDA": 16.0,
+        "AUDI": null,
+        "HONDA": 1.0,
+        "KIA": 3.0,
+        "NISSAN": 6.0,
+        "SUBARU": 3.0,
+        "HYUNDAI": null,
+        "BMW": 2.0,
+        "PEUGEOT": null,
+        "DS": null,
+        "MITSUBISHI": 4.0,
+        "JEEP": null,
+        "MERCEDES BENZ": 1.0,
+        "VOLKSWAGEN": 1.0,
+        "SKODA": null,
+        "CHEVROLET": null,
+        "PORSCHE": 1.0,
+        "GREAT WALL": null
+      },
+      {
+        "year": "2026",
+        "TOYOTA": 206.0,
+        "FORD": 103.0,
+        "MAZDA": 6.0,
+        "AUDI": 23.0,
+        "HONDA": 6.0,
+        "KIA": null,
+        "NISSAN": 1.0,
+        "SUBARU": 1.0,
+        "HYUNDAI": 2.0,
+        "BMW": null,
+        "PEUGEOT": 6.0,
+        "DS": null,
+        "MITSUBISHI": null,
+        "JEEP": 3.0,
+        "MERCEDES BENZ": null,
+        "VOLKSWAGEN": null,
+        "SKODA": 2.0,
+        "CHEVROLET": 1.0,
+        "PORSCHE": null,
+        "GREAT WALL": 1.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "TOYOTA": 106.0,
+          "FORD": 7.0,
+          "MAZDA": 9.0,
+          "AUDI": 4.0,
+          "HONDA": 4.0,
+          "BMW": 5.0,
+          "DS": 7.0,
+          "NISSAN": 1.0,
+          "KIA": 4.0,
+          "HYUNDAI": 4.0,
+          "SUBARU": 3.0,
+          "PEUGEOT": null,
+          "MERCEDES BENZ": 1.0,
+          "MITSUBISHI": 2.0,
+          "JEEP": null,
+          "VOLKSWAGEN": null,
+          "GREAT WALL": null
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 84.0,
+          "FORD": 34.0,
+          "MAZDA": 11.0,
+          "AUDI": null,
+          "HONDA": 1.0,
+          "BMW": 2.0,
+          "DS": null,
+          "NISSAN": 4.0,
+          "KIA": 2.0,
+          "HYUNDAI": null,
+          "SUBARU": 2.0,
+          "PEUGEOT": null,
+          "MERCEDES BENZ": 1.0,
+          "MITSUBISHI": null,
+          "JEEP": null,
+          "VOLKSWAGEN": 1.0,
+          "GREAT WALL": null
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 99.0,
+          "FORD": 41.0,
+          "MAZDA": 4.0,
+          "AUDI": 9.0,
+          "HONDA": 4.0,
+          "BMW": null,
+          "DS": null,
+          "NISSAN": 1.0,
+          "KIA": null,
+          "HYUNDAI": 1.0,
+          "SUBARU": null,
+          "PEUGEOT": 3.0,
+          "MERCEDES BENZ": null,
+          "MITSUBISHI": null,
+          "JEEP": 2.0,
+          "VOLKSWAGEN": null,
+          "GREAT WALL": 1.0
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "TOYOTA": 36.0,
+          "FORD": 19.0,
+          "AUDI": 4.0,
+          "MAZDA": 2.0,
+          "SUBARU": 2.0,
+          "KIA": 3.0,
+          "MITSUBISHI": 1.0,
+          "NISSAN": 1.0,
+          "SKODA": null,
+          "PEUGEOT": 1.0,
+          "HYUNDAI": null,
+          "HONDA": 1.0,
+          "JEEP": null,
+          "VOLKSWAGEN": 1.0,
+          "BMW": 1.0,
+          "PORSCHE": null,
+          "MERCEDES BENZ": 1.0
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 55.0,
+          "FORD": 17.0,
+          "AUDI": null,
+          "MAZDA": 2.0,
+          "SUBARU": 1.0,
+          "KIA": null,
+          "MITSUBISHI": 2.0,
+          "NISSAN": 1.0,
+          "SKODA": null,
+          "PEUGEOT": null,
+          "HYUNDAI": null,
+          "HONDA": null,
+          "JEEP": null,
+          "VOLKSWAGEN": null,
+          "BMW": null,
+          "PORSCHE": 1.0,
+          "MERCEDES BENZ": null
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 53.0,
+          "FORD": 39.0,
+          "AUDI": 13.0,
+          "MAZDA": 1.0,
+          "SUBARU": 1.0,
+          "KIA": null,
+          "MITSUBISHI": null,
+          "NISSAN": null,
+          "SKODA": 2.0,
+          "PEUGEOT": 1.0,
+          "HYUNDAI": 1.0,
+          "HONDA": null,
+          "JEEP": 1.0,
+          "VOLKSWAGEN": null,
+          "BMW": null,
+          "PORSCHE": null,
+          "MERCEDES BENZ": null
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "TOYOTA": 1.0,
+          "FORD": 1.0
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 6.0,
+          "FORD": 3.0
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 5.0,
+          "FORD": 6.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "FORD": null,
+          "TOYOTA": null
+        },
+        {
+          "year": "2025",
+          "FORD": null,
+          "TOYOTA": 1.0
+        },
+        {
+          "year": "2026",
+          "FORD": 2.0,
+          "TOYOTA": null
+        }
+      ]
+    },
+    "por_provincia": []
+  },
+  "suv_80plus": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "TOYOTA": 19.0,
+        "CHEVROLET": 28.0,
+        "FORD": 15.0,
+        "JEEP": 10.0,
+        "NISSAN": 7.0,
+        "HONDA": 3.0,
+        "AUDI": 6.0,
+        "MERCEDES BENZ": 1.0,
+        "BMW": null,
+        "PORSCHE": 1.0,
+        "LINCOLN": 1.0,
+        "HYUNDAI": 1.0
+      },
+      {
+        "year": "2025",
+        "TOYOTA": 86.0,
+        "CHEVROLET": 40.0,
+        "FORD": 9.0,
+        "JEEP": 7.0,
+        "NISSAN": 2.0,
+        "HONDA": 3.0,
+        "AUDI": null,
+        "MERCEDES BENZ": 2.0,
+        "BMW": null,
+        "PORSCHE": null,
+        "LINCOLN": null,
+        "HYUNDAI": null
+      },
+      {
+        "year": "2026",
+        "TOYOTA": 56.0,
+        "CHEVROLET": 37.0,
+        "FORD": 16.0,
+        "JEEP": 1.0,
+        "NISSAN": null,
+        "HONDA": null,
+        "AUDI": null,
+        "MERCEDES BENZ": null,
+        "BMW": 2.0,
+        "PORSCHE": null,
+        "LINCOLN": null,
+        "HYUNDAI": null
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "TOYOTA": 13.0,
+          "CHEVROLET": 6.0,
+          "JEEP": 8.0,
+          "FORD": 3.0,
+          "NISSAN": 7.0,
+          "AUDI": 4.0,
+          "MERCEDES BENZ": 1.0,
+          "BMW": null,
+          "HONDA": null,
+          "PORSCHE": 1.0,
+          "HYUNDAI": 1.0
+        },
+        {
+          "year": "2025",
+          "TOYOTA": 36.0,
+          "CHEVROLET": 14.0,
+          "JEEP": 5.0,
+          "FORD": 4.0,
+          "NISSAN": 2.0,
+          "AUDI": null,
+          "MERCEDES BENZ": 1.0,
+          "BMW": null,
+          "HONDA": 2.0,
+          "PORSCHE": null,
+          "HYUNDAI": null
+        },
+        {
+          "year": "2026",
+          "TOYOTA": 27.0,
+          "CHEVROLET": 8.0,
+          "JEEP": 1.0,
+          "FORD": 6.0,
+          "NISSAN": null,
+          "AUDI": null,
+          "MERCEDES BENZ": null,
+          "BMW": 2.0,
+          "HONDA": null,
+          "PORSCHE": null,
+          "HYUNDAI": null
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "CHEVROLET": 17.0,
+          "TOYOTA": 2.0,
+          "FORD": 10.0,
+          "JEEP": 1.0,
+          "AUDI": 2.0,
+          "HONDA": 2.0,
+          "LINCOLN": 1.0,
+          "MERCEDES BENZ": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 17.0,
+          "TOYOTA": 26.0,
+          "FORD": 2.0,
+          "JEEP": 2.0,
+          "AUDI": null,
+          "HONDA": null,
+          "LINCOLN": null,
+          "MERCEDES BENZ": 1.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 21.0,
+          "TOYOTA": 14.0,
+          "FORD": 5.0,
+          "JEEP": null,
+          "AUDI": null,
+          "HONDA": null,
+          "LINCOLN": null,
+          "MERCEDES BENZ": null
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": null,
+          "TOYOTA": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 4.0,
+          "TOYOTA": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 5.0,
+          "TOYOTA": null
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "FORD": null,
+          "TOYOTA": null,
+          "CHEVROLET": null
+        },
+        {
+          "year": "2025",
+          "FORD": 1.0,
+          "TOYOTA": null,
+          "CHEVROLET": null
+        },
+        {
+          "year": "2026",
+          "FORD": 1.0,
+          "TOYOTA": 1.0,
+          "CHEVROLET": 1.0
+        }
+      ]
+    },
+    "por_provincia": []
+  },
+  "pickup_cat_ytd": [
+    {
+      "seg": "COMPACT PICK UPS",
+      "y2024": 137.0,
+      "y2025": 202.0,
+      "y2026": 175.0,
+      "fcts2026": 420
+    },
+    {
+      "seg": "FULL SIZE PICK UPS",
+      "y2024": 207.0,
+      "y2025": 205.0,
+      "y2026": 265.0,
+      "fcts2026": 636
+    },
+    {
+      "seg": "MID SIZE PICK UPS",
+      "y2024": 5952.0,
+      "y2025": 5243.0,
+      "y2026": 6733.0,
+      "fcts2026": 16159
+    }
+  ],
+  "pickup_cat_nacional": [
+    {
+      "seg": "COMPACT PICK UPS",
+      "y2024": 215.0,
+      "y2025": 337.0,
+      "y2026": 288.0,
+      "fcts2026": 691
+    },
+    {
+      "seg": "FULL SIZE PICK UPS",
+      "y2024": 263.0,
+      "y2025": 254.0,
+      "y2026": 337.0,
+      "fcts2026": 809
+    },
+    {
+      "seg": "MID SIZE PICK UPS",
+      "y2024": 8488.0,
+      "y2025": 7637.0,
+      "y2026": 10253.0,
+      "fcts2026": 24607
+    }
+  ],
+  "pu_cat_por_prov": {
+    "EL ORO": [
+      {
+        "seg": "COMPACT PICK UPS",
+        "y2024": 1.0,
+        "y2025": 3.0,
+        "y2026": 3.0
+      },
+      {
+        "seg": "FULL SIZE PICK UPS",
+        "y2024": 1.0,
+        "y2025": null,
+        "y2026": 8.0
+      },
+      {
+        "seg": "MID SIZE PICK UPS",
+        "y2024": 122.0,
+        "y2025": 132.0,
+        "y2026": 198.0
+      }
+    ],
+    "GUAYAS": [
+      {
+        "seg": "COMPACT PICK UPS",
+        "y2024": 41.0,
+        "y2025": 43.0,
+        "y2026": 35.0
+      },
+      {
+        "seg": "FULL SIZE PICK UPS",
+        "y2024": 102.0,
+        "y2025": 95.0,
+        "y2026": 111.0
+      },
+      {
+        "seg": "MID SIZE PICK UPS",
+        "y2024": 2053.0,
+        "y2025": 1511.0,
+        "y2026": 2365.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "seg": "COMPACT PICK UPS",
+        "y2024": 7.0,
+        "y2025": 8.0,
+        "y2026": 9.0
+      },
+      {
+        "seg": "FULL SIZE PICK UPS",
+        "y2024": 11.0,
+        "y2025": 5.0,
+        "y2026": 21.0
+      },
+      {
+        "seg": "MID SIZE PICK UPS",
+        "y2024": 279.0,
+        "y2025": 208.0,
+        "y2026": 277.0
+      }
+    ],
+    "PICHINCHA": [
+      {
+        "seg": "COMPACT PICK UPS",
+        "y2024": 88.0,
+        "y2025": 148.0,
+        "y2026": 128.0
+      },
+      {
+        "seg": "FULL SIZE PICK UPS",
+        "y2024": 93.0,
+        "y2025": 105.0,
+        "y2026": 125.0
+      },
+      {
+        "seg": "MID SIZE PICK UPS",
+        "y2024": 3498.0,
+        "y2025": 3392.0,
+        "y2026": 3893.0
+      }
+    ]
+  },
+  "pick_diesel_tm": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "CHEVROLET": 232.0,
+        "TOYOTA": 246.0,
+        "MAZDA": 40.0,
+        "KIA": null,
+        "FORD": 8.0,
+        "ZXAUTO": 1.0,
+        "NISSAN": 2.0
+      },
+      {
+        "year": "2025",
+        "CHEVROLET": 663.0,
+        "TOYOTA": 226.0,
+        "MAZDA": 86.0,
+        "KIA": 1.0,
+        "FORD": 73.0,
+        "ZXAUTO": 1.0,
+        "NISSAN": null
+      },
+      {
+        "year": "2026",
+        "CHEVROLET": null,
+        "TOYOTA": 123.0,
+        "MAZDA": 77.0,
+        "KIA": 179.0,
+        "FORD": 42.0,
+        "ZXAUTO": null,
+        "NISSAN": null
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "CHEVROLET": 125.0,
+          "TOYOTA": 89.0,
+          "KIA": null,
+          "MAZDA": 21.0,
+          "FORD": 6.0,
+          "NISSAN": 2.0,
+          "ZXAUTO": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 417.0,
+          "TOYOTA": 88.0,
+          "KIA": 1.0,
+          "MAZDA": 69.0,
+          "FORD": 43.0,
+          "NISSAN": null,
+          "ZXAUTO": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": null,
+          "TOYOTA": 54.0,
+          "KIA": 171.0,
+          "MAZDA": 47.0,
+          "FORD": 16.0,
+          "NISSAN": null,
+          "ZXAUTO": null
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "CHEVROLET": 25.0,
+          "TOYOTA": 29.0,
+          "MAZDA": 4.0,
+          "FORD": 2.0,
+          "ZXAUTO": null,
+          "KIA": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 70.0,
+          "TOYOTA": 26.0,
+          "MAZDA": 5.0,
+          "FORD": 7.0,
+          "ZXAUTO": 1.0,
+          "KIA": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": null,
+          "TOYOTA": 17.0,
+          "MAZDA": 16.0,
+          "FORD": 9.0,
+          "ZXAUTO": null,
+          "KIA": 1.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 6.0,
+          "TOYOTA": 4.0,
+          "FORD": null,
+          "MAZDA": 1.0,
+          "KIA": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 25.0,
+          "TOYOTA": 3.0,
+          "FORD": 2.0,
+          "MAZDA": 1.0,
+          "KIA": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": null,
+          "TOYOTA": 4.0,
+          "FORD": 4.0,
+          "MAZDA": 3.0,
+          "KIA": 1.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 5.0,
+          "TOYOTA": 4.0,
+          "FORD": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 24.0,
+          "TOYOTA": 1.0,
+          "FORD": 1.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": null,
+          "TOYOTA": 2.0,
+          "FORD": 2.0
+        }
+      ]
+    }
+  },
+  "pick_diesel_ta": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "CHEVROLET": 174.0,
+        "FORD": 9.0,
+        "TOYOTA": 52.0,
+        "NISSAN": 5.0,
+        "MITSUBISHI": 2.0,
+        "ISUZU": null,
+        "MAZDA": 14.0,
+        "KIA": null,
+        "GREAT WALL": 5.0,
+        "SINOTRUK": null
+      },
+      {
+        "year": "2025",
+        "CHEVROLET": 55.0,
+        "FORD": 50.0,
+        "TOYOTA": 18.0,
+        "NISSAN": 21.0,
+        "MITSUBISHI": 22.0,
+        "ISUZU": 1.0,
+        "MAZDA": null,
+        "KIA": 2.0,
+        "GREAT WALL": 4.0,
+        "SINOTRUK": null
+      },
+      {
+        "year": "2026",
+        "CHEVROLET": 112.0,
+        "FORD": 54.0,
+        "TOYOTA": 20.0,
+        "NISSAN": 13.0,
+        "MITSUBISHI": 9.0,
+        "ISUZU": 29.0,
+        "MAZDA": null,
+        "KIA": 12.0,
+        "GREAT WALL": null,
+        "SINOTRUK": 2.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "CHEVROLET": 69.0,
+          "FORD": 1.0,
+          "TOYOTA": 22.0,
+          "MITSUBISHI": 1.0,
+          "NISSAN": 3.0,
+          "ISUZU": null,
+          "KIA": null,
+          "MAZDA": 7.0,
+          "GREAT WALL": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 17.0,
+          "FORD": 25.0,
+          "TOYOTA": 4.0,
+          "MITSUBISHI": 13.0,
+          "NISSAN": 6.0,
+          "ISUZU": 1.0,
+          "KIA": 2.0,
+          "MAZDA": null,
+          "GREAT WALL": 4.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 23.0,
+          "FORD": 13.0,
+          "TOYOTA": 4.0,
+          "MITSUBISHI": 2.0,
+          "NISSAN": 6.0,
+          "ISUZU": 10.0,
+          "KIA": 6.0,
+          "MAZDA": null,
+          "GREAT WALL": null
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "CHEVROLET": 41.0,
+          "FORD": 4.0,
+          "TOYOTA": 8.0,
+          "NISSAN": null,
+          "MITSUBISHI": 1.0,
+          "MAZDA": 6.0,
+          "KIA": null,
+          "GREAT WALL": 2.0,
+          "ISUZU": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 18.0,
+          "FORD": 14.0,
+          "TOYOTA": 5.0,
+          "NISSAN": 7.0,
+          "MITSUBISHI": 3.0,
+          "MAZDA": null,
+          "KIA": null,
+          "GREAT WALL": null,
+          "ISUZU": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 28.0,
+          "FORD": 12.0,
+          "TOYOTA": 5.0,
+          "NISSAN": 5.0,
+          "MITSUBISHI": 2.0,
+          "MAZDA": null,
+          "KIA": 5.0,
+          "GREAT WALL": null,
+          "ISUZU": 2.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 6.0,
+          "TOYOTA": 4.0,
+          "FORD": 1.0,
+          "NISSAN": null,
+          "KIA": null,
+          "GREAT WALL": 1.0,
+          "ISUZU": null
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 2.0,
+          "TOYOTA": 1.0,
+          "FORD": null,
+          "NISSAN": 1.0,
+          "KIA": null,
+          "GREAT WALL": null,
+          "ISUZU": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 7.0,
+          "TOYOTA": null,
+          "FORD": 2.0,
+          "NISSAN": 1.0,
+          "KIA": 1.0,
+          "GREAT WALL": null,
+          "ISUZU": 1.0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 4.0,
+          "FORD": null,
+          "ISUZU": null,
+          "TOYOTA": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": null,
+          "FORD": null,
+          "ISUZU": null,
+          "TOYOTA": null
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 8.0,
+          "FORD": 6.0,
+          "ISUZU": 2.0,
+          "TOYOTA": null
+        }
+      ]
+    }
+  },
+  "pick_diesel": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "CHEVROLET": 232.0,
+        "TOYOTA": 246.0,
+        "MAZDA": 40.0,
+        "KIA": null,
+        "FORD": 8.0,
+        "ZXAUTO": 1.0,
+        "NISSAN": 2.0
+      },
+      {
+        "year": "2025",
+        "CHEVROLET": 663.0,
+        "TOYOTA": 226.0,
+        "MAZDA": 86.0,
+        "KIA": 1.0,
+        "FORD": 73.0,
+        "ZXAUTO": 1.0,
+        "NISSAN": null
+      },
+      {
+        "year": "2026",
+        "CHEVROLET": null,
+        "TOYOTA": 123.0,
+        "MAZDA": 77.0,
+        "KIA": 179.0,
+        "FORD": 42.0,
+        "ZXAUTO": null,
+        "NISSAN": null
+      }
+    ],
+    "prov_marcas": {
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 12.0,
+          "TOYOTA": 8.0,
+          "FORD": 1.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 0,
+          "GREAT WALL": 1.0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 27.0,
+          "TOYOTA": 4.0,
+          "FORD": 2.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 7.0,
+          "TOYOTA": 4.0,
+          "FORD": 6.0,
+          "MAZDA": 3.0,
+          "KIA": 2.0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
+          "ISUZU": 1.0
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "CHEVROLET": 66.0,
+          "TOYOTA": 37.0,
+          "MAZDA": 10.0,
+          "FORD": 6.0,
+          "ZXAUTO": 0,
+          "KIA": 0,
+          "NISSAN": 0,
+          "MITSUBISHI": 1.0,
+          "GREAT WALL": 2.0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 88.0,
+          "TOYOTA": 31.0,
+          "MAZDA": 5.0,
+          "FORD": 21.0,
+          "ZXAUTO": 1.0,
+          "KIA": 0,
+          "NISSAN": 7.0,
+          "MITSUBISHI": 3.0,
+          "GREAT WALL": 0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 28.0,
+          "TOYOTA": 22.0,
+          "MAZDA": 16.0,
+          "FORD": 21.0,
+          "ZXAUTO": 0,
+          "KIA": 6.0,
+          "NISSAN": 5.0,
+          "MITSUBISHI": 2.0,
+          "GREAT WALL": 0,
+          "ISUZU": 2.0
+        }
+      ],
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "CHEVROLET": 194.0,
+          "TOYOTA": 111.0,
+          "KIA": 0,
+          "MAZDA": 28.0,
+          "FORD": 7.0,
+          "NISSAN": 5.0,
+          "ZXAUTO": 1.0,
+          "MITSUBISHI": 1.0,
+          "ISUZU": 0,
+          "GREAT WALL": 1.0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 434.0,
+          "TOYOTA": 92.0,
+          "KIA": 3.0,
+          "MAZDA": 69.0,
+          "FORD": 68.0,
+          "NISSAN": 6.0,
+          "ZXAUTO": 0,
+          "MITSUBISHI": 13.0,
+          "ISUZU": 1.0,
+          "GREAT WALL": 4.0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 23.0,
+          "TOYOTA": 58.0,
+          "KIA": 177.0,
+          "MAZDA": 47.0,
+          "FORD": 29.0,
+          "NISSAN": 6.0,
+          "ZXAUTO": 0,
+          "MITSUBISHI": 2.0,
+          "ISUZU": 10.0,
+          "GREAT WALL": 0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 9.0,
+          "TOYOTA": 5.0,
+          "FORD": 0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 24.0,
+          "TOYOTA": 1.0,
+          "FORD": 1.0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 8.0,
+          "TOYOTA": 2.0,
+          "FORD": 8.0,
+          "ISUZU": 2.0
+        }
+      ]
+    }
+  },
+  "pick_fullsize": {
+    "NACIONAL": [
+      {
+        "year": "2024",
+        "RAM": 126.0,
+        "RAM . RAM 1500": 126.0,
+        "FORD": 48.0,
+        "FORD . FORD F-150": 47.0,
+        "FORD . FORD F-150 EV": 1.0,
+        "CHEVROLET": 68.0,
+        "CHEVROLET . SILVERADO": 68.0,
+        "JEEP": 9.0,
+        "JEEP . GLADIATOR": 9.0,
+        "TOYOTA": 4.0,
+        "TOYOTA . TACOMA": null,
+        "TOYOTA . TUNDRA": 4.0,
+        "GMC": 2.0,
+        "GMC . SIERRA": 2.0
+      },
+      {
+        "year": "2025",
+        "RAM": 83.0,
+        "RAM . RAM 1500": 83.0,
+        "FORD": 86.0,
+        "FORD . FORD F-150": 85.0,
+        "FORD . FORD F-150 EV": 1.0,
+        "CHEVROLET": 36.0,
+        "CHEVROLET . SILVERADO": 36.0,
+        "JEEP": 12.0,
+        "JEEP . GLADIATOR": 12.0,
+        "TOYOTA": 6.0,
+        "TOYOTA . TACOMA": 5.0,
+        "TOYOTA . TUNDRA": 1.0,
+        "GMC": 1.0,
+        "GMC . SIERRA": 1.0
+      },
+      {
+        "year": "2026",
+        "RAM": 107.0,
+        "RAM . RAM 1500": 107.0,
+        "FORD": 107.0,
+        "FORD . FORD F-150": 107.0,
+        "FORD . FORD F-150 EV": null,
+        "CHEVROLET": 27.0,
+        "CHEVROLET . SILVERADO": 27.0,
+        "JEEP": 13.0,
+        "JEEP . GLADIATOR": 13.0,
+        "TOYOTA": 10.0,
+        "TOYOTA . TACOMA": 8.0,
+        "TOYOTA . TUNDRA": 2.0,
+        "GMC": 3.0,
+        "GMC . SIERRA": 3.0
+      }
+    ],
+    "prov_marcas": {
+      "PICHINCHA": [
+        {
+          "year": "2024",
+          "RAM": 54.0,
+          "FORD": 13.0,
+          "CHEVROLET": 16.0,
+          "JEEP": 5.0,
+          "TOYOTA": 3.0,
+          "GMC": 1.0
+        },
+        {
+          "year": "2025",
+          "RAM": 31.0,
+          "FORD": 47.0,
+          "CHEVROLET": 12.0,
+          "JEEP": 4.0,
+          "TOYOTA": 2.0,
+          "GMC": null
+        },
+        {
+          "year": "2026",
+          "RAM": 41.0,
+          "FORD": 45.0,
+          "CHEVROLET": 5.0,
+          "JEEP": 5.0,
+          "TOYOTA": 3.0,
+          "GMC": 2.0
+        }
+      ],
+      "GUAYAS": [
+        {
+          "year": "2024",
+          "RAM": 50.0,
+          "FORD": 25.0,
+          "CHEVROLET": 25.0,
+          "GMC": 1.0,
+          "TOYOTA": null,
+          "JEEP": null
+        },
+        {
+          "year": "2025",
+          "RAM": 39.0,
+          "FORD": 29.0,
+          "CHEVROLET": 16.0,
+          "GMC": 1.0,
+          "TOYOTA": null,
+          "JEEP": null
+        },
+        {
+          "year": "2026",
+          "RAM": 47.0,
+          "FORD": 31.0,
+          "CHEVROLET": 8.0,
+          "GMC": null,
+          "TOYOTA": 1.0,
+          "JEEP": 1.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "FORD": 1.0,
+          "RAM": 4.0,
+          "CHEVROLET": 6.0,
+          "TOYOTA": null,
+          "JEEP": null
+        },
+        {
+          "year": "2025",
+          "FORD": null,
+          "RAM": 2.0,
+          "CHEVROLET": null,
+          "TOYOTA": null,
+          "JEEP": 1.0
+        },
+        {
+          "year": "2026",
+          "FORD": 9.0,
+          "RAM": 2.0,
+          "CHEVROLET": 1.0,
+          "TOYOTA": 1.0,
+          "JEEP": null
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "RAM": null,
+          "CHEVROLET": 1.0
+        },
+        {
+          "year": "2025",
+          "RAM": null,
+          "CHEVROLET": null
+        },
+        {
+          "year": "2026",
+          "RAM": 8.0,
+          "CHEVROLET": null
+        }
+      ]
+    }
+  },
   "precios_competidores": {
     "SUV GAS 25 - 40": [
       {
