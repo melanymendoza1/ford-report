@@ -10992,11 +10992,10 @@
         "combustible": "Hibrido",
         "precio": 43990,
         "vol_override": {
-          "EL ORO": 0,
-          "NACIONAL": 175,
-          "PICHINCHA": 99,
-          "GUAYAS": 48,
-          "ZONA ORGU": 147
+          "NACIONAL": 41,
+          "PICHINCHA": 29,
+          "GUAYAS": 7,
+          "EL ORO": 0
         }
       },
       {
@@ -11006,11 +11005,9 @@
         "combustible": "Hibrido",
         "precio": 48990,
         "vol_override": {
-          "NACIONAL": 175,
-          "PICHINCHA": 99,
-          "GUAYAS": 48,
-          "EL ORO": 1,
-          "ZONA ORGU": 148
+          "NACIONAL": 134,
+          "PICHINCHA": 70,
+          "GUAYAS": 41
         }
       },
       {
@@ -11020,12 +11017,9 @@
         "combustible": "Hibrido",
         "precio": 45999,
         "vol_override": {
-          "NACIONAL": 189,
-          "PICHINCHA": 96,
-          "GUAYAS": 40,
-          "MANABÍ": 2,
-          "EL ORO": 1,
-          "ZONA ORGU": 139
+          "NACIONAL": 165,
+          "PICHINCHA": 89,
+          "GUAYAS": 31
         }
       },
       {
@@ -11035,12 +11029,11 @@
         "combustible": "Hibrido",
         "precio": 48999,
         "vol_override": {
+          "NACIONAL": 23,
+          "PICHINCHA": 7,
+          "GUAYAS": 9,
           "MANABÍ": 0,
-          "EL ORO": 0,
-          "NACIONAL": 189,
-          "PICHINCHA": 96,
-          "GUAYAS": 40,
-          "ZONA ORGU": 136
+          "EL ORO": 0
         }
       },
       {
