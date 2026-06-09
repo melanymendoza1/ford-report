@@ -39,8 +39,10 @@ const INS_LABELS: Record<string, string> = {
   T3_suv_segmentos: 'T3 · SUV Segmentos', T4_gas_25_40: 'T4 · Gas 25-40K',
   T5_hev_25_40: 'T5 · HEV 25-40K', T6_hev_40_50: 'T6 · HEV 40-50K',
   T7_everest: 'T7 · Everest', T7_explorer_active: 'T7 · Explorer Active',
-  T8_suv_80plus: 'T8 · SUV +80K', T9_pu_categoria: 'T9 · PU Categoría',
-  T10_ranger_xl: 'T10 · Ranger XL', T11_ranger_xlt: 'T11 · Ranger XLT',
+  T8_suv_80plus: 'T8 · SUV +80K', T8_expedition: 'T8 · Expedition', T8_bronco: 'T8 · Bronco', T8_explorer_plat: 'T8 · Explorer Platinum',
+  T9_pu_categoria: 'T9 · PU Categoría',
+  T10_ranger_xl: 'T10 · Ranger XL', T11_ranger_xlt: 'T11 · F-150 XLT',
+  T11_lariat: 'T11 · F-150 Lariat', T11_platinum: 'T11 · F-150 Platinum',
   T11_fullsize: 'T11 · Full Size', T12_portafolio: 'T12 · Portafolio',
 }
 
