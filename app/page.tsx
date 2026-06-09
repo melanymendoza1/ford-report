@@ -2500,29 +2500,20 @@ function T11({ d }: { d: any }) {
     const row = fp.find((x: any) => x.year === yr) || {} as any
     return Object.keys(activeFilters).reduce((s, brand) => s + ((row[brand] as number) || 0), 0)
   }
-  const getProvFordTotal = (p: string, yr: string) => {
-    const terms = activeFilters['FORD'] || []
-    if (!terms.length) return 0
-    const fp = provMarcas[p] || []
-    const row = fp.find((x: any) => x.year === yr) || {} as any
-    const matched: string[] = []
-    Object.entries(row).forEach(([k, v]) => {
-      if (k.startsWith('FORD . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
-    })
-    let total = 0
-    matched.forEach(k => {
-      const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
-      const parts = k.split(' . ')
-      const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
-      if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
-    })
-    if (total === 0 && (row['FORD'] as number) > 0) total = (row['FORD'] as number) || 0
-    return total
+
+  // Hardcoded province data Mayo 2026 — Full Size segmento
+  const T11_PROV: Record<string, {ytd2025:number, ytd2026:number, ford:number}> = {
+    PICHINCHA: { ytd2025: 96,  ytd2026: 101, ford: 45 },
+    GUAYAS:    { ytd2025: 85,  ytd2026: 88,  ford: 31 },
+    'MANABÍ':  { ytd2025: 3,   ytd2026: 13,  ford: 9  },
+    'EL ORO':  { ytd2025: 1,   ytd2026: 8,   ford: 0  },
   }
+
   const provChartData = PROVS.map(p => {
-    const v26 = getProvFilteredTotal(p, '2026')
-    const v25 = getProvFilteredTotal(p, '2025')
-    const f26 = getProvFordTotal(p, '2026')
+    const hc = T11_PROV[p]
+    const v26 = hc?.ytd2026 ?? 0
+    const v25 = hc?.ytd2025 ?? 0
+    const f26 = hc?.ford ?? 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
     const ms = v26 ? (f26 / v26 * 100).toFixed(1) : '0'
     return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': f26, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
