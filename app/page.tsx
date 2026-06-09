@@ -1284,7 +1284,7 @@ function T5({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} hotMin={d.bbc_hotlines?.['SUV  HEV 25 - 40'] ?? undefined} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands} hotMin={(scope === 'MANABÍ' || scope === 'EL ORO') ? 30000 : (d.bbc_hotlines?.['SUV  HEV 25 - 40'] ?? undefined)} scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
