@@ -1052,7 +1052,7 @@ function T4({ d }: { d: any }) {
       // Ford first — Escape Titanium 1.5 only (not ST-Line)
       const fc4bbc = d.ford_cards?.['T4_gas_25_40'] || {}
       const fordModels = [{ name: fc4bbc.model || 'Escape 1.5', price: fc4bbc.price || 35990, vol: fc4bbc.v26 != null ? fc4bbc.v26 : (fordEntry?.v26 || 0) }]
-      const _pcB2=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src2=['FORD',..._pcB2.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB2=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src2=['FORD',..._pcB2.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src2.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1256,7 +1256,7 @@ function T5({ d }: { d: any }) {
       const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
       const fc5 = d.ford_cards?.['T5_hev_25_40'] || {}
       const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1433,7 +1433,7 @@ function T6({ d }: { d: any }) {
       const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
       const fc6 = d.ford_cards?.['T6_hev_40_50'] || {}
       const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -1702,7 +1702,7 @@ function T7({ d }: { d: any }) {
       const fp = sub === 'everest' ? 69990 : 79990
       const prices = (d.precios_competidores?.[pk] || []) as any[]
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -2014,7 +2014,7 @@ function T8({ d }: { d: any }) {
       if (!pk) return null
       const prices = (d.precios_competidores?.[pk] || []) as any[]
       const fordModels = [{ name: fmMap[sub], price: fpMap[sub], vol: fordEntry?.v26 || 0 }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -2364,7 +2364,7 @@ function T10({ d }: { d: any }) {
       const fp = sub === 'xl' ? 53990 : 67990
       const prices = (d.precios_competidores?.['Pick up TM'] || []) as any[]
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -2620,7 +2620,7 @@ function T11({ d }: { d: any }) {
         { name: 'F-150 Lariat', price: 89990, vol: lariatV26 },
         { name: 'F-150 Platinum', price: 99990, vol: platV26 },
       ]
-      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>b.v26>0||b.brand==='FORD')
+      const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.filter((p:any)=>(p.marca||'').toUpperCase()===b.brand).some((p:any)=>(p.vol_override?.[scope]||0)>0)})
       const bbcBrands = _src.map(b => {
         // Ford uses general precios path
         const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
@@ -2773,7 +2773,7 @@ function T12({ d }: { d: any }) {
       </div>
     </Card>
 
-    <Lbl>Nacional · SUVs · Ordenado por precio (menor a mayor)</Lbl>
+    <Lbl>Nacional · SUVs </Lbl>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 24 }}>
       {suvs.map((m, i) => {
         const u = m.v25 ? m.v26 >= m.v25 : m.v26 > 0
@@ -2801,7 +2801,7 @@ function T12({ d }: { d: any }) {
       })}
     </div>
 
-    <Lbl>Nacional · Pickups · Ordenado por precio (menor a mayor)</Lbl>
+    <Lbl>Nacional · Pickups </Lbl>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 24 }}>
       {pickups.map((m, i) => {
         const u = m.v25 ? m.v26 >= m.v25 : m.v26 > 0
