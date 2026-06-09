@@ -1854,20 +1854,11 @@ function T8({ d }: { d: any }) {
   const fordPos = filteredBrands.findIndex(b => b.brand === 'FORD') + 1
   const getModelNames = (brand: string) => (activeFilters[brand] || []).filter((t: string) => t.length > 0).map((t: string) => t.replace(/-/g, ' ').toUpperCase())
 
-  // Province chart with filtered totals
+  // Province chart — sum brand totals for brands in activeFilters
   const getProvFilteredTotal = (p: string, yr: string) => {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
-    Object.keys(activeFilters).forEach(brand => {
-      const terms = activeFilters[brand] || []
-      if (!terms.length) return
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-      })
-    })
-    return total
+    return Object.keys(activeFilters).reduce((s, brand) => s + ((row[brand] as number) || 0), 0)
   }
   const getProvFordTotal = (p: string, yr: string) => {
     const terms = activeFilters['FORD'] || []
@@ -2106,8 +2097,8 @@ function T9({ d }: { d: any }) {
 
   // Get segments based on scope
   const getSegs = () => {
-    if (scope === 'NACIONAL') return segsNac.map(s => ({ seg: s.seg, y2024: s.ytd2024, y2025: s.ytd2025, y2026: s.ytd2026 }))
-    if (scope === 'ZONA ORGU') return segsOrgu.map(s => ({ seg: s.seg, y2024: s.ytd2024, y2025: s.ytd2025, y2026: s.ytd2026 }))
+    if (scope === 'NACIONAL') return segsNac.map(s => ({ seg: s.seg, y2024: s.y2024, y2025: s.y2025, y2026: s.y2026 }))
+    if (scope === 'ZONA ORGU') return segsOrgu.map(s => ({ seg: s.seg, y2024: s.y2024, y2025: s.y2025, y2026: s.y2026 }))
     return Object.entries(segGroups).map(([seg, pds]) => {
       const prov = pds.find((p: any) => p.label === scope)
       return { seg, y2024: prov?.ytd2024 || 0, y2025: prov?.ytd2025 || 0, y2026: prov?.ytd2026 || 0 }
@@ -2234,20 +2225,11 @@ function T10({ d }: { d: any }) {
     return dn ? [dn] : []
   }
 
-  // Province chart with filtered totals
+  // Province chart — sum brand totals for brands in activeFilters
   const getProvFilteredTotal = (p: string, yr: string) => {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
-    Object.keys(activeFilters).forEach(brand => {
-      const terms = activeFilters[brand] || []
-      if (!terms.length) return
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-      })
-    })
-    return total
+    return Object.keys(activeFilters).reduce((s, brand) => s + ((row[brand] as number) || 0), 0)
   }
   const getProvFordTotal = (p: string, yr: string) => {
     const terms = activeFilters['FORD'] || []
@@ -2488,30 +2470,11 @@ function T11({ d }: { d: any }) {
     return dn ? [dn] : []
   }
 
-  // Province chart with filtered totals
+  // Province chart — sum brand totals for brands in activeFilters
   const getProvFilteredTotal = (p: string, yr: string) => {
     const fp = provMarcas[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
-    Object.keys(activeFilters).forEach(brand => {
-      const terms = activeFilters[brand] || []
-      if (!terms.length) return
-      // Find deepest matching keys only (with specs like AC, CD) to avoid double-counting subtotals
-      const matched: string[] = []
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand) return
-        if (k.startsWith(brand + ' . ') && terms.some((t: string) => k.toUpperCase().includes(t.toUpperCase()))) matched.push(k)
-      })
-      // For each matched key, only add if no other matched key is a child of it
-      matched.forEach(k => {
-        const isSubtotal = matched.some(other => other !== k && other.startsWith(k + ' . '))
-        // Skip double-prefixed subtotals like "BRAND . BRAND . MODEL"
-        const parts = k.split(' . ')
-        const isDoublePrefixed = parts.length >= 3 && parts[0] === parts[1]
-        if (!isSubtotal && !isDoublePrefixed) total += ((row[k] as number) || 0)
-      })
-    })
-    return total
+    return Object.keys(activeFilters).reduce((s, brand) => s + ((row[brand] as number) || 0), 0)
   }
   const getProvFordTotal = (p: string, yr: string) => {
     const terms = activeFilters['FORD'] || []
