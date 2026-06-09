@@ -113,8 +113,9 @@ function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
   const prices = data.precios_competidores?.[seg] || []
   const filters = data.model_filters?.[filterKey] || {}
 
-  const BRAND_COLORS: Record<string,string> = { FORD:'#133A7C', TOYOTA:'#CC0000', KIA:'#BA0C2F', MAZDA:'#E65100', NISSAN:'#1A1A1A', HYUNDAI:'#002C5F', CHEVROLET:'#D4AC0D', MITSUBISHI:'#E30613', SUBARU:'#1C4CA3', PEUGEOT:'#192D6E', RAM:'#8B0000', GREAT_WALL:'#1B5E20', SUZUKI:'#003087', RENAULT:'#FFCC00', BYD:'#1C3E6E', CHERY:'#0D5EAF', JEEP:'#2E7D32', BMW:'#1C69D4', HONDA:'#CC0000', NISSAN2:'#C3002F' }
-  const DEF_COLORS = ['#DC2626','#059669','#D97706','#7C3AED','#0891B2','#BE185D','#4338CA','#65A30D','#0EA5E9']
+  const _BCOL: Record<string,string> = { FORD:'#133A7C', TOYOTA:'#D4A017', KIA:'#BB162B', MAZDA:'#E87722', NISSAN:'#2C4A8C', HYUNDAI:'#00287A', CHEVROLET:'#D4A500', MITSUBISHI:'#8B0000', SUBARU:'#013B7C', PEUGEOT:'#1E3A5F', RAM:'#3D3D3D', GREAT_WALL:'#5F4B3A', SUZUKI:'#005BAC', RENAULT:'#B8860B', BYD:'#1A6B3C', CHERY:'#A0522D', JEEP:'#4A6741', BMW:'#1C69D4', HONDA:'#C8102E', GMC:'#1B4F8A', DFSK:'#7B68EE', CHANGAN:'#20B2AA', GEELY:'#4169E1', MG:'#8B1A1A', HAVAL:'#6B4423', JAC:'#708090', BAIC:'#556B2F', CITROEN:'#CC2020', VOLKSWAGEN:'#1E3A8A', SKODA:'#4CAF50', JETOUR:'#2E8B57', 'MERCEDES BENZ':'#1C1C1C', ISUZU:'#FF6600', ZXAUTO:'#778899' }
+  const _FALLBACK = ['#607D8B','#795548','#009688','#FF5722','#9C27B0','#FF9800','#3F51B5','#00BCD4','#8BC34A','#E91E63']
+  const usedC = new Set<string>()
 
   const _pBrands = [...new Set(prices.filter((p: any) => p.precio != null).map((p: any) => (p.marca || '').toUpperCase()).filter(Boolean))]
   const _bList = ['FORD', ..._pBrands.filter(b => b !== 'FORD')]
@@ -128,7 +129,10 @@ function buildBBCData(data: any, seg: string, scope = 'NACIONAL') {
       return { name: trimKey, price: Number(p.precio), vol, idx: prices.indexOf(p) }
     })
     const totalVol = (r26[brand] as number) || 0
-    const color = BRAND_COLORS[brand] || DEF_COLORS[bi % DEF_COLORS.length]
+    const baseColor = (_BCOL[brand] || _BCOL[brand.replace(' ','_')] || '').toLowerCase()
+    const color = baseColor && !usedC.has(baseColor)
+      ? (usedC.add(baseColor), baseColor)
+      : (_FALLBACK.find(c => !usedC.has(c)) || '#555').toLowerCase().replace(/.*/, c => (usedC.add(c), c))
     return { brand, models, totalVol, color }
   }).filter(b => b.models.length > 0 || b.brand === 'FORD')
 }
