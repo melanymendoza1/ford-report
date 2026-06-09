@@ -1599,9 +1599,6 @@ function T7({ d }: { d: any }) {
     return total
   }
 
-  const activePT = sub === 'everest' ? pt55 : pt60
-  const activeFord = sub === 'everest' ? fordEverest : fordExplorer
-
   const provChartData = PROVS.map(p => {
     const r = activePT.find((x: any) => x.label === p)
     const v26 = r?.ytd2026 || 0
