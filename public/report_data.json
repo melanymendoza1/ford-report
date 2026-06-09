@@ -10662,12 +10662,12 @@
         "combustible": "Gasolina",
         "precio": 38999,
         "vol_override": {
-          "NACIONAL": 342,
-          "PICHINCHA": 177,
-          "MANABÍ": 11,
-          "GUAYAS": 205,
-          "EL ORO": 5,
-          "ZONA ORGU": 398
+          "NACIONAL": 417,
+          "PICHINCHA": 219,
+          "GUAYAS": 107,
+          "MANABÍ": 17,
+          "EL ORO": 2,
+          "ZONA ORGU": 345
         }
       },
       {
@@ -10677,12 +10677,12 @@
         "combustible": "Gasolina",
         "precio": 28499,
         "vol_override": {
-          "MANABÍ": 14,
-          "NACIONAL": 457,
-          "PICHINCHA": 171,
-          "GUAYAS": 170,
+          "NACIONAL": 187,
           "EL ORO": 4,
-          "ZONA ORGU": 359
+          "MANABÍ": 16,
+          "GUAYAS": 63,
+          "PICHINCHA": 58,
+          "ZONA ORGU": 141
         }
       },
       {
@@ -10692,12 +10692,12 @@
         "combustible": "Gasolina",
         "precio": 43999,
         "vol_override": {
-          "MANABÍ": 2,
+          "NACIONAL": 39,
           "EL ORO": 0,
-          "NACIONAL": 457,
-          "PICHINCHA": 171,
-          "GUAYAS": 170,
-          "ZONA ORGU": 343
+          "MANABÍ": 2,
+          "GUAYAS": 16,
+          "PICHINCHA": 14,
+          "ZONA ORGU": 32
         }
       },
       {
@@ -10707,11 +10707,11 @@
         "combustible": "Gasolina",
         "precio": 34990,
         "vol_override": {
-          "MANABÍ": 5,
-          "NACIONAL": 202,
-          "PICHINCHA": 107,
-          "GUAYAS": 48,
-          "ZONA ORGU": 160
+          "NACIONAL": 170,
+          "PICHINCHA": 88,
+          "GUAYAS": 44,
+          "MANABÍ": 8,
+          "ZONA ORGU": 100
         }
       },
       {
@@ -10721,10 +10721,10 @@
         "combustible": "Gasolina",
         "precio": 39990,
         "vol_override": {
-          "NACIONAL": 79,
-          "PICHINCHA": 52,
-          "GUAYAS": 17,
-          "ZONA ORGU": 69
+          "NACIONAL": 42,
+          "PICHINCHA": 29,
+          "GUAYAS": 9,
+          "ZONA ORGU": 38
         }
       },
       {
@@ -10734,12 +10734,12 @@
         "combustible": "Gasolina",
         "precio": 35499,
         "vol_override": {
-          "MANABÍ": 2,
-          "NACIONAL": 139,
-          "PICHINCHA": 43,
+          "NACIONAL": 138,
+          "PICHINCHA": 42,
           "GUAYAS": 59,
+          "MANABÍ": 5,
           "EL ORO": 1,
-          "ZONA ORGU": 105
+          "ZONA ORGU": 107
         }
       },
       {
@@ -10749,12 +10749,11 @@
         "combustible": "Gasolina",
         "precio": 42450,
         "vol_override": {
+          "NACIONAL": 45,
+          "PICHINCHA": 16,
+          "GUAYAS": 13,
           "MANABÍ": 1,
-          "NACIONAL": 72,
-          "PICHINCHA": 29,
-          "GUAYAS": 17,
-          "EL ORO": 1,
-          "ZONA ORGU": 48
+          "EL ORO": 1
         }
       },
       {
@@ -10764,12 +10763,12 @@
         "combustible": "Gasolina",
         "precio": 29990,
         "vol_override": {
-          "NACIONAL": 111,
-          "PICHINCHA": 29,
-          "GUAYAS": 47,
-          "MANABÍ": 2,
-          "EL ORO": 8,
-          "ZONA ORGU": 86
+          "NACIONAL": 25,
+          "PICHINCHA": 8,
+          "GUAYAS": 9,
+          "MANABÍ": 0,
+          "EL ORO": 3,
+          "ZONA ORGU": 20
         }
       },
       {
@@ -10779,10 +10778,10 @@
         "combustible": "Gasolina",
         "precio": 39990,
         "vol_override": {
-          "NACIONAL": 79,
-          "PICHINCHA": 45,
-          "GUAYAS": 18,
-          "ZONA ORGU": 63
+          "NACIONAL": 58,
+          "PICHINCHA": 33,
+          "GUAYAS": 11,
+          "ZONA ORGU": 44
         }
       },
       {
@@ -10792,10 +10791,10 @@
         "combustible": "Gasolina",
         "precio": 31990,
         "vol_override": {
-          "NACIONAL": 3,
-          "PICHINCHA": 2,
+          "NACIONAL": 4,
+          "PICHINCHA": 3,
           "GUAYAS": 1,
-          "ZONA ORGU": 3
+          "ZONA ORGU": 4
         }
       },
       {
@@ -10807,7 +10806,7 @@
         "vol_override": {
           "PICHINCHA": 3,
           "GUAYAS": 14,
-          "NACIONAL": 17,
+          "NACIONAL": 19,
           "ZONA ORGU": 17,
           "MANABÍ": 1
         }
@@ -10821,12 +10820,10 @@
         "combustible": "Híbrido",
         "precio": 35990,
         "vol_override": {
-          "NACIONAL": 267,
-          "ZONA ORGU": 246,
-          "PICHINCHA": 148,
-          "GUAYAS": 66,
-          "MANABÍ": 27,
-          "EL ORO": 5
+          "NACIONAL": 296,
+          "PICHINCHA": 160,
+          "GUAYAS": 78,
+          "ZONA ORGU": 273
         }
       },
       {
@@ -10836,12 +10833,11 @@
         "combustible": "Hibrido",
         "precio": 37499,
         "vol_override": {
-          "NACIONAL": 244,
-          "ZONA ORGU": 189,
-          "PICHINCHA": 125,
-          "GUAYAS": 58,
-          "MANABÍ": 5,
-          "EL ORO": 1
+          "NACIONAL": 261,
+          "PICHINCHA": 131,
+          "GUAYAS": 65,
+          "MANABÍ": 6,
+          "ZONA ORGU": 203
         }
       },
       {
@@ -10851,12 +10847,12 @@
         "combustible": "Hibrido",
         "precio": 34199,
         "vol_override": {
+          "NACIONAL": 320,
+          "PICHINCHA": 173,
+          "GUAYAS": 94,
+          "MANABÍ": 3,
           "EL ORO": 0,
-          "NACIONAL": 258,
-          "ZONA ORGU": 220,
-          "PICHINCHA": 137,
-          "GUAYAS": 80,
-          "MANABÍ": 1
+          "ZONA ORGU": 270
         }
       },
       {
@@ -10866,12 +10862,12 @@
         "combustible": "Hibrido",
         "precio": 28499,
         "vol_override": {
-          "NACIONAL": 438,
-          "ZONA ORGU": 362,
-          "PICHINCHA": 254,
-          "GUAYAS": 106,
-          "MANABÍ": 9,
-          "EL ORO": 2
+          "NACIONAL": 540,
+          "PICHINCHA": 294,
+          "GUAYAS": 138,
+          "MANABÍ": 13,
+          "EL ORO": 5,
+          "ZONA ORGU": 450
         }
       },
       {
@@ -10881,12 +10877,12 @@
         "combustible": "Hibrido",
         "precio": 30499,
         "vol_override": {
-          "NACIONAL": 104,
-          "ZONA ORGU": 89,
-          "PICHINCHA": 54,
-          "GUAYAS": 23,
-          "MANABÍ": 9,
-          "EL ORO": 3
+          "NACIONAL": 159,
+          "PICHINCHA": 75,
+          "GUAYAS": 39,
+          "MANABÍ": 12,
+          "EL ORO": 5,
+          "ZONA ORGU": 131
         }
       },
       {
@@ -10911,11 +10907,10 @@
         "combustible": "Hibrido",
         "precio": 31990,
         "vol_override": {
-          "PICHINCHA": 23,
           "NACIONAL": 45,
+          "PICHINCHA": 23,
           "GUAYAS": 13,
           "MANABÍ": 1,
-          "EL ORO": 0,
           "ZONA ORGU": 37
         }
       },
@@ -10954,11 +10949,11 @@
         "combustible": "Hibrido",
         "precio": 29999,
         "vol_override": {
-          "GUAYAS": 12,
+          "NACIONAL": 64,
+          "PICHINCHA": 31,
+          "GUAYAS": 14,
           "MANABÍ": 3,
-          "PICHINCHA": 28,
-          "ZONA ORGU": 43,
-          "NACIONAL": 57
+          "ZONA ORGU": 48
         }
       },
       {
@@ -10968,11 +10963,10 @@
         "combustible": "Hibrido",
         "precio": 31490,
         "vol_override": {
-          "NACIONAL": 140,
-          "PICHINCHA": 89,
-          "GUAYAS": 20,
-          "EL ORO": 1,
-          "ZONA ORGU": 110
+          "NACIONAL": 94,
+          "PICHINCHA": 58,
+          "GUAYAS": 12,
+          "ZONA ORGU": 71
         }
       },
       {
@@ -10982,11 +10976,11 @@
         "combustible": "Hibrido",
         "precio": 35490,
         "vol_override": {
+          "NACIONAL": 46,
+          "PICHINCHA": 31,
+          "GUAYAS": 8,
           "EL ORO": 0,
-          "NACIONAL": 140,
-          "PICHINCHA": 89,
-          "GUAYAS": 20,
-          "ZONA ORGU": 109
+          "ZONA ORGU": 39
         }
       },
       {
@@ -11010,11 +11004,11 @@
         "combustible": "Hibrido",
         "precio": 28990,
         "vol_override": {
-          "NACIONAL": 78,
-          "PICHINCHA": 46,
-          "GUAYAS": 12,
+          "NACIONAL": 68,
+          "PICHINCHA": 42,
+          "GUAYAS": 7,
           "MANABÍ": 1,
-          "ZONA ORGU": 59
+          "ZONA ORGU": 50
         }
       },
       {
@@ -11024,11 +11018,10 @@
         "combustible": "Hibrido",
         "precio": 32990,
         "vol_override": {
-          "MANABÍ": 0,
-          "NACIONAL": 78,
-          "PICHINCHA": 46,
-          "GUAYAS": 12,
-          "ZONA ORGU": 58
+          "NACIONAL": 10,
+          "PICHINCHA": 4,
+          "GUAYAS": 5,
+          "ZONA ORGU": 10
         }
       }
     ],
@@ -11052,13 +11045,13 @@
         "modelo": "Xtrail",
         "trim": "Advance",
         "combustible": "Hibrido",
-        "precio": 43990,
+        "precio": 41990,
         "vol_override": {
+          "NACIONAL": 41,
+          "PICHINCHA": 29,
+          "GUAYAS": 7,
           "EL ORO": 0,
-          "NACIONAL": 175,
-          "PICHINCHA": 99,
-          "GUAYAS": 48,
-          "ZONA ORGU": 147
+          "ZONA ORGU": 36
         }
       },
       {
@@ -11066,13 +11059,12 @@
         "modelo": "Xtrail",
         "trim": "Exclusive",
         "combustible": "Hibrido",
-        "precio": 48990,
+        "precio": 46990,
         "vol_override": {
-          "NACIONAL": 175,
-          "PICHINCHA": 99,
-          "GUAYAS": 48,
-          "EL ORO": 1,
-          "ZONA ORGU": 148
+          "NACIONAL": 134,
+          "PICHINCHA": 70,
+          "GUAYAS": 41,
+          "ZONA ORGU": 112
         }
       },
       {
@@ -11082,12 +11074,10 @@
         "combustible": "Hibrido",
         "precio": 45999,
         "vol_override": {
-          "NACIONAL": 189,
-          "PICHINCHA": 96,
-          "GUAYAS": 40,
-          "MANABÍ": 2,
-          "EL ORO": 1,
-          "ZONA ORGU": 139
+          "NACIONAL": 165,
+          "PICHINCHA": 89,
+          "GUAYAS": 31,
+          "ZONA ORGU": 123
         }
       },
       {
@@ -11097,12 +11087,12 @@
         "combustible": "Hibrido",
         "precio": 48999,
         "vol_override": {
+          "NACIONAL": 23,
+          "PICHINCHA": 7,
+          "GUAYAS": 9,
           "MANABÍ": 0,
           "EL ORO": 0,
-          "NACIONAL": 189,
-          "PICHINCHA": 96,
-          "GUAYAS": 40,
-          "ZONA ORGU": 136
+          "ZONA ORGU": 16
         }
       },
       {
@@ -11142,12 +11132,12 @@
         "combustible": "Diésel",
         "precio": 69990,
         "vol_override": {
+          "NACIONAL": 56,
           "PICHINCHA": 21,
           "GUAYAS": 23,
           "MANABÍ": 6,
           "EL ORO": 2,
-          "ZONA ORGU": 52,
-          "NACIONAL": 103
+          "ZONA ORGU": 52
         }
       },
       {
@@ -11173,11 +11163,11 @@
         "precio": 73999,
         "vol_override": {
           "NACIONAL": 141,
-          "PICHINCHA": 50,
-          "GUAYAS": 26,
-          "MANABÍ": 1,
+          "PICHINCHA": 70,
+          "GUAYAS": 34,
+          "MANABÍ": 2,
           "EL ORO": 0,
-          "ZONA ORGU": 77
+          "ZONA ORGU": 106
         }
       },
       {
@@ -11202,12 +11192,8 @@
         "combustible": "Gasolina",
         "precio": 89990,
         "vol_override": {
-          "PICHINCHA": 8,
-          "GUAYAS": 7,
-          "MANABÍ": 6,
-          "EL ORO": 0,
-          "ZONA ORGU": 21,
-          "NACIONAL": 47
+          "NACIONAL": 21,
+          "ZONA ORGU": 21
         }
       },
       {
@@ -11243,7 +11229,7 @@
           "NACIONAL": 0,
           "ZONA ORGU": 0,
           "PICHINCHA": 0,
-          "GUAYAS": 1
+          "GUAYAS": 0
         }
       },
       {
@@ -11279,10 +11265,9 @@
         "combustible": "Gasolina",
         "precio": 129990,
         "vol_override": {
-          "NACIONAL": 4,
-          "PICHINCHA": 1,
-          "GUAYAS": 2,
-          "ZONA ORGU": 3,
+          "NACIONAL": 15,
+          "PICHINCHA": 5,
+          "GUAYAS": 5,
           "MANABÍ": 1
         }
       },
@@ -11293,12 +11278,11 @@
         "combustible": "Gasolina",
         "precio": 132074,
         "vol_override": {
-          "NACIONAL": 49,
-          "PICHINCHA": 24,
-          "GUAYAS": 6,
-          "MANABÍ": 0,
-          "EL ORO": 0,
-          "ZONA ORGU": 30
+          "NACIONAL": 55,
+          "PICHINCHA": 26,
+          "GUAYAS": 14,
+          "MANABÍ": 1,
+          "ZONA ORGU": 41
         }
       },
       {
@@ -11322,12 +11306,8 @@
         "combustible": "Gasolina",
         "precio": 131999,
         "vol_override": {
-          "NACIONAL": 35,
-          "PICHINCHA": 14,
-          "GUAYAS": 15,
-          "MANABÍ": 5,
-          "EL ORO": 1,
-          "ZONA ORGU": 35
+          "NACIONAL": 37,
+          "PICHINCHA": 8
         }
       }
     ],
@@ -11339,11 +11319,11 @@
         "combustible": "Gasolina",
         "precio": 99990,
         "vol_override": {
-          "NACIONAL": 16,
-          "PICHINCHA": 6,
-          "GUAYAS": 5,
-          "MANABÍ": 1,
-          "ZONA ORGU": 12
+          "NACIONAL": 22,
+          "PICHINCHA": 9,
+          "GUAYAS": 8,
+          "MANABÍ": 0,
+          "ZONA ORGU": 17
         }
       },
       {
@@ -11379,21 +11359,6 @@
           "MANABÍ": 0,
           "EL ORO": 0,
           "ZONA ORGU": 3
-        }
-      },
-      {
-        "marca": "BMW",
-        "modelo": "X5",
-        "trim": "",
-        "combustible": "Gasolina",
-        "precio": 119999,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
-          "MANABÍ": 0,
-          "EL ORO": 0
         }
       }
     ],
@@ -11496,12 +11461,11 @@
         "combustible": "Diesel",
         "precio": 56999,
         "vol_override": {
-          "NACIONAL": 112,
-          "PICHINCHA": 23,
-          "GUAYAS": 28,
-          "MANABÍ": 7,
-          "EL ORO": 8,
-          "ZONA ORGU": 66
+          "NACIONAL": 43,
+          "PICHINCHA": 13,
+          "GUAYAS": 9,
+          "MANABÍ": 2,
+          "EL ORO": 5
         }
       },
       {
@@ -11511,12 +11475,11 @@
         "combustible": "Diesel",
         "precio": 49999,
         "vol_override": {
-          "NACIONAL": 112,
-          "PICHINCHA": 23,
-          "GUAYAS": 28,
-          "MANABÍ": 7,
-          "EL ORO": 8,
-          "ZONA ORGU": 66
+          "NACIONAL": 69,
+          "PICHINCHA": 10,
+          "GUAYAS": 19,
+          "MANABÍ": 5,
+          "EL ORO": 3
         }
       },
       {
@@ -11597,11 +11560,10 @@
         "combustible": "Gasolina",
         "precio": 79990,
         "vol_override": {
-          "NACIONAL": 107,
-          "PICHINCHA": 45,
-          "GUAYAS": 31,
-          "MANABÍ": 9,
-          "ZONA ORGU": 85
+          "NACIONAL": 45,
+          "PICHINCHA": 19,
+          "MANABÍ": 6,
+          "GUAYAS": 17
         }
       },
       {
@@ -11611,12 +11573,7 @@
         "combustible": "Gasolina",
         "precio": 72999,
         "vol_override": {
-          "NACIONAL": 93,
-          "PICHINCHA": 37,
-          "GUAYAS": 38,
-          "MANABÍ": 2,
-          "EL ORO": 8,
-          "ZONA ORGU": 79
+          "NACIONAL": 107
         }
       },
       {
@@ -11626,8 +11583,8 @@
         "combustible": "Gasolina",
         "precio": 91499,
         "vol_override": {
-          "NACIONAL": 23,
-          "PICHINCHA": 3,
+          "NACIONAL": 27,
+          "PICHINCHA": 5,
           "GUAYAS": 8,
           "MANABÍ": 1,
           "ZONA ORGU": 12
@@ -11640,7 +11597,7 @@
         "combustible": "Gasolina",
         "precio": 135990,
         "vol_override": {
-          "NACIONAL": 12,
+          "NACIONAL": 13,
           "PICHINCHA": 5,
           "GUAYAS": 1,
           "ZONA ORGU": 6
@@ -11658,6 +11615,32 @@
           "GUAYAS": 1,
           "MANABÍ": 1,
           "ZONA ORGU": 5
+        }
+      },
+      {
+        "marca": "Ford",
+        "modelo": "F-150",
+        "trim": "Lariat",
+        "combustible": "Gasolina",
+        "precio": 89990,
+        "vol_override": {
+          "NACIONAL": 20,
+          "PICHINCHA": 9,
+          "MANABÍ": 3,
+          "GUAYAS": 6
+        }
+      },
+      {
+        "marca": "Ford",
+        "modelo": "F-150",
+        "trim": "Platinum",
+        "combustible": "Gasolina",
+        "precio": 99990,
+        "vol_override": {
+          "NACIONAL": 30,
+          "PICHINCHA": 13,
+          "MANABÍ": 0,
+          "GUAYAS": 8
         }
       }
     ]
@@ -11953,12 +11936,12 @@
   },
   "insights": {
     "T1_industria": [
-      "Ford crece 1.32x más rápido que la industria — ganamos share mientras el mercado se expande",
-      "Proyección 2026: ~2.070 unidades Ford · Mercado ~132K si mantenemos el ritmo actual"
+      "Ford crece 1.15x más rápido que la industria, ganamos share mientras el mercado se expande.",
+      "Proyección 2026: 1.951 unidades Ford · Mercado ~153K si mantenemos el ritmo actual"
     ],
     "T2_combustibles": [
-      "BSUV y Compact concentran el 80% del volumen SUV",
-      "Ford compite en Compact con Territory y Escape, en Midsize con Everest, Bronco y Explorer, y en Full Size con Expedition"
+      "El shift a híbrido se acelera — HEV creció de 25% a 31.7% del mix SUV en un año",
+      "Diesel mantiene su dominio al 78.3% del volumen pickup — base sólida"
     ],
     "T3_suv_segmentos": [
       "Compact +46.9%, Ford MS 3.1% vs 2.5% — ganando share",
@@ -12020,78 +12003,78 @@
       "model": "Escape 1.5",
       "price": 35990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 19,
+      "v25": 103
     },
     "T5_hev_25_40": {
       "model": "Territory Titanium Plus",
       "price": 35990,
       "fuel": "Híbrido",
-      "v26": null,
-      "v25": null
+      "v26": 296,
+      "v25": 0
     },
     "T6_hev_40_50": {
       "model": "Escape ST-Line",
       "price": 44990,
       "fuel": "Híbrido",
-      "v26": null,
-      "v25": null
+      "v26": 19,
+      "v25": 34
     },
     "T7_everest": {
       "model": "Everest Active",
       "price": 69990,
       "fuel": "Diésel",
-      "v26": null,
-      "v25": null
+      "v26": 56,
+      "v25": 31
     },
     "T7_explorer_active": {
       "model": "Explorer Active",
       "price": 89990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 21,
+      "v25": 25
     },
     "T8_suv_80plus": {
       "model": "Explorer Platinum",
       "price": 99990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 22,
+      "v25": 3
     },
     "T10_ranger_xl": {
       "model": "Ranger XL",
       "price": 53990,
       "fuel": "Diésel",
-      "v26": null,
-      "v25": null
+      "v26": 42,
+      "v25": 73
     },
     "T11_ranger_xlt": {
       "model": "Ranger XLT",
       "price": 67990,
       "fuel": "Diésel",
-      "v26": null,
-      "v25": null
+      "v26": 54,
+      "v25": 50
     },
     "T11_fullsize": {
       "model": "F-150 XLT",
       "price": 79990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 45,
+      "v25": 43
     },
     "T8_expedition": {
       "model": "Expedition Platinum",
       "price": 129990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 15,
+      "v25": 4
     },
     "T8_bronco": {
       "model": "Bronco",
       "price": 119990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 1,
+      "v25": 2
     },
     "T8_explorer_plat": {
       "model": "Explorer Platinum",
@@ -12104,15 +12087,15 @@
       "model": "F-150 Lariat",
       "price": 85990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 20,
+      "v25": 24
     },
     "T11_platinum": {
       "model": "F-150 Platinum",
       "price": 95990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 30,
+      "v25": 18
     }
   }
 }
