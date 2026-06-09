@@ -11133,11 +11133,11 @@
         "precio": 69990,
         "vol_override": {
           "NACIONAL": 56,
+          "ZONA ORGU": 52,
           "PICHINCHA": 21,
           "GUAYAS": 23,
           "MANABÍ": 6,
-          "EL ORO": 2,
-          "ZONA ORGU": 52
+          "EL ORO": 2
         }
       },
       {
@@ -11148,11 +11148,11 @@
         "precio": 59990,
         "vol_override": {
           "NACIONAL": 330,
+          "ZONA ORGU": 255,
           "PICHINCHA": 93,
           "GUAYAS": 123,
           "MANABÍ": 27,
-          "EL ORO": 12,
-          "ZONA ORGU": 255
+          "EL ORO": 12
         }
       },
       {
@@ -11163,11 +11163,11 @@
         "precio": 73999,
         "vol_override": {
           "NACIONAL": 141,
+          "ZONA ORGU": 106,
           "PICHINCHA": 70,
           "GUAYAS": 34,
           "MANABÍ": 2,
-          "EL ORO": 0,
-          "ZONA ORGU": 106
+          "EL ORO": 0
         }
       },
       {
@@ -11178,9 +11178,11 @@
         "precio": 69999,
         "vol_override": {
           "NACIONAL": 17,
+          "ZONA ORGU": 11,
           "PICHINCHA": 8,
           "GUAYAS": 3,
-          "ZONA ORGU": 11
+          "MANABÍ": 0,
+          "EL ORO": 0
         }
       }
     ],
@@ -11193,7 +11195,11 @@
         "precio": 89990,
         "vol_override": {
           "NACIONAL": 21,
-          "ZONA ORGU": 21
+          "ZONA ORGU": 21,
+          "PICHINCHA": 8,
+          "GUAYAS": 7,
+          "MANABÍ": 6,
+          "EL ORO": 0
         }
       },
       {
@@ -11217,7 +11223,14 @@
         "trim": "",
         "combustible": "Gasolina",
         "precio": 59999,
-        "vol_override": {}
+        "vol_override": {
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
+        }
       },
       {
         "marca": "Hyundai",
@@ -11229,7 +11242,9 @@
           "NACIONAL": 0,
           "ZONA ORGU": 0,
           "PICHINCHA": 0,
-          "GUAYAS": 0
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
         }
       },
       {
@@ -11240,8 +11255,11 @@
         "precio": 69999,
         "vol_override": {
           "NACIONAL": 1,
+          "ZONA ORGU": 1,
+          "PICHINCHA": 0,
           "GUAYAS": 1,
-          "ZONA ORGU": 1
+          "MANABÍ": 0,
+          "EL ORO": 0
         }
       },
       {
@@ -11251,9 +11269,12 @@
         "combustible": "Gasolina",
         "precio": 93990,
         "vol_override": {
-          "NACIONAL": 1,
-          "PICHINCHA": 1,
-          "ZONA ORGU": 1
+          "NACIONAL": 0,
+          "ZONA ORGU": 0,
+          "PICHINCHA": 0,
+          "GUAYAS": 0,
+          "MANABÍ": 0,
+          "EL ORO": 0
         }
       }
     ],
@@ -12078,21 +12099,21 @@
     },
     "T8_explorer_plat": {
       "model": "Explorer Platinum",
-      "price": 94990,
+      "price": 99990,
       "fuel": "Gasolina",
-      "v26": null,
-      "v25": null
+      "v26": 22,
+      "v25": 3
     },
     "T11_lariat": {
       "model": "F-150 Lariat",
-      "price": 85990,
+      "price": 89990,
       "fuel": "Gasolina",
       "v26": 20,
       "v25": 24
     },
     "T11_platinum": {
       "model": "F-150 Platinum",
-      "price": 95990,
+      "price": 99990,
       "fuel": "Gasolina",
       "v26": 30,
       "v25": 18
