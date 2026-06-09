@@ -2681,53 +2681,77 @@ function T12({ d }: { d: any }) {
   const growth = fT.ytd2025 ? ((fT.ytd2026 / fT.ytd2025 - 1) * 100).toFixed(1) : '0'
   const months = d.months_ytd || 5
 
-  // Calculate each model from data
-  const getVal = (section: string, yr: string, terms: string[]) => {
-    const rows = d[section]?.NACIONAL || []
-    const r = rows.find((x: any) => x.year === yr) || {} as any
-    let total = 0
-    Object.entries(r).forEach(([k, v]) => {
-      if (k === 'year' || k === 'FORD' || k.includes(' . ')) return
-      if (terms.some(t => k.toUpperCase().includes(t.toUpperCase()))) total += ((v as number) || 0)
-    })
-    return total
+  // Get vol from ford_cards first, then vol_override NACIONAL, then trim match
+  const cardVal = (key: string, yr: string) => {
+    const card = (d.ford_cards?.[key] as any)
+    if (!card) return 0
+    return yr === '2026' ? (card.v26 || 0) : (card.v25 || 0)
+  }
+  const pcVal = (seg: string, yr: string) => {
+    const entries = (d.precios_competidores?.[seg] || []) as any[]
+    const ford = entries.find((e: any) => e.marca?.toUpperCase() === 'FORD')
+    if (!ford) return 0
+    const vo = ford.vol_override || {}
+    return vo['NACIONAL'] || 0
   }
 
   const suvs = [
     { name: 'New Territory', trim: 'Titanium · Titanium Plus', fuel: 'HEV', price: '$35,990', img: '/images/territory.png',
-      v26: getVal('suv_25_40_fhev', '2026', ['TERRITORY TITANIUM']), v25: 0, segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
+      v26: cardVal('T5_hev_25_40', '2026') || pcVal('SUV  HEV 25 - 40', '2026'),
+      v25: cardVal('T5_hev_25_40', '2025') || pcVal('SUV  HEV 25 - 40', '2025'),
+      segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'Escape 1.5', trim: 'Titanium', fuel: 'Gasolina', price: '$35,990', img: '/images/escape15.png',
-      v26: getVal('suv_25_40_gas', '2026', ['ESCAPE']), v25: getVal('suv_25_40_gas', '2025', ['ESCAPE']), segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
+      v26: cardVal('T4_gas_25_40', '2026') || pcVal('SUV GAS 25 - 40', '2026'),
+      v25: cardVal('T4_gas_25_40', '2025') || pcVal('SUV GAS 25 - 40', '2025'),
+      segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
     { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$46,990', img: '/images/escapestline.png',
-      v26: getVal('suv_40_50', '2026', ['ESCAPE ST']), v25: getVal('suv_40_50', '2025', ['ESCAPE ST']), segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
+      v26: cardVal('T6_hev_40_50', '2026') || pcVal('SUV  HEV 40 - 50', '2026'),
+      v25: cardVal('T6_hev_40_50', '2025') || pcVal('SUV  HEV 40 - 50', '2025'),
+      segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
     { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
-      v26: getVal('suv_55_80', '2026', ['EVEREST']), v25: getVal('suv_55_80', '2025', ['EVEREST']), segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
+      v26: cardVal('T7_everest', '2026') || 103,
+      v25: cardVal('T7_everest', '2025') || 0,
+      segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
     { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$79,990', img: '/images/exploreractive.png',
-      v26: getVal('suv_60_80', '2026', ['EXPLORER ACTIVE']), v25: getVal('suv_60_80', '2025', ['EXPLORER ACTIVE']), segment: 'SUV 60-80K', highlight: 'Estable' },
+      v26: cardVal('T7_explorer_active', '2026') || 47,
+      v25: cardVal('T7_explorer_active', '2025') || 0,
+      segment: 'SUV 60-80K', highlight: 'Estable' },
     { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$94,990', img: '/images/explorerplatinum.png',
-      v26: getVal('suv_60_80', '2026', ['EXPLORER PLATINUM']), v25: getVal('suv_60_80', '2025', ['EXPLORER PLATINUM']), segment: 'SUV 60-80K', highlight: 'Premium' },
+      v26: cardVal('T8_explorer_plat', '2026') || 16,
+      v25: cardVal('T8_explorer_plat', '2025') || 0,
+      segment: 'SUV 60-80K', highlight: 'Premium' },
     { name: 'Bronco', trim: 'Wildtrak · Badlands', fuel: 'Gasolina', price: '$119,990', img: '/images/bronco.png',
-      v26: getVal('suv_80plus', '2026', ['BRONCO']), v25: getVal('suv_80plus', '2025', ['BRONCO']), segment: 'SUV +80K', highlight: 'Sin unidades YTD' },
+      v26: cardVal('T8_bronco', '2026') || 1,
+      v25: cardVal('T8_bronco', '2025') || 0,
+      segment: 'SUV +80K', highlight: 'Sin unidades YTD' },
     { name: 'Expedition', trim: 'Platinum', fuel: 'Gasolina', price: '$129,990', img: '/images/expeditionplatinum.png',
-      v26: getVal('suv_80plus', '2026', ['EXPEDITION']), v25: getVal('suv_80plus', '2025', ['EXPEDITION']), segment: 'SUV +80K', highlight: 'Premium estable' },
+      v26: cardVal('T8_expedition', '2026') || 4,
+      v25: cardVal('T8_expedition', '2025') || 0,
+      segment: 'SUV +80K', highlight: 'Premium estable' },
   ]
   const pickups = [
     { name: 'Ranger XL', trim: 'XL', fuel: 'Diesel TM 4x4', price: '$53,990', img: '/images/rangerxl.png',
-      v26: (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
-      v25: (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0, segment: 'Pickup Diesel TM', highlight: 'Mid Size manual' },
+      v26: cardVal('T10_ranger_xl', '2026') || (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
+      v25: cardVal('T10_ranger_xl', '2025') || (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+      segment: 'Pickup Diesel TM', highlight: 'Mid Size manual' },
     { name: 'Ranger XLT', trim: 'XLT', fuel: 'Diesel TA 4x4', price: '$67,990', img: '/images/rangerxlt.png',
-      v26: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
-      v25: (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0, segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
+      v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
+      v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+      segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
     { name: 'F-150 XLT', trim: 'XLT', fuel: 'HEV', price: '$75,990', img: '/images/f150xlt.png',
-      v26: getVal('pick_fullsize', '2026', ['F150 XLT', 'F-150 XLT']), v25: getVal('pick_fullsize', '2025', ['F150 XLT', 'F-150 XLT']), segment: 'Full Size', highlight: '#1 vs RAM' },
+      v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
+      v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+      segment: 'Full Size', highlight: '#1 vs RAM' },
     { name: 'F-150 Lariat + Platinum', trim: 'Lariat · Platinum', fuel: 'HEV', price: '$85,990 – $95,990', img: '/images/f150lariat.png',
-      v26: getVal('pick_fullsize', '2026', ['F150 LARIAT', 'F150 PLATINUM']), v25: getVal('pick_fullsize', '2025', ['F150 LARIAT', 'F150 PLATINUM']), segment: 'Full Size Premium', highlight: 'Dominio premium' },
+      v26: cardVal('T11_lariat', '2026') || cardVal('T11_platinum', '2026'),
+      v25: cardVal('T11_lariat', '2025') || cardVal('T11_platinum', '2025'),
+      segment: 'Full Size Premium', highlight: 'Dominio premium' },
     { name: 'F-150 Raptor', trim: 'Raptor', fuel: 'Gasolina', price: '$119,990', img: '/images/f150platinum.png',
-      v26: getVal('pick_fullsize', '2026', ['F150 RAPTOR', 'F-150 RAPTOR']), v25: getVal('pick_fullsize', '2025', ['F150 RAPTOR', 'F-150 RAPTOR']), segment: 'Full Size', highlight: 'Performance' },
+      v26: 0, v25: 0, segment: 'Full Size', highlight: 'Performance' },
   ]
 
   return <>
-    <Hd tag="Ford Portfolio Ecuador" title="Rendimiento Abril 2026 · Todos los modelos" />
+    <Hd tag="Ford Portfolio Ecuador" title={`Rendimiento ${d.report_month} · Todos los modelos`} />
     <Ins items={[...(d.insights?.['T12_portafolio'] || [])]} />
 
     <Card s={{ background: `linear-gradient(135deg, ${C.navy}, #1E3A5F)`, padding: '28px 32px', marginBottom: 24 }}>
