@@ -11461,12 +11461,11 @@
         "combustible": "Diesel",
         "precio": 56999,
         "vol_override": {
-          "NACIONAL": 112,
-          "PICHINCHA": 23,
-          "GUAYAS": 28,
-          "MANABÍ": 7,
-          "EL ORO": 8,
-          "ZONA ORGU": 66
+          "NACIONAL": 43,
+          "PICHINCHA": 13,
+          "GUAYAS": 9,
+          "MANABÍ": 2,
+          "EL ORO": 5
         }
       },
       {
@@ -11476,12 +11475,11 @@
         "combustible": "Diesel",
         "precio": 49999,
         "vol_override": {
-          "NACIONAL": 112,
-          "PICHINCHA": 23,
-          "GUAYAS": 28,
-          "MANABÍ": 7,
-          "EL ORO": 8,
-          "ZONA ORGU": 66
+          "NACIONAL": 69,
+          "PICHINCHA": 10,
+          "GUAYAS": 19,
+          "MANABÍ": 5,
+          "EL ORO": 3
         }
       },
       {
@@ -11562,11 +11560,10 @@
         "combustible": "Gasolina",
         "precio": 79990,
         "vol_override": {
-          "NACIONAL": 107,
-          "PICHINCHA": 45,
-          "GUAYAS": 31,
-          "MANABÍ": 9,
-          "ZONA ORGU": 85
+          "NACIONAL": 45,
+          "PICHINCHA": 19,
+          "MANABÍ": 6,
+          "GUAYAS": 17
         }
       },
       {
@@ -11576,12 +11573,7 @@
         "combustible": "Gasolina",
         "precio": 72999,
         "vol_override": {
-          "NACIONAL": 93,
-          "PICHINCHA": 37,
-          "GUAYAS": 38,
-          "MANABÍ": 2,
-          "EL ORO": 8,
-          "ZONA ORGU": 79
+          "NACIONAL": 107
         }
       },
       {
@@ -11591,8 +11583,8 @@
         "combustible": "Gasolina",
         "precio": 91499,
         "vol_override": {
-          "NACIONAL": 23,
-          "PICHINCHA": 3,
+          "NACIONAL": 27,
+          "PICHINCHA": 5,
           "GUAYAS": 8,
           "MANABÍ": 1,
           "ZONA ORGU": 12
@@ -11605,7 +11597,7 @@
         "combustible": "Gasolina",
         "precio": 135990,
         "vol_override": {
-          "NACIONAL": 12,
+          "NACIONAL": 13,
           "PICHINCHA": 5,
           "GUAYAS": 1,
           "ZONA ORGU": 6
@@ -11623,6 +11615,32 @@
           "GUAYAS": 1,
           "MANABÍ": 1,
           "ZONA ORGU": 5
+        }
+      },
+      {
+        "marca": "Ford",
+        "modelo": "F-150",
+        "trim": "Lariat",
+        "combustible": "Gasolina",
+        "precio": 89990,
+        "vol_override": {
+          "NACIONAL": 20,
+          "PICHINCHA": 9,
+          "MANABÍ": 3,
+          "GUAYAS": 6
+        }
+      },
+      {
+        "marca": "Ford",
+        "modelo": "F-150",
+        "trim": "Platinum",
+        "combustible": "Gasolina",
+        "precio": 99990,
+        "vol_override": {
+          "NACIONAL": 30,
+          "PICHINCHA": 13,
+          "MANABÍ": 0,
+          "GUAYAS": 8
         }
       }
     ]
