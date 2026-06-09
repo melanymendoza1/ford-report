@@ -34,7 +34,7 @@ const C = { night: '#081534', navy: '#133A7C', steel: '#2A6BAC', sky: '#47A8E5',
 const SEG: Record<string, string> = { 'B SUV': 'BSUV', 'C SUV': 'Compact', 'D SUV': 'Midsize', 'E SUV': 'Full Size', 'PREMIUM SUV': 'Premium' }
 const cn = (c: string) => ({ 'AUTOMOV. DE PASAJEROS': 'Automóviles', 'SUV': 'SUV', 'PICK UPS': 'Pick Ups', 'CAMION': 'Camiones', 'BUS': 'Buses', 'VAN': 'Vans' }[c] || c)
 const sn = (s: string) => SEG[s] || s
-const fc = (v: number) => Math.round(v / 3 * 12)
+const fc = (v: number, months = 5) => Math.round(v / months * 12)
 const gr = (c: number, gap = 16) => ({ display: 'grid' as const, gridTemplateColumns: `repeat(${c},1fr)`, gap, marginBottom: 20 })
 const PROVS = ['PICHINCHA', 'GUAYAS', 'MANABÍ', 'EL ORO']
 const pn = (p: string) => ({ 'PICHINCHA': 'Pichincha', 'GUAYAS': 'Guayas', 'MANABÍ': 'Manabí', 'EL ORO': 'El Oro', 'ZONA ORGU': 'Zona Orgu', 'NACIONAL': 'Nacional', 'TODAS': 'Todas' }[p] || p)
@@ -377,21 +377,31 @@ export default function Page() {
     {/* HERO — ONLY ON INDUSTRIA */}
     {tab === 'ind' && <div style={{ background: `linear-gradient(135deg,${C.night},#0F2B5E)`, padding: '28px 32px 32px' }}>
       <div style={{ maxWidth: 1360, margin: '0 auto' }}>
-        <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>Abril 2026 · YTD Comparable ene-feb-mar-abr</div>
-        <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece 1.32x más rápido que el mercado</h1>
-        <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable (ene-feb-mar-abr 2026 vs 2025)</p>
-        <div style={gr(4, 16)}>
-          {[
-            { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
-            { l: 'Ford Nacional YTD', v: N(fT.ytd2026), s: `↑ +${dFord}% vs ${N(fT.ytd2025)} un. (2025 YTD)`, c: '#10B981' },
-            { l: 'Market Share Ford', v: `${msF}%`, s: `vs ${ms25}% (2025 YTD)`, c: C.gld },
-            { l: 'Forecast 2026', v: N(fc(fT.ytd2026 || 0)), s: 'Proyección lineal · 3m × 4', c: '#94A3B8' },
-          ].map((k, i) => <div key={i} style={{ background: 'rgba(255,255,255,.07)', borderRadius: 14, padding: '16px 20px', borderLeft: `4px solid ${k.c}` }}>
-            <div style={{ fontSize: 10, color: '#7BA8D4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>{k.l}</div>
-            <div style={{ fontSize: 32, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{k.v}</div>
-            <div style={{ fontSize: 12, color: '#4ade80', marginTop: 6 }}>{k.s}</div>
-          </div>)}
-        </div>
+        {(() => {
+          const months = (data as any).months_ytd || 5
+          const monthNames = ['','Ene','Ene-Feb','Ene-Mar','Ene-Abr','Ene-May','Ene-Jun','Ene-Jul','Ene-Ago','Ene-Sep','Ene-Oct','Ene-Nov','Ene-Dic']
+          const ytdLabel = monthNames[months] || `${months}m`
+          const growthRatio = (dFord !== '0' && dInd !== '0') ? (parseFloat(dFord) / parseFloat(dInd)).toFixed(2) : '—'
+          const fcts = fc(fT.ytd2026 || 0, months)
+          const indFcts = fc(mT.ytd2026 || 0, months)
+          return <>
+            <div style={{ fontSize: 11, color: C.sky, letterSpacing: 1.5, textTransform: 'uppercase', marginBottom: 6 }}>{data.report_month} · YTD Comparable {ytdLabel}</div>
+            <h1 style={{ fontSize: 24, fontWeight: 700, color: '#fff', margin: '0 0 4px' }}>Ford crece {growthRatio}x más rápido que el mercado</h1>
+            <p style={{ fontSize: 13, color: '#7BA8D4', margin: '0 0 20px' }}>Industria +{dInd}% vs Ford +{dFord}% YTD comparable ({ytdLabel.toLowerCase()} 2026 vs 2025)</p>
+            <div style={gr(4, 16)}>
+              {[
+                { l: 'Industria YTD', v: N(mT.ytd2026), s: `↑ +${dInd}% vs ${N(mT.ytd2025)} un. (2025 YTD)`, c: C.sky },
+                { l: 'Ford Nacional YTD', v: N(fT.ytd2026), s: `↑ +${dFord}% vs ${N(fT.ytd2025)} un. (2025 YTD)`, c: '#10B981' },
+                { l: 'Market Share Ford', v: `${msF}%`, s: `vs ${ms25}% (2025 YTD)`, c: C.gld },
+                { l: 'Forecast 2026', v: N(fcts), s: `Proyección lineal · ${months}m × ${Math.round(12/months)}`, c: '#94A3B8' },
+              ].map((k, i) => <div key={i} style={{ background: 'rgba(255,255,255,.07)', borderRadius: 14, padding: '16px 20px', borderLeft: `4px solid ${k.c}` }}>
+                <div style={{ fontSize: 10, color: '#7BA8D4', textTransform: 'uppercase', letterSpacing: 1, marginBottom: 6 }}>{k.l}</div>
+                <div style={{ fontSize: 32, fontWeight: 700, color: '#fff', lineHeight: 1 }}>{k.v}</div>
+                <div style={{ fontSize: 12, color: '#4ade80', marginTop: 6 }}>{k.s}</div>
+              </div>)}
+            </div>
+          </>
+        })()}
       </div>
     </div>}
 
@@ -2668,6 +2678,7 @@ function T12({ d }: { d: any }) {
   const mktT = (d.mercado_ytd || []).find((r: any) => r.cat === 'Total general') || {} as any
   const ms = mktT.ytd2026 ? ((fT.ytd2026 || 0) / mktT.ytd2026 * 100).toFixed(2) : '0'
   const growth = fT.ytd2025 ? ((fT.ytd2026 / fT.ytd2025 - 1) * 100).toFixed(1) : '0'
+  const months = d.months_ytd || 5
 
   // Calculate each model from data
   const getVal = (section: string, yr: string, terms: string[]) => {
@@ -2733,7 +2744,7 @@ function T12({ d }: { d: any }) {
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Market Share</div>
         </div>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0))}</div>
+          <div style={{ fontSize: 36, fontWeight: 700, color: '#FBBF24', lineHeight: 1 }}>{N(fc(fT.ytd2026 || 0, months))}</div>
           <div style={{ fontSize: 11, color: '#94A3B8', marginTop: 4 }}>Forecast 2026</div>
         </div>
       </div>
@@ -2807,7 +2818,7 @@ function T12({ d }: { d: any }) {
             <td style={{ padding: '12px 14px', textAlign: 'right', color: C.sub }}>{N(r.ytd2025)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right', fontWeight: 700, color: C.navy }}>{N(r.ytd2026)}</td>
             <td style={{ padding: '12px 14px', textAlign: 'right' }}><Dl a={r.ytd2026} b={r.ytd2025} /></td>
-            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0))}</td>
+            <td style={{ padding: '12px 14px', textAlign: 'right', color: C.ac, fontWeight: 600 }}>{N(fc(r.ytd2026 || 0, months))}</td>
           </tr>
         )}</tbody>
       </table>
