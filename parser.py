@@ -232,6 +232,233 @@ def extract_pick_diesel_combined(ws_tm, ws_ta):
     return combined
 
 # ─── MAIN ──────────────────────────────────────────────────────────────────────
+def reshape_for_frontend(report: dict, wb) -> dict:
+    """
+    page.tsx espera claves específicas con formato array o nested.
+    Aquí hacemos el mapping sin tocar el frontend.
+    """
+    out = {k: v for k, v in report.items()}  # copy all existing keys
+
+    months = report.get('months_ytd', 5)
+
+    # ── T1: mercado_ytd, ford_ytd (arrays con cat/y2024/y2025/y2026) ──
+    # Zona Orgu data (lo que usa el tab principal)
+    ind_orgu = report.get('industria_orgu_ytd', {})
+    ford_orgu = report.get('ford_orgu_ytd', {})
+    ind_nac   = report.get('industria_nacional_ytd', {})
+    ford_nac  = report.get('ford_nacional_ytd', {})
+
+    def dict_to_arr(d):
+        return [{'cat': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'),
+                 'y2026': v.get('y2026'), 'fcts2026': v.get('fcts2026')} for k, v in d.items()]
+
+    out['mercado_ytd']          = dict_to_arr(ind_orgu)
+    out['ford_ytd']             = dict_to_arr(ford_orgu)
+    out['mercado_ytd_nacional'] = dict_to_arr(ind_nac)
+    out['ford_ytd_nacional']    = dict_to_arr(ford_nac)
+
+    # ── T1: provincias_ytd (array con label/y2024/y2025/y2026) ──
+    out['provincias_ytd'] = [
+        {'label': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'), 'y2026': v.get('y2026')}
+        for k, v in report.get('provincias_industria', {}).items()
+    ]
+    out['ford_provincias_ytd'] = [
+        {'label': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'), 'y2026': v.get('y2026')}
+        for k, v in report.get('provincias_ford', {}).items()
+    ]
+
+    # ford_cat_por_prov: page.tsx expects [{prov, SUV:{y2024,y2025,y2026}, 'PICK UPS':{...}}]
+    fcpp = report.get('ford_cat_por_prov', {})
+    out['ford_cat_por_prov'] = [
+        {'prov': prov, **cats}
+        for prov, cats in fcpp.items()
+    ]
+
+    # ── T2: combustible SUV/PU ──
+    def parse_combustible_nac(ws):
+        rows = list(ws.iter_rows(min_row=1, max_row=30, values_only=True))
+        result = []
+        for i, row in enumerate(rows):
+            if row[0] == 'Etiquetas de fila':
+                for r in rows[i+1:]:
+                    if r[0] is None: break
+                    if str(r[0]) == 'Total general': continue
+                    if str(r[0]) in ('SUV', 'PICK UPS'): continue  # skip total category row
+                    result.append({'combustible': r[0], 'y2024': safe_num(r[1]),
+                                   'y2025': safe_num(r[2]), 'y2026': safe_num(r[3])})
+        return result
+
+    def parse_combustible_prov(ws):
+        rows = list(ws.iter_rows(min_row=1, max_row=60, values_only=True))
+        result = {}
+        current_prov = None
+        for i, row in enumerate(rows):
+            if row[0] == 'Etiquetas de fila':
+                continue
+            if row[0] in PROVINCES:
+                current_prov = row[0]
+                result[current_prov] = []
+                continue
+            if current_prov and row[0] and row[0] not in ('Total general', 'SUV', 'PICK UPS'):
+                if str(row[0]) in ('DIESEL', 'ELECTRICO BEV', 'GASOLINA', 'HIBRIDO', 'GAS NATURAL'):
+                    result[current_prov].append({
+                        'combustible': row[0], 'y2024': safe_num(row[1]),
+                        'y2025': safe_num(row[2]), 'y2026': safe_num(row[3])
+                    })
+        return result
+
+    out['combustible_suv_nacional'] = parse_combustible_nac(wb['COMBUSTIBLE_NACIONAL_SUV_YTD'])
+    out['combustible_suv_prov']     = parse_combustible_prov(wb['COMBUSTIBLE_PROV_SUV_YTD'])
+    out['ford_comb_suv_nacional']   = parse_combustible_nac(wb['FORD_COMBUSTIBLE_SUV_YTD'])
+    out['ford_comb_suv_prov']       = parse_combustible_prov(wb['FORD_COMBUSTIBLE_SUV_PROV_YTD'])
+    out['combustible_pu_nacional']  = parse_combustible_nac(wb['COMBUSTIBLE_NACIONAL_PU_YTD'])
+    out['combustible_pu_prov']      = parse_combustible_prov(wb['COMBUSTIBLE_PROV_PU_YTD'])
+    out['ford_comb_pu_nacional']    = parse_combustible_nac(wb['FORD_COMBUSTIBLE_PU_YTD'])
+    out['ford_comb_pu_prov']        = parse_combustible_prov(wb['FORD_COMBUSTIBLE_PU_PROV_YTD'])
+
+    # ── T3: suv_segmentos, suv_segmentos_nacional, suv_seg_por_provincia ──
+    def seg_dict_to_arr(d):
+        return [{'seg': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'),
+                 'y2026': v.get('y2026'), 'fcts2026': v.get('fcts2026')} for k, v in d.items() if k != '_total']
+
+    out['suv_segmentos']          = seg_dict_to_arr(report.get('suv_segmentos_orgu_ytd', {}))
+    out['suv_segmentos_nacional'] = seg_dict_to_arr(extract_summary(wb['SUV_SEGMENTOS_NACIONAL_YTD']))
+    out['ford_suv_seg_nacional']  = seg_dict_to_arr(extract_summary(wb['FORD_SUV_SEGMENTOS_NACIONAL_YTD']))
+
+    # suv_seg_por_provincia: {PICHINCHA: [{seg, y2024, y2025, y2026}], ...}
+    raw_seg_prov = report.get('suv_segmentos_por_prov', {})
+    out['suv_seg_por_provincia'] = {
+        prov: [{'seg': r['label'], 'y2024': r.get('y2024'), 'y2025': r.get('y2025'), 'y2026': r.get('y2026')}
+               for r in rows]
+        for prov, rows in raw_seg_prov.items()
+    }
+
+    ford_seg_prov_raw = extract_by_province(wb['FORD_SUV_SEGMENTOS_PROV_YTD'], brand_level=False)
+    out['ford_suv_seg_prov'] = {
+        prov: [{'seg': r['label'], 'y2024': r.get('y2024'), 'y2025': r.get('y2025'), 'y2026': r.get('y2026')}
+               for r in rows]
+        for prov, rows in ford_seg_prov_raw.items()
+    }
+
+    # ── T4: suv_25_40_gas nested format ──
+    # page.tsx: d.suv_25_40_gas.NACIONAL (array year rows), d.suv_25_40_gas.prov_marcas, d.suv_25_40_gas.por_provincia
+    def build_national_year_rows(brand_list):
+        """Convert [{brand, y2024, y2025, y2026}] → [{year:'2024', BRAND:val,...}, ...]"""
+        result = {}
+        for item in brand_list:
+            for yr in ('y2024','y2025','y2026'):
+                y = yr[1:]
+                if y not in result: result[y] = {'year': y}
+                result[y][item['brand']] = item.get(yr)
+        return [result[y] for y in ('2024','2025','2026') if y in result]
+
+    def build_prov_marcas(prov_dict):
+        """Convert {PROV:[{brand,y2024,y2025,y2026}]} → {PROV:[{year,BRAND:val}]}"""
+        out2 = {}
+        for prov, brands in prov_dict.items():
+            yr_rows = {}
+            for item in brands:
+                for yr in ('y2024','y2025','y2026'):
+                    y = yr[1:]
+                    if y not in yr_rows: yr_rows[y] = {'year': y}
+                    yr_rows[y][item['brand']] = item.get(yr)
+            out2[prov] = [yr_rows[y] for y in ('2024','2025','2026') if y in yr_rows]
+        return out2
+
+    def build_por_provincia(prov_vol_dict):
+        """Convert {PROV:{y2024,y2025,y2026}} → [{label,y2024,y2025,y2026}]"""
+        return [{'label': k, 'y2024': v.get('y2024'), 'y2025': v.get('y2025'), 'y2026': v.get('y2026')}
+                for k, v in prov_vol_dict.items() if k != 'ZONA ORGU']
+
+    out['suv_25_40_gas'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_gas_25_40_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_gas_25_40_por_prov', {})),
+        'por_provincia': build_por_provincia(report.get('suv_gas_25_40_prov_vol', {})),
+    }
+
+    # ── T5: suv_25_40_fhev ──
+    out['suv_25_40_fhev'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_hib_25_40_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_hib_25_40_por_prov', {})),
+        'por_provincia': build_por_provincia(report.get('suv_hib_25_40_prov_vol', {})),
+    }
+
+    # ── T6: suv_40_50 ──
+    out['suv_40_50'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_hib_40_50_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_hib_40_50_por_prov', {})),
+        'por_provincia': build_por_provincia(report.get('suv_hib_40_50_prov_vol', {})),
+    }
+
+    # ── T7: suv_55_80 (Everest) and suv_60_80 (Explorer) ──
+    out['suv_55_80'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_55_80_everest_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_55_80_por_prov', {})),
+        'por_provincia': build_por_provincia({}),
+    }
+    out['suv_60_80'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_60_80_explorer_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_60_80_por_prov', {})),
+        'por_provincia': build_por_provincia({}),
+    }
+
+    # ── T8: suv_80plus ──
+    out['suv_80plus'] = {
+        'NACIONAL':      build_national_year_rows(report.get('suv_80plus_nacional', [])),
+        'prov_marcas':   build_prov_marcas(report.get('suv_80plus_por_prov', {})),
+        'por_provincia': build_por_provincia({}),
+    }
+
+    # ── T9: pickup_cat_ytd, pickup_cat_nacional, pu_cat_por_prov ──
+    out['pickup_cat_ytd']      = seg_dict_to_arr(extract_summary(wb['PICKUP_CAT_ORGU_YTD']))
+    out['pickup_cat_nacional'] = seg_dict_to_arr(extract_summary(wb['PICKUP_CAT_NACIONAL_YTD']))
+
+    def parse_pu_cat_por_prov(ws):
+        rows = list(ws.iter_rows(min_row=1, max_row=50, values_only=True))
+        result = {}
+        current_prov = None
+        for row in rows:
+            if row[0] in PROVINCES:
+                current_prov = row[0]
+                result[current_prov] = []
+                continue
+            if current_prov and row[0] and row[0] not in ('Etiquetas de fila','Total general'):
+                if row[0] in ('COMPACT PICK UPS','FULL SIZE PICK UPS','MID SIZE PICK UPS'):
+                    result[current_prov].append({
+                        'seg': row[0], 'y2024': safe_num(row[1]),
+                        'y2025': safe_num(row[2]), 'y2026': safe_num(row[3])
+                    })
+        return result
+
+    out['pu_cat_por_prov'] = parse_pu_cat_por_prov(wb['PU_CAT_POR_PROV'])
+
+    # ── T10: pick_diesel_tm / pick_diesel_ta ──
+    out['pick_diesel_tm'] = {
+        'NACIONAL':    build_national_year_rows(report.get('pu_diesel_tm_nacional', [])),
+        'prov_marcas': build_prov_marcas(extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TM'])),
+    }
+    out['pick_diesel_ta'] = {
+        'NACIONAL':    build_national_year_rows(report.get('pu_diesel_ta_nacional', [])),
+        'prov_marcas': build_prov_marcas(extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TA'])),
+    }
+
+    # pick_diesel (combined, used in T9)
+    out['pick_diesel'] = {
+        'NACIONAL':    out['pick_diesel_tm']['NACIONAL'],  # TM as primary
+        'prov_marcas': build_prov_marcas(report.get('pu_diesel_por_prov', {})),
+    }
+
+    # ── T11: pick_fullsize ──
+    out['pick_fullsize'] = {
+        'NACIONAL':    build_national_year_rows(report.get('pu_fullsize_nacional', [])),
+        'prov_marcas': build_prov_marcas(report.get('pu_fullsize_por_prov', {})),
+    }
+
+    # ── T12: ford_ytd already set above ──
+    # mercado_ytd already set above
+
+    return out
+
 def main(excel_path):
     print(f"Leyendo: {excel_path}")
     wb = load_workbook(excel_path, read_only=True, data_only=True)
@@ -351,6 +578,10 @@ def main(excel_path):
     print("  Top 10 modelos...")
     report['top10_modelos'] = extract_flat(wb['TOP10_MODELOS_ORGU_YTD'])
 
+    # ── Reshape for frontend compatibility ──
+    print("  Reshaping para frontend...")
+    report = reshape_for_frontend(report, wb)
+
     wb.close()
 
     # ── Write output ──
@@ -388,3 +619,6 @@ if __name__ == '__main__':
         print("Uso: python parser.py <ruta_excel.xlsx>")
         sys.exit(1)
     main(sys.argv[1])
+
+
+# ─── RESHAPE: adapta el JSON al formato esperado por page.tsx ──────────────────
