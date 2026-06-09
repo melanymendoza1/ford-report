@@ -1634,10 +1634,10 @@ function T7({ d }: { d: any }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(everestV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T7_everest'] as any)?.v26 ?? everestV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={everestV26} b={everestV25} />
+          <Dl a={(d.ford_cards?.['T7_everest'] as any)?.v26 ?? everestV26} b={(d.ford_cards?.['T7_everest'] as any)?.v25 ?? everestV25} />
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -1648,10 +1648,10 @@ function T7({ d }: { d: any }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(explorerV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T7_explorer_active'] as any)?.v26 ?? explorerV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={explorerV26} b={explorerV25} />
+          <Dl a={(d.ford_cards?.['T7_explorer_active'] as any)?.v26 ?? explorerV26} b={(d.ford_cards?.['T7_explorer_active'] as any)?.v25 ?? explorerV25} />
         </div>
       </Card>
     </div>
@@ -1720,7 +1720,11 @@ function T7({ d }: { d: any }) {
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
       bbcBrands.forEach(b => { b.ms = totalSeg ? (b.totalVol / totalSeg * 100) : 0 })
       bbcBrands.sort((a, b) => a.brand === 'FORD' ? -1 : b.brand === 'FORD' ? 1 : b.totalVol - a.totalVol)
-      return <BBC brands={bbcBrands} scopeLabel={scopeLabel} />
+      return <BBC brands={bbcBrands}
+        hotMin={sub === 'everest'
+          ? ((scope === 'MANABÍ' || scope === 'EL ORO') ? 60000 : (d.bbc_hotlines?.['SUV  55 - 80 everest'] ?? 65000))
+          : (d.bbc_hotlines?.['SUV  55 - 80 explorer'] ?? 80000)}
+        scopeLabel={scopeLabel} />
     })()}
 
     <Card s={{ marginBottom: 16 }}>
@@ -1907,10 +1911,11 @@ function T8({ d }: { d: any }) {
         <img src="/images/expeditionplatinum.png" alt="Expedition" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Expedition</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$129,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T8_expedition'] as any)?.price || 129990)}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_expedition', '2026'))}</div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N((d.ford_cards?.['T8_expedition'] as any)?.v26 ?? getCardFordVal('suv_80plus_expedition', '2026'))}</div>
+          <Dl a={(d.ford_cards?.['T8_expedition'] as any)?.v26 ?? getCardFordVal('suv_80plus_expedition', '2026')} b={(d.ford_cards?.['T8_expedition'] as any)?.v25 ?? getCardFordVal('suv_80plus_expedition', '2025')} />
           <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
         </div>
       </Card>
@@ -1918,10 +1923,11 @@ function T8({ d }: { d: any }) {
         <img src="/images/bronco.png" alt="Bronco" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Bronco</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$119,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T8_bronco'] as any)?.price || 119990)}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_bronco', '2026'))}</div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N((d.ford_cards?.['T8_bronco'] as any)?.v26 ?? getCardFordVal('suv_80plus_bronco', '2026'))}</div>
+          <Dl a={(d.ford_cards?.['T8_bronco'] as any)?.v26 ?? getCardFordVal('suv_80plus_bronco', '2026')} b={(d.ford_cards?.['T8_bronco'] as any)?.v25 ?? getCardFordVal('suv_80plus_bronco', '2025')} />
           <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
         </div>
       </Card>
@@ -1929,10 +1935,11 @@ function T8({ d }: { d: any }) {
         <img src="/images/explorerplatinum.png" alt="Explorer Platinum" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Explorer Platinum</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>$94,990</div>
+          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T8_explorer_plat'] as any)?.price || 94990)}</div>
         </div>
         <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N(getCardFordVal('suv_80plus_explorer_plat', '2026'))}</div>
+          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N((d.ford_cards?.['T8_explorer_plat'] as any)?.v26 ?? getCardFordVal('suv_80plus_explorer_plat', '2026'))}</div>
+          <Dl a={(d.ford_cards?.['T8_explorer_plat'] as any)?.v26 ?? getCardFordVal('suv_80plus_explorer_plat', '2026')} b={(d.ford_cards?.['T8_explorer_plat'] as any)?.v25 ?? getCardFordVal('suv_80plus_explorer_plat', '2025')} />
           <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
         </div>
       </Card>
@@ -2543,42 +2550,42 @@ function T11({ d }: { d: any }) {
         <img src="/images/f150xlt.png" alt="F-150 XLT" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 XLT</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$75,990 · Gasolina</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T11_ranger_xlt'] as any)?.price || 75990)} · Gasolina</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(xltV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T11_ranger_xlt'] as any)?.v26 ?? xltV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={xltV26} b={xltV25} />
+          <Dl a={(d.ford_cards?.['T11_ranger_xlt'] as any)?.v26 ?? xltV26} b={(d.ford_cards?.['T11_ranger_xlt'] as any)?.v25 ?? xltV25} />
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
         <img src="/images/f150lariat.png" alt="F-150 Lariat" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 Lariat</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$89,990 · Gasolina</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T11_lariat'] as any)?.price || 89990)} · Gasolina</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(lariatV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T11_lariat'] as any)?.v26 ?? lariatV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={lariatV26} b={lariatV25} />
+          <Dl a={(d.ford_cards?.['T11_lariat'] as any)?.v26 ?? lariatV26} b={(d.ford_cards?.['T11_lariat'] as any)?.v25 ?? lariatV25} />
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
         <img src="/images/f150platinum.png" alt="F-150 Platinum" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 Platinum</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$99,990 · Gasolina</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T11_platinum'] as any)?.price || 99990)} · Gasolina</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(platV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T11_platinum'] as any)?.v26 ?? platV26)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={platV26} b={platV25} />
+          <Dl a={(d.ford_cards?.['T11_platinum'] as any)?.v26 ?? platV26} b={(d.ford_cards?.['T11_platinum'] as any)?.v25 ?? platV25} />
         </div>
       </Card>
     </div>
