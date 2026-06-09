@@ -1553,33 +1553,13 @@ function T7({ d }: { d: any }) {
   const fordPos = filteredBrands.findIndex(b => b.brand === 'FORD') + 1
   const getModelNames = (brand: string) => (activeFilters[brand] || []).filter((t: string) => t.length > 0).map((t: string) => t.replace(/-/g, ' ').toUpperCase())
 
-  // Province chart
-  // Province chart — sum only filtered models per province
+  // Province chart — sum brand totals only for brands in activeFilters (segment competitors)
   const getProvFilteredTotal = (p: string, yr: string) => {
     const fp = activePM[p] || []
     const row = fp.find((x: any) => x.year === yr) || {} as any
-    let total = 0
-    Object.keys(activeFilters).forEach(brand => {
-      const terms = activeFilters[brand] || []
-      if (!terms.length) return
-      const covered = new Set<string>()
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || !v) return
-        if (k.toUpperCase().startsWith(brand.toUpperCase() + ' . ')) {
-          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()))
-          if (mt.length) { total += ((v as number) || 0); mt.forEach(t => covered.add(t.toUpperCase())) }
-        }
-      })
-      Object.entries(row).forEach(([k, v]) => {
-        if (k === 'year' || k === brand || k.includes(' . ') || !v) return
-        const isBrandOnly = k === k.toUpperCase() && k.length < 20 && !k.includes(' AC ') && !k.includes(' 5P') && !k.includes(' TD ')
-        if (!isBrandOnly) {
-          const mt = terms.filter((t: string) => k.toUpperCase().includes(t.toUpperCase()) && !covered.has(t.toUpperCase()))
-          if (mt.length) total += ((v as number) || 0)
-        }
-      })
-    })
-    return total
+    return Object.keys(activeFilters).reduce((s, brand) => {
+      return s + ((row[brand] as number) || 0)
+    }, 0)
   }
   const getProvFordTotal = (p: string, yr: string) => {
     const terms = activeFilters['FORD'] || []
