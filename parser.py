@@ -268,6 +268,16 @@ def reshape_for_frontend(report: dict, wb) -> dict:
     out['mercado_ytd_nacional'] = dict_to_arr(ind_nac)
     out['ford_ytd_nacional']    = dict_to_arr(ford_nac)
 
+    # ── T1: cat por provincia individual ──
+    prov_sheet_map = {
+        'cat_pichincha_ytd': 'CAT_PICHINCHA_YTD',
+        'cat_guayas_ytd':    'CAT_GUAYAS_YTD',
+        'cat_manabi_ytd':    'CAT_MANABI_YTD',
+        'cat_eloro_ytd':     'CAT_ELORO_YTD',
+    }
+    for key, sheet in prov_sheet_map.items():
+        out[key] = dict_to_arr(extract_summary(wb[sheet]))
+
     # ── T1: provincias_ytd (array con label/ytd2024/ytd2025/ytd2026) ──
     out['provincias_ytd'] = [
         {'label': k, 'ytd2024': v.get('y2024'), 'ytd2025': v.get('y2025'), 'ytd2026': v.get('y2026')}
@@ -299,38 +309,35 @@ def reshape_for_frontend(report: dict, wb) -> dict:
                 for r in rows[i+1:]:
                     if r[0] is None: break
                     if str(r[0]) == 'Total general': continue
-                    if str(r[0]) in ('SUV', 'PICK UPS'): continue  # skip total category row
-                    result.append({'combustible': r[0], 'y2024': safe_num(r[1]),
-                                   'y2025': safe_num(r[2]), 'y2026': safe_num(r[3])})
+                    if str(r[0]) in ('SUV', 'PICK UPS'): continue
+                    result.append({'label': r[0], '2024': safe_num(r[1]),
+                                   '2025': safe_num(r[2]), '2026': safe_num(r[3])})
         return result
 
-    def parse_combustible_prov(ws):
-        rows = list(ws.iter_rows(min_row=1, max_row=60, values_only=True))
-        result = {}
-        current_prov = None
+    def combustible_prov_to_flat(ws):
+        """Returns flat array: [{label:'PICHINCHA'}, {label:'GASOLINA','2024':...}, ...]
+        page.tsx iterates this and uses r.label to detect province vs fuel."""
+        rows = list(ws.iter_rows(min_row=1, max_row=80, values_only=True))
+        result = []
         for i, row in enumerate(rows):
             if row[0] == 'Etiquetas de fila':
-                continue
-            if row[0] in PROVINCES:
-                current_prov = row[0]
-                result[current_prov] = []
-                continue
-            if current_prov and row[0] and row[0] not in ('Total general', 'SUV', 'PICK UPS'):
-                if str(row[0]) in ('DIESEL', 'ELECTRICO BEV', 'GASOLINA', 'HIBRIDO', 'GAS NATURAL'):
-                    result[current_prov].append({
-                        'combustible': row[0], 'y2024': safe_num(row[1]),
-                        'y2025': safe_num(row[2]), 'y2026': safe_num(row[3])
-                    })
+                for r in rows[i+1:]:
+                    if r[0] is None: break
+                    label = str(r[0]) if r[0] else ''
+                    if not label or label == 'Total general': continue
+                    if label in ('SUV','PICK UPS'): continue
+                    result.append({'label': label, '2024': safe_num(r[1]),
+                                   '2025': safe_num(r[2]), '2026': safe_num(r[3])})
         return result
 
     out['combustible_suv_nacional'] = parse_combustible_nac(wb['COMBUSTIBLE_NACIONAL_SUV_YTD'])
-    out['combustible_suv_prov']     = parse_combustible_prov(wb['COMBUSTIBLE_PROV_SUV_YTD'])
+    out['combustible_suv_prov']     = combustible_prov_to_flat(wb['COMBUSTIBLE_PROV_SUV_YTD'])
     out['ford_comb_suv_nacional']   = parse_combustible_nac(wb['FORD_COMBUSTIBLE_SUV_YTD'])
-    out['ford_comb_suv_prov']       = parse_combustible_prov(wb['FORD_COMBUSTIBLE_SUV_PROV_YTD'])
+    out['ford_comb_suv_prov']       = combustible_prov_to_flat(wb['FORD_COMBUSTIBLE_SUV_PROV_YTD'])
     out['combustible_pu_nacional']  = parse_combustible_nac(wb['COMBUSTIBLE_NACIONAL_PU_YTD'])
-    out['combustible_pu_prov']      = parse_combustible_prov(wb['COMBUSTIBLE_PROV_PU_YTD'])
+    out['combustible_pu_prov']      = combustible_prov_to_flat(wb['COMBUSTIBLE_PROV_PU_YTD'])
     out['ford_comb_pu_nacional']    = parse_combustible_nac(wb['FORD_COMBUSTIBLE_PU_YTD'])
-    out['ford_comb_pu_prov']        = parse_combustible_prov(wb['FORD_COMBUSTIBLE_PU_PROV_YTD'])
+    out['ford_comb_pu_prov']        = combustible_prov_to_flat(wb['FORD_COMBUSTIBLE_PU_PROV_YTD'])
 
     # ── T3: suv_segmentos, suv_segmentos_nacional, suv_seg_por_provincia ──
     def seg_dict_to_arr(d):
@@ -341,20 +348,45 @@ def reshape_for_frontend(report: dict, wb) -> dict:
     out['suv_segmentos_nacional'] = seg_dict_to_arr(extract_summary(wb['SUV_SEGMENTOS_NACIONAL_YTD']))
     out['ford_suv_seg_nacional']  = seg_dict_to_arr(extract_summary(wb['FORD_SUV_SEGMENTOS_NACIONAL_YTD']))
 
-    # suv_seg_por_provincia: {PICHINCHA: [{seg, y2024, y2025, y2026}], ...}
-    raw_seg_prov = report.get('suv_segmentos_por_prov', {})
-    out['suv_seg_por_provincia'] = {
-        prov: [{'seg': r['label'], 'y2024': r.get('y2024'), 'y2025': r.get('y2025'), 'y2026': r.get('y2026')}
-               for r in rows]
-        for prov, rows in raw_seg_prov.items()
-    }
+    # suv_seg_por_provincia: sheet has seg→province structure (B SUV→PICHINCHA,GUAYAS...)
+    # page.tsx line 761 expects flat array: [{label:'PICHINCHA'},{label:'B SUV',y2024,...},...]
+    # BUT actually page.tsx builds segGroups by iterating: if label in PROVS → new group key
+    # So we need: [{label:'B SUV'}, {label:'PICHINCHA',y2024,...}, {label:'GUAYAS',...}, ...]
+    def parse_seg_por_prov_flat(ws):
+        rows = list(ws.iter_rows(min_row=1, max_row=100, values_only=True))
+        result = []
+        for i, row in enumerate(rows):
+            if row[0] == 'Etiquetas de fila':
+                year_cols = {str(h): j for j, h in enumerate(row) if str(h) in ('2024','2025','2026')}
+                current_seg = None
+                for r in rows[i+1:]:
+                    if r[0] is None: break
+                    label = str(r[0])
+                    if label == 'Total general': continue
+                    if label in PROVINCES:
+                        # Province row under a segment
+                        result.append({'label': label,
+                            'y2024': safe_num(r[year_cols.get('2024', 99)]) if '2024' in year_cols else None,
+                            'y2025': safe_num(r[year_cols.get('2025', 99)]) if '2025' in year_cols else None,
+                            'y2026': safe_num(r[year_cols.get('2026', 99)]) if '2026' in year_cols else None,
+                            '_seg': current_seg})
+                    else:
+                        # Segment header row
+                        current_seg = label
+                        result.append({'label': label})
+                break
+        return result
+
+    out['suv_seg_por_provincia'] = parse_seg_por_prov_flat(wb['SUV_SEGMENTOS_POR_PROVINCIA_YTD'])
 
     ford_seg_prov_raw = extract_by_province(wb['FORD_SUV_SEGMENTOS_PROV_YTD'], brand_level=False)
-    out['ford_suv_seg_prov'] = {
-        prov: [{'seg': r['label'], 'y2024': r.get('y2024'), 'y2025': r.get('y2025'), 'y2026': r.get('y2026')}
-               for r in rows]
-        for prov, rows in ford_seg_prov_raw.items()
-    }
+    flat_ford_seg_prov = []
+    for prov, rows in ford_seg_prov_raw.items():
+        flat_ford_seg_prov.append({'label': prov})
+        for r in rows:
+            flat_ford_seg_prov.append({'label': r['label'], 'y2024': r.get('y2024'),
+                                       'y2025': r.get('y2025'), 'y2026': r.get('y2026')})
+    out['ford_suv_seg_prov'] = flat_ford_seg_prov
 
     # ── T4: suv_25_40_gas nested format ──
     # page.tsx: d.suv_25_40_gas.NACIONAL (array year rows), d.suv_25_40_gas.prov_marcas, d.suv_25_40_gas.por_provincia
@@ -430,44 +462,71 @@ def reshape_for_frontend(report: dict, wb) -> dict:
     out['pickup_cat_nacional'] = seg_dict_to_arr(extract_summary(wb['PICKUP_CAT_NACIONAL_YTD']))
 
     def parse_pu_cat_por_prov(ws):
+        # page.tsx line 2054 expects flat array with label as province or seg name
         rows = list(ws.iter_rows(min_row=1, max_row=50, values_only=True))
-        result = {}
+        result = []
         current_prov = None
         for row in rows:
             if row[0] in PROVINCES:
                 current_prov = row[0]
-                result[current_prov] = []
+                result.append({'label': current_prov})
                 continue
             if current_prov and row[0] and row[0] not in ('Etiquetas de fila','Total general'):
                 if row[0] in ('COMPACT PICK UPS','FULL SIZE PICK UPS','MID SIZE PICK UPS'):
-                    result[current_prov].append({
-                        'seg': row[0], 'y2024': safe_num(row[1]),
-                        'y2025': safe_num(row[2]), 'y2026': safe_num(row[3])
-                    })
+                    result.append({'label': row[0], 'ytd2024': safe_num(row[1]),
+                                   'ytd2025': safe_num(row[2]), 'ytd2026': safe_num(row[3])})
         return result
 
     out['pu_cat_por_prov'] = parse_pu_cat_por_prov(wb['PU_CAT_POR_PROV'])
 
+    # pick_diesel.FORD: page.tsx T9 accesses d.pick_diesel.FORD as an array of year rows
+    # Build from pu_diesel_ford flat data -> [{year:'2024', FORD:val}, ...]
+    def build_ford_year_rows(brand_list, ford_key='FORD'):
+        """Build [{year, FORD:val}] from [{brand, y2024, y2025, y2026}]"""
+        ford_row = next((r for r in brand_list if r.get('brand') == ford_key), None)
+        if not ford_row:
+            return []
+        return [
+            {'year': '2024', ford_key: ford_row.get('y2024')},
+            {'year': '2025', ford_key: ford_row.get('y2025')},
+            {'year': '2026', ford_key: ford_row.get('y2026')},
+        ]
+
     # ── T10: pick_diesel_tm / pick_diesel_ta ──
+    prov_tm = extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TM'])
+    prov_ta = extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TA'])
     out['pick_diesel_tm'] = {
         'NACIONAL':    build_national_year_rows(report.get('pu_diesel_tm_nacional', [])),
-        'prov_marcas': build_prov_marcas(extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TM'])),
+        'prov_marcas': build_prov_marcas(prov_tm),
+        'FORD': build_ford_year_rows(report.get('pu_diesel_tm_nacional', [])),
     }
     out['pick_diesel_ta'] = {
         'NACIONAL':    build_national_year_rows(report.get('pu_diesel_ta_nacional', [])),
-        'prov_marcas': build_prov_marcas(extract_by_province(wb['PU_DIESEL_POR_PROV_MARCAS_TA'])),
+        'prov_marcas': build_prov_marcas(prov_ta),
+        'FORD': build_ford_year_rows(report.get('pu_diesel_ta_nacional', [])),
     }
 
     # pick_diesel (combined, used in T9)
+    combined_nac = []
+    for brand_tm in report.get('pu_diesel_tm_nacional', []):
+        brand_ta = next((b for b in report.get('pu_diesel_ta_nacional', []) if b['brand'] == brand_tm['brand']), {})
+        combined_nac.append({
+            'brand': brand_tm['brand'],
+            'y2024': (brand_tm.get('y2024') or 0) + (brand_ta.get('y2024') or 0),
+            'y2025': (brand_tm.get('y2025') or 0) + (brand_ta.get('y2025') or 0),
+            'y2026': (brand_tm.get('y2026') or 0) + (brand_ta.get('y2026') or 0),
+        })
     out['pick_diesel'] = {
-        'NACIONAL':    out['pick_diesel_tm']['NACIONAL'],  # TM as primary
+        'NACIONAL':    build_national_year_rows(combined_nac),
         'prov_marcas': build_prov_marcas(report.get('pu_diesel_por_prov', {})),
+        'FORD': build_ford_year_rows(combined_nac),
     }
 
     # ── T11: pick_fullsize ──
     out['pick_fullsize'] = {
         'NACIONAL':    build_national_year_rows(report.get('pu_fullsize_nacional', [])),
         'prov_marcas': build_prov_marcas(report.get('pu_fullsize_por_prov', {})),
+        'FORD': build_ford_year_rows(report.get('pu_fullsize_nacional', [])),
     }
 
     # ── T12: ford_ytd already set above ──
