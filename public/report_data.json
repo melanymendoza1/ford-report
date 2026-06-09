@@ -11192,12 +11192,7 @@
         "combustible": "Gasolina",
         "precio": 89990,
         "vol_override": {
-          "PICHINCHA": 8,
-          "GUAYAS": 7,
-          "MANABÍ": 6,
-          "EL ORO": 0,
-          "ZONA ORGU": 21,
-          "NACIONAL": 47
+          "NACIONAL": 18
         }
       },
       {
@@ -11233,7 +11228,7 @@
           "NACIONAL": 0,
           "ZONA ORGU": 0,
           "PICHINCHA": 0,
-          "GUAYAS": 1
+          "GUAYAS": 0
         }
       },
       {
