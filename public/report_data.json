@@ -3752,32 +3752,6 @@
     }
   ],
   "pu_diesel_por_prov": {
-    "EL ORO": [
-      {
-        "brand": "CHEVROLET",
-        "y2024": 9.0,
-        "y2025": 24.0,
-        "y2026": 8.0
-      },
-      {
-        "brand": "TOYOTA",
-        "y2024": 5.0,
-        "y2025": 1.0,
-        "y2026": 2.0
-      },
-      {
-        "brand": "FORD",
-        "y2024": 0,
-        "y2025": 1.0,
-        "y2026": 8.0
-      },
-      {
-        "brand": "ISUZU",
-        "y2024": 0,
-        "y2025": 0,
-        "y2026": 2.0
-      }
-    ],
     "GUAYAS": [
       {
         "brand": "CHEVROLET",
@@ -3840,56 +3814,6 @@
         "y2026": 2.0
       }
     ],
-    "MANABÍ": [
-      {
-        "brand": "CHEVROLET",
-        "y2024": 12.0,
-        "y2025": 27.0,
-        "y2026": 7.0
-      },
-      {
-        "brand": "TOYOTA",
-        "y2024": 8.0,
-        "y2025": 4.0,
-        "y2026": 4.0
-      },
-      {
-        "brand": "FORD",
-        "y2024": 1.0,
-        "y2025": 2.0,
-        "y2026": 6.0
-      },
-      {
-        "brand": "MAZDA",
-        "y2024": 1.0,
-        "y2025": 1.0,
-        "y2026": 3.0
-      },
-      {
-        "brand": "KIA",
-        "y2024": 0,
-        "y2025": 0,
-        "y2026": 2.0
-      },
-      {
-        "brand": "NISSAN",
-        "y2024": 0,
-        "y2025": 1.0,
-        "y2026": 1.0
-      },
-      {
-        "brand": "GREAT WALL",
-        "y2024": 1.0,
-        "y2025": 0,
-        "y2026": 0
-      },
-      {
-        "brand": "ISUZU",
-        "y2024": 0,
-        "y2025": 0,
-        "y2026": 1.0
-      }
-    ],
     "PICHINCHA": [
       {
         "brand": "CHEVROLET",
@@ -3950,6 +3874,82 @@
         "y2024": 1.0,
         "y2025": 4.0,
         "y2026": 0
+      }
+    ],
+    "EL ORO": [
+      {
+        "brand": "CHEVROLET",
+        "y2024": 9.0,
+        "y2025": 24.0,
+        "y2026": 8.0
+      },
+      {
+        "brand": "TOYOTA",
+        "y2024": 5.0,
+        "y2025": 1.0,
+        "y2026": 2.0
+      },
+      {
+        "brand": "FORD",
+        "y2024": 0,
+        "y2025": 1.0,
+        "y2026": 8.0
+      },
+      {
+        "brand": "ISUZU",
+        "y2024": 0,
+        "y2025": 0,
+        "y2026": 2.0
+      }
+    ],
+    "MANABÍ": [
+      {
+        "brand": "CHEVROLET",
+        "y2024": 12.0,
+        "y2025": 27.0,
+        "y2026": 7.0
+      },
+      {
+        "brand": "TOYOTA",
+        "y2024": 8.0,
+        "y2025": 4.0,
+        "y2026": 4.0
+      },
+      {
+        "brand": "FORD",
+        "y2024": 1.0,
+        "y2025": 2.0,
+        "y2026": 6.0
+      },
+      {
+        "brand": "MAZDA",
+        "y2024": 1.0,
+        "y2025": 1.0,
+        "y2026": 3.0
+      },
+      {
+        "brand": "KIA",
+        "y2024": 0,
+        "y2025": 0,
+        "y2026": 2.0
+      },
+      {
+        "brand": "NISSAN",
+        "y2024": 0,
+        "y2025": 1.0,
+        "y2026": 1.0
+      },
+      {
+        "brand": "GREAT WALL",
+        "y2024": 1.0,
+        "y2025": 0,
+        "y2026": 0
+      },
+      {
+        "brand": "ISUZU",
+        "y2024": 0,
+        "y2025": 0,
+        "y2026": 1.0
       }
     ]
   },
@@ -8443,27 +8443,27 @@
     "por_provincia": [
       {
         "label": "EL ORO",
-        "y2024": 18.0,
-        "y2025": 9.0,
-        "y2026": 21.0
+        "ytd2024": 18.0,
+        "ytd2025": 9.0,
+        "ytd2026": 21.0
       },
       {
         "label": "GUAYAS",
-        "y2024": 878.0,
-        "y2025": 692.0,
-        "y2026": 740.0
+        "ytd2024": 878.0,
+        "ytd2025": 692.0,
+        "ytd2026": 740.0
       },
       {
         "label": "MANABÍ",
-        "y2024": 83.0,
-        "y2025": 81.0,
-        "y2026": 85.0
+        "ytd2024": 83.0,
+        "ytd2025": 81.0,
+        "ytd2026": 85.0
       },
       {
         "label": "PICHINCHA",
-        "y2024": 1318.0,
-        "y2025": 1003.0,
-        "y2026": 1070.0
+        "ytd2024": 1318.0,
+        "ytd2025": 1003.0,
+        "ytd2026": 1070.0
       }
     ]
   },
@@ -8915,27 +8915,27 @@
     "por_provincia": [
       {
         "label": "EL ORO",
-        "y2024": 11.0,
-        "y2025": 2.0,
-        "y2026": 27.0
+        "ytd2024": 11.0,
+        "ytd2025": 2.0,
+        "ytd2026": 27.0
       },
       {
         "label": "GUAYAS",
-        "y2024": 423.0,
-        "y2025": 540.0,
-        "y2026": 1272.0
+        "ytd2024": 423.0,
+        "ytd2025": 540.0,
+        "ytd2026": 1272.0
       },
       {
         "label": "MANABÍ",
-        "y2024": 40.0,
-        "y2025": 35.0,
-        "y2026": 133.0
+        "ytd2024": 40.0,
+        "ytd2025": 35.0,
+        "ytd2026": 133.0
       },
       {
         "label": "PICHINCHA",
-        "y2024": 1013.0,
-        "y2025": 1103.0,
-        "y2026": 2670.0
+        "ytd2024": 1013.0,
+        "ytd2025": 1103.0,
+        "ytd2026": 2670.0
       }
     ]
   },
@@ -9180,27 +9180,27 @@
     "por_provincia": [
       {
         "label": "EL ORO",
-        "y2024": 2.0,
-        "y2025": null,
-        "y2026": 2.0
+        "ytd2024": 2.0,
+        "ytd2025": null,
+        "ytd2026": 2.0
       },
       {
         "label": "GUAYAS",
-        "y2024": 100.0,
-        "y2025": 67.0,
-        "y2026": 215.0
+        "ytd2024": 100.0,
+        "ytd2025": 67.0,
+        "ytd2026": 215.0
       },
       {
         "label": "MANABÍ",
-        "y2024": 13.0,
-        "y2025": 6.0,
-        "y2026": 21.0
+        "ytd2024": 13.0,
+        "ytd2025": 6.0,
+        "ytd2026": 21.0
       },
       {
         "label": "PICHINCHA",
-        "y2024": 296.0,
-        "y2025": 182.0,
-        "y2026": 452.0
+        "ytd2024": 296.0,
+        "ytd2025": 182.0,
+        "ytd2026": 452.0
       }
     ]
   },
@@ -10275,29 +10275,6 @@
       }
     ],
     "prov_marcas": {
-      "EL ORO": [
-        {
-          "year": "2024",
-          "CHEVROLET": 9.0,
-          "TOYOTA": 5.0,
-          "FORD": 0,
-          "ISUZU": 0
-        },
-        {
-          "year": "2025",
-          "CHEVROLET": 24.0,
-          "TOYOTA": 1.0,
-          "FORD": 1.0,
-          "ISUZU": 0
-        },
-        {
-          "year": "2026",
-          "CHEVROLET": 8.0,
-          "TOYOTA": 2.0,
-          "FORD": 8.0,
-          "ISUZU": 2.0
-        }
-      ],
       "GUAYAS": [
         {
           "year": "2024",
@@ -10339,41 +10316,6 @@
           "ISUZU": 2.0
         }
       ],
-      "MANABÍ": [
-        {
-          "year": "2024",
-          "CHEVROLET": 12.0,
-          "TOYOTA": 8.0,
-          "FORD": 1.0,
-          "MAZDA": 1.0,
-          "KIA": 0,
-          "NISSAN": 0,
-          "GREAT WALL": 1.0,
-          "ISUZU": 0
-        },
-        {
-          "year": "2025",
-          "CHEVROLET": 27.0,
-          "TOYOTA": 4.0,
-          "FORD": 2.0,
-          "MAZDA": 1.0,
-          "KIA": 0,
-          "NISSAN": 1.0,
-          "GREAT WALL": 0,
-          "ISUZU": 0
-        },
-        {
-          "year": "2026",
-          "CHEVROLET": 7.0,
-          "TOYOTA": 4.0,
-          "FORD": 6.0,
-          "MAZDA": 3.0,
-          "KIA": 2.0,
-          "NISSAN": 1.0,
-          "GREAT WALL": 0,
-          "ISUZU": 1.0
-        }
-      ],
       "PICHINCHA": [
         {
           "year": "2024",
@@ -10413,6 +10355,64 @@
           "MITSUBISHI": 2.0,
           "ISUZU": 10.0,
           "GREAT WALL": 0
+        }
+      ],
+      "EL ORO": [
+        {
+          "year": "2024",
+          "CHEVROLET": 9.0,
+          "TOYOTA": 5.0,
+          "FORD": 0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 24.0,
+          "TOYOTA": 1.0,
+          "FORD": 1.0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 8.0,
+          "TOYOTA": 2.0,
+          "FORD": 8.0,
+          "ISUZU": 2.0
+        }
+      ],
+      "MANABÍ": [
+        {
+          "year": "2024",
+          "CHEVROLET": 12.0,
+          "TOYOTA": 8.0,
+          "FORD": 1.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 0,
+          "GREAT WALL": 1.0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2025",
+          "CHEVROLET": 27.0,
+          "TOYOTA": 4.0,
+          "FORD": 2.0,
+          "MAZDA": 1.0,
+          "KIA": 0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
+          "ISUZU": 0
+        },
+        {
+          "year": "2026",
+          "CHEVROLET": 7.0,
+          "TOYOTA": 4.0,
+          "FORD": 6.0,
+          "MAZDA": 3.0,
+          "KIA": 2.0,
+          "NISSAN": 1.0,
+          "GREAT WALL": 0,
+          "ISUZU": 1.0
         }
       ]
     },
@@ -10614,7 +10614,10 @@
         "vol_override": {
           "NACIONAL": 342,
           "PICHINCHA": 177,
-          "MANABÍ": 11
+          "MANABÍ": 11,
+          "GUAYAS": 205,
+          "EL ORO": 5,
+          "ZONA ORGU": 398
         }
       },
       {
@@ -10624,7 +10627,12 @@
         "combustible": "Gasolina",
         "precio": 28499,
         "vol_override": {
-          "MANABÍ": 14
+          "MANABÍ": 14,
+          "NACIONAL": 457,
+          "PICHINCHA": 171,
+          "GUAYAS": 170,
+          "EL ORO": 4,
+          "ZONA ORGU": 359
         }
       },
       {
@@ -10635,7 +10643,11 @@
         "precio": 43999,
         "vol_override": {
           "MANABÍ": 2,
-          "EL ORO": 0
+          "EL ORO": 0,
+          "NACIONAL": 457,
+          "PICHINCHA": 171,
+          "GUAYAS": 170,
+          "ZONA ORGU": 343
         }
       },
       {
@@ -10645,7 +10657,11 @@
         "combustible": "Gasolina",
         "precio": 34990,
         "vol_override": {
-          "MANABÍ": 5
+          "MANABÍ": 5,
+          "NACIONAL": 202,
+          "PICHINCHA": 107,
+          "GUAYAS": 48,
+          "ZONA ORGU": 160
         }
       },
       {
@@ -10653,7 +10669,13 @@
         "modelo": "3008",
         "trim": "Allure",
         "combustible": "Gasolina",
-        "precio": 39990
+        "precio": 39990,
+        "vol_override": {
+          "NACIONAL": 79,
+          "PICHINCHA": 52,
+          "GUAYAS": 17,
+          "ZONA ORGU": 69
+        }
       },
       {
         "marca": "Hyundai",
@@ -10662,7 +10684,12 @@
         "combustible": "Gasolina",
         "precio": 35499,
         "vol_override": {
-          "MANABÍ": 2
+          "MANABÍ": 2,
+          "NACIONAL": 139,
+          "PICHINCHA": 43,
+          "GUAYAS": 59,
+          "EL ORO": 1,
+          "ZONA ORGU": 105
         }
       },
       {
@@ -10672,7 +10699,12 @@
         "combustible": "Gasolina",
         "precio": 42450,
         "vol_override": {
-          "MANABÍ": 1
+          "MANABÍ": 1,
+          "NACIONAL": 72,
+          "PICHINCHA": 29,
+          "GUAYAS": 17,
+          "EL ORO": 1,
+          "ZONA ORGU": 48
         }
       },
       {
@@ -10680,14 +10712,28 @@
         "modelo": "x70",
         "trim": "Plus",
         "combustible": "Gasolina",
-        "precio": 29990
+        "precio": 29990,
+        "vol_override": {
+          "NACIONAL": 111,
+          "PICHINCHA": 29,
+          "GUAYAS": 47,
+          "MANABÍ": 2,
+          "EL ORO": 8,
+          "ZONA ORGU": 86
+        }
       },
       {
         "marca": "Mitsubishi",
         "modelo": "Eclipse cross",
         "trim": "GLX",
         "combustible": "Gasolina",
-        "precio": 39990
+        "precio": 39990,
+        "vol_override": {
+          "NACIONAL": 79,
+          "PICHINCHA": 45,
+          "GUAYAS": 18,
+          "ZONA ORGU": 63
+        }
       },
       {
         "marca": "Mitsubishi",
@@ -10698,7 +10744,8 @@
         "vol_override": {
           "NACIONAL": 3,
           "PICHINCHA": 2,
-          "GUAYAS": 1
+          "GUAYAS": 1,
+          "ZONA ORGU": 3
         }
       },
       {
@@ -10711,7 +10758,8 @@
           "PICHINCHA": 3,
           "GUAYAS": 14,
           "NACIONAL": 17,
-          "ZONA ORGU": 17
+          "ZONA ORGU": 17,
+          "MANABÍ": 1
         }
       }
     ],
@@ -10826,14 +10874,28 @@
         "modelo": "Kona",
         "trim": "GL",
         "combustible": "Hibrido",
-        "precio": null
+        "precio": null,
+        "vol_override": {
+          "NACIONAL": 227,
+          "PICHINCHA": 100,
+          "GUAYAS": 57,
+          "MANABÍ": 12,
+          "ZONA ORGU": 169
+        }
       },
       {
         "marca": "Hyundai",
         "modelo": "Kona",
         "trim": "GLS",
         "combustible": "Hibrido",
-        "precio": null
+        "precio": null,
+        "vol_override": {
+          "NACIONAL": 227,
+          "PICHINCHA": 100,
+          "GUAYAS": 57,
+          "MANABÍ": 12,
+          "ZONA ORGU": 169
+        }
       },
       {
         "marca": "Hyundai",
@@ -10854,7 +10916,14 @@
         "modelo": "Crosstrek",
         "trim": "AC",
         "combustible": "Hibrido",
-        "precio": 31490
+        "precio": 31490,
+        "vol_override": {
+          "NACIONAL": 140,
+          "PICHINCHA": 89,
+          "GUAYAS": 20,
+          "EL ORO": 1,
+          "ZONA ORGU": 110
+        }
       },
       {
         "marca": "Subaru",
@@ -10863,7 +10932,11 @@
         "combustible": "Hibrido",
         "precio": 35490,
         "vol_override": {
-          "EL ORO": 0
+          "EL ORO": 0,
+          "NACIONAL": 140,
+          "PICHINCHA": 89,
+          "GUAYAS": 20,
+          "ZONA ORGU": 109
         }
       },
       {
@@ -10871,14 +10944,28 @@
         "modelo": "Song Plus",
         "trim": "",
         "combustible": "Hibrido",
-        "precio": 37990
+        "precio": 37990,
+        "vol_override": {
+          "NACIONAL": 77,
+          "PICHINCHA": 34,
+          "GUAYAS": 14,
+          "MANABÍ": 9,
+          "ZONA ORGU": 57
+        }
       },
       {
         "marca": "Renault",
         "modelo": "Arkana",
         "trim": "Alpine",
         "combustible": "Hibrido",
-        "precio": 28990
+        "precio": 28990,
+        "vol_override": {
+          "NACIONAL": 78,
+          "PICHINCHA": 46,
+          "GUAYAS": 12,
+          "MANABÍ": 1,
+          "ZONA ORGU": 59
+        }
       },
       {
         "marca": "Renault",
@@ -10887,7 +10974,11 @@
         "combustible": "Hibrido",
         "precio": 32990,
         "vol_override": {
-          "MANABÍ": 0
+          "MANABÍ": 0,
+          "NACIONAL": 78,
+          "PICHINCHA": 46,
+          "GUAYAS": 12,
+          "ZONA ORGU": 58
         }
       }
     ],
@@ -10897,7 +10988,14 @@
         "modelo": "Escape",
         "trim": "ST-LINE",
         "combustible": "Híbrido",
-        "precio": 44990
+        "precio": 44990,
+        "vol_override": {
+          "NACIONAL": 19,
+          "PICHINCHA": 2,
+          "GUAYAS": 11,
+          "MANABÍ": 6,
+          "ZONA ORGU": 19
+        }
       },
       {
         "marca": "Nissan",
@@ -10906,7 +11004,11 @@
         "combustible": "Hibrido",
         "precio": 43990,
         "vol_override": {
-          "EL ORO": 0
+          "EL ORO": 0,
+          "NACIONAL": 175,
+          "PICHINCHA": 99,
+          "GUAYAS": 48,
+          "ZONA ORGU": 147
         }
       },
       {
@@ -10914,14 +11016,29 @@
         "modelo": "Xtrail",
         "trim": "Exclusive",
         "combustible": "Hibrido",
-        "precio": 48990
+        "precio": 48990,
+        "vol_override": {
+          "NACIONAL": 175,
+          "PICHINCHA": 99,
+          "GUAYAS": 48,
+          "EL ORO": 1,
+          "ZONA ORGU": 148
+        }
       },
       {
         "marca": "Toyota",
         "modelo": "Rav4",
         "trim": "LE",
         "combustible": "Hibrido",
-        "precio": 45999
+        "precio": 45999,
+        "vol_override": {
+          "NACIONAL": 189,
+          "PICHINCHA": 96,
+          "GUAYAS": 40,
+          "MANABÍ": 2,
+          "EL ORO": 1,
+          "ZONA ORGU": 139
+        }
       },
       {
         "marca": "Toyota",
@@ -10931,7 +11048,11 @@
         "precio": 48999,
         "vol_override": {
           "MANABÍ": 0,
-          "EL ORO": 0
+          "EL ORO": 0,
+          "NACIONAL": 189,
+          "PICHINCHA": 96,
+          "GUAYAS": 40,
+          "ZONA ORGU": 136
         }
       },
       {
@@ -10954,7 +11075,13 @@
         "modelo": "Forester",
         "trim": "",
         "combustible": "Hibrido",
-        "precio": 44990
+        "precio": 44990,
+        "vol_override": {
+          "NACIONAL": 51,
+          "PICHINCHA": 31,
+          "GUAYAS": 8,
+          "ZONA ORGU": 39
+        }
       }
     ],
     "SUV  55 - 80 everest": [
@@ -10963,14 +11090,30 @@
         "modelo": "Everest Active",
         "trim": "EVEREST",
         "combustible": "Diésel",
-        "precio": 69990
+        "precio": 69990,
+        "vol_override": {
+          "NACIONAL": 103,
+          "PICHINCHA": 41,
+          "GUAYAS": 39,
+          "MANABÍ": 6,
+          "EL ORO": 2,
+          "ZONA ORGU": 88
+        }
       },
       {
         "marca": "Chevrolet",
         "modelo": "Trailblazer",
         "trim": "High country",
         "combustible": "Diesel",
-        "precio": 59990
+        "precio": 59990,
+        "vol_override": {
+          "NACIONAL": 330,
+          "PICHINCHA": 93,
+          "GUAYAS": 123,
+          "MANABÍ": 27,
+          "EL ORO": 12,
+          "ZONA ORGU": 255
+        }
       },
       {
         "marca": "Toyota",
@@ -10992,7 +11135,13 @@
         "modelo": "Montero Sport",
         "trim": "TD",
         "combustible": "Diesel",
-        "precio": 69999
+        "precio": 69999,
+        "vol_override": {
+          "NACIONAL": 17,
+          "PICHINCHA": 8,
+          "GUAYAS": 3,
+          "ZONA ORGU": 11
+        }
       }
     ],
     "SUV  55 - 80 explorer": [
@@ -11001,7 +11150,15 @@
         "modelo": "Explorer",
         "trim": "EXPLORER ACTIVE",
         "combustible": "Gasolina",
-        "precio": 89990
+        "precio": 89990,
+        "vol_override": {
+          "NACIONAL": 103,
+          "PICHINCHA": 41,
+          "GUAYAS": 39,
+          "MANABÍ": 6,
+          "EL ORO": 2,
+          "ZONA ORGU": 88
+        }
       },
       {
         "marca": "Mazda",
@@ -11023,7 +11180,8 @@
         "modelo": "Sorento",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 59999
+        "precio": 59999,
+        "vol_override": {}
       },
       {
         "marca": "Hyundai",
@@ -11034,7 +11192,8 @@
         "vol_override": {
           "NACIONAL": 0,
           "ZONA ORGU": 0,
-          "PICHINCHA": 0
+          "PICHINCHA": 0,
+          "GUAYAS": 1
         }
       },
       {
@@ -11042,14 +11201,24 @@
         "modelo": "Outback",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 69999
+        "precio": 69999,
+        "vol_override": {
+          "NACIONAL": 1,
+          "GUAYAS": 1,
+          "ZONA ORGU": 1
+        }
       },
       {
         "marca": "Nissan",
         "modelo": "Pathfinder",
         "trim": "Advance",
         "combustible": "Gasolina",
-        "precio": 93990
+        "precio": 93990,
+        "vol_override": {
+          "NACIONAL": 1,
+          "PICHINCHA": 1,
+          "ZONA ORGU": 1
+        }
       }
     ],
     "SUV  80 plus expedition": [
@@ -11063,7 +11232,8 @@
           "NACIONAL": 4,
           "PICHINCHA": 1,
           "GUAYAS": 2,
-          "ZONA ORGU": 3
+          "ZONA ORGU": 3,
+          "MANABÍ": 1
         }
       },
       {
@@ -11086,7 +11256,14 @@
         "modelo": "Land Cruiser Prado 250",
         "trim": "ADV",
         "combustible": "Gasolina",
-        "precio": null
+        "precio": null,
+        "vol_override": {
+          "NACIONAL": 56,
+          "PICHINCHA": 27,
+          "GUAYAS": 14,
+          "MANABÍ": 1,
+          "ZONA ORGU": 42
+        }
       },
       {
         "marca": "Chevrolet",
@@ -11110,21 +11287,34 @@
         "modelo": "Explorer",
         "trim": "EXPLORER PLATINUM",
         "combustible": "Gasolina",
-        "precio": 99990
+        "precio": 99990,
+        "vol_override": {
+          "NACIONAL": 16,
+          "PICHINCHA": 6,
+          "GUAYAS": 5,
+          "MANABÍ": 1,
+          "ZONA ORGU": 12
+        }
       },
       {
         "marca": "Jeep",
         "modelo": "Grand Cherokee",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": 109999
+        "precio": 109999,
+        "vol_override": {
+          "NACIONAL": 1,
+          "PICHINCHA": 1,
+          "ZONA ORGU": 1
+        }
       },
       {
         "marca": "Nissan",
         "modelo": "Pathfinder",
         "trim": "Advance",
         "combustible": "Gasolina",
-        "precio": 93990
+        "precio": 93990,
+        "vol_override": {}
       },
       {
         "marca": "HONDA",
@@ -11163,42 +11353,74 @@
         "modelo": "Ranger",
         "trim": "RANGER XL",
         "combustible": "Diésel",
-        "precio": 53990
+        "precio": 53990,
+        "vol_override": {
+          "NACIONAL": 42,
+          "PICHINCHA": 16,
+          "GUAYAS": 9,
+          "MANABÍ": 4,
+          "EL ORO": 2,
+          "ZONA ORGU": 31
+        }
       },
       {
         "marca": "Chevrolet",
         "modelo": "Colorado",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 46999
+        "precio": 46999,
+        "vol_override": {}
       },
       {
         "marca": "Toyota",
         "modelo": "Hilux",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 52724
+        "precio": 52724,
+        "vol_override": {
+          "NACIONAL": 123,
+          "PICHINCHA": 54,
+          "GUAYAS": 17,
+          "MANABÍ": 4,
+          "EL ORO": 2,
+          "ZONA ORGU": 77
+        }
       },
       {
         "marca": "Mazda",
         "modelo": "BT-50",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 49999
+        "precio": 49999,
+        "vol_override": {
+          "NACIONAL": 77,
+          "PICHINCHA": 47,
+          "GUAYAS": 16,
+          "MANABÍ": 3,
+          "ZONA ORGU": 66
+        }
       },
       {
         "marca": "Kia",
         "modelo": "Tasman",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 59999
+        "precio": 59999,
+        "vol_override": {
+          "NACIONAL": 179,
+          "PICHINCHA": 171,
+          "GUAYAS": 1,
+          "MANABÍ": 1,
+          "ZONA ORGU": 173
+        }
       },
       {
         "marca": "Nissan",
         "modelo": "Frontier",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 46990
+        "precio": 46990,
+        "vol_override": {}
       }
     ],
     "Pick up TA": [
@@ -11207,56 +11429,114 @@
         "modelo": "Ranger",
         "trim": "RANGER XLT",
         "combustible": "Diésel",
-        "precio": 67990
+        "precio": 67990,
+        "vol_override": {
+          "NACIONAL": 54,
+          "PICHINCHA": 13,
+          "GUAYAS": 12,
+          "MANABÍ": 2,
+          "EL ORO": 6,
+          "ZONA ORGU": 33
+        }
       },
       {
         "marca": "Chevrolet",
         "modelo": "Colorado",
         "trim": "High country",
         "combustible": "Diesel",
-        "precio": 56999
+        "precio": 56999,
+        "vol_override": {
+          "NACIONAL": 112,
+          "PICHINCHA": 23,
+          "GUAYAS": 28,
+          "MANABÍ": 7,
+          "EL ORO": 8,
+          "ZONA ORGU": 66
+        }
       },
       {
         "marca": "Chevrolet",
         "modelo": "Colorado",
         "trim": "WT",
         "combustible": "Diesel",
-        "precio": 49999
+        "precio": 49999,
+        "vol_override": {
+          "NACIONAL": 112,
+          "PICHINCHA": 23,
+          "GUAYAS": 28,
+          "MANABÍ": 7,
+          "EL ORO": 8,
+          "ZONA ORGU": 66
+        }
       },
       {
         "marca": "Toyota",
         "modelo": "Hilux",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 73350
+        "precio": 73350,
+        "vol_override": {
+          "NACIONAL": 20,
+          "PICHINCHA": 4,
+          "GUAYAS": 5,
+          "ZONA ORGU": 9
+        }
       },
       {
         "marca": "Nissan",
         "modelo": "Frontier",
         "trim": "Pro-4x",
         "combustible": "Diesel",
-        "precio": 65990
+        "precio": 65990,
+        "vol_override": {
+          "NACIONAL": 13,
+          "PICHINCHA": 6,
+          "GUAYAS": 5,
+          "MANABÍ": 1,
+          "ZONA ORGU": 12
+        }
       },
       {
         "marca": "Mitsubishi",
         "modelo": "Triton",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 59990
+        "precio": 59990,
+        "vol_override": {
+          "NACIONAL": 9,
+          "PICHINCHA": 2,
+          "GUAYAS": 2,
+          "ZONA ORGU": 4
+        }
       },
       {
         "marca": "Isuzu",
         "modelo": "Isuzu",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 59990
+        "precio": 59990,
+        "vol_override": {
+          "NACIONAL": 29,
+          "PICHINCHA": 10,
+          "GUAYAS": 2,
+          "MANABÍ": 1,
+          "EL ORO": 2,
+          "ZONA ORGU": 15
+        }
       },
       {
         "marca": "Kia",
         "modelo": "Tasman",
         "trim": "",
         "combustible": "Diesel",
-        "precio": 68999
+        "precio": 68999,
+        "vol_override": {
+          "NACIONAL": 12,
+          "PICHINCHA": 6,
+          "GUAYAS": 5,
+          "MANABÍ": 1,
+          "ZONA ORGU": 12
+        }
       }
     ],
     "Full size Pick up": [
@@ -11265,7 +11545,14 @@
         "modelo": "F-150",
         "trim": "XLT",
         "combustible": "Gasolina",
-        "precio": 79990
+        "precio": 79990,
+        "vol_override": {
+          "NACIONAL": 107,
+          "PICHINCHA": 45,
+          "GUAYAS": 31,
+          "MANABÍ": 9,
+          "ZONA ORGU": 85
+        }
       },
       {
         "marca": "Ram",
@@ -11314,7 +11601,14 @@
         "modelo": "Tundra",
         "trim": "",
         "combustible": "Gasolina",
-        "precio": null
+        "precio": null,
+        "vol_override": {
+          "NACIONAL": 10,
+          "PICHINCHA": 3,
+          "GUAYAS": 1,
+          "MANABÍ": 1,
+          "ZONA ORGU": 5
+        }
       }
     ]
   },
