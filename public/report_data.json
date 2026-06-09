@@ -12075,21 +12075,21 @@
       "price": 129990,
       "fuel": "Gasolina",
       "v26": 15,
-      "v25": 0
+      "v25": 4
     },
     "T8_bronco": {
       "model": "Bronco",
       "price": 119990,
       "fuel": "Gasolina",
       "v26": 1,
-      "v25": 0
+      "v25": 2
     },
     "T8_explorer_plat": {
       "model": "Explorer Platinum",
       "price": 94990,
       "fuel": "Gasolina",
       "v26": 22,
-      "v25": 0
+      "v25": 3
     },
     "T11_lariat": {
       "model": "F-150 Lariat",
