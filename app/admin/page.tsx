@@ -349,11 +349,28 @@ export default function AdminPage() {
   const save = async () => {
     setSaving(true); setSaveMsg('')
     try {
-      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(data, null, 2))))
+      // Fetch latest version first to avoid overwriting concurrent changes
+      const latest = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
+        headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github.v3+json' }
+      })
+      const latestJson = await latest.json()
+      if (!latestJson.sha) throw new Error('No se pudo obtener versión actual')
+
+      // Decode latest JSON from GitHub
+      const _b = Uint8Array.from(atob(latestJson.content.replace(/\n/g,'')), (c:string) => c.charCodeAt(0))
+      const latestData = JSON.parse(new TextDecoder('utf-8').decode(_b))
+
+      // Merge: only overwrite the fields admin manages, preserve everything else
+      const ADMIN_KEYS = ['precios_competidores', 'bbc_hotlines', 'model_filters',
+                          'model_display_names', 'insights', 'vol_override', 'ford_cards']
+      const merged = { ...latestData }
+      ADMIN_KEYS.forEach(k => { if (data[k] !== undefined) merged[k] = data[k] })
+
+      const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(merged, null, 2))))
       const res = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE}`, {
         method: 'PUT',
         headers: { Authorization: `token ${token}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: 'Admin: edición manual', content: encoded, sha })
+        body: JSON.stringify({ message: 'Admin: edición manual', content: encoded, sha: latestJson.sha })
       })
       const json = await res.json()
       if (json.content?.sha) {
