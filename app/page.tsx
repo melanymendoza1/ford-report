@@ -701,8 +701,8 @@ function T2({ d }: { d: any }) {
 
   const catLabel = cat === 'suv' ? 'SUVs' : 'Pickups'
   const insItems = cat === 'suv'
-    ? ['El shift de gasolina a híbrido se acelera. HEV pasó de 17% a 23% del mix en un año', 'Ford capturó esta tendencia con Territory']
-    : ['Diesel sigue siendo el 77% del volumen pickup', 'Hibrido pickup crece — tendencia emergente a monitorear']
+    ? (d.insights?.['T2_combustible_suv'] || ['El shift a híbrido se acelera — HEV creció de 25% a 31.7% del mix SUV en un año', 'Eléctrico BEV se triplica: de 3.6% a 8.5% — tendencia a monitorear de cerca'])
+    : (d.insights?.['T2_combustible_pu'] || ['Diesel mantiene su dominio al 78.3% del volumen pickup — base sólida', 'Híbrido pickup sube de 2.8% a 5.3% — tendencia emergente que consolida'])
 
   return <>
     <Hd tag="Combustibles" title="Análisis por tipo de combustible" />
@@ -1220,7 +1220,8 @@ function T5({ d }: { d: any }) {
       <Card s={{ background: `linear-gradient(135deg,${C.glB},#FEF3C7)`, border: `1px solid #FDE68A`, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '24px 28px' }}>
         <div style={{ fontSize: 11, color: C.gld, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>Territory Effect</div>
         <div style={{ fontSize: 14, color: C.txt, lineHeight: 1.8 }}>
-          El New Territory redefinió el posicionamiento de Ford en Ecuador. Con {N(fordVal)} unidades YTD representa el <strong>38% del volumen total Ford</strong> y es el principal motor del crecimiento de +73% de la marca. A $35,990 en versión híbrida, captura exactamente donde el mercado está migrando. Posición <strong>#5 nacional</strong> en su primer Q1 completo.
+          {d.insights?.['T5_territory_effect'] ||
+            `El New Territory redefinió el posicionamiento de Ford en Ecuador. Con ${N(fordVal)} unidades YTD representa el 36% del volumen total Ford y es el principal motor del crecimiento de +47% de la marca. A $35,990 en versión híbrida, captura exactamente donde el mercado está migrando.`}
         </div>
       </Card>
     </div>
@@ -1385,12 +1386,12 @@ function T6({ d }: { d: any }) {
     <Hd tag="SUV Híbrido 40-50K" title="Análisis de marcas · Rango $40K-$50K Híbrido" />
     <Ins items={[...(d.insights?.['T6_hev_40_50'] || [])]} />
 
-    <div style={gr(2)}>
+    <div style={gr(1)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 20, padding: '20px 28px' }}>
         <img src="/images/escapestline.png" alt="Escape ST-Line" style={{ height: 90, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 18, fontWeight: 700, color: C.txt }}>Escape ST-Line</div>
-          <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>$46,990 · HEV</div>
+          <div style={{ fontSize: 13, color: C.ac, fontWeight: 600 }}>$44,990 · HEV</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 16, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
@@ -1398,12 +1399,6 @@ function T6({ d }: { d: any }) {
             <div style={{ fontSize: 11, color: C.sub, marginTop: 2 }}>un. YTD</div>
           </div>
           <Dl a={(()=>{const f6=(d.ford_cards?.['T6_hev_40_50'] as any)||{};return f6.v26!=null?f6.v26:(fordEntry?.v26||0)})()} b={(()=>{const f6=(d.ford_cards?.['T6_hev_40_50'] as any)||{};return f6.v25!=null?f6.v25:(fordEntry?.v25||0)})()}  />
-        </div>
-      </Card>
-      <Card s={{ background: C.dnB, border: `1px solid #FECACA`, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '24px 28px' }}>
-        <div style={{ fontSize: 11, color: C.dn, fontWeight: 700, textTransform: 'uppercase', letterSpacing: 1, marginBottom: 12 }}>Alerta de canibalización</div>
-        <div style={{ fontSize: 14, color: C.txt, lineHeight: 1.8 }}>
-          El Escape ST-Line HEV cae -50% YTD (14 a 7 un.) por canibalización directa del Territory. Territory captura volumen en el rango inferior con una propuesta de valor más agresiva. Monitorear si el ST-Line necesita reposicionamiento de precio o de comunicación.
         </div>
       </Card>
     </div>
@@ -2703,7 +2698,7 @@ function T12({ d }: { d: any }) {
       v26: cardVal('T4_gas_25_40', '2026') || pcVal('SUV GAS 25 - 40', '2026'),
       v25: cardVal('T4_gas_25_40', '2025') || 0,
       segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
-    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$46,990', img: '/images/escapestline.png',
+    { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$44,990', img: '/images/escapestline.png',
       v26: cardVal('T6_hev_40_50', '2026') || pcVal('SUV  HEV 40 - 50', '2026'),
       v25: cardVal('T6_hev_40_50', '2025') || 0,
       segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
