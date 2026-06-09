@@ -11960,8 +11960,8 @@
       "model": "Territory Titanium Plus",
       "price": 35990,
       "fuel": "Híbrido",
-      "v26": null,
-      "v25": null
+      "v26": 296,
+      "v25": 0
     },
     "T6_hev_40_50": {
       "model": "Escape ST-Line",
