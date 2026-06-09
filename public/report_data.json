@@ -11203,36 +11203,6 @@
         }
       },
       {
-        "marca": "Mazda",
-        "modelo": "CX90",
-        "trim": "",
-        "combustible": "Gasolina",
-        "precio": 64999,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
-          "MANABÍ": 0,
-          "EL ORO": 0
-        }
-      },
-      {
-        "marca": "Kia",
-        "modelo": "Sorento",
-        "trim": "",
-        "combustible": "Gasolina",
-        "precio": 59999,
-        "vol_override": {
-          "NACIONAL": 0,
-          "ZONA ORGU": 0,
-          "PICHINCHA": 0,
-          "GUAYAS": 0,
-          "MANABÍ": 0,
-          "EL ORO": 0
-        }
-      },
-      {
         "marca": "Hyundai",
         "modelo": "Palisade",
         "trim": "",
