@@ -11201,10 +11201,10 @@
         "vol_override": {
           "PICHINCHA": 8,
           "GUAYAS": 7,
-          "MANABÍ": 6,
+          "MANABÍ": 0,
           "EL ORO": 0,
-          "ZONA ORGU": 21,
-          "NACIONAL": 47
+          "ZONA ORGU": 15,
+          "NACIONAL": 18
         }
       },
       {
