@@ -11963,8 +11963,8 @@
       "model": "Escape ST-Line",
       "price": 44990,
       "fuel": "Híbrido",
-      "v26": null,
-      "v25": null
+      "v26": 19,
+      "v25": 34
     },
     "T7_everest": {
       "model": "Everest Active",
