@@ -1715,8 +1715,9 @@ function T7({ d }: { d: any }) {
           let vol = p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol
           if (b.brand === 'FORD') {
             const hc = sub === 'everest' ? fordEverest : fordExplorer
-            const hcNac = sub === 'everest' ? 103 : 47
-            const hcZO  = sub === 'everest' ? 52  : 21
+            // Everest: Ford=56 Nacional, 52 ZO — Explorer Active: Ford=21 Nacional, 21 ZO
+            const hcNac = sub === 'everest' ? 56 : 21
+            const hcZO  = sub === 'everest' ? 52 : 21
             if (scope === 'NACIONAL') vol = hcNac
             else if (scope === 'ZONA ORGU') vol = hcZO
             else vol = hc[scope] ?? vol
@@ -2703,7 +2704,7 @@ function T12({ d }: { d: any }) {
       v25: cardVal('T6_hev_40_50', '2025') || 0,
       segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
     { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
-      v26: cardVal('T7_everest', '2026') || 103,
+      v26: cardVal('T7_everest', '2026') || 56,
       v25: cardVal('T7_everest', '2025') || 0,
       segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
     { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$79,990', img: '/images/exploreractive.png',
@@ -2773,7 +2774,7 @@ function T12({ d }: { d: any }) {
       </div>
     </Card>
 
-    <Lbl>Nacional · SUVs </Lbl>
+    <Lbl>Nacional · SUVs · Ordenado por precio (menor a mayor)</Lbl>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 24 }}>
       {suvs.map((m, i) => {
         const u = m.v25 ? m.v26 >= m.v25 : m.v26 > 0
@@ -2801,7 +2802,7 @@ function T12({ d }: { d: any }) {
       })}
     </div>
 
-    <Lbl>Nacional · Pickups </Lbl>
+    <Lbl>Nacional · Pickups · Ordenado por precio (menor a mayor)</Lbl>
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 16, marginBottom: 24 }}>
       {pickups.map((m, i) => {
         const u = m.v25 ? m.v26 >= m.v25 : m.v26 > 0
