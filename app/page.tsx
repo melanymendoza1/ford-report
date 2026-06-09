@@ -31,6 +31,22 @@ function bbcVol(row: Record<string,any>, brand: string, trimKey: string, others:
   return vol > 0 ? vol : (row[brand] as number) || 0
 }
 const C = { night: '#081534', navy: '#133A7C', steel: '#2A6BAC', sky: '#47A8E5', bg: '#F0F4F8', w: '#FFF', brd: '#E8ECF1', mut: '#8896AB', txt: '#1A2332', sub: '#5A6B80', up: '#0D9F6E', upB: '#ECFDF5', dn: '#DC2626', dnB: '#FEF2F2', ac: '#3B82F6', acB: '#EFF6FF', gld: '#F59E0B', glB: '#FFFBEB' }
+// Global brand color map — one color per brand, consistent across all BBCs
+const BRAND_COLORS: Record<string, string> = {
+  'FORD': '#133A7C', 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B',
+  'NISSAN': '#2C4A8C', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C',
+  'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#8B0000', 'HONDA': '#C8102E',
+  'AUDI': '#666666', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#3D3D3D',
+  'GMC': '#1B4F8A', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#1C1C1C', 'RENAULT': '#FFCC00',
+  'CHERY': '#A0522D', 'GREAT WALL': '#5F4B3A', 'DFSK': '#7B68EE', 'CHANGAN': '#20B2AA',
+  'BYD': '#1A6B3C', 'GEELY': '#4169E1', 'MG': '#8B1A1A', 'HAVAL': '#6B4423',
+  'JAC': '#708090', 'BAIC': '#556B2F', 'DONGFENG': '#CD853F', 'MAXUS': '#4682B4',
+  'CITROEN': '#CC2020', 'VOLKSWAGEN': '#1E3A8A', 'SKODA': '#4CAF50', 'OPEL': '#FFD700',
+  'FIAT': '#B22222', 'PORSCHE': '#8B4513', 'LAND ROVER': '#2F4F4F', 'VOLVO': '#003087',
+  'LEXUS': '#9B111E', 'ISUZU': '#FF6600', 'ZXAUTO': '#778899', 'MITSUBISHI FUSO': '#CC0000',
+  'KIA TASMAN': '#BB162B', 'LYNK AND CO': '#1A1A2E', 'DS': '#8B0073',
+}
+const brandColor = (b: string) => BRAND_COLORS[b.toUpperCase()] || '#607D8B'
 const SEG: Record<string, string> = { 'B SUV': 'BSUV', 'C SUV': 'Compact', 'D SUV': 'Midsize', 'E SUV': 'Full Size', 'PREMIUM SUV': 'Premium' }
 const cn = (c: string) => ({ 'AUTOMOV. DE PASAJEROS': 'Automóviles', 'SUV': 'SUV', 'PICK UPS': 'Pick Ups', 'CAMION': 'Camiones', 'BUS': 'Buses', 'VAN': 'Vans' }[c] || c)
 const sn = (s: string) => SEG[s] || s
@@ -140,7 +156,19 @@ function SubTab({ tabs, active, onChange }: { tabs: { id: string, label: string 
 /* BBC — Bubble Brand Chart */
 function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: { name: string, price: number, vol: number, noPrice?: boolean }[], totalVol: number, ms: number, color: string }[], scopeLabel: string, hotMin?: number }) {
   if (!brands.length) return null
-  const allModels = brands.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
+
+  // Deduplicate colors within this BBC — assign fallback palette to collisions
+  const FALLBACK_PALETTE = ['#607D8B','#795548','#009688','#FF5722','#9C27B0','#FF9800','#3F51B5','#00BCD4','#8BC34A','#E91E63']
+  const usedColors = new Set<string>()
+  const deduped = brands.map(b => {
+    const c = b.color.toLowerCase()
+    if (!usedColors.has(c)) { usedColors.add(c); return b }
+    // Find unused fallback
+    const fb = FALLBACK_PALETTE.find(p => !usedColors.has(p.toLowerCase())) || '#555'
+    usedColors.add(fb.toLowerCase())
+    return { ...b, color: fb }
+  })
+  const allModels = deduped.flatMap(b => b.models.map(m => ({ ...m, brand: b.brand, color: b.color })))
   const maxVol = Math.max(...allModels.map(m => m.vol), 1)
   const validPrices = allModels.filter(m => m.price > 0 && !m.noPrice).map(m => m.price)
   if (!validPrices.length) return null
@@ -151,7 +179,7 @@ function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: 
   const W = 950, H = 480, PAD = { t: 30, b: 85, l: 80, r: 20 }
   const plotW = W - PAD.l - PAD.r
   const plotH = H - PAD.t - PAD.b
-  const colW = plotW / brands.length
+  const colW = plotW / deduped.length
 
   const yScale = (p: number) => PAD.t + plotH - ((p - minP) / rangeP * plotH)
   const rScale = (v: number) => Math.max(8, Math.min(38, Math.sqrt(v / maxVol) * 38))
@@ -186,9 +214,9 @@ function BBC({ brands, scopeLabel, hotMin }: { brands: { brand: string, models: 
         {/* Hot range shading */}
         {hotRange >= 0 && <rect x={PAD.l} y={yScale(hotRange + 5000)} width={W - PAD.l - PAD.r} height={yScale(hotRange) - yScale(hotRange + 5000)} fill="#F1F5F9" opacity={0.5} />}
         {/* Column separators */}
-        {brands.map((_, bi) => bi > 0 && <line key={bi} x1={PAD.l + bi * colW} x2={PAD.l + bi * colW} y1={PAD.t} y2={H - PAD.b + 5} stroke="#F1F5F9" strokeWidth={1} />)}
+        {deduped.map((_, bi) => bi > 0 && <line key={bi} x1={PAD.l + bi * colW} x2={PAD.l + bi * colW} y1={PAD.t} y2={H - PAD.b + 5} stroke="#F1F5F9" strokeWidth={1} />)}
         {/* Brand columns */}
-        {brands.map((b, bi) => {
+        {deduped.map((b, bi) => {
           const cx = PAD.l + bi * colW + colW / 2
           const visibleModels = b.models.filter(m => m.price > 0 && m.vol > 0)
           return <g key={b.brand}>
@@ -860,8 +888,7 @@ function T4({ d }: { d: any }) {
   const provTotals = d.suv_25_40_gas?.por_provincia || []
   const precio = (d.precios_ford || []).find((p: any) => p.modelo === 'Escape')
   const filters = d.model_filters?.suv_gas_25_40 || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const getRawRows = () => {
     if (scope === 'NACIONAL') return nacRows
@@ -1020,7 +1047,6 @@ function T4({ d }: { d: any }) {
 
     {/* BBC — Bubble Brand Chart */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const priceKey = 'SUV GAS 25 - 40'
       const prices = (d.precios_competidores?.[priceKey] || []) as any[]
       // Ford first — Escape Titanium 1.5 only (not ST-Line)
@@ -1038,16 +1064,15 @@ function T4({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.models.some(m => m.price > 0))
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0 && m.vol > 0) || (b.brand === 'FORD' && b.totalVol > 0))
       // Recalculate MS
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -1081,8 +1106,7 @@ function T5({ d }: { d: any }) {
   const provTotals = d.suv_25_40_fhev?.por_provincia || []
   const precio = (d.precios_ford || []).find((p: any) => p.modelo === 'Territory')
   const filters = d.model_filters?.suv_hib_25_40 || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const r26nac = nacRows.find((r: any) => r.year === '2026') || {} as any
   const fordVal = (() => {
@@ -1228,7 +1252,6 @@ function T5({ d }: { d: any }) {
     {/* Ranking */}
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 25 - 40'] || []) as any[]
       const fc5 = d.ford_cards?.['T5_hev_25_40'] || {}
       const fordModels = [{ name: fc5.model || 'Territory', price: fc5.price || 35990, vol: fc5.v26 != null ? fc5.v26 : (fordEntry?.v26 || 0) }]
@@ -1244,8 +1267,8 @@ function T5({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -1253,10 +1276,9 @@ function T5({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -1284,8 +1306,7 @@ function T6({ d }: { d: any }) {
   const nacRows = d.suv_40_50?.NACIONAL || []
   const provTotals = d.suv_40_50?.por_provincia || []
   const filters = d.model_filters?.suv_hib_40_50 || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const getRawRows = () => {
     if (scope === 'NACIONAL') return nacRows
@@ -1414,7 +1435,6 @@ function T6({ d }: { d: any }) {
     {/* Ranking */}
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['SUV  HEV 40 - 50'] || []) as any[]
       const fc6 = d.ford_cards?.['T6_hev_40_50'] || {}
       const fordModels = [{ name: fc6.model || 'Escape ST-Line', price: fc6.price || 46990, vol: fc6.v26 != null ? fc6.v26 : (fordEntry?.v26 || 0) }]
@@ -1430,8 +1450,8 @@ function T6({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -1439,10 +1459,9 @@ function T6({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -1477,8 +1496,7 @@ function T7({ d }: { d: any }) {
   const pt60 = d.suv_60_80?.por_provincia || []
   const filters55 = d.model_filters?.suv_55_80_everest || {}
   const filters60 = d.model_filters?.suv_55_80_explorer || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const activeNac = sub === 'everest' ? n55 : n60
   const activePM = sub === 'everest' ? pm55 : pm60
@@ -1688,7 +1706,6 @@ function T7({ d }: { d: any }) {
     {/* Ranking */}
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pk = sub === 'everest' ? 'SUV  55 - 80 everest' : 'SUV  55 - 80 explorer'
       const fm = sub === 'everest' ? 'Everest' : 'Explorer Active'
       const fp = sub === 'everest' ? 69990 : 79990
@@ -1706,8 +1723,8 @@ function T7({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -1715,10 +1732,9 @@ function T7({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -1753,8 +1769,7 @@ function T8({ d }: { d: any }) {
   const filtersExp = d.model_filters?.suv_80plus_expedition || {}
   const filtersBr = d.model_filters?.suv_80plus_bronco || {}
   const filtersEP = d.model_filters?.suv_80plus_explorer_plat || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const activeFilters = sub === 'expedition' ? filtersExp : sub === 'bronco' ? filtersBr : filtersEP
   // Explorer Platinum needs combined data from both sheets
@@ -1970,7 +1985,6 @@ function T8({ d }: { d: any }) {
 
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const pkMap: Record<string,string> = { 'expedition': 'SUV  80 plus expedition', 'bronco': '', 'explorer_plat': 'SUV  80 plus explorer' }
       const fmMap: Record<string,string> = { 'expedition': 'Expedition', 'bronco': 'Bronco', 'explorer_plat': 'Explorer Platinum' }
       const fpMap: Record<string,number> = { 'expedition': 129990, 'bronco': 119990, 'explorer_plat': 94990 }
@@ -1990,8 +2004,8 @@ function T8({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -1999,10 +2013,9 @@ function T8({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -2150,8 +2163,7 @@ function T10({ d }: { d: any }) {
   const pmTA = d.pick_diesel_ta?.prov_marcas || {}
   const filtersTM = d.model_filters?.pu_diesel_ranger_xl || {}
   const filtersTA = d.model_filters?.pu_diesel_ranger_xlt || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const activeNac = sub === 'xl' ? nacTM : nacTA
   const activePM = sub === 'xl' ? pmTM : pmTA
@@ -2335,7 +2347,6 @@ function T10({ d }: { d: any }) {
 
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const fm = sub === 'xl' ? 'Ranger XL' : 'Ranger XLT'
       const fp = sub === 'xl' ? 53990 : 67990
       const prices = (d.precios_competidores?.['Pick up TM'] || []) as any[]
@@ -2352,8 +2363,8 @@ function T10({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -2361,10 +2372,9 @@ function T10({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
@@ -2397,8 +2407,7 @@ function T11({ d }: { d: any }) {
   const nacRows = d.pick_fullsize?.NACIONAL || []
   const provMarcas = d.pick_fullsize?.prov_marcas || {}
   const filtersAll = d.model_filters?.pu_fullsize_all || {}
-  const CCOLS = ['#DC2626', '#059669', '#D97706', '#7C3AED', '#0891B2', '#BE185D', '#4338CA', '#65A30D']
-  const bCol = (b: string, i: number) => b === 'FORD' ? C.navy : CCOLS[i % CCOLS.length]
+  const bCol = (b: string) => brandColor(b)
 
   const activeFilters = filtersAll
 
@@ -2620,7 +2629,6 @@ function T11({ d }: { d: any }) {
 
 {/* BBC */}
     {(() => {
-      const BRAND_COLORS: Record<string, string> = { 'FORD': C.navy, 'TOYOTA': '#D4A017', 'MAZDA': '#E87722', 'KIA': '#BB162B', 'NISSAN': '#1A1A1A', 'HYUNDAI': '#00287A', 'SUZUKI': '#005BAC', 'SUBARU': '#013B7C', 'PEUGEOT': '#1E3A5F', 'JETOUR': '#2E8B57', 'MITSUBISHI': '#CC0000', 'HONDA': '#CC0000', 'AUDI': '#333', 'CHEVROLET': '#D4A500', 'JEEP': '#4A6741', 'RAM': '#1A1A1A', 'GMC': '#CC0000', 'BMW': '#1C69D4', 'MERCEDES BENZ': '#333' }
       const prices = (d.precios_competidores?.['Full size Pick up'] || []) as any[]
       const fordModels = [
         { name: 'F-150 XLT', price: 75990, vol: xltV26 },
@@ -2639,8 +2647,8 @@ function T11({ d }: { d: any }) {
           const computedVol = bbcVol(row, b.brand, trimKey, others)
           return { name: trimKey, price, vol: (p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol) }
         })
-        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: BRAND_COLORS[b.brand] || '#666' }
-      }).filter(b => b.totalVol > 0)
+        const modVol = models.reduce((s: number, m: any) => s + (m.vol || 0), 0); return { brand: shortName(b.brand), models, totalVol: modVol > 0 ? modVol : (b.v26 || 0), ms: 0, color: brandColor(b.brand) }
+      }).filter(b => b.models.some(m => m.price > 0) || b.brand === 'FORD')
       // Brands with volume but no price — place at range average with negative price flag
       const allPricesInBBC = bbcBrands.flatMap(b => b.models.filter(m => m.price > 0).map(m => m.price))
       const avgPrice = allPricesInBBC.length ? allPricesInBBC.reduce((s, p) => s + p, 0) / allPricesInBBC.length : 0
@@ -2648,10 +2656,9 @@ function T11({ d }: { d: any }) {
       // Add fallback bubble for brands with volume but no matching price trims
       bbcBrands.forEach(b => {
         const matchedVol = b.models.reduce((s, m) => s + m.vol, 0)
-        if (matchedVol === 0 && b.totalVol > 0) {
-          const allP = bbcBrands.flatMap(x => x.models.filter(m => m.price > 0).map(m => m.price))
-          const avg = allP.length ? allP.reduce((s, p) => s + p, 0) / allP.length : 0
-          if (avg > 0) b.models.push({ name: b.brand, price: avg, vol: b.totalVol, noPrice: true })
+        if (matchedVol === 0 && b.models.some(m => m.price > 0) && b.totalVol > 0) {
+          // Has price entry but no vol matched — use totalVol on first model
+          b.models[0].vol = b.models[0].vol || b.totalVol
         }
       })
       const totalSeg = bbcBrands.reduce((s, x) => s + x.totalVol, 0)
