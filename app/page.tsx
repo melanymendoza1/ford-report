@@ -811,8 +811,15 @@ function T3({ d }: { d: any }) {
     return r
   }, [fordSegProv])
 
+  // T3 Ford by scope+seg — hardcoded Mayo 2026
+  const T3_FORD_HC: Record<string,Record<string,{f26:number,f25:number}>> = {
+    'C SUV': { 'ZONA ORGU':{f26:356,f25:0},'PICHINCHA':{f26:207,f25:0},'GUAYAS':{f26:107,f25:0},'MANABÍ':{f26:35,f25:0},'EL ORO':{f26:7,f25:0} },
+    'D SUV': { 'ZONA ORGU':{f26:90,f25:0}, 'PICHINCHA':{f26:55,f25:0}, 'GUAYAS':{f26:26,f25:0}, 'MANABÍ':{f26:6,f25:0}, 'EL ORO':{f26:3,f25:0} },
+    'E SUV': { 'ZONA ORGU':{f26:49,f25:0}, 'PICHINCHA':{f26:27,f25:0}, 'GUAYAS':{f26:21,f25:0}, 'MANABÍ':{f26:1,f25:0}, 'EL ORO':{f26:0,f25:0} },
+  }
   const getFordSeg = (seg: string, sc: string) => {
     if (sc === 'NACIONAL') { const f = fordSegNac.find((r: any) => (r.seg||r.label) === seg); return { f26: f?.y2026 || f?.['2026'] || 0, f25: f?.y2025 || f?.['2025'] || 0 } }
+    const hc = T3_FORD_HC[seg]?.[sc]; if (hc) return hc
     const tgt = sc === 'ZONA ORGU' ? PROVS : [sc]
     let f26 = 0, f25 = 0; tgt.forEach(p => { const v = fordPP[seg]?.[p]; if (v) { f26 += (v.y2026||v['2026']||0); f25 += (v.y2025||v['2025']||0) } })
     return { f26, f25 }
@@ -956,20 +963,17 @@ function T4({ d }: { d: any }) {
     return terms.filter(t => t.length > 0).map(t => t.replace(/-/g, ' ').toUpperCase())
   }
 
-  // Province chart — always Zona Orgu
-  const fordProvData = PROVS.map(p => {
-    const fp = provMarcas[p] || []
-    const fr26 = fp.find((x: any) => x.year === '2026') || {} as any
-    const fr25 = fp.find((x: any) => x.year === '2025') || {} as any
-    return { prov: p, f26: fr26['FORD'] || 0, f25: fr25['FORD'] || 0 }
-  })
-  const provChartData = PROVS.map(p => {
-    const r = (provTotals || []).find((x: any) => (x.label || x.prov) === p)
-    const v26 = r?.ytd2026 || 0, v25 = r?.ytd2025 || 0
-    const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
-    const fd = fordProvData.find(f => f.prov === p)
-    const ms = v26 && fd ? (fd.f26 / v26 * 100).toFixed(1) : '0'
-    return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': fd?.f26 || 0, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
+  // Province chart — hardcoded Mayo 2026
+  const T4_PROV_HC = [
+    { prov:'PICHINCHA', v25:1139, v26:1150, ford:23 },
+    { prov:'GUAYAS',    v25:800,  v26:768,  ford:15 },
+    { prov:'MANABÍ',    v25:95,   v26:92,   ford:1  },
+    { prov:'EL ORO',    v25:13,   v26:24,   ford:23 },
+  ]
+  const provChartData = T4_PROV_HC.map(hc => {
+    const pct = hc.v25 ? ((hc.v26 - hc.v25) / hc.v25 * 100).toFixed(1) : '0'
+    const ms = hc.v26 ? (hc.ford / hc.v26 * 100).toFixed(1) : '0'
+    return { prov: pn(hc.prov), '2025 YTD': hc.v25, '2026 YTD': hc.v26, 'Ford 2026': hc.ford, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
   })
   const PDL = (props: any) => { const { x, y, width, index } = props; if (!provChartData[index]) return null; const dd = provChartData[index].delta; return <text x={x + width / 2} y={y - 6} textAnchor="middle" fontSize={9} fontWeight={600} fill={dd.startsWith('-') ? C.dn : C.up}>{dd}</text> }
 
