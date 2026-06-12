@@ -11190,16 +11190,14 @@
       {
         "marca": "Ford",
         "modelo": "Explorer",
-        "trim": "EXPLORER ACTIVE",
+        "trim": "ACTIVE",
         "combustible": "Gasolina",
         "precio": 89990,
         "vol_override": {
-          "NACIONAL": 40,
-          "ZONA ORGU": 32,
-          "PICHINCHA": 17,
-          "GUAYAS": 15,
-          "MANABÍ": 0,
-          "EL ORO": 0
+          "NACIONAL": 18,
+          "PICHINCHA": 8,
+          "GUAYAS": 7,
+          "MANABÍ": 0
         }
       },
       {
@@ -11215,6 +11213,63 @@
           "GUAYAS": 1,
           "MANABÍ": 0,
           "EL ORO": 0
+        }
+      },
+      {
+        "marca": "",
+        "modelo": "",
+        "trim": "",
+        "combustible": "Gasolina",
+        "precio": null
+      },
+      {
+        "marca": "Ford",
+        "modelo": "Explorer",
+        "trim": "Platinum",
+        "combustible": "Gasolina",
+        "precio": 99990,
+        "vol_override": {
+          "NACIONAL": 22,
+          "PICHINCHA": 9,
+          "GUAYAS": 8,
+          "MANABÍ": 0
+        }
+      },
+      {
+        "marca": "Jeep",
+        "modelo": "Grand Cherokee",
+        "trim": "",
+        "combustible": "Gasolina",
+        "precio": 109999,
+        "vol_override": {
+          "NACIONAL": 3,
+          "PICHINCHA": 2,
+          "GUAYAS": 1,
+          "ZONA ORGU": 3
+        }
+      },
+      {
+        "marca": "Nissan",
+        "modelo": "Pathfinder",
+        "trim": "Advance",
+        "combustible": "Gasolina",
+        "precio": 93990,
+        "vol_override": {
+          "NACIONAL": 1,
+          "ZONA ORGU": 1,
+          "PICHINCHA": 1
+        }
+      },
+      {
+        "marca": "Honda",
+        "modelo": "Pilot",
+        "trim": "",
+        "combustible": "Gasolina",
+        "precio": 106000,
+        "vol_override": {
+          "NACIONAL": 4,
+          "ZONA ORGU": 3,
+          "PICHINCHA": 3
         }
       }
     ],
