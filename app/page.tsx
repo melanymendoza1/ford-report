@@ -1510,7 +1510,7 @@ function T7({ d }: { d: any }) {
     { label: 'MANABÍ',    ytd2025: 3,  ytd2026: 0  },
     { label: 'EL ORO',    ytd2025: 0,  ytd2026: 0  },
   ]
-  const fordExplorer: Record<string,number> = { PICHINCHA: 17, GUAYAS: 15, 'MANABÍ': 0, 'EL ORO': 0 }
+  const fordExplorer: Record<string,number> = { PICHINCHA: 8, GUAYAS: 7, 'MANABÍ': 0, 'EL ORO': 0 }
 
   const activeNac = sub === 'everest' ? n55 : n60
   const activePM = sub === 'everest' ? pm55 : pm60
@@ -1735,8 +1735,8 @@ function T7({ d }: { d: any }) {
           if (b.brand === 'FORD') {
             const hc = sub === 'everest' ? fordEverest : fordExplorer
             // Everest: Ford=56 Nacional, 52 ZO — Explorer Active: Ford=21 Nacional, 21 ZO
-            const hcNac = sub === 'everest' ? 95 : 40
-            const hcZO  = sub === 'everest' ? 83 : 32
+            const hcNac = sub === 'everest' ? 95 : 18
+            const hcZO  = sub === 'everest' ? 83 : 15
             if (scope === 'NACIONAL') vol = hcNac
             else if (scope === 'ZONA ORGU') vol = hcZO
             else vol = hc[scope] ?? vol
