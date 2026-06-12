@@ -11132,10 +11132,10 @@
         "combustible": "Diésel",
         "precio": 69990,
         "vol_override": {
-          "NACIONAL": 56,
-          "ZONA ORGU": 52,
-          "PICHINCHA": 21,
-          "GUAYAS": 23,
+          "NACIONAL": 95,
+          "ZONA ORGU": 83,
+          "PICHINCHA": 51,
+          "GUAYAS": 24,
           "MANABÍ": 6,
           "EL ORO": 2
         }
@@ -11965,7 +11965,7 @@
       "model": "Escape 1.5",
       "price": 35990,
       "fuel": "Gasolina",
-      "v26": 19,
+      "v26": 45,
       "v25": 103
     },
     "T5_hev_25_40": {
@@ -11979,21 +11979,21 @@
       "model": "Escape ST-Line",
       "price": 44990,
       "fuel": "Híbrido",
-      "v26": 19,
+      "v26": 45,
       "v25": 34
     },
     "T7_everest": {
       "model": "Everest Active",
       "price": 69990,
       "fuel": "Diésel",
-      "v26": 56,
+      "v26": 95,
       "v25": 31
     },
     "T7_explorer_active": {
       "model": "Explorer Active",
-      "price": 89988,
+      "price": 89990,
       "fuel": "Gasolina",
-      "v26": 21,
+      "v26": 18,
       "v25": 25
     },
     "T8_suv_80plus": {
