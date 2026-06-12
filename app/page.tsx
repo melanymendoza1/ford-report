@@ -1723,8 +1723,8 @@ function T7({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.some((p:any)=>(p.marca||'').toUpperCase()===b.brand && p.precio!=null)})
       const bbcBrands = _src.map(b => {
-        // Ford uses general precios path
-        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
+        // Ford uses general precios path — for Explorer sub, only show ACTIVE trim
+        const bPrices = prices.filter((p: any) => { if (p.marca?.toUpperCase() !== b.brand) return false; if (b.brand === 'FORD' && sub === 'explorer') { return (p.trim||'').toUpperCase().includes('ACTIVE') || (p.modelo||'').toUpperCase().includes('ACTIVE') } return true })
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
