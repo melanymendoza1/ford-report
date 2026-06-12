@@ -1723,8 +1723,8 @@ function T7({ d }: { d: any }) {
       const fordModels = [{ name: fm, price: fp, vol: fordEntry?.v26 || 0 }]
       const _pcB=[...new Set(prices.filter((p:any)=>p.precio!=null).map((p:any)=>(p.marca||'').toUpperCase()).filter(Boolean))];const _src=['FORD',..._pcB.filter(b=>b!=='FORD')].map(brand=>{const fb=filteredBrands.find((x:any)=>x.brand===brand);if(fb)return fb;const _r=(rows.find((r:any)=>r.year==='2026')||{}) as any;return{brand,v26:(_r[brand] as number)||0,v25:0,v24:0}}).filter((b:any)=>{if(b.brand==='FORD')return true;if((b.v26||0)>0)return true;return prices.some((p:any)=>(p.marca||'').toUpperCase()===b.brand && p.precio!=null)})
       const bbcBrands = _src.map(b => {
-        // Ford uses general precios path — for Explorer sub, only show ACTIVE trim
-        const bPrices = prices.filter((p: any) => { if (p.marca?.toUpperCase() !== b.brand) return false; if (b.brand === 'FORD' && sub === 'explorer') { return (p.trim||'').toUpperCase().includes('ACTIVE') || (p.modelo||'').toUpperCase().includes('ACTIVE') } return true })
+        // Ford uses general precios path
+        const bPrices = prices.filter((p: any) => p.marca?.toUpperCase() === b.brand)
         const models = bPrices.filter((p: any) => p.precio).map((p: any) => {
           const trimKey = `${p.modelo} ${p.trim || ''}`.trim()
           const price = typeof p.precio === 'number' ? p.precio : parseFloat(String(p.precio).replace(/[^0-9.]/g, '')) || 0
@@ -1734,12 +1734,23 @@ function T7({ d }: { d: any }) {
           let vol = p.vol_override?.[scope] != null ? p.vol_override[scope] : computedVol
           if (b.brand === 'FORD') {
             const hc = sub === 'everest' ? fordEverest : fordExplorer
-            // Everest: Ford=56 Nacional, 52 ZO — Explorer Active: Ford=21 Nacional, 21 ZO
-            const hcNac = sub === 'everest' ? 95 : 18
-            const hcZO  = sub === 'everest' ? 83 : 15
-            if (scope === 'NACIONAL') vol = hcNac
-            else if (scope === 'ZONA ORGU') vol = hcZO
-            else vol = hc[scope] ?? vol
+            const isActive = (p.trim||'').toUpperCase().includes('ACTIVE') || (p.modelo||'').toUpperCase().includes('ACTIVE')
+            const isPlatinum = (p.trim||'').toUpperCase().includes('PLATINUM') || (p.modelo||'').toUpperCase().includes('PLATINUM')
+            if (sub === 'everest') {
+              // Everest: hardcode all scopes
+              const hcNac = 95; const hcZO = 83
+              if (scope === 'NACIONAL') vol = hcNac
+              else if (scope === 'ZONA ORGU') vol = hcZO
+              else vol = hc[scope] ?? vol
+            } else {
+              // Explorer: Active uses hardcode, Platinum uses vol_override from JSON
+              if (isActive) {
+                if (scope === 'NACIONAL') vol = 18
+                else if (scope === 'ZONA ORGU') vol = 15
+                else vol = fordExplorer[scope] ?? vol
+              }
+              // Platinum: keep vol_override from JSON (already set above)
+            }
           }
           return { name: trimKey, price, vol }
         })
