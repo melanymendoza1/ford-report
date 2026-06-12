@@ -1174,15 +1174,15 @@ function T5({ d }: { d: any }) {
   const fordPos = filteredBrands.findIndex(b => b.brand === 'FORD') + 1
   const getModelNames = (brand: string) => (filters[brand] || []).filter((t: string) => t.length > 0).map((t: string) => t.replace(/-/g, ' ').toUpperCase())
 
-  // Province chart
+  // Province chart — Ford hardcoded, segment totals from data
+  const T6_FORD_PROV: Record<string,number> = { 'PICHINCHA':24, 'GUAYAS':11, 'MANABÍ':6, 'EL ORO':0 }
   const provChartData = PROVS.map(p => {
     const r = (provTotals || []).find((x: any) => (x.label || x.prov) === p)
     const v26 = r?.ytd2026 || 0, v25 = r?.ytd2025 || 0
+    const ford = T6_FORD_PROV[p] ?? 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
-    const fp = provMarcas[p] || []
-    const fr26 = fp.find((x: any) => x.year === '2026') || {} as any
-    const ms = v26 ? ((fr26['FORD'] || 0) / v26 * 100).toFixed(1) : '0'
-    return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': fr26['FORD'] || 0, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
+    const ms = v26 ? (ford / v26 * 100).toFixed(1) : '0'
+    return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': ford, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
   })
   const PDL = (props: any) => { const { x, y, width, index } = props; if (!provChartData[index]) return null; const dd = provChartData[index].delta; return <text x={x + width / 2} y={y - 6} textAnchor="middle" fontSize={9} fontWeight={600} fill={dd.startsWith('-') ? C.dn : C.up}>{dd}</text> }
 
@@ -1359,15 +1359,15 @@ function T6({ d }: { d: any }) {
   const fordPos = filteredBrands.findIndex(b => b.brand === 'FORD') + 1
   const getModelNames = (brand: string) => (filters[brand] || []).filter((t: string) => t.length > 0).map((t: string) => t.replace(/-/g, ' ').toUpperCase())
 
-  // Province chart
+  // Province chart — Ford hardcoded, segment totals from data
+  const T6_FORD_PROV: Record<string,number> = { 'PICHINCHA':24, 'GUAYAS':11, 'MANABÍ':6, 'EL ORO':0 }
   const provChartData = PROVS.map(p => {
     const r = (provTotals || []).find((x: any) => (x.label || x.prov) === p)
     const v26 = r?.ytd2026 || 0, v25 = r?.ytd2025 || 0
+    const ford = T6_FORD_PROV[p] ?? 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
-    const fp = provMarcas[p] || []
-    const fr26 = fp.find((x: any) => x.year === '2026') || {} as any
-    const ms = v26 ? ((fr26['FORD'] || 0) / v26 * 100).toFixed(1) : '0'
-    return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': fr26['FORD'] || 0, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
+    const ms = v26 ? (ford / v26 * 100).toFixed(1) : '0'
+    return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': ford, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
   })
   const PDL = (props: any) => { const { x, y, width, index } = props; if (!provChartData[index]) return null; const dd = provChartData[index].delta; return <text x={x + width / 2} y={y - 6} textAnchor="middle" fontSize={9} fontWeight={600} fill={dd.startsWith('-') ? C.dn : C.up}>{dd}</text> }
 
@@ -1492,20 +1492,21 @@ function T7({ d }: { d: any }) {
   const bCol = (b: string) => brandColor(b)
 
   // Datos corregidos por provincia — hardcoded Mayo 2026
+  // T7 hardcoded province data — Mayo 2026
   const pt55 = [
-    { label: 'PICHINCHA', ytd2025: 145, ytd2026: 192 },
-    { label: 'GUAYAS',    ytd2025: 87,  ytd2026: 183 },
+    { label: 'PICHINCHA', ytd2025: 199, ytd2026: 262 },
+    { label: 'GUAYAS',    ytd2025: 92,  ytd2026: 194 },
     { label: 'MANABÍ',    ytd2025: 6,   ytd2026: 35  },
-    { label: 'EL ORO',    ytd2025: 1,   ytd2026: 14  },
+    { label: 'EL ORO',    ytd2025: 1,   ytd2026: 15  },
   ]
-  const fordEverest: Record<string,number> = { PICHINCHA: 21, GUAYAS: 23, 'MANABÍ': 6, 'EL ORO': 2 }
+  const fordEverest: Record<string,number> = { PICHINCHA: 51, GUAYAS: 24, 'MANABÍ': 6, 'EL ORO': 2 }
   const pt60 = [
-    { label: 'PICHINCHA', ytd2025: 17, ytd2026: 9 },
-    { label: 'GUAYAS',    ytd2025: 10, ytd2026: 8 },
-    { label: 'MANABÍ',    ytd2025: 0,  ytd2026: 6 },
-    { label: 'EL ORO',    ytd2025: 0,  ytd2026: 0 },
+    { label: 'PICHINCHA', ytd2025: 30, ytd2026: 23 },
+    { label: 'GUAYAS',    ytd2025: 14, ytd2026: 16 },
+    { label: 'MANABÍ',    ytd2025: 3,  ytd2026: 0  },
+    { label: 'EL ORO',    ytd2025: 0,  ytd2026: 0  },
   ]
-  const fordExplorer: Record<string,number> = { PICHINCHA: 8, GUAYAS: 7, 'MANABÍ': 6, 'EL ORO': 0 }
+  const fordExplorer: Record<string,number> = { PICHINCHA: 17, GUAYAS: 15, 'MANABÍ': 0, 'EL ORO': 0 }
 
   const activeNac = sub === 'everest' ? n55 : n60
   const activePM = sub === 'everest' ? pm55 : pm60
@@ -1636,7 +1637,7 @@ function T7({ d }: { d: any }) {
   return <>
     <Hd tag="SUV 55-80K" title="Análisis de marcas · Rango $55K-$80K" />
 
-    <div style={gr(2)}>
+    <div style={gr(3)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
         <img src="/images/everest.png" alt="Everest" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
@@ -1645,24 +1646,38 @@ function T7({ d }: { d: any }) {
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T7_everest'] as any)?.v26 ?? everestV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(95)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={(d.ford_cards?.['T7_everest'] as any)?.v26 ?? everestV26} b={(d.ford_cards?.['T7_everest'] as any)?.v25 ?? everestV25} />
+          <Dl a={95} b={31} />
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
-        <img src="/images/exploreractive.png" alt="Explorer" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
+        <img src="/images/exploreractive.png" alt="Explorer Active" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer Active</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$79,990</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$89,990</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T7_explorer_active'] as any)?.v26 ?? explorerV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(18)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={(d.ford_cards?.['T7_explorer_active'] as any)?.v26 ?? explorerV26} b={(d.ford_cards?.['T7_explorer_active'] as any)?.v25 ?? explorerV25} />
+          <Dl a={18} b={25} />
+        </div>
+      </Card>
+      <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
+        <img src="/images/explorerplatinum.png" alt="Explorer Platinum" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
+        <div style={{ flex: 1 }}>
+          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer Platinum</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$99,990</div>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
+          <div style={{ textAlign: 'right' }}>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N(22)}</div>
+            <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
+          </div>
+          <Dl a={22} b={3} />
         </div>
       </Card>
     </div>
@@ -1716,8 +1731,8 @@ function T7({ d }: { d: any }) {
           if (b.brand === 'FORD') {
             const hc = sub === 'everest' ? fordEverest : fordExplorer
             // Everest: Ford=56 Nacional, 52 ZO — Explorer Active: Ford=21 Nacional, 21 ZO
-            const hcNac = sub === 'everest' ? 56 : 21
-            const hcZO  = sub === 'everest' ? 52 : 21
+            const hcNac = sub === 'everest' ? 95 : 40
+            const hcZO  = sub === 'everest' ? 83 : 32
             if (scope === 'NACIONAL') vol = hcNac
             else if (scope === 'ZONA ORGU') vol = hcZO
             else vol = hc[scope] ?? vol
@@ -2549,14 +2564,14 @@ function T11({ d }: { d: any }) {
         <img src="/images/f150xlt.png" alt="F-150 XLT" style={{ height: 70, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
           <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>F-150 XLT</div>
-          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T11_ranger_xlt'] as any)?.price || 75990)} · Gasolina</div>
+          <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T11_fullsize'] as any)?.price || 79990)} · Gasolina</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T11_ranger_xlt'] as any)?.v26 ?? xltV26)}</div>
+            <div style={{ fontSize: 28, fontWeight: 700, color: C.navy, lineHeight: 1 }}>{N((d.ford_cards?.['T11_fullsize'] as any)?.v26 ?? 45)}</div>
             <div style={{ fontSize: 10, color: C.sub }}>un. YTD</div>
           </div>
-          <Dl a={(d.ford_cards?.['T11_ranger_xlt'] as any)?.v26 ?? xltV26} b={(d.ford_cards?.['T11_ranger_xlt'] as any)?.v25 ?? xltV25} />
+          <Dl a={(d.ford_cards?.['T11_fullsize'] as any)?.v26 ?? 45} b={(d.ford_cards?.['T11_fullsize'] as any)?.v25 ?? 43} />
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
@@ -2692,28 +2707,22 @@ function T12({ d }: { d: any }) {
 
   const suvs = [
     { name: 'New Territory', trim: 'Titanium · Titanium Plus', fuel: 'HEV', price: '$35,990', img: '/images/territory.png',
-      v26: cardVal('T5_hev_25_40', '2026') || pcVal('SUV  HEV 25 - 40', '2026'),
-      v25: cardVal('T5_hev_25_40', '2025') || 0,
+      v26: 296, v25: 0,
       segment: 'SUV HEV 25-40K', highlight: 'Motor del crecimiento Ford' },
     { name: 'Escape 1.5', trim: 'Titanium', fuel: 'Gasolina', price: '$35,990', img: '/images/escape15.png',
-      v26: cardVal('T4_gas_25_40', '2026') || pcVal('SUV GAS 25 - 40', '2026'),
-      v25: cardVal('T4_gas_25_40', '2025') || 0,
+      v26: 45, v25: 103,
       segment: 'SUV Gas 25-40K', highlight: 'Inventario residual' },
     { name: 'Escape ST-Line', trim: 'ST-Line', fuel: 'HEV', price: '$44,990', img: '/images/escapestline.png',
-      v26: cardVal('T6_hev_40_50', '2026') || pcVal('SUV  HEV 40 - 50', '2026'),
-      v25: cardVal('T6_hev_40_50', '2025') || 0,
+      v26: 45, v25: 34,
       segment: 'SUV HEV 40-50K', highlight: 'Monitorear' },
-    { name: 'Everest', trim: 'Active', fuel: 'Gasolina', price: '$69,990', img: '/images/everest.png',
-      v26: cardVal('T7_everest', '2026') || 56,
-      v25: cardVal('T7_everest', '2025') || 0,
+    { name: 'Everest Active', trim: 'Active', fuel: 'Diésel', price: '$69,990', img: '/images/everest.png',
+      v26: 95, v25: 31,
       segment: 'SUV 55-80K', highlight: '#3 en su segmento' },
-    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$79,990', img: '/images/exploreractive.png',
-      v26: cardVal('T7_explorer_active', '2026') || 47,
-      v25: cardVal('T7_explorer_active', '2025') || 0,
+    { name: 'Explorer Active', trim: 'Active', fuel: 'Gasolina', price: '$89,990', img: '/images/exploreractive.png',
+      v26: 18, v25: 25,
       segment: 'SUV 60-80K', highlight: 'Estable' },
-    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$94,990', img: '/images/explorerplatinum.png',
-      v26: cardVal('T8_explorer_plat', '2026') || 16,
-      v25: cardVal('T8_explorer_plat', '2025') || 0,
+    { name: 'Explorer Platinum', trim: 'Platinum', fuel: 'Gasolina', price: '$99,990', img: '/images/explorerplatinum.png',
+      v26: 22, v25: 3,
       segment: 'SUV 60-80K', highlight: 'Premium' },
     { name: 'Bronco', trim: 'Wildtrak · Badlands', fuel: 'Gasolina', price: '$119,990', img: '/images/bronco.png',
       v26: cardVal('T8_bronco', '2026') || 1,
@@ -2726,16 +2735,13 @@ function T12({ d }: { d: any }) {
   ]
   const pickups = [
     { name: 'Ranger XL', trim: 'XL', fuel: 'Diesel TM 4x4', price: '$53,990', img: '/images/rangerxl.png',
-      v26: cardVal('T10_ranger_xl', '2026') || (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
-      v25: cardVal('T10_ranger_xl', '2025') || (d.pick_diesel_tm?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+      v26: 42, v25: 73,
       segment: 'Pickup Diesel TM', highlight: 'Mid Size manual' },
     { name: 'Ranger XLT', trim: 'XLT', fuel: 'Diesel TA 4x4', price: '$67,990', img: '/images/rangerxlt.png',
-      v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
-      v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_diesel_ta?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+      v26: 54, v25: 50,
       segment: 'Pickup Diesel TA', highlight: 'Mid Size automática' },
-    { name: 'F-150 XLT', trim: 'XLT', fuel: 'Gasolina', price: '$75,990', img: '/images/f150xlt.png',
-      v26: cardVal('T11_ranger_xlt', '2026') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2026') || {})['FORD'] || 0,
-      v25: cardVal('T11_ranger_xlt', '2025') || (d.pick_fullsize?.NACIONAL?.find((r:any)=>r.year==='2025') || {})['FORD'] || 0,
+    { name: 'F-150 XLT', trim: 'XLT', fuel: 'Gasolina', price: '$79,990', img: '/images/f150xlt.png',
+      v26: 45, v25: 43,
       segment: 'Full Size', highlight: '#1 vs RAM' },
     { name: 'F-150 Lariat', trim: 'Lariat', fuel: 'Gasolina', price: '$85,990', img: '/images/f150lariat.png',
       v26: cardVal('T11_lariat', '2026'),
