@@ -968,7 +968,7 @@ function T4({ d }: { d: any }) {
     { prov:'PICHINCHA', v25:1139, v26:1150, ford:23 },
     { prov:'GUAYAS',    v25:800,  v26:768,  ford:15 },
     { prov:'MANABÍ',    v25:95,   v26:92,   ford:1  },
-    { prov:'EL ORO',    v25:13,   v26:24,   ford:23 },
+    { prov:'EL ORO',    v25:13,   v26:24,   ford:0  },
   ]
   const provChartData = T4_PROV_HC.map(hc => {
     const pct = hc.v25 ? ((hc.v26 - hc.v25) / hc.v25 * 100).toFixed(1) : '0'
@@ -1178,12 +1178,12 @@ function T5({ d }: { d: any }) {
   const fordPos = filteredBrands.findIndex(b => b.brand === 'FORD') + 1
   const getModelNames = (brand: string) => (filters[brand] || []).filter((t: string) => t.length > 0).map((t: string) => t.replace(/-/g, ' ').toUpperCase())
 
-  // Province chart — Ford hardcoded, segment totals from data
-  const T6_FORD_PROV: Record<string,number> = { 'PICHINCHA':24, 'GUAYAS':11, 'MANABÍ':6, 'EL ORO':0 }
+  // Province chart — Ford hardcoded Mayo 2026 T5
+  const T5_FORD_PROV: Record<string,number> = { 'PICHINCHA':160, 'GUAYAS':78, 'MANABÍ':28, 'EL ORO':7 }
   const provChartData = PROVS.map(p => {
     const r = (provTotals || []).find((x: any) => (x.label || x.prov) === p)
     const v26 = r?.ytd2026 || 0, v25 = r?.ytd2025 || 0
-    const ford = T6_FORD_PROV[p] ?? 0
+    const ford = T5_FORD_PROV[p] ?? 0
     const pct = v25 ? ((v26 - v25) / v25 * 100).toFixed(1) : '0'
     const ms = v26 ? (ford / v26 * 100).toFixed(1) : '0'
     return { prov: pn(p), '2025 YTD': v25, '2026 YTD': v26, 'Ford 2026': ford, delta: `${parseFloat(pct) >= 0 ? '+' : ''}${pct}%`, ms }
@@ -1657,9 +1657,9 @@ function T7({ d }: { d: any }) {
         </div>
       </Card>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 16, padding: '16px 20px' }}>
-        <img src="/images/exploreractive.png" alt="Explorer Active" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
+        <img src="/images/exploreractive.png" alt="Explorer" style={{ height: 80, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer Active</div>
+          <div style={{ fontSize: 16, fontWeight: 700, color: C.txt }}>Explorer</div>
           <div style={{ fontSize: 12, color: C.ac, fontWeight: 600 }}>$89,990</div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexShrink: 0 }}>
@@ -1687,7 +1687,7 @@ function T7({ d }: { d: any }) {
     </div>
 
     {/* Everest / Explorer sub-tabs */}
-    <SubTab tabs={[{ id: 'everest', label: 'Everest' }, { id: 'explorer', label: 'Explorer Active' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
+    <SubTab tabs={[{ id: 'everest', label: 'Everest' }, { id: 'explorer', label: 'Explorer' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
 
     {/* Province chart */}
     <Card s={{ marginBottom: 20 }}>
@@ -1986,18 +1986,7 @@ function T8({ d }: { d: any }) {
           <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
         </div>
       </Card>
-      <Card s={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px' }}>
-        <img src="/images/explorerplatinum.png" alt="Explorer Platinum" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
-        <div style={{ flex: 1 }}>
-          <div style={{ fontSize: 14, fontWeight: 700, color: C.txt }}>Explorer Platinum</div>
-          <div style={{ fontSize: 11, color: C.ac, fontWeight: 600 }}>${N((d.ford_cards?.['T8_explorer_plat'] as any)?.price || 94990)}</div>
-        </div>
-        <div style={{ textAlign: 'right' }}>
-          <div style={{ fontSize: 22, fontWeight: 700, color: C.navy }}>{N((d.ford_cards?.['T8_explorer_plat'] as any)?.v26 ?? getCardFordVal('suv_80plus_explorer_plat', '2026'))}</div>
-          <Dl a={(d.ford_cards?.['T8_explorer_plat'] as any)?.v26 ?? getCardFordVal('suv_80plus_explorer_plat', '2026')} b={(d.ford_cards?.['T8_explorer_plat'] as any)?.v25 ?? getCardFordVal('suv_80plus_explorer_plat', '2025')} />
-          <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
-        </div>
-      </Card>
+
     </div>
 
     <SubTab tabs={[{ id: 'expedition', label: 'Expedition' }, { id: 'bronco', label: 'Bronco' }, { id: 'explorer_plat', label: 'Explorer Platinum' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
