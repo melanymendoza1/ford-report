@@ -1961,7 +1961,7 @@ function T8({ d }: { d: any }) {
   return <>
     <Hd tag="SUV +80K" title="Análisis de marcas · Rango +$80K" />
 
-    <div style={gr(3)}>
+    <div style={gr(2)}>
       <Card s={{ display: 'flex', alignItems: 'center', gap: 12, padding: '14px 18px' }}>
         <img src="/images/expeditionplatinum.png" alt="Expedition" style={{ height: 60, objectFit: 'contain', flexShrink: 0 }} />
         <div style={{ flex: 1 }}>
@@ -1986,10 +1986,9 @@ function T8({ d }: { d: any }) {
           <div style={{ fontSize: 9, color: C.sub }}>un. YTD</div>
         </div>
       </Card>
-
     </div>
 
-    <SubTab tabs={[{ id: 'expedition', label: 'Expedition' }, { id: 'bronco', label: 'Bronco' }, { id: 'explorer_plat', label: 'Explorer Platinum' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
+    <SubTab tabs={[{ id: 'expedition', label: 'Expedition' }, { id: 'bronco', label: 'Bronco' }]} active={sub} onChange={(id) => { setSub(id); setScope('NACIONAL') }} />
 
     {/* Province chart */}
     <Card s={{ marginBottom: 20 }}>
